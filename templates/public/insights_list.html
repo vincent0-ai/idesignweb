@@ -34,10 +34,10 @@
             {{ post.excerpt }}
           </p>
 
-          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-hairline); padding-top: var(--space-sm); margin-top: auto;">
-            <span style="font-family: var(--font-mono); font-size: var(--text-tiny); color: var(--text-dim);">BY {{ post.author }}</span>
+          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-hairline); padding-top: var(--space-md); margin-top: auto;">
+            <span style="font-size: var(--text-tiny); color: var(--text-dim);">By {{ post.author }}</span>
             <a href="{% url 'public:insight_detail' post.slug %}" class="card-service-action" style="font-size: var(--text-tiny);">
-              READ ARTICLE [->]
+              Read Article
             </a>
           </div>
         </article>

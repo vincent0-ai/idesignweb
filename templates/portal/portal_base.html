@@ -10,37 +10,48 @@
   <!-- Portal Sidebar Navigation -->
   <aside class="portal-sidebar">
     <div style="margin-bottom: var(--space-xl); border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-md);">
-      <div class="form-label" style="font-size: var(--text-tiny);">LOGGED IN AS:</div>
+      <div class="form-label" style="font-size: var(--text-tiny);">
+        {% if user.is_staff %}Staff Administrator{% else %}Client Account{% endif %}
+      </div>
       <div style="font-size: var(--text-h4); font-weight: var(--weight-bold);">{{ user.username }}</div>
-      <div class="numeral" style="font-size: var(--text-tiny); color: var(--text-muted);">CLIENT ACCOUNT</div>
+      {% if user.is_staff %}
+        <div style="margin-top: 6px;">
+          <span class="status-tag status-approved">Staff Access</span>
+        </div>
+      {% endif %}
     </div>
 
     <nav class="portal-nav-list" aria-label="Portal Navigation">
       <a href="{% url 'portal:dashboard' %}" class="portal-nav-item {% if active_section == 'dashboard' %}active{% endif %}">
-        <span>01 DASHBOARD</span>
-        <span class="numeral">-></span>
+        <span>Dashboard</span>
       </a>
       <a href="{% url 'portal:communications' %}" class="portal-nav-item {% if active_section == 'communications' %}active{% endif %}">
-        <span>02 ANNOUNCEMENTS</span>
-        <span class="numeral">-></span>
+        <span>Announcements</span>
       </a>
       <a href="{% url 'portal:projects' %}" class="portal-nav-item {% if active_section == 'projects' %}active{% endif %}">
-        <span>03 PROJECTS & DELIVERABLES</span>
-        <span class="numeral">-></span>
+        <span>Projects & Deliverables</span>
       </a>
       <a href="{% url 'portal:assets' %}" class="portal-nav-item {% if active_section == 'assets' %}active{% endif %}">
-        <span>04 ASSET LIBRARY</span>
-        <span class="numeral">-></span>
+        <span>Asset Library</span>
       </a>
       <a href="{% url 'portal:tickets' %}" class="portal-nav-item {% if active_section == 'support' %}active{% endif %}">
-        <span>05 SUPPORT TICKETS</span>
-        <span class="numeral">-></span>
+        <span>Support Tickets</span>
       </a>
+      {% if user.is_staff %}
+        <a href="{% url 'portal:inquiries' %}" class="portal-nav-item {% if active_section == 'inquiries' %}active{% endif %}">
+          <span>Client Inquiries</span>
+        </a>
+      {% endif %}
     </nav>
 
     <div style="margin-top: var(--space-3xl); border-top: 1px solid var(--border-hairline); padding-top: var(--space-md);">
+      {% if user.is_staff %}
+        <a href="/admin/" target="_blank" class="btn btn-secondary btn-sm btn-block" style="margin-bottom: var(--space-xs);">
+          Django Admin
+        </a>
+      {% endif %}
       <a href="{% url 'portal:logout' %}" class="btn btn-ghost btn-sm btn-block">
-        LOGOUT
+        Log Out
       </a>
     </div>
   </aside>

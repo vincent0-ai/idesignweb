@@ -23,7 +23,7 @@
         <article class="card-hairline">
           <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-sm); margin-bottom: var(--space-md);">
             <span class="card-service-numeral">{{ service.service_number }}</span>
-            <span class="numeral-badge">SERVICE</span>
+            <span class="numeral-badge">Service</span>
           </div>
 
           <h2 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">{{ service.title }}</h2>
@@ -31,7 +31,7 @@
           <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-lg); line-height: 1.6;">{{ service.overview }}</p>
           
           <div style="margin-bottom: var(--space-lg);">
-            <div class="form-label" style="font-size: var(--text-tiny);">WHAT IS INCLUDED:</div>
+            <div class="form-label" style="font-size: var(--text-tiny);">What is included:</div>
             <ul class="card-service-deliverables" style="margin-bottom: 0;">
               {% for d in service.deliverables %}
                 <li>{{ d }}</li>
@@ -41,8 +41,7 @@
 
           <div style="border-top: 1px solid var(--border-hairline); padding-top: var(--space-md); margin-top: auto; display: flex; justify-content: space-between; align-items: center;">
             <a href="{% url 'public:service_detail' service.slug %}" class="card-service-action">
-              <span>EXPLORE {{ service.title|upper }}</span>
-              <span class="numeral">-></span>
+              <span>Learn More</span>
             </a>
           </div>
         </article>
@@ -53,45 +52,39 @@
     <div class="card-hairline" style="background-color: var(--bg-surface); padding: var(--space-2xl);">
       <div class="section-header" style="margin-bottom: var(--space-xl);">
         <div class="section-title-wrap">
-          <div class="section-numeral">SPECIALIZED CAPABILITIES</div>
+          <div class="section-numeral">Capabilities</div>
           <h2 class="section-title" style="font-size: var(--text-h3);">Complete Website Solutions</h2>
         </div>
       </div>
 
       <div class="grid-3">
         <div style="background: var(--bg-primary); border: 1px solid var(--border-hairline); padding: var(--space-lg);">
-          <div class="numeral-badge" style="margin-bottom: 8px;">01</div>
-          <h3 style="font-size: var(--text-h4); margin-bottom: 4px;">Custom Website Design</h3>
+          <h3 style="font-size: var(--text-h4); margin-bottom: var(--space-xs);">Custom Website Design</h3>
           <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: 0;">Unique, modern, and professional designs tailored to your brand identity.</p>
         </div>
 
         <div style="background: var(--bg-primary); border: 1px solid var(--border-hairline); padding: var(--space-lg);">
-          <div class="numeral-badge" style="margin-bottom: 8px;">02</div>
-          <h3 style="font-size: var(--text-h4); margin-bottom: 4px;">Responsive Development</h3>
+          <h3 style="font-size: var(--text-h4); margin-bottom: var(--space-xs);">Responsive Development</h3>
           <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: 0;">Mobile-friendly websites that look and function smoothly on all devices.</p>
         </div>
 
         <div style="background: var(--bg-primary); border: 1px solid var(--border-hairline); padding: var(--space-lg);">
-          <div class="numeral-badge" style="margin-bottom: 8px;">03</div>
-          <h3 style="font-size: var(--text-h4); margin-bottom: 4px;">E-Commerce Solutions</h3>
+          <h3 style="font-size: var(--text-h4); margin-bottom: var(--space-xs);">E-Commerce Solutions</h3>
           <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: 0;">Online stores with secure payment systems to help you sell products easily.</p>
         </div>
 
         <div style="background: var(--bg-primary); border: 1px solid var(--border-hairline); padding: var(--space-lg);">
-          <div class="numeral-badge" style="margin-bottom: 8px;">04</div>
-          <h3 style="font-size: var(--text-h4); margin-bottom: 4px;">Website Management</h3>
+          <h3 style="font-size: var(--text-h4); margin-bottom: var(--space-xs);">Website Management</h3>
           <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: 0;">We handle updates, content changes, and backups so you can focus on business.</p>
         </div>
 
         <div style="background: var(--bg-primary); border: 1px solid var(--border-hairline); padding: var(--space-lg);">
-          <div class="numeral-badge" style="margin-bottom: 8px;">05</div>
-          <h3 style="font-size: var(--text-h4); margin-bottom: 4px;">Website Maintenance</h3>
+          <h3 style="font-size: var(--text-h4); margin-bottom: var(--space-xs);">Website Maintenance</h3>
           <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: 0;">Ongoing support, security monitoring, and regular performance optimization.</p>
         </div>
 
         <div style="background: var(--bg-primary); border: 1px solid var(--border-hairline); padding: var(--space-lg);">
-          <div class="numeral-badge" style="margin-bottom: 8px;">06</div>
-          <h3 style="font-size: var(--text-h4); margin-bottom: 4px;">SEO & Speed Optimization</h3>
+          <h3 style="font-size: var(--text-h4); margin-bottom: var(--space-xs);">SEO & Speed Optimization</h3>
           <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: 0;">We optimize your website to rank higher on search engines and load faster.</p>
         </div>
       </div>

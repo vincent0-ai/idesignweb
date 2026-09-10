@@ -7,9 +7,6 @@
 <!-- Full-Bleed Hero Section -->
 <section class="hero-section">
   <div class="container">
-    <div style="margin-bottom: var(--space-md);">
-      <span class="numeral-badge">WEBSITE DEVELOPMENT & DIGITAL DESIGN</span>
-    </div>
     <h1 class="hero-headline">
       Smart Websites. Stronger Businesses. Better Results.
     </h1>
@@ -19,36 +16,39 @@
     <div class="hero-actions">
       <!-- Sole Primary CTA with Accent Color -->
       <a href="{% url 'public:contact' %}" class="btn btn-primary">
-        GET STARTED
+        Get Started
       </a>
       <a href="{% url 'public:work_list' %}" class="btn btn-secondary">
-        VIEW OUR WORK
+        View Our Work
       </a>
       <a href="{% url 'portal:login' %}" class="btn btn-ghost">
-        CLIENT LOGIN
+        Client Login
       </a>
     </div>
 
+    <!-- Hero Showcase Device Presentation -->
+    <div class="hero-showcase">
+      <div class="hero-showcase-inner">
+        <img src="{% static 'img/hero_laptop.jpg' %}" alt="Modern website development by Idesignweb" class="hero-showcase-img" loading="eager">
+      </div>
+    </div>
+
     <!-- Core Website Pillars Row -->
-    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-md); margin-top: var(--space-3xl); border-top: 1px solid var(--border-hairline); padding-top: var(--space-xl);">
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-md); margin-top: var(--space-2xl); border-top: 1px solid var(--border-hairline); padding-top: var(--space-xl);">
       <div>
-        <div class="numeral" style="font-size: var(--text-tiny); color: var(--text-dim); margin-bottom: 4px;">01 / PILLAR</div>
-        <div style="font-weight: var(--weight-bold); font-size: var(--text-small); margin-bottom: 4px;">MODERN DESIGN</div>
+        <div style="font-weight: var(--weight-bold); font-size: var(--text-small); margin-bottom: 4px;">Modern Design</div>
         <div style="font-size: var(--text-tiny); color: var(--text-muted); line-height: 1.5;">Clean, professional, and tailored to your brand.</div>
       </div>
       <div>
-        <div class="numeral" style="font-size: var(--text-tiny); color: var(--text-dim); margin-bottom: 4px;">02 / PILLAR</div>
-        <div style="font-weight: var(--weight-bold); font-size: var(--text-small); margin-bottom: 4px;">RESPONSIVE</div>
+        <div style="font-weight: var(--weight-bold); font-size: var(--text-small); margin-bottom: 4px;">Responsive</div>
         <div style="font-size: var(--text-tiny); color: var(--text-muted); line-height: 1.5;">Looks perfect on phones, tablets, and laptops.</div>
       </div>
       <div>
-        <div class="numeral" style="font-size: var(--text-tiny); color: var(--text-dim); margin-bottom: 4px;">03 / PILLAR</div>
-        <div style="font-weight: var(--weight-bold); font-size: var(--text-small); margin-bottom: 4px;">FAST & SECURE</div>
+        <div style="font-weight: var(--weight-bold); font-size: var(--text-small); margin-bottom: 4px;">Fast & Secure</div>
         <div style="font-size: var(--text-tiny); color: var(--text-muted); line-height: 1.5;">Built for rapid speed and dependable security.</div>
       </div>
       <div>
-        <div class="numeral" style="font-size: var(--text-tiny); color: var(--text-dim); margin-bottom: 4px;">04 / PILLAR</div>
-        <div style="font-weight: var(--weight-bold); font-size: var(--text-small); margin-bottom: 4px;">SEO FRIENDLY</div>
+        <div style="font-weight: var(--weight-bold); font-size: var(--text-small); margin-bottom: 4px;">SEO Friendly</div>
         <div style="font-size: var(--text-tiny); color: var(--text-muted); line-height: 1.5;">Structured to help customers find you on Google.</div>
       </div>
     </div>
@@ -132,7 +132,7 @@
       </div>
       <div>
         <a href="{% url 'public:services_hub' %}" class="btn btn-ghost btn-sm">
-          EXPLORE ALL SERVICES [->]
+          Explore All Services
         </a>
       </div>
     </div>
@@ -161,11 +161,11 @@
   <div class="container">
     <div class="section-header">
       <div class="section-title-wrap">
-        <div class="section-numeral">OUR METHODOLOGY</div>
+        <div class="section-numeral">Our Methodology</div>
         <h2 class="section-title">How We Work</h2>
       </div>
       <div>
-        <span class="numeral-badge">CLEAR THREE-STEP PROCESS</span>
+        <span class="numeral-badge">Clear Three-Step Process</span>
       </div>
     </div>
 
@@ -182,31 +182,38 @@
   <div class="container">
     <div class="section-header">
       <div class="section-title-wrap">
-        <div class="section-numeral">PORTFOLIO</div>
+        <div class="section-numeral">Portfolio</div>
         <h2 class="section-title">Recent Work</h2>
       </div>
       <div>
         <a href="{% url 'public:work_list' %}" class="btn btn-ghost btn-sm">
-          VIEW ALL CASE STUDIES [->]
+          View All Case Studies
         </a>
       </div>
     </div>
 
     <div class="grid-2">
       {% for case in case_studies %}
-        <article class="card-hairline">
-          <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-sm); margin-bottom: var(--space-md);">
-            <span class="numeral-badge">{{ case.category }}</span>
-            <span class="numeral" style="font-size: var(--text-tiny); color: var(--text-muted);">{{ case.year }}</span>
-          </div>
-          <h3 style="font-size: var(--text-h3); margin-bottom: var(--space-sm);">{{ case.title }}</h3>
-          <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-lg);">{{ case.summary }}</p>
-          
-          <div style="border-top: 1px solid var(--border-hairline); padding-top: var(--space-md); margin-top: auto; display: flex; justify-content: space-between; align-items: baseline;">
-            <span style="font-size: var(--text-tiny); font-family: var(--font-mono); color: var(--text-dim);">CLIENT: {{ case.client }}</span>
-            <a href="{% url 'public:work_detail' case.slug %}" class="card-service-action" style="font-size: var(--text-tiny);">
-              READ CASE STUDY [->]
-            </a>
+        <article class="card-hairline-image">
+          {% if case.image_url %}
+            <div class="card-image-wrap">
+              <img src="{% static case.image_url %}" alt="{{ case.title }}" class="card-image" loading="lazy">
+            </div>
+          {% endif %}
+          <div class="card-body">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-sm);">
+              <span class="numeral-badge">{{ case.category }}</span>
+              <span style="font-size: var(--text-tiny); color: var(--text-dim);">{{ case.year }}</span>
+            </div>
+            <h3 style="font-size: var(--text-h3); margin-bottom: var(--space-xs);">{{ case.title }}</h3>
+            <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-lg);">{{ case.summary }}</p>
+            
+            <div style="border-top: 1px solid var(--border-hairline); padding-top: var(--space-md); margin-top: auto; display: flex; justify-content: space-between; align-items: baseline;">
+              <span style="font-size: var(--text-tiny); color: var(--text-dim);">Client: {{ case.client }}</span>
+              <a href="{% url 'public:work_detail' case.slug %}" class="card-service-action" style="font-size: var(--text-tiny);">
+                View Case Study
+              </a>
+            </div>
           </div>
         </article>
       {% endfor %}
@@ -219,23 +226,23 @@
   <div class="container">
     <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-lg); border: 1px solid var(--border-hairline); background-color: var(--bg-primary); padding: var(--space-xl);">
       <div>
-        <div class="numeral-badge" style="margin-bottom: var(--space-xs);">SPEED</div>
-        <div style="font-weight: var(--weight-bold); font-size: var(--text-body); margin-bottom: 4px;">FAST DELIVERY</div>
+        <div class="numeral-badge" style="margin-bottom: var(--space-xs);">Speed</div>
+        <div style="font-weight: var(--weight-bold); font-size: var(--text-body); margin-bottom: 4px;">Fast Delivery</div>
         <div style="font-size: var(--text-small); color: var(--text-muted);">On time, every time. Clear delivery milestones from day one.</div>
       </div>
       <div>
-        <div class="numeral-badge" style="margin-bottom: var(--space-xs);">STANDARDS</div>
-        <div style="font-weight: var(--weight-bold); font-size: var(--text-body); margin-bottom: 4px;">QUALITY WORK</div>
+        <div class="numeral-badge" style="margin-bottom: var(--space-xs);">Standards</div>
+        <div style="font-weight: var(--weight-bold); font-size: var(--text-body); margin-bottom: 4px;">Quality Work</div>
         <div style="font-size: var(--text-small); color: var(--text-muted);">High quality, clean code, and meticulous attention to detail.</div>
       </div>
       <div>
-        <div class="numeral-badge" style="margin-bottom: var(--space-xs);">ASSISTANCE</div>
-        <div style="font-weight: var(--weight-bold); font-size: var(--text-body); margin-bottom: 4px;">ONGOING SUPPORT</div>
+        <div class="numeral-badge" style="margin-bottom: var(--space-xs);">Assistance</div>
+        <div style="font-weight: var(--weight-bold); font-size: var(--text-body); margin-bottom: 4px;">Ongoing Support</div>
         <div style="font-size: var(--text-small); color: var(--text-muted);">We are here whenever you need updates, questions, or guidance.</div>
       </div>
       <div>
-        <div class="numeral-badge" style="margin-bottom: var(--space-xs);">GUARANTEE</div>
-        <div style="font-weight: var(--weight-bold); font-size: var(--text-body); margin-bottom: 4px;">100% SATISFACTION</div>
+        <div class="numeral-badge" style="margin-bottom: var(--space-xs);">Guarantee</div>
+        <div style="font-weight: var(--weight-bold); font-size: var(--text-body); margin-bottom: 4px;">100% Satisfaction</div>
         <div style="font-size: var(--text-small); color: var(--text-muted);">Your satisfaction and business results are our top priority.</div>
       </div>
     </div>
@@ -254,16 +261,16 @@
       </p>
       <div style="display: flex; justify-content: center; gap: var(--space-md); flex-wrap: wrap; margin-bottom: var(--space-2xl);">
         <a href="{% url 'public:contact' %}" class="btn btn-primary">
-          GET A QUOTE
+          Get a Quote
         </a>
         <a href="tel:{{ company_phone }}" class="btn btn-secondary">
-          CALL: {{ company_phone }}
+          Call: {{ company_phone }}
         </a>
       </div>
-      <div style="display: flex; justify-content: center; gap: var(--space-xl); font-family: var(--font-mono); font-size: var(--text-small); color: var(--text-muted); flex-wrap: wrap;">
-        <div>PHONE: {{ company_phone }}</div>
-        <div>EMAIL: {{ company_email }}</div>
-        <div>LOCATION: {{ company_location }}</div>
+      <div style="display: flex; justify-content: center; gap: var(--space-xl); font-size: var(--text-small); color: var(--text-muted); flex-wrap: wrap;">
+        <div>Phone: {{ company_phone }}</div>
+        <div>Email: {{ company_email }}</div>
+        <div>Location: {{ company_location }}</div>
       </div>
     </div>
   </div>

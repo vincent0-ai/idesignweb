@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     navToggle.addEventListener('click', function() {
       const isOpen = mainNav.classList.toggle('mobile-open');
       navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      navToggle.textContent = isOpen ? '[ CLOSE ]' : '[ MENU ]';
+      navToggle.textContent = isOpen ? 'Close' : 'Menu';
     });
   }
 

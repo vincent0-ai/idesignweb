@@ -169,6 +169,7 @@ class Command(BaseCommand):
                 'client': 'Klar Form',
                 'category': 'Web Development',
                 'year': '2026',
+                'image_url': 'img/ecommerce.jpg',
                 'summary': 'A fast, mobile-friendly online store with instant product search and secure payment checkout.',
                 'challenge': 'Klar Form was losing customers because their previous website took too long to load on mobile phones.',
                 'solution': 'We built a modern responsive store with clean layouts, fast image loading, and a simple 2-step checkout.',
@@ -187,13 +188,14 @@ class Command(BaseCommand):
                 'client': 'Klar Form Studio',
                 'category': 'Graphic Design',
                 'year': '2026',
+                'image_url': 'img/branding.jpg',
                 'summary': 'A complete visual identity redesign including logo suite, packaging templates, and promotional posters.',
                 'challenge': 'The client needed an elevated, professional brand image to sell into premium retail galleries.',
                 'solution': 'We designed a memorable minimalist logo, unified color palette, and elegant print collateral.',
                 'results': [
                     {'metric': '+55%', 'label': 'Increase in retail inquiries'},
                     {'metric': '100%', 'label': 'Standardized print packaging'},
-                    {'metric': '03', 'label': 'Design showcase features'}
+                    {'metric': '3 Features', 'label': 'Design showcase publications'}
                 ],
                 'deliverables_summary': 'Vector logo package, brand guidelines PDF, poster series, business cards.',
                 'published_at': now,
@@ -205,13 +207,14 @@ class Command(BaseCommand):
                 'client': 'Modern Spaces',
                 'category': 'Video Editing',
                 'year': '2026',
+                'image_url': 'img/hero_laptop.jpg',
                 'summary': 'A six-minute showcase film paired with 15-second vertical cuts for Instagram and YouTube campaigns.',
                 'challenge': 'The client needed engaging video content to demonstrate their commercial architectural work to prospective clients.',
                 'solution': 'We edited footage with crisp cuts, natural ambient soundscapes, clean text overlays, and 4K color correction.',
                 'results': [
                     {'metric': '240K', 'label': 'Total views across video channels'},
                     {'metric': '82%', 'label': 'Average watch completion rate'},
-                    {'metric': '4K', 'label': 'High resolution master delivered'}
+                    {'metric': '4K Master', 'label': 'High resolution master delivered'}
                 ],
                 'deliverables_summary': 'Master 4K video, 4 social media cuts, sound mix, YouTube master files.',
                 'published_at': now,
@@ -223,11 +226,12 @@ class Command(BaseCommand):
                 'client': 'Vertex Media',
                 'category': 'Cybersecurity',
                 'year': '2026',
+                'image_url': 'img/company_flyer.jpg',
                 'summary': 'A comprehensive security checkup, malware cleanup, and automated daily backup system for a media platform.',
                 'challenge': 'Vertex Media experienced spam injections and required security hardening to protect client accounts.',
                 'solution': 'We patched outdated software, installed web application firewalls, and configured automated daily offsite backups.',
                 'results': [
-                    {'metric': '0', 'label': 'Vulnerabilities remaining'},
+                    {'metric': '0 Issues', 'label': 'Vulnerabilities remaining'},
                     {'metric': '99.99%', 'label': 'Uptime maintained'},
                     {'metric': 'Daily', 'label': 'Automated backups verified'}
                 ],
@@ -300,20 +304,20 @@ class Command(BaseCommand):
         db.announcements.delete_many({})
         announcements_data = [
             {
-                'title': 'Scheduled Routine Server Updates This Sunday',
-                'body': 'We will perform routine server updates this Sunday at 2:00 AM UTC. Services will remain available, and all project files are safe.',
+                'title': 'Scheduled Routine Server Maintenance This Sunday',
+                'body': 'We will perform routine server updates this Sunday at 2:00 AM UTC. Services will remain fully accessible, and all your project files are secure.',
                 'priority': 'Notice',
                 'audience': 'all',
-                'date_str': '2026-09-12',
+                'date_str': 'September 12, 2026',
                 'created_at': now,
                 'active': True
             },
             {
                 'title': 'High Resolution File Downloads Available in Asset Library',
-                'body': 'You can now preview and download all your approved logo packages and brand assets directly from your client member portal.',
+                'body': 'You can now preview and download all your approved logo packages, vector files, and brand graphics directly from your client workspace.',
                 'priority': 'Update',
                 'audience': 'all',
-                'date_str': '2026-09-08',
+                'date_str': 'September 8, 2026',
                 'created_at': now,
                 'active': True
             }
@@ -331,15 +335,15 @@ class Command(BaseCommand):
                 'service_category': 'Web Development',
                 'status': 'In Progress',
                 'progress_percent': 70,
-                'start_date': '2026-08-01',
-                'target_date': '2026-10-15',
+                'start_date': 'August 1, 2026',
+                'target_date': 'October 15, 2026',
                 'deliverables': [
                     {
                         'deliverable_id': 'DEL-01',
                         'title': 'Website sitemap and page layouts',
                         'version': '1.0',
                         'status': 'Approved',
-                        'due_date': '2026-08-20',
+                        'due_date': 'August 20, 2026',
                         'client_notes': 'Approved by client.'
                     },
                     {
@@ -347,7 +351,7 @@ class Command(BaseCommand):
                         'title': 'Homepage and product catalog templates',
                         'version': '2.0',
                         'status': 'In Review',
-                        'due_date': '2026-09-15',
+                        'due_date': 'September 15, 2026',
                         'client_notes': 'Please review mobile menu alignment.'
                     },
                     {
@@ -355,7 +359,7 @@ class Command(BaseCommand):
                         'title': 'Online checkout and payment setup',
                         'version': '0.9',
                         'status': 'Draft',
-                        'due_date': '2026-10-01',
+                        'due_date': 'October 1, 2026',
                         'client_notes': ''
                     }
                 ],
@@ -369,15 +373,15 @@ class Command(BaseCommand):
                 'service_category': 'Graphic Design',
                 'status': 'In Review',
                 'progress_percent': 90,
-                'start_date': '2026-08-15',
-                'target_date': '2026-09-25',
+                'start_date': 'August 15, 2026',
+                'target_date': 'September 25, 2026',
                 'deliverables': [
                     {
                         'deliverable_id': 'DEL-04',
                         'title': 'Logo concepts and color palette',
                         'version': '1.2',
                         'status': 'Approved',
-                        'due_date': '2026-08-30',
+                        'due_date': 'August 30, 2026',
                         'client_notes': 'Approved option 2.'
                     },
                     {
@@ -385,7 +389,7 @@ class Command(BaseCommand):
                         'title': 'Print collateral and social media banners',
                         'version': '1.0',
                         'status': 'In Review',
-                        'due_date': '2026-09-20',
+                        'due_date': 'September 20, 2026',
                         'client_notes': ''
                     }
                 ],
@@ -407,7 +411,7 @@ class Command(BaseCommand):
                 'format': 'SVG, PNG',
                 'size': '2.4 MB',
                 'version': '1.2',
-                'updated_date': '2026-09-02'
+                'updated_date': 'September 2, 2026'
             },
             {
                 'client_username': 'client_apex',
@@ -417,7 +421,7 @@ class Command(BaseCommand):
                 'format': 'PDF',
                 'size': '420 KB',
                 'version': '1.0',
-                'updated_date': '2026-09-04'
+                'updated_date': 'September 4, 2026'
             },
             {
                 'client_username': 'client_apex',
@@ -427,7 +431,7 @@ class Command(BaseCommand):
                 'format': 'MP4, MOV',
                 'size': '184 MB',
                 'version': '1.1',
-                'updated_date': '2026-09-05'
+                'updated_date': 'September 5, 2026'
             },
             {
                 'client_username': 'client_apex',
@@ -437,7 +441,7 @@ class Command(BaseCommand):
                 'format': 'PDF',
                 'size': '1.8 MB',
                 'version': '1.0',
-                'updated_date': '2026-09-09'
+                'updated_date': 'September 9, 2026'
             }
         ]
         db.assets.insert_many(assets_data)
@@ -459,13 +463,13 @@ class Command(BaseCommand):
                         'sender': 'client_apex',
                         'role': 'client',
                         'text': 'Which logo file should our printing vendor use for our new business cards?',
-                        'date_str': '2026-09-05 10:14'
+                        'date_str': 'Sep 5, 2026 at 10:14 AM'
                     },
                     {
                         'sender': 'Timothy Owino',
                         'role': 'staff',
                         'text': 'Please share the vector PDF or EPS file in your asset library with your printer for the highest quality.',
-                        'date_str': '2026-09-05 11:30'
+                        'date_str': 'Sep 5, 2026 at 11:30 AM'
                     }
                 ]
             },
@@ -482,13 +486,13 @@ class Command(BaseCommand):
                         'sender': 'client_apex',
                         'role': 'client',
                         'text': 'Can we get a vertical 9:16 version of our promotional video for an Instagram story campaign?',
-                        'date_str': '2026-09-09 14:20'
+                        'date_str': 'Sep 9, 2026 at 2:20 PM'
                     },
                     {
                         'sender': 'Timothy Owino',
                         'role': 'staff',
                         'text': 'Working on the vertical reframe now. We will upload it to your project space by tomorrow afternoon.',
-                        'date_str': '2026-09-09 15:45'
+                        'date_str': 'Sep 9, 2026 at 3:45 PM'
                     }
                 ]
             }

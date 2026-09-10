@@ -4,13 +4,9 @@
 
 {% block portal_content %}
 <div style="margin-bottom: var(--space-2xl);">
-  <div class="hero-meta">
-    <span class="numeral">PORTAL / 03</span>
-    <span>PROJECT REPOSITORIES</span>
-  </div>
-  <h1 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">Client Project Spaces</h1>
+  <h1 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">Your Projects</h1>
   <p style="font-size: var(--text-body); color: var(--text-muted);">
-    Dedicated execution spaces containing milestone tracking, deliverable repositories, and approval workflows.
+    Track project milestones, review deliverables, and approve work.
   </p>
 </div>
 
@@ -26,19 +22,19 @@
         <a href="{% url 'portal:project_detail' prj.project_code %}">{{ prj.title }}</a>
       </h2>
 
-      <div style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-md);">
-        PRACTICE: {{ prj.service_category }}
+      <div style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-xs);">
+        Service: {{ prj.service_category }}
       </div>
 
-      <div style="font-size: var(--text-tiny); font-family: var(--font-mono); color: var(--text-dim); margin-bottom: var(--space-md);">
-        TIMELINE: {{ prj.start_date }} TO {{ prj.target_date }}
+      <div style="font-size: var(--text-tiny); color: var(--text-dim); margin-bottom: var(--space-md);">
+        Timeline: {{ prj.start_date }} to {{ prj.target_date }}
       </div>
 
       <!-- Progress Meter -->
       <div style="margin-bottom: var(--space-lg);">
-        <div style="display: flex; justify-content: space-between; font-size: var(--text-tiny); font-family: var(--font-mono); margin-bottom: 4px;">
-          <span>COMPLETION</span>
-          <span>{{ prj.progress_percent }}%</span>
+        <div style="display: flex; justify-content: space-between; font-size: var(--text-tiny); margin-bottom: 4px;">
+          <span>Progress</span>
+          <span style="font-weight: bold;">{{ prj.progress_percent }}%</span>
         </div>
         <div style="width: 100%; height: 6px; background: var(--border-hairline); border: 1px solid var(--border-hairline);">
           <div style="width: {{ prj.progress_percent }}%; height: 100%; background: var(--text-main);"></div>
@@ -46,9 +42,9 @@
       </div>
 
       <div style="border-top: 1px solid var(--border-hairline); padding-top: var(--space-sm); margin-top: auto; display: flex; justify-content: space-between; align-items: center;">
-        <span class="numeral" style="font-size: var(--text-tiny); color: var(--text-dim);">DELIVERABLES: {{ prj.deliverables|length }}</span>
+        <span style="font-size: var(--text-tiny); color: var(--text-dim);">Deliverables: {{ prj.deliverables|length }}</span>
         <a href="{% url 'portal:project_detail' prj.project_code %}" class="card-service-action" style="font-size: var(--text-tiny);">
-          OPEN WORKSPACE [->]
+          View Project
         </a>
       </div>
     </article>

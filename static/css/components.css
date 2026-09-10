@@ -92,6 +92,41 @@
   flex-direction: column;
 }
 
+.card-hairline-image {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-hairline);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.card-image-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-hairline);
+  background-color: var(--bg-surface);
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.card-hairline-image:hover .card-image {
+  transform: scale(1.02);
+}
+
+.card-body {
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
 .card-hairline-dark {
   background-color: var(--bg-dark-surface);
   border: 1px solid var(--border-hairline-dark);
@@ -127,10 +162,10 @@
 }
 
 .card-service-numeral {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: var(--text-h3);
   font-weight: var(--weight-bold);
-  letter-spacing: -0.05em;
+  letter-spacing: -0.02em;
   color: var(--text-main);
 }
 
@@ -162,49 +197,50 @@
 
 .card-service-deliverables li::before {
   content: "+";
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-weight: var(--weight-bold);
   color: var(--text-main);
   margin-right: 8px;
 }
 
 .card-service-action {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: var(--text-small);
   font-weight: var(--weight-bold);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
   color: var(--text-main);
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .card-service-action:hover {
-  text-decoration: underline;
+  color: var(--accent-cta);
 }
 
-/* Badges and Numerals */
+/* Badges and Tags - Clean Sans-Serif Typography */
 .numeral-badge {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-weight: var(--weight-bold);
   font-size: var(--text-tiny);
-  letter-spacing: 0.05em;
-  padding: 4px 8px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 4px 10px;
   border: 1px solid var(--border-hairline);
   display: inline-block;
   background-color: var(--bg-surface);
   color: var(--text-main);
 }
 
-/* Status Tags - Pure Typography and Hairline Borders */
+/* Status Tags - Clean, subtle pills */
 .status-tag {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: var(--text-tiny);
   font-weight: var(--weight-bold);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 4px 8px;
+  letter-spacing: 0.04em;
+  padding: 4px 10px;
   border: 1px solid var(--border-hairline);
   display: inline-flex;
   align-items: center;
@@ -287,9 +323,19 @@
 .alert-dismiss {
   background: transparent;
   border: none;
-  font-family: var(--font-mono);
-  font-size: var(--text-small);
-  font-weight: var(--weight-bold);
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--text-muted);
   cursor: pointer;
-  padding: 4px 8px;
+  padding: 0 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease;
+}
+
+.alert-dismiss:hover {
+  color: var(--text-main);
 }

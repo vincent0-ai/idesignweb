@@ -4,13 +4,9 @@
 
 {% block portal_content %}
 <div style="margin-bottom: var(--space-2xl);">
-  <div class="hero-meta">
-    <span class="numeral">PORTAL / 02</span>
-    <span>COMMUNICATIONS ARCHIVE</span>
-  </div>
-  <h1 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">System Announcements</h1>
+  <h1 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">Announcements</h1>
   <p style="font-size: var(--text-body); color: var(--text-muted);">
-    Direct technical notices, release bulletins, and scheduled maintenance alerts.
+    Updates and notices regarding your services and project milestones.
   </p>
 </div>
 
@@ -18,8 +14,8 @@
   {% for ann in announcements %}
     <article class="card-hairline">
       <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-sm);">
-        <span class="numeral-badge">LEVEL: {{ ann.priority|upper }}</span>
-        <span class="numeral" style="font-size: var(--text-tiny); color: var(--text-dim);">ISSUED: {{ ann.date_str }}</span>
+        <span class="numeral-badge">{{ ann.priority }}</span>
+        <span style="font-size: var(--text-tiny); color: var(--text-dim);">{{ ann.date_str }}</span>
       </div>
 
       <h2 style="font-size: var(--text-h3); margin-bottom: var(--space-sm);">{{ ann.title }}</h2>

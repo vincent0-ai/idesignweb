@@ -10,10 +10,10 @@
 <section class="section" style="min-height: calc(80vh - var(--header-height)); display: flex; align-items: center;">
   <div class="container" style="max-width: 480px;">
     <div class="card-hairline">
-      <div class="footer-col-title">RESTRICTED ACCESS PORTAL</div>
-      <h1 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">Member Login</h1>
+      <div class="footer-col-title">Client Area</div>
+      <h1 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">Client Login</h1>
       <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-xl);">
-        Authentication required. Access to project deliverables, asset files, and support channels.
+        Log in to access your project workspace, review deliverables, and download files.
       </p>
 
       <form method="POST" action="{% url 'portal:login' %}">
@@ -31,16 +31,16 @@
         </div>
 
         <button type="submit" class="btn btn-primary btn-block" style="margin-bottom: var(--space-lg);">
-          AUTHENTICATE SESSION
+          Log In
         </button>
       </form>
 
       <!-- Demonstration Credentials Box -->
       <div style="background-color: var(--bg-surface); border: 1px solid var(--border-hairline); padding: var(--space-md);">
-        <div class="form-label" style="font-size: var(--text-tiny);">DEMO CLIENT CREDENTIALS</div>
-        <div style="font-family: var(--font-mono); font-size: var(--text-tiny); color: var(--text-muted);">
-          <div>USER: <span style="color: var(--text-main); font-weight: bold;">client_apex</span></div>
-          <div>PASS: <span style="color: var(--text-main); font-weight: bold;">MemberPass2026!</span></div>
+        <div class="form-label" style="font-size: var(--text-tiny);">Demo Account Details</div>
+        <div style="font-size: var(--text-tiny); color: var(--text-muted);">
+          <div>Username: <span style="color: var(--text-main); font-weight: bold;">client_apex</span></div>
+          <div>Password: <span style="color: var(--text-main); font-weight: bold;">MemberPass2026!</span></div>
         </div>
       </div>
     </div>

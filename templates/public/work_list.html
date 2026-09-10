@@ -1,4 +1,5 @@
 {% extends 'base/base.html' %}
+{% load static %}
 
 {% block title %}Our Work & Case Studies : {{ site_title }}{% endblock %}
 
@@ -20,11 +21,11 @@
     <!-- Category Filter Controls -->
     <div style="display: flex; gap: var(--space-xs); flex-wrap: wrap; margin-bottom: var(--space-2xl); border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-md);">
       <a href="{% url 'public:work_list' %}" class="btn btn-ghost btn-sm {% if selected_category == 'all' %}btn-secondary{% endif %}">
-        ALL PROJECTS
+        All Projects
       </a>
       {% for cat in categories %}
         <a href="{% url 'public:work_list' %}?category={{ cat|urlencode }}" class="btn btn-ghost btn-sm {% if selected_category == cat %}btn-secondary{% endif %}">
-          {{ cat|upper }}
+          {{ cat }}
         </a>
       {% endfor %}
     </div>
@@ -32,40 +33,48 @@
     <!-- Case Studies Grid -->
     <div class="grid-2">
       {% for case in case_studies %}
-        <article class="card-hairline">
-          <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-md);">
-            <span class="numeral-badge">{{ case.category }}</span>
-            <span class="numeral" style="font-size: var(--text-tiny); color: var(--text-dim);">{{ case.year }}</span>
-          </div>
+        <article class="card-hairline-image">
+          {% if case.image_url %}
+            <div class="card-image-wrap">
+              <img src="{% static case.image_url %}" alt="{{ case.title }}" class="card-image" loading="lazy">
+            </div>
+          {% endif %}
 
-          <h2 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">
-            <a href="{% url 'public:work_detail' case.slug %}">{{ case.title }}</a>
-          </h2>
-          <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-lg); line-height: 1.6;">
-            {{ case.summary }}
-          </p>
+          <div class="card-body">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-sm);">
+              <span class="numeral-badge">{{ case.category }}</span>
+              <span style="font-size: var(--text-tiny); color: var(--text-dim);">{{ case.year }}</span>
+            </div>
 
-          <!-- Results Highlights -->
-          <div style="display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--border-hairline); margin-bottom: var(--space-lg); background: var(--bg-surface);">
-            {% for res in case.results %}
-              <div style="padding: var(--space-sm); border-right: 1px solid var(--border-hairline); text-align: center;">
-                <div class="numeral" style="font-size: 1.25rem; font-weight: var(--weight-bold);">{{ res.metric }}</div>
-                <div style="font-size: var(--text-tiny); color: var(--text-muted); text-transform: uppercase;">{{ res.label }}</div>
-              </div>
-            {% endfor %}
-          </div>
+            <h2 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">
+              <a href="{% url 'public:work_detail' case.slug %}">{{ case.title }}</a>
+            </h2>
+            <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-lg); line-height: 1.6;">
+              {{ case.summary }}
+            </p>
 
-          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-hairline); padding-top: var(--space-md); margin-top: auto;">
-            <span style="font-size: var(--text-tiny); font-family: var(--font-mono); color: var(--text-dim);">CLIENT: {{ case.client }}</span>
-            <a href="{% url 'public:work_detail' case.slug %}" class="card-service-action" style="font-size: var(--text-tiny);">
-              VIEW CASE STUDY [->]
-            </a>
+            <!-- Results Highlights -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--border-hairline); margin-bottom: var(--space-lg); background: var(--bg-surface);">
+              {% for res in case.results %}
+                <div style="padding: var(--space-sm); border-right: 1px solid var(--border-hairline); text-align: center;">
+                  <div style="font-size: 1.25rem; font-weight: var(--weight-bold); color: var(--text-main);">{{ res.metric }}</div>
+                  <div style="font-size: var(--text-tiny); color: var(--text-muted);">{{ res.label }}</div>
+                </div>
+              {% endfor %}
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-hairline); padding-top: var(--space-md); margin-top: auto;">
+              <span style="font-size: var(--text-tiny); color: var(--text-dim);">Client: {{ case.client }}</span>
+              <a href="{% url 'public:work_detail' case.slug %}" class="card-service-action" style="font-size: var(--text-tiny);">
+                View Case Study
+              </a>
+            </div>
           </div>
         </article>
       {% empty %}
         <div class="card-hairline" style="grid-column: 1 / -1; text-align: center; padding: var(--space-2xl);">
           <p>No case studies found for this category.</p>
-          <a href="{% url 'public:work_list' %}" class="btn btn-secondary btn-sm" style="margin-top: var(--space-md);">ALL PROJECTS</a>
+          <a href="{% url 'public:work_list' %}" class="btn btn-secondary btn-sm" style="margin-top: var(--space-md);">All Projects</a>
         </div>
       {% endfor %}
     </div>

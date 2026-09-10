@@ -1,0 +1,55 @@
+{% extends 'portal/portal_base.html' %}
+
+{% block title %}Client Inquiries : Staff Portal : {{ site_title }}{% endblock %}
+
+{% block portal_content %}
+<div style="margin-bottom: var(--space-2xl);">
+  <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: var(--space-md);">
+    <div>
+      <h1 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">Client Inquiries</h1>
+      <p style="font-size: var(--text-body); color: var(--text-muted);">
+        Prospective client messages and project requests submitted through the contact page.
+      </p>
+    </div>
+    <div>
+      <span class="numeral-badge">Total Inquiries: {{ inquiries|length }}</span>
+    </div>
+  </div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: var(--space-lg); max-width: 900px;">
+  {% for inq in inquiries %}
+    <article class="card-hairline">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-sm); flex-wrap: wrap; gap: var(--space-xs);">
+        <div>
+          <span class="numeral-badge">{{ inq.service_interest }}</span>
+          <span class="numeral-badge" style="margin-left: 6px;">Budget: {{ inq.budget_range }}</span>
+        </div>
+        <span style="font-size: var(--text-tiny); color: var(--text-dim);">{{ inq.submitted_at|date:"M j, Y at g:i A" }}</span>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: var(--space-sm); flex-wrap: wrap;">
+        <h2 style="font-size: var(--text-h3); margin-bottom: 0;">{{ inq.full_name }}</h2>
+        <a href="mailto:{{ inq.email }}" class="card-service-action" style="font-size: var(--text-small);">
+          <span>{{ inq.email }}</span>
+        </a>
+      </div>
+
+      <p style="font-size: var(--text-body); line-height: 1.6; color: var(--text-main); margin-bottom: var(--space-md); background: var(--bg-surface); padding: var(--space-md); border: 1px solid var(--border-hairline);">
+        {{ inq.message }}
+      </p>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; font-size: var(--text-tiny); color: var(--text-muted);">
+        <span>Status: <strong>{{ inq.status|default:"New" }}</strong></span>
+        <a href="mailto:{{ inq.email }}?subject=Re: Your Idesignweb Inquiry ({{ inq.service_interest }})" class="btn btn-secondary btn-sm">
+          Reply via Email
+        </a>
+      </div>
+    </article>
+  {% empty %}
+    <div class="card-hairline" style="text-align: center; padding: var(--space-2xl);">
+      <p style="color: var(--text-muted); margin-bottom: 0;">No client inquiries received yet.</p>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

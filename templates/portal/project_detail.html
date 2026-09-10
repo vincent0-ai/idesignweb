@@ -5,7 +5,7 @@
 {% block portal_content %}
 <div style="margin-bottom: var(--space-xl);">
   <a href="{% url 'portal:projects' %}" class="card-service-action" style="font-size: var(--text-small);">
-    <span>[<-] BACK TO PROJECT SPACES</span>
+    <span>Back to Projects</span>
   </a>
 </div>
 
@@ -18,21 +18,21 @@
 
   <h1 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">{{ project.title }}</h1>
   <div style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-md);">
-    PRACTICE: {{ project.service_category }} / CLIENT: {{ project.client_username }}
+    Service: {{ project.service_category }} &bull; Client: {{ project.client_username }}
   </div>
 
   <div style="display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--border-hairline); margin-bottom: var(--space-md);">
     <div style="padding: var(--space-sm); border-right: 1px solid var(--border-hairline);">
-      <div class="form-label" style="font-size: var(--text-tiny);">START DATE</div>
-      <div class="numeral" style="font-size: var(--text-small);">{{ project.start_date }}</div>
+      <div class="form-label" style="font-size: var(--text-tiny);">Start Date</div>
+      <div style="font-size: var(--text-small); font-weight: bold;">{{ project.start_date }}</div>
     </div>
     <div style="padding: var(--space-sm); border-right: 1px solid var(--border-hairline);">
-      <div class="form-label" style="font-size: var(--text-tiny);">TARGET DELIVERY</div>
-      <div class="numeral" style="font-size: var(--text-small);">{{ project.target_date }}</div>
+      <div class="form-label" style="font-size: var(--text-tiny);">Target Delivery</div>
+      <div style="font-size: var(--text-small); font-weight: bold;">{{ project.target_date }}</div>
     </div>
     <div style="padding: var(--space-sm);">
-      <div class="form-label" style="font-size: var(--text-tiny);">PROGRESS</div>
-      <div class="numeral" style="font-size: var(--text-small);">{{ project.progress_percent }}%</div>
+      <div class="form-label" style="font-size: var(--text-tiny);">Progress</div>
+      <div style="font-size: var(--text-small); font-weight: bold;">{{ project.progress_percent }}%</div>
     </div>
   </div>
 
@@ -45,15 +45,14 @@
 <!-- Deliverables Section -->
 <div class="section-header">
   <div class="section-title-wrap">
-    <div class="section-numeral">DELIVERABLE ARTIFACTS</div>
-    <h2 class="section-title" style="font-size: var(--text-h3);">Deliverables and Approval Workflow</h2>
+    <h2 class="section-title" style="font-size: var(--text-h3);">Deliverables & Approval Workflow</h2>
   </div>
   <!-- Status Filter Controls -->
   <div style="display: flex; gap: var(--space-xs);">
-    <button type="button" class="btn btn-ghost btn-sm active" data-filter-status="all">ALL</button>
-    <button type="button" class="btn btn-ghost btn-sm" data-filter-status="In Review">IN REVIEW</button>
-    <button type="button" class="btn btn-ghost btn-sm" data-filter-status="Approved">APPROVED</button>
-    <button type="button" class="btn btn-ghost btn-sm" data-filter-status="Draft">DRAFT</button>
+    <button type="button" class="btn btn-ghost btn-sm active" data-filter-status="all">All</button>
+    <button type="button" class="btn btn-ghost btn-sm" data-filter-status="In Review">In Review</button>
+    <button type="button" class="btn btn-ghost btn-sm" data-filter-status="Approved">Approved</button>
+    <button type="button" class="btn btn-ghost btn-sm" data-filter-status="Draft">Draft</button>
   </div>
 </div>
 
@@ -63,29 +62,29 @@
       <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-sm);">
         <div>
           <span class="numeral-badge">{{ del.deliverable_id }}</span>
-          <span class="numeral" style="font-size: var(--text-tiny); margin-left: 8px;">VER: {{ del.version }}</span>
+          <span style="font-size: var(--text-tiny); color: var(--text-dim); margin-left: 8px;">Version {{ del.version }}</span>
         </div>
         <div>
           {% if del.status == 'Approved' %}
-            <span class="status-tag status-approved">APPROVED</span>
+            <span class="status-tag status-approved">Approved</span>
           {% elif del.status == 'In Review' %}
-            <span class="status-tag status-in-review">IN REVIEW</span>
+            <span class="status-tag status-in-review">In Review</span>
           {% elif del.status == 'Revision Requested' %}
-            <span class="status-tag" style="border-color: #BD2130; color: #BD2130;">REVISION REQUESTED</span>
+            <span class="status-tag" style="border-color: #BD2130; color: #BD2130;">Revision Requested</span>
           {% else %}
-            <span class="status-tag status-draft">DRAFT</span>
+            <span class="status-tag status-draft">Draft</span>
           {% endif %}
         </div>
       </div>
 
       <h3 style="font-size: var(--text-h3); margin-bottom: var(--space-xs);">{{ del.title }}</h3>
-      <div class="numeral" style="font-size: var(--text-tiny); color: var(--text-dim); margin-bottom: var(--space-md);">
-        DUE DATE: {{ del.due_date }}
+      <div style="font-size: var(--text-tiny); color: var(--text-dim); margin-bottom: var(--space-md);">
+        Due: {{ del.due_date }}
       </div>
 
       {% if del.client_notes %}
         <div style="background: var(--bg-surface); border: 1px solid var(--border-hairline); padding: var(--space-sm) var(--space-md); margin-bottom: var(--space-md);">
-          <div class="form-label" style="font-size: var(--text-tiny);">CLIENT FEEDBACK NOTES</div>
+          <div class="form-label" style="font-size: var(--text-tiny);">Feedback Notes</div>
           <p style="font-size: var(--text-small); color: var(--text-main); margin-bottom: 0;">{{ del.client_notes }}</p>
         </div>
       {% endif %}
@@ -96,16 +95,16 @@
           {% csrf_token %}
 
           <div style="margin-bottom: var(--space-sm);">
-            <label class="form-label" style="font-size: var(--text-tiny);">FEEDBACK / REVISION SPECIFICATION (OPTIONAL FOR APPROVAL):</label>
-            <input type="text" name="client_notes" class="form-input" style="padding: 8px 12px; font-size: var(--text-small);" placeholder="Enter notes or revision requirements...">
+            <label class="form-label" style="font-size: var(--text-tiny);">Feedback or revision details (optional):</label>
+            <input type="text" name="client_notes" class="form-input" style="padding: 8px 12px; font-size: var(--text-small);" placeholder="Enter notes or revision requests...">
           </div>
 
           <div style="display: flex; gap: var(--space-sm);">
             <button type="submit" name="action" value="approve" class="btn btn-secondary btn-sm">
-              [ APPROVE DELIVERABLE ]
+              Approve Deliverable
             </button>
             <button type="submit" name="action" value="revise" class="btn btn-ghost btn-sm">
-              [ REQUEST REVISION ]
+              Request Revision
             </button>
           </div>
         </form>

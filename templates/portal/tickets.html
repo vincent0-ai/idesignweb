@@ -5,10 +5,6 @@
 {% block portal_content %}
 <div style="margin-bottom: var(--space-2xl); display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: var(--space-md);">
   <div>
-    <div class="hero-meta">
-      <span class="numeral">PORTAL / 05</span>
-      <span>CLIENT SUPPORT</span>
-    </div>
     <h1 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">Support Tickets</h1>
     <p style="font-size: var(--text-body); color: var(--text-muted); margin-bottom: 0;">
       Ask questions, request file adjustments, or report website issues directly to our team.
@@ -16,7 +12,7 @@
   </div>
   <div>
     <a href="{% url 'portal:create_ticket' %}" class="btn btn-secondary">
-      + NEW TICKET
+      New Ticket
     </a>
   </div>
 </div>
@@ -28,15 +24,15 @@
       <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-sm);">
         <div>
           <span class="numeral-badge">{{ t.ticket_id }}</span>
-          <span class="numeral-badge" style="margin-left: 6px;">PRIORITY: {{ t.priority|upper }}</span>
+          <span class="numeral-badge" style="margin-left: 6px;">{{ t.priority }}</span>
         </div>
         <div>
           {% if t.status == 'Resolved' %}
-            <span class="status-tag status-approved">RESOLVED</span>
+            <span class="status-tag status-approved">Resolved</span>
           {% elif t.status == 'In Progress' %}
-            <span class="status-tag status-in-review">IN PROGRESS</span>
+            <span class="status-tag status-in-review">In Progress</span>
           {% else %}
-            <span class="status-tag status-draft">OPEN</span>
+            <span class="status-tag status-draft">Open</span>
           {% endif %}
         </div>
       </div>
@@ -46,11 +42,11 @@
       </h2>
 
       <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-hairline); padding-top: var(--space-sm); margin-top: var(--space-md);">
-        <span class="numeral" style="font-size: var(--text-tiny); color: var(--text-dim);">
-          MESSAGES: {{ t.messages|length }}
+        <span style="font-size: var(--text-tiny); color: var(--text-dim);">
+          Messages: {{ t.messages|length }}
         </span>
         <a href="{% url 'portal:ticket_detail' t.ticket_id %}" class="card-service-action" style="font-size: var(--text-tiny);">
-          VIEW CONVERSATION [->]
+          View Conversation
         </a>
       </div>
     </article>
@@ -58,7 +54,7 @@
     <div class="card-hairline" style="text-align: center; padding: var(--space-2xl);">
       <p>No support tickets currently open.</p>
       <a href="{% url 'portal:create_ticket' %}" class="btn btn-secondary btn-sm" style="margin-top: var(--space-md);">
-        SUBMIT A TICKET
+        Submit a Ticket
       </a>
     </div>
   {% endfor %}

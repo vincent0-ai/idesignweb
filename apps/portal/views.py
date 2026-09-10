@@ -200,22 +200,25 @@ def ticket_detail_view(request, ticket_id):
 
     if request.method == 'POST':
         reply_text = request.POST.get('reply_text', '').strip()
+        status_update = request.POST.get('status', '').strip()
+
+        update_fields = {'updated_at': datetime.datetime.now(datetime.timezone.utc)}
+        if request.user.is_staff and status_update in ['Open', 'In Progress', 'Resolved']:
+            update_fields['status'] = status_update
+
+        update_ops = {'$set': update_fields}
         if reply_text:
             new_msg = {
                 'sender': username,
                 'role': 'staff' if request.user.is_staff else 'client',
                 'text': reply_text,
-                'date_str': datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
+                'date_str': datetime.datetime.now().strftime('%b %d, %Y at %I:%M %p')
             }
-            db.tickets.update_one(
-                {'_id': ticket['_id']},
-                {
-                    '$push': {'messages': new_msg},
-                    '$set': {'updated_at': datetime.datetime.now(datetime.timezone.utc)}
-                }
-            )
-            messages.success(request, 'Reply recorded on support ticket.')
-            return redirect('portal:ticket_detail', ticket_id=ticket_id)
+            update_ops['$push'] = {'messages': new_msg}
+
+        db.tickets.update_one({'_id': ticket['_id']}, update_ops)
+        messages.success(request, 'Support ticket updated.')
+        return redirect('portal:ticket_detail', ticket_id=ticket_id)
 
     return render(request, 'portal/ticket_detail.html', {
         'ticket': ticket,
@@ -262,3 +265,15 @@ def create_ticket_view(request):
             return redirect('portal:ticket_detail', ticket_id=new_ticket_id)
 
     return render(request, 'portal/create_ticket.html', {'active_section': 'support'})
+
+@login_required(login_url='/login/')
+def inquiries_view(request):
+    if not request.user.is_staff:
+        raise Http404('Access restricted to staff members.')
+    db = get_db()
+    inquiries = list(db.inquiries.find({}).sort('submitted_at', -1))
+    return render(request, 'portal/inquiries.html', {
+        'inquiries': inquiries,
+        'active_section': 'inquiries'
+    })
+

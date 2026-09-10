@@ -26,14 +26,14 @@
         </p>
         <div>
           <a href="{% url 'public:contact' %}?service={{ service.slug }}" class="btn btn-primary">
-            GET A QUOTE FOR {{ service.title|upper }}
+            Get a Quote for {{ service.title }}
           </a>
         </div>
       </div>
 
       <!-- Deliverables List -->
       <div class="card-hairline">
-        <div class="footer-col-title">WHAT IS INCLUDED</div>
+        <div class="footer-col-title">What is included</div>
         <ul class="card-service-deliverables">
           {% for d in service.deliverables %}
             <li>{{ d }}</li>
@@ -46,11 +46,11 @@
     <div style="margin-bottom: var(--space-3xl);">
       <div class="section-header">
         <div class="section-title-wrap">
-          <div class="section-numeral">WORKFLOW</div>
+          <div class="section-numeral">Workflow</div>
           <h2 class="section-title">How We Deliver This Service</h2>
         </div>
         <div>
-          <span class="numeral-badge">THREE-STEP DELIVERY</span>
+          <span class="numeral-badge">Three-Step Process</span>
         </div>
       </div>
 
@@ -66,7 +66,7 @@
       <div>
         <div class="section-header">
           <div class="section-title-wrap">
-            <div class="section-numeral">PORTFOLIO</div>
+            <div class="section-numeral">Portfolio</div>
             <h2 class="section-title">Related Projects</h2>
           </div>
         </div>
@@ -74,15 +74,15 @@
         <div class="grid-2">
           {% for case in related_cases %}
             <article class="card-hairline">
-              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-md);">
-                <span class="numeral-badge">CLIENT: {{ case.client }}</span>
-                <span class="numeral" style="font-size: var(--text-tiny);">{{ case.year }}</span>
+              <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-md);">
+                <span class="numeral-badge">Client: {{ case.client }}</span>
+                <span style="font-size: var(--text-tiny); color: var(--text-dim);">{{ case.year }}</span>
               </div>
               <h3 style="font-size: var(--text-h3); margin-bottom: var(--space-xs);">{{ case.title }}</h3>
               <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-lg);">{{ case.summary }}</p>
               <div style="margin-top: auto; border-top: 1px solid var(--border-hairline); padding-top: var(--space-sm);">
                 <a href="{% url 'public:work_detail' case.slug %}" class="card-service-action" style="font-size: var(--text-tiny);">
-                  VIEW CASE STUDY [->]
+                  View Case Study
                 </a>
               </div>
             </article>

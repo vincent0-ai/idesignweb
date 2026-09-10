@@ -5,7 +5,7 @@
 {% block portal_content %}
 <div style="margin-bottom: var(--space-xl);">
   <a href="{% url 'portal:tickets' %}" class="card-service-action" style="font-size: var(--text-small);">
-    <span>[<-] BACK TO ALL TICKETS</span>
+    <span>Back to Tickets</span>
   </a>
 </div>
 
@@ -14,38 +14,38 @@
   <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-md);">
     <div>
       <span class="numeral-badge">{{ ticket.ticket_id }}</span>
-      <span class="numeral-badge" style="margin-left: 6px;">PRIORITY: {{ ticket.priority|upper }}</span>
+      <span class="numeral-badge" style="margin-left: 6px;">{{ ticket.priority }}</span>
     </div>
     <div>
       {% if ticket.status == 'Resolved' %}
-        <span class="status-tag status-approved">RESOLVED</span>
+        <span class="status-tag status-approved">Resolved</span>
       {% elif ticket.status == 'In Progress' %}
-        <span class="status-tag status-in-review">IN PROGRESS</span>
+        <span class="status-tag status-in-review">In Progress</span>
       {% else %}
-        <span class="status-tag status-draft">OPEN</span>
+        <span class="status-tag status-draft">Open</span>
       {% endif %}
     </div>
   </div>
 
   <h1 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">{{ ticket.subject }}</h1>
-  <div class="numeral" style="font-size: var(--text-tiny); color: var(--text-dim);">
-    CLIENT: {{ ticket.client_username }}
+  <div style="font-size: var(--text-tiny); color: var(--text-dim);">
+    Client: {{ ticket.client_username }}
   </div>
 </div>
 
 <!-- Messages Conversation Log -->
 <div style="margin-bottom: var(--space-2xl);">
-  <div class="footer-col-title">MESSAGES</div>
+  <div class="footer-col-title">Messages</div>
 
   <div style="display: flex; flex-direction: column; gap: var(--space-md);">
     {% for msg in ticket.messages %}
       <div class="card-hairline" style="background-color: {% if msg.role == 'staff' %}var(--bg-surface){% else %}var(--bg-primary){% endif %};">
         <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-sm);">
           <div>
-            <span class="numeral-badge">{% if msg.role == 'staff' %}IDESIGNWEB TEAM{% else %}CLIENT{% endif %}</span>
+            <span class="numeral-badge">{% if msg.role == 'staff' %}Idesignweb Team{% else %}Client{% endif %}</span>
             <span style="font-weight: var(--weight-bold); font-size: var(--text-small); margin-left: 8px;">{{ msg.sender }}</span>
           </div>
-          <span class="numeral" style="font-size: var(--text-tiny); color: var(--text-dim);">{{ msg.date_str }}</span>
+          <span style="font-size: var(--text-tiny); color: var(--text-dim);">{{ msg.date_str }}</span>
         </div>
 
         <p style="font-size: var(--text-body); line-height: 1.6; color: var(--text-main); margin-bottom: 0;">
@@ -58,7 +58,7 @@
 
 <!-- Reply Section -->
 <div class="card-hairline">
-  <div class="footer-col-title">REPLY TO THIS TICKET</div>
+  <div class="footer-col-title">Reply to This Ticket</div>
 
   <form method="POST" action="{% url 'portal:ticket_detail' ticket.ticket_id %}">
     {% csrf_token %}
@@ -68,8 +68,19 @@
       <textarea id="reply_text" name="reply_text" rows="4" class="form-textarea" required placeholder="Type your message here..."></textarea>
     </div>
 
+    {% if user.is_staff %}
+      <div class="form-group">
+        <label for="status" class="form-label">Ticket Status</label>
+        <select id="status" name="status" class="form-select">
+          <option value="Open" {% if ticket.status == 'Open' %}selected{% endif %}>Open</option>
+          <option value="In Progress" {% if ticket.status == 'In Progress' %}selected{% endif %}>In Progress</option>
+          <option value="Resolved" {% if ticket.status == 'Resolved' %}selected{% endif %}>Resolved</option>
+        </select>
+      </div>
+    {% endif %}
+
     <button type="submit" class="btn btn-secondary">
-      SEND REPLY
+      Send Reply
     </button>
   </form>
 </div>

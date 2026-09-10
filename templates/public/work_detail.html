@@ -1,4 +1,5 @@
 {% extends 'base/base.html' %}
+{% load static %}
 
 {% block title %}{{ case_study.title }} : Case Study : {{ site_title }}{% endblock %}
 
@@ -7,13 +8,13 @@
   <div class="container">
     <div style="margin-bottom: var(--space-xl);">
       <a href="{% url 'public:work_list' %}" class="card-service-action" style="font-size: var(--text-small);">
-        <span>[<-] BACK TO ALL CASE STUDIES</span>
+        <span>Back to Case Studies</span>
       </a>
     </div>
 
     <div class="hero-meta">
       <span class="numeral-badge">{{ case_study.category }}</span>
-      <span>CLIENT: {{ case_study.client }} / {{ case_study.year }}</span>
+      <span>Client: {{ case_study.client }} &bull; {{ case_study.year }}</span>
     </div>
 
     <h1 style="font-size: var(--text-h1); max-width: 960px; margin-bottom: var(--space-md);">
@@ -24,9 +25,16 @@
       {{ case_study.summary }}
     </p>
 
+    {% if case_study.image_url %}
+      <!-- Featured Case Study Visual Showcase -->
+      <div style="border: 1px solid var(--border-hairline); margin-bottom: var(--space-3xl); overflow: hidden; background: var(--bg-surface);">
+        <img src="{% static case_study.image_url %}" alt="{{ case_study.title }}" style="width: 100%; max-height: 520px; object-fit: cover; display: block;">
+      </div>
+    {% endif %}
+
     <!-- Results Banner -->
     <div class="card-hairline" style="margin-bottom: var(--space-3xl); background-color: var(--bg-surface);">
-      <div class="footer-col-title">KEY RESULTS & IMPACT</div>
+      <div class="footer-col-title">Key Results & Impact</div>
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md);">
         {% for r in case_study.results %}
           <div style="background-color: var(--bg-primary); border: 1px solid var(--border-hairline); padding: var(--space-lg);">
@@ -40,13 +48,11 @@
     <!-- Case Study Deep Dive Breakdown -->
     <div class="grid-2" style="margin-bottom: var(--space-3xl);">
       <div class="card-hairline">
-        <div class="section-numeral">01 / BACKGROUND</div>
         <h2 style="font-size: var(--text-h3); margin-bottom: var(--space-sm);">The Challenge</h2>
         <p style="line-height: 1.7; font-size: var(--text-body);">{{ case_study.challenge }}</p>
       </div>
 
       <div class="card-hairline">
-        <div class="section-numeral">02 / EXECUTION</div>
         <h2 style="font-size: var(--text-h3); margin-bottom: var(--space-sm);">What We Built</h2>
         <p style="line-height: 1.7; font-size: var(--text-body);">{{ case_study.solution }}</p>
       </div>
@@ -54,7 +60,6 @@
 
     <!-- Deliverables Manifest -->
     <div class="card-hairline" style="margin-bottom: var(--space-3xl);">
-      <div class="section-numeral">03 / DELIVERABLES</div>
       <h2 style="font-size: var(--text-h3); margin-bottom: var(--space-sm);">Completed Deliverables</h2>
       <p style="color: var(--text-muted); font-size: var(--text-body);">{{ case_study.deliverables_summary }}</p>
     </div>
@@ -62,10 +67,10 @@
     <!-- Bottom CTA -->
     <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-hairline); padding-top: var(--space-xl); flex-wrap: wrap; gap: var(--space-md);">
       <a href="{% url 'public:work_list' %}" class="btn btn-secondary">
-        VIEW MORE WORK
+        View More Work
       </a>
       <a href="{% url 'public:contact' %}" class="btn btn-primary">
-        START A SIMILAR PROJECT
+        Start a Similar Project
       </a>
     </div>
 
