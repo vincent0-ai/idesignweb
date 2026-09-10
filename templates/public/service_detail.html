@@ -1,0 +1,97 @@
+{% extends 'base/base.html' %}
+
+{% block title %}{{ service.title }} : Practices : {{ site_title }}{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="hero-meta">
+      <span class="numeral">{{ service.service_number }}</span>
+      <span>PRACTICE SPECIFICATION / {{ service.title|upper }}</span>
+    </div>
+    
+    <h1 style="font-size: var(--text-h1); max-width: 900px; margin-bottom: var(--space-md);">
+      {{ service.title }}
+    </h1>
+    
+    <p style="font-size: 1.25rem; color: var(--text-muted); max-width: 760px; margin-bottom: var(--space-2xl);">
+      {{ service.tagline }}
+    </p>
+
+    <div class="grid-2" style="align-items: start; margin-bottom: var(--space-3xl);">
+      <!-- Practice Scope Description -->
+      <div class="card-hairline">
+        <div class="footer-col-title">PRACTICE SCOPE</div>
+        <p style="line-height: 1.7; margin-bottom: var(--space-lg);">
+          {{ service.overview }}
+        </p>
+        <div>
+          <a href="{% url 'public:contact' %}?service={{ service.slug }}" class="btn btn-primary">
+            COMMISSION {{ service.title|upper }}
+          </a>
+        </div>
+      </div>
+
+      <!-- Deliverables Blueprint -->
+      <div class="card-hairline">
+        <div class="footer-col-title">DELIVERABLE ARTIFACTS</div>
+        <ul class="card-service-deliverables">
+          {% for d in service.deliverables %}
+            <li>{{ d }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <!-- Practice Methodology -->
+    <div style="margin-bottom: var(--space-3xl);">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-numeral">METHODOLOGY</div>
+          <h2 class="section-title">Execution Lifecycle</h2>
+        </div>
+        <div>
+          <span class="numeral-badge">SYSTEM PROTOCOL</span>
+        </div>
+      </div>
+
+      <div class="process-list">
+        {% for step in service.process_steps %}
+          {% include 'components/process_step.html' with step=step %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Related Case Studies (if any) -->
+    {% if related_cases %}
+      <div>
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <div class="section-numeral">VERIFIED OUTCOMES</div>
+            <h2 class="section-title">Related Case Studies</h2>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          {% for case in related_cases %}
+            <article class="card-hairline">
+              <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-md);">
+                <span class="numeral-badge">CLIENT: {{ case.client }}</span>
+                <span class="numeral" style="font-size: var(--text-tiny);">YEAR {{ case.year }}</span>
+              </div>
+              <h3 style="font-size: var(--text-h3); margin-bottom: var(--space-xs);">{{ case.title }}</h3>
+              <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-lg);">{{ case.summary }}</p>
+              <div style="margin-top: auto; border-top: 1px solid var(--border-hairline); padding-top: var(--space-sm);">
+                <a href="{% url 'public:work_detail' case.slug %}" class="card-service-action" style="font-size: var(--text-tiny);">
+                  READ CASE STUDY [->]
+                </a>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+{% endblock %}

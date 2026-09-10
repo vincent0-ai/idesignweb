@@ -1,0 +1,116 @@
+{% extends 'portal/portal_base.html' %}
+
+{% block title %}{{ project.title }} : Projects : Member Portal : {{ site_title }}{% endblock %}
+
+{% block portal_content %}
+<div style="margin-bottom: var(--space-xl);">
+  <a href="{% url 'portal:projects' %}" class="card-service-action" style="font-size: var(--text-small);">
+    <span>[<-] BACK TO PROJECT SPACES</span>
+  </a>
+</div>
+
+<!-- Project Header Card -->
+<div class="card-hairline" style="margin-bottom: var(--space-2xl);">
+  <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-md);">
+    <span class="numeral-badge">{{ project.project_code }}</span>
+    <span class="status-tag status-in-review">{{ project.status }}</span>
+  </div>
+
+  <h1 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">{{ project.title }}</h1>
+  <div style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-md);">
+    PRACTICE: {{ project.service_category }} / CLIENT: {{ project.client_username }}
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--border-hairline); margin-bottom: var(--space-md);">
+    <div style="padding: var(--space-sm); border-right: 1px solid var(--border-hairline);">
+      <div class="form-label" style="font-size: var(--text-tiny);">START DATE</div>
+      <div class="numeral" style="font-size: var(--text-small);">{{ project.start_date }}</div>
+    </div>
+    <div style="padding: var(--space-sm); border-right: 1px solid var(--border-hairline);">
+      <div class="form-label" style="font-size: var(--text-tiny);">TARGET DELIVERY</div>
+      <div class="numeral" style="font-size: var(--text-small);">{{ project.target_date }}</div>
+    </div>
+    <div style="padding: var(--space-sm);">
+      <div class="form-label" style="font-size: var(--text-tiny);">PROGRESS</div>
+      <div class="numeral" style="font-size: var(--text-small);">{{ project.progress_percent }}%</div>
+    </div>
+  </div>
+
+  <!-- Progress Bar -->
+  <div style="width: 100%; height: 6px; background: var(--border-hairline); border: 1px solid var(--border-hairline);">
+    <div style="width: {{ project.progress_percent }}%; height: 100%; background: var(--text-main);"></div>
+  </div>
+</div>
+
+<!-- Deliverables Section -->
+<div class="section-header">
+  <div class="section-title-wrap">
+    <div class="section-numeral">DELIVERABLE ARTIFACTS</div>
+    <h2 class="section-title" style="font-size: var(--text-h3);">Deliverables and Approval Workflow</h2>
+  </div>
+  <!-- Status Filter Controls -->
+  <div style="display: flex; gap: var(--space-xs);">
+    <button type="button" class="btn btn-ghost btn-sm active" data-filter-status="all">ALL</button>
+    <button type="button" class="btn btn-ghost btn-sm" data-filter-status="In Review">IN REVIEW</button>
+    <button type="button" class="btn btn-ghost btn-sm" data-filter-status="Approved">APPROVED</button>
+    <button type="button" class="btn btn-ghost btn-sm" data-filter-status="Draft">DRAFT</button>
+  </div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: var(--space-lg);">
+  {% for del in project.deliverables %}
+    <article class="card-hairline" data-status="{{ del.status }}">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-sm);">
+        <div>
+          <span class="numeral-badge">{{ del.deliverable_id }}</span>
+          <span class="numeral" style="font-size: var(--text-tiny); margin-left: 8px;">VER: {{ del.version }}</span>
+        </div>
+        <div>
+          {% if del.status == 'Approved' %}
+            <span class="status-tag status-approved">APPROVED</span>
+          {% elif del.status == 'In Review' %}
+            <span class="status-tag status-in-review">IN REVIEW</span>
+          {% elif del.status == 'Revision Requested' %}
+            <span class="status-tag" style="border-color: #BD2130; color: #BD2130;">REVISION REQUESTED</span>
+          {% else %}
+            <span class="status-tag status-draft">DRAFT</span>
+          {% endif %}
+        </div>
+      </div>
+
+      <h3 style="font-size: var(--text-h3); margin-bottom: var(--space-xs);">{{ del.title }}</h3>
+      <div class="numeral" style="font-size: var(--text-tiny); color: var(--text-dim); margin-bottom: var(--space-md);">
+        DUE DATE: {{ del.due_date }}
+      </div>
+
+      {% if del.client_notes %}
+        <div style="background: var(--bg-surface); border: 1px solid var(--border-hairline); padding: var(--space-sm) var(--space-md); margin-bottom: var(--space-md);">
+          <div class="form-label" style="font-size: var(--text-tiny);">CLIENT FEEDBACK NOTES</div>
+          <p style="font-size: var(--text-small); color: var(--text-main); margin-bottom: 0;">{{ del.client_notes }}</p>
+        </div>
+      {% endif %}
+
+      <!-- Client Approval Action Workflow Form -->
+      <div style="border-top: 1px solid var(--border-hairline); padding-top: var(--space-md); margin-top: auto;">
+        <form method="POST" action="{% url 'portal:deliverable_action' project.project_code del.deliverable_id %}">
+          {% csrf_token %}
+
+          <div style="margin-bottom: var(--space-sm);">
+            <label class="form-label" style="font-size: var(--text-tiny);">FEEDBACK / REVISION SPECIFICATION (OPTIONAL FOR APPROVAL):</label>
+            <input type="text" name="client_notes" class="form-input" style="padding: 8px 12px; font-size: var(--text-small);" placeholder="Enter notes or revision requirements...">
+          </div>
+
+          <div style="display: flex; gap: var(--space-sm);">
+            <button type="submit" name="action" value="approve" class="btn btn-secondary btn-sm">
+              [ APPROVE DELIVERABLE ]
+            </button>
+            <button type="submit" name="action" value="revise" class="btn btn-ghost btn-sm">
+              [ REQUEST REVISION ]
+            </button>
+          </div>
+        </form>
+      </div>
+    </article>
+  {% endfor %}
+</div>
+{% endblock %}

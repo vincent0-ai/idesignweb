@@ -1,0 +1,74 @@
+{% extends 'base/base.html' %}
+
+{% block title %}{{ case_study.title }} : Case Study : {{ site_title }}{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div style="margin-bottom: var(--space-xl);">
+      <a href="{% url 'public:work_list' %}" class="card-service-action" style="font-size: var(--text-small);">
+        <span>[<-] BACK TO CASE STUDIES</span>
+      </a>
+    </div>
+
+    <div class="hero-meta">
+      <span class="numeral-badge">{{ case_study.category }}</span>
+      <span>CLIENT: {{ case_study.client }} / YEAR {{ case_study.year }}</span>
+    </div>
+
+    <h1 style="font-size: var(--text-h1); max-width: 960px; margin-bottom: var(--space-md);">
+      {{ case_study.title }}
+    </h1>
+
+    <p style="font-size: 1.25rem; color: var(--text-muted); max-width: 760px; margin-bottom: var(--space-2xl);">
+      {{ case_study.summary }}
+    </p>
+
+    <!-- Metrics Banner -->
+    <div class="card-hairline" style="margin-bottom: var(--space-3xl); background-color: var(--bg-surface);">
+      <div class="footer-col-title">DOCUMENTED QUANTITATIVE IMPACT</div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md);">
+        {% for r in case_study.results %}
+          <div style="background-color: var(--bg-primary); border: 1px solid var(--border-hairline); padding: var(--space-lg);">
+            <div class="stat-metric" style="font-size: 2.25rem;">{{ r.metric }}</div>
+            <div class="stat-label">{{ r.label }}</div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Case Study Deep Dive Breakdown -->
+    <div class="grid-2" style="margin-bottom: var(--space-3xl);">
+      <div class="card-hairline">
+        <div class="section-numeral">01 / SITUATION</div>
+        <h2 style="font-size: var(--text-h3); margin-bottom: var(--space-sm);">The Challenge</h2>
+        <p style="line-height: 1.7;">{{ case_study.challenge }}</p>
+      </div>
+
+      <div class="card-hairline">
+        <div class="section-numeral">02 / INTERVENTION</div>
+        <h2 style="font-size: var(--text-h3); margin-bottom: var(--space-sm);">The Architectural Solution</h2>
+        <p style="line-height: 1.7;">{{ case_study.solution }}</p>
+      </div>
+    </div>
+
+    <!-- Deliverables Manifest -->
+    <div class="card-hairline" style="margin-bottom: var(--space-3xl);">
+      <div class="section-numeral">03 / ARTIFACTS</div>
+      <h2 style="font-size: var(--text-h3); margin-bottom: var(--space-sm);">Shipped Deliverables</h2>
+      <p style="color: var(--text-muted); font-size: var(--text-body);">{{ case_study.deliverables_summary }}</p>
+    </div>
+
+    <!-- Bottom CTA -->
+    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-hairline); padding-top: var(--space-xl);">
+      <a href="{% url 'public:work_list' %}" class="btn btn-secondary">
+        VIEW MORE CASE STUDIES
+      </a>
+      <a href="{% url 'public:contact' %}" class="btn btn-primary">
+        COMMISSION SIMILAR PROJECT
+      </a>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

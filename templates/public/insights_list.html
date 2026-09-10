@@ -1,0 +1,54 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Field Insights and Notes : {{ site_title }}{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="hero-meta">
+      <span class="numeral">04</span>
+      <span>TECHNICAL WRITING AND ANALYSIS</span>
+    </div>
+
+    <h1 style="font-size: var(--text-h1); max-width: 800px; margin-bottom: var(--space-md);">
+      Insights and Field Notes
+    </h1>
+
+    <p style="font-size: 1.125rem; color: var(--text-muted); max-width: 680px; margin-bottom: var(--space-2xl);">
+      Engineering essays, typographic principles, and defensive threat modeling writeups published by our technical leads.
+    </p>
+
+    <!-- Articles List -->
+    <div style="display: flex; flex-direction: column; gap: var(--space-xl); max-width: 900px;">
+      {% for post in posts %}
+        <article class="card-hairline">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-sm);">
+            <span class="numeral-badge">{{ post.category }}</span>
+            <span class="numeral" style="font-size: var(--text-tiny); color: var(--text-dim);">{{ post.reading_time }}</span>
+          </div>
+
+          <h2 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">
+            <a href="{% url 'public:insight_detail' post.slug %}">{{ post.title }}</a>
+          </h2>
+
+          <p style="font-size: var(--text-body); color: var(--text-muted); margin-bottom: var(--space-md);">
+            {{ post.excerpt }}
+          </p>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-hairline); padding-top: var(--space-sm); margin-top: auto;">
+            <span style="font-family: var(--font-mono); font-size: var(--text-tiny); color: var(--text-dim);">AUTHOR: {{ post.author }}</span>
+            <a href="{% url 'public:insight_detail' post.slug %}" class="card-service-action" style="font-size: var(--text-tiny);">
+              READ ESSAY [->]
+            </a>
+          </div>
+        </article>
+      {% empty %}
+        <div class="card-hairline" style="text-align: center; padding: var(--space-2xl);">
+          <p>No insight articles currently published.</p>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+{% endblock %}

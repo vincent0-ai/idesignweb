@@ -1,0 +1,101 @@
+/*
+ * idesignweb Base Styles and Typography Reset
+ * Enforces tabular numerals, clean box model, and flat surfaces.
+ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+}
+
+body {
+  font-family: var(--font-sans);
+  font-weight: var(--weight-regular);
+  font-size: var(--text-body);
+  line-height: 1.5;
+  color: var(--text-main);
+  background-color: var(--bg-primary);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Typography Hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  font-weight: var(--weight-bold);
+  color: var(--text-main);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: var(--text-h1); margin-bottom: var(--space-md); }
+h2 { font-size: var(--text-h2); margin-bottom: var(--space-sm); }
+h3 { font-size: var(--text-h3); margin-bottom: var(--space-xs); }
+h4 { font-size: var(--text-h4); }
+
+p {
+  margin-bottom: var(--space-md);
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+a:hover {
+  color: var(--text-main);
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* Tabular Numerals & Monospace */
+.numeral, .tabular, code, pre {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+}
+
+/* Accessible Focus States */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Text Utilities */
+.text-display {
+  font-size: var(--text-display);
+  font-weight: var(--weight-bold);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.text-muted { color: var(--text-muted); }
+.text-bold { font-weight: var(--weight-bold); }
+.text-regular { font-weight: var(--weight-regular); }
+.text-mono { font-family: var(--font-mono); }
+.text-caps { text-transform: uppercase; letter-spacing: 0.08em; font-size: var(--text-small); }
+
+/* Structural Dividers */
+hr {
+  border: none;
+  border-top: 1px solid var(--border-hairline);
+  margin: var(--space-xl) 0;
+}

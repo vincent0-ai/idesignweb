@@ -1,0 +1,116 @@
+{% extends 'portal/portal_base.html' %}
+
+{% block title %}Dashboard : Member Portal : {{ site_title }}{% endblock %}
+
+{% block portal_content %}
+<div style="margin-bottom: var(--space-2xl);">
+  <div class="hero-meta">
+    <span class="numeral">PORTAL / 01</span>
+    <span>OVERVIEW TELEMETRY</span>
+  </div>
+  <h1 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">Client Operations Dashboard</h1>
+  <p style="font-size: var(--text-body); color: var(--text-muted);">
+    Centralized monitoring for active deliverables, technical milestones, and communication advisories.
+  </p>
+</div>
+
+<!-- 4-Stat Metric Row -->
+<div class="grid-4" style="margin-bottom: var(--space-2xl);">
+  <div class="card-hairline" style="padding: var(--space-lg);">
+    <div class="stat-metric" style="font-size: 2rem;">{{ projects|length }}</div>
+    <div class="stat-label" style="font-size: var(--text-tiny);">ACTIVE PROJECTS</div>
+  </div>
+  <div class="card-hairline" style="padding: var(--space-lg);">
+    <div class="stat-metric" style="font-size: 2rem;">{{ pending_review_count }}</div>
+    <div class="stat-label" style="font-size: var(--text-tiny);">DELIVERABLES IN REVIEW</div>
+  </div>
+  <div class="card-hairline" style="padding: var(--space-lg);">
+    <div class="stat-metric" style="font-size: 2rem;">{{ total_deliverables }}</div>
+    <div class="stat-label" style="font-size: var(--text-tiny);">TOTAL DELIVERABLES</div>
+  </div>
+  <div class="card-hairline" style="padding: var(--space-lg);">
+    <div class="stat-metric" style="font-size: 2rem;">{{ tickets|length }}</div>
+    <div class="stat-label" style="font-size: var(--text-tiny);">SUPPORT TICKETS</div>
+  </div>
+</div>
+
+<!-- Active Project Spaces Section -->
+<div style="margin-bottom: var(--space-2xl);">
+  <div class="section-header">
+    <div class="section-title-wrap">
+      <div class="section-numeral">01 / WORKSPACES</div>
+      <h2 class="section-title" style="font-size: var(--text-h3);">Active Project Spaces</h2>
+    </div>
+    <div>
+      <a href="{% url 'portal:projects' %}" class="btn btn-ghost btn-sm">ALL PROJECTS [->]</a>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    {% for prj in projects %}
+      <article class="card-hairline">
+        <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-md);">
+          <span class="numeral-badge">{{ prj.project_code }}</span>
+          <span class="status-tag status-in-review">{{ prj.status }}</span>
+        </div>
+
+        <h3 style="font-size: var(--text-h3); margin-bottom: var(--space-xs);">
+          <a href="{% url 'portal:project_detail' prj.project_code %}">{{ prj.title }}</a>
+        </h3>
+
+        <div style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-md);">
+          DISCIPLINE: {{ prj.service_category }}
+        </div>
+
+        <!-- Flat Hairline Progress Bar -->
+        <div style="margin-bottom: var(--space-md);">
+          <div style="display: flex; justify-content: space-between; font-size: var(--text-tiny); font-family: var(--font-mono); margin-bottom: 4px;">
+            <span>PROGRESS</span>
+            <span>{{ prj.progress_percent }}%</span>
+          </div>
+          <div style="width: 100%; height: 6px; background: var(--border-hairline); border: 1px solid var(--border-hairline);">
+            <div style="width: {{ prj.progress_percent }}%; height: 100%; background: var(--text-main);"></div>
+          </div>
+        </div>
+
+        <div style="border-top: 1px solid var(--border-hairline); padding-top: var(--space-sm); display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
+          <span class="numeral" style="font-size: var(--text-tiny); color: var(--text-dim);">DELIVERABLES: {{ prj.deliverables|length }}</span>
+          <a href="{% url 'portal:project_detail' prj.project_code %}" class="card-service-action" style="font-size: var(--text-tiny);">
+            MANAGE SPACE [->]
+          </a>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Communications and Announcements Preview -->
+<div>
+  <div class="section-header">
+    <div class="section-title-wrap">
+      <div class="section-numeral">02 / NOTICES</div>
+      <h2 class="section-title" style="font-size: var(--text-h3);">System Announcements</h2>
+    </div>
+    <div>
+      <a href="{% url 'portal:communications' %}" class="btn btn-ghost btn-sm">ALL ANNOUNCEMENTS [->]</a>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+    {% for ann in announcements %}
+      <div class="card-hairline" style="background-color: var(--bg-surface); padding: var(--space-md) var(--space-lg);">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: var(--space-xs);">
+          <span class="numeral-badge">PRIORITY: {{ ann.priority|upper }}</span>
+          <span class="numeral" style="font-size: var(--text-tiny); color: var(--text-dim);">DATE: {{ ann.date_str }}</span>
+        </div>
+        <div style="font-weight: var(--weight-bold); font-size: var(--text-body); margin-bottom: var(--space-xs);">
+          {{ ann.title }}
+        </div>
+        <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: 0;">
+          {{ ann.body }}
+        </p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

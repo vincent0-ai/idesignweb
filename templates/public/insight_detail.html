@@ -1,0 +1,42 @@
+{% extends 'base/base.html' %}
+
+{% block title %}{{ post.title }} : Insights : {{ site_title }}{% endblock %}
+
+{% block content %}
+<article class="section">
+  <div class="container" style="max-width: 840px;">
+    <div style="margin-bottom: var(--space-xl);">
+      <a href="{% url 'public:insights_list' %}" class="card-service-action" style="font-size: var(--text-small);">
+        <span>[<-] ALL INSIGHT ARTICLES</span>
+      </a>
+    </div>
+
+    <div class="hero-meta">
+      <span class="numeral-badge">{{ post.category }}</span>
+      <span>{{ post.reading_time }} / AUTHOR: {{ post.author }}</span>
+    </div>
+
+    <h1 style="font-size: var(--text-h1); margin-bottom: var(--space-lg); line-height: 1.15;">
+      {{ post.title }}
+    </h1>
+
+    <div style="border-top: 1px solid var(--border-hairline); border-bottom: 1px solid var(--border-hairline); padding: var(--space-md) 0; margin-bottom: var(--space-2xl); font-size: 1.125rem; font-weight: var(--weight-bold); color: var(--text-main); line-height: 1.5;">
+      {{ post.excerpt }}
+    </div>
+
+    <div style="font-size: 1.125rem; line-height: 1.8; color: var(--text-main);">
+      {{ post.content|linebreaks }}
+    </div>
+
+    <div style="border-top: 1px solid var(--border-hairline); padding-top: var(--space-2xl); margin-top: var(--space-3xl); display: flex; justify-content: space-between; align-items: center;">
+      <a href="{% url 'public:insights_list' %}" class="btn btn-secondary">
+        BACK TO INSIGHTS
+      </a>
+      <a href="{% url 'public:contact' %}" class="btn btn-primary">
+        COMMISSION AN ENGAGEMENT
+      </a>
+    </div>
+
+  </div>
+</article>
+{% endblock %}

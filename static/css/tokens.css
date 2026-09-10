@@ -1,0 +1,63 @@
+/*
+ * idesignweb Design System Tokens
+ * Strict Constraints: Flat surfaces only, hairline borders, zero gradients,
+ * zero emoji, zero icon fonts, two-weight typographic hierarchy.
+ */
+
+:root {
+  /* Color Palette - Flat Solitary Surfaces */
+  --bg-primary: #FFFFFF;
+  --bg-surface: #F9F9F9;
+  --bg-surface-alt: #F2F2F2;
+  --bg-dark: #111111;
+  --bg-dark-surface: #1A1A1A;
+  
+  --text-main: #111111;
+  --text-muted: #555555;
+  --text-dim: #777777;
+  --text-inverse: #FFFFFF;
+  --text-inverse-muted: #999999;
+  
+  /* Hairline Borders (Strict 1px Solid) */
+  --border-hairline: #E2E2E2;
+  --border-hairline-strong: #111111;
+  --border-hairline-dark: #2A2A2A;
+  
+  /* Single Accent - Reserved STRICTLY for Primary Call-To-Action */
+  --accent-cta: #0047FF;
+  --accent-cta-hover: #0036D6;
+  --accent-cta-text: #FFFFFF;
+  
+  /* Focus States */
+  --focus-ring: #0047FF;
+  
+  /* Typography Tokens */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  
+  /* Strict Two-Weight System */
+  --weight-regular: 400;
+  --weight-bold: 700;
+  
+  /* Type Scale */
+  --text-display: clamp(2.5rem, 5vw, 4.25rem);
+  --text-h1: clamp(2rem, 3.5vw, 3rem);
+  --text-h2: clamp(1.5rem, 2.5vw, 2.25rem);
+  --text-h3: 1.375rem;
+  --text-h4: 1.125rem;
+  --text-body: 1rem;
+  --text-small: 0.8125rem;
+  --text-tiny: 0.6875rem;
+  
+  /* Layout Spacing */
+  --container-max: 1280px;
+  --header-height: 72px;
+  --space-unit: 8px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}

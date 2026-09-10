@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{{ site_title }} : Digital Solutions Architecture{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}Digital solutions firm specializing in graphic design, video editing, web development, and cybersecurity.{% endblock %}">
+  {% block robots %}
+  <meta name="robots" content="index, follow">
+  {% endblock %}
+  
+  <!-- Flat Design System Stylesheets -->
+  <link rel="stylesheet" href="{% static 'css/tokens.css' %}">
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/components.css' %}">
+  <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+  <!-- Site Header Shell -->
+  {% include 'base/header.html' %}
+
+  <!-- Messages / Flash Notifications -->
+  {% if messages %}
+    <div class="container" style="padding-top: var(--space-md);">
+      {% for message in messages %}
+        <div class="alert-banner" role="alert">
+          <div class="alert-banner-text">{{ message }}</div>
+          <button type="button" class="alert-dismiss" aria-label="Dismiss">[ DISMISS ]</button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <!-- Main Content Shell -->
+  <main id="main-content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Site Footer Shell -->
+  {% include 'base/footer.html' %}
+
+  <!-- Vanilla Scripts -->
+  <script src="{% static 'js/main.js' %}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

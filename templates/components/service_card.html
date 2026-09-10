@@ -1,0 +1,29 @@
+<!--
+  Service Card Component Primitive (01-04 Grid System)
+  Flat hairline border, two-weight type system, tabular numerals.
+-->
+<article class="card-service">
+  <div>
+    <div class="card-service-header">
+      <span class="card-service-numeral">{{ service.service_number }}</span>
+      <span class="numeral-badge">PRACTICE</span>
+    </div>
+    <h3 class="card-service-title">{{ service.title }}</h3>
+    <p class="card-service-tagline">{{ service.tagline }}</p>
+    
+    {% if service.deliverables %}
+      <ul class="card-service-deliverables">
+        {% for del in service.deliverables|slice:":3" %}
+          <li>{{ del }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+
+  <div>
+    <a href="{% url 'public:service_detail' service.slug %}" class="card-service-action">
+      <span>EXPLORE PRACTICE</span>
+      <span class="numeral">-></span>
+    </a>
+  </div>
+</article>

@@ -1,0 +1,51 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Practices and Capabilities : {{ site_title }}{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="hero-meta">
+      <span class="numeral">01</span>
+      <span>TECHNICAL CAPABILITIES</span>
+    </div>
+    <h1 style="font-size: var(--text-h1); max-width: 800px; margin-bottom: var(--space-md);">
+      Four Integrated Digital Disciplines
+    </h1>
+    <p style="font-size: 1.125rem; color: var(--text-muted); max-width: 680px; margin-bottom: var(--space-2xl);">
+      idesignweb operates at the intersection of visual communication and computer science. Our teams engineer identities, motion assets, web infrastructure, and defensive perimeters under a single unified standard.
+    </p>
+
+    <!-- Services Grid -->
+    <div class="grid-2">
+      {% for service in services %}
+        <article class="card-hairline">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-sm); margin-bottom: var(--space-md);">
+            <span class="card-service-numeral">{{ service.service_number }}</span>
+            <span class="numeral-badge">DISCIPLINE</span>
+          </div>
+          <h2 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">{{ service.title }}</h2>
+          <p style="font-size: var(--text-body); color: var(--text-muted); margin-bottom: var(--space-md);">{{ service.tagline }}</p>
+          <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-lg);">{{ service.overview }}</p>
+          
+          <div style="margin-bottom: var(--space-lg);">
+            <div class="form-label" style="font-size: var(--text-tiny);">CORE DELIVERABLES</div>
+            <ul class="card-service-deliverables" style="margin-bottom: 0;">
+              {% for d in service.deliverables %}
+                <li>{{ d }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+
+          <div style="border-top: 1px solid var(--border-hairline); padding-top: var(--space-md); margin-top: auto; display: flex; justify-content: space-between; align-items: center;">
+            <a href="{% url 'public:service_detail' service.slug %}" class="card-service-action">
+              <span>VIEW FULL PRACTICE SPECIFICATION</span>
+              <span class="numeral">-></span>
+            </a>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

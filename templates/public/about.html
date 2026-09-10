@@ -1,0 +1,77 @@
+{% extends 'base/base.html' %}
+
+{% block title %}About and Architectural Standards : {{ site_title }}{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="hero-meta">
+      <span class="numeral">03</span>
+      <span>FIRM BACKGROUND AND PHILOSOPHY</span>
+    </div>
+
+    <h1 style="font-size: var(--text-h1); max-width: 900px; margin-bottom: var(--space-md);">
+      Digital Solutions Founded on Disciplined Architecture
+    </h1>
+
+    <p style="font-size: 1.25rem; color: var(--text-muted); max-width: 760px; margin-bottom: var(--space-3xl);">
+      idesignweb was created to eliminate the bloat, decorative distractions, and security lapses endemic to contemporary digital studios. We build brand systems, video sequences, software platforms, and threat defenses that prioritize functional clarity above all else.
+    </p>
+
+    <!-- Standards Grid -->
+    <div style="margin-bottom: var(--space-3xl);">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-numeral">OPERATIONAL CODES</div>
+          <h2 class="section-title">Design and Engineering Principles</h2>
+        </div>
+        <div>
+          <span class="numeral-badge">NON-NEGOTIABLE STANDARDS</span>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        {% for std in standards %}
+          <div class="card-hairline">
+            <div class="numeral" style="font-size: var(--text-h3); font-weight: var(--weight-bold); margin-bottom: var(--space-sm); border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs);">
+              {{ std.numeral }}
+            </div>
+            <h3 style="font-size: var(--text-h3); margin-bottom: var(--space-xs);">{{ std.title }}</h3>
+            <p style="font-size: var(--text-small); color: var(--text-muted); line-height: 1.6;">{{ std.desc }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Technical Infrastructure Statement -->
+    <div class="card-hairline" style="background-color: var(--bg-surface); margin-bottom: var(--space-3xl);">
+      <div class="footer-col-title">SYSTEM SPECIFICATION</div>
+      <h2 style="font-size: var(--text-h3); margin-bottom: var(--space-sm);">The idesignweb Architectural System</h2>
+      <p style="line-height: 1.7; margin-bottom: var(--space-md);">
+        This entire platform operates on strict constraints: flat surfaces with solid fills, 1px hairline borders, zero gradients, zero emoji, zero icon fonts, and a single accent color reserved exclusively for the primary Call-To-Action button. We rely on tabular typography, modular type scales, and high contrast to provide intuitive structural orientation.
+      </p>
+      <div style="display: flex; gap: var(--space-sm); flex-wrap: wrap;">
+        <span class="numeral-badge">FLAT INTERFACES</span>
+        <span class="numeral-badge">HAIRLINE BORDERS</span>
+        <span class="numeral-badge">TABULAR NUMERALS</span>
+        <span class="numeral-badge">PYTHON 3.13 + DJANGO</span>
+        <span class="numeral-badge">MONGODB STORAGE</span>
+      </div>
+    </div>
+
+    <!-- Contact Banner -->
+    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-hairline); padding-top: var(--space-xl);">
+      <div>
+        <div class="form-label" style="font-size: var(--text-tiny);">TECHNICAL CONSULTATION</div>
+        <div style="font-size: var(--text-h3); font-weight: var(--weight-bold);">Discuss your technical roadmap with us.</div>
+      </div>
+      <div>
+        <a href="{% url 'public:contact' %}" class="btn btn-primary">
+          COMMENCE CONSULTATION
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

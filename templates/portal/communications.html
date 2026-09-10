@@ -1,0 +1,37 @@
+{% extends 'portal/portal_base.html' %}
+
+{% block title %}Announcements and Communications : Member Portal : {{ site_title }}{% endblock %}
+
+{% block portal_content %}
+<div style="margin-bottom: var(--space-2xl);">
+  <div class="hero-meta">
+    <span class="numeral">PORTAL / 02</span>
+    <span>COMMUNICATIONS ARCHIVE</span>
+  </div>
+  <h1 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">System Announcements</h1>
+  <p style="font-size: var(--text-body); color: var(--text-muted);">
+    Direct technical notices, release bulletins, and scheduled maintenance alerts.
+  </p>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: var(--space-lg); max-width: 900px;">
+  {% for ann in announcements %}
+    <article class="card-hairline">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-sm);">
+        <span class="numeral-badge">LEVEL: {{ ann.priority|upper }}</span>
+        <span class="numeral" style="font-size: var(--text-tiny); color: var(--text-dim);">ISSUED: {{ ann.date_str }}</span>
+      </div>
+
+      <h2 style="font-size: var(--text-h3); margin-bottom: var(--space-sm);">{{ ann.title }}</h2>
+
+      <p style="font-size: var(--text-body); line-height: 1.6; color: var(--text-main); margin-bottom: 0;">
+        {{ ann.body }}
+      </p>
+    </article>
+  {% empty %}
+    <div class="card-hairline" style="text-align: center; padding: var(--space-2xl);">
+      <p>No announcements currently on record.</p>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

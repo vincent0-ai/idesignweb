@@ -1,0 +1,63 @@
+{% extends 'portal/portal_base.html' %}
+
+{% block title %}Asset Library : Member Portal : {{ site_title }}{% endblock %}
+
+{% block portal_content %}
+<div style="margin-bottom: var(--space-2xl);">
+  <div class="hero-meta">
+    <span class="numeral">PORTAL / 04</span>
+    <span>BRAND AND REPOSITORY ASSETS</span>
+  </div>
+  <h1 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">Client Asset Library</h1>
+  <p style="font-size: var(--text-body); color: var(--text-muted);">
+    Approved production vectors, typographic guideline documents, and threat mitigation reports.
+  </p>
+</div>
+
+<!-- Category Filters -->
+<div style="display: flex; gap: var(--space-xs); flex-wrap: wrap; margin-bottom: var(--space-2xl); border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-md);">
+  <a href="{% url 'portal:assets' %}" class="btn btn-ghost btn-sm {% if selected_category == 'all' %}btn-secondary{% endif %}">
+    ALL ASSETS
+  </a>
+  {% for cat in categories %}
+    <a href="{% url 'portal:assets' %}?category={{ cat|urlencode }}" class="btn btn-ghost btn-sm {% if selected_category == cat %}btn-secondary{% endif %}">
+      {{ cat|upper }}
+    </a>
+  {% endfor %}
+</div>
+
+<!-- Asset Table / Grid -->
+<div style="border: 1px solid var(--border-hairline); background-color: var(--bg-primary);">
+  <div style="display: grid; grid-template-columns: 1fr 180px 140px 100px 140px; padding: 12px 16px; background-color: var(--bg-surface); border-bottom: 1px solid var(--border-hairline); font-family: var(--font-mono); font-size: var(--text-tiny); font-weight: var(--weight-bold); color: var(--text-muted);">
+    <div>ASSET IDENTIFIER AND NAME</div>
+    <div>CATEGORY</div>
+    <div>FORMAT</div>
+    <div>SIZE</div>
+    <div style="text-align: right;">ACTION</div>
+  </div>
+
+  {% for asset in assets %}
+    <div style="display: grid; grid-template-columns: 1fr 180px 140px 100px 140px; padding: 16px; border-bottom: 1px solid var(--border-hairline); align-items: center; font-size: var(--text-small);">
+      <div>
+        <span class="numeral-badge" style="margin-right: 8px;">{{ asset.asset_code }}</span>
+        <span style="font-weight: var(--weight-bold);">{{ asset.name }}</span>
+        <div class="numeral" style="font-size: var(--text-tiny); color: var(--text-dim); margin-top: 4px;">VER {{ asset.version }} / UPDATED {{ asset.updated_date }}</div>
+      </div>
+      <div>
+        <span class="numeral-badge">{{ asset.category }}</span>
+      </div>
+      <div class="numeral" style="font-size: var(--text-tiny);">{{ asset.format }}</div>
+      <div class="numeral" style="font-size: var(--text-tiny);">{{ asset.size }}</div>
+      <div style="text-align: right;">
+        <button type="button" class="btn btn-ghost btn-sm" onclick="alert('Asset {{ asset.asset_code }} verified and queued for download.')">
+          DOWNLOAD [->]
+        </button>
+      </div>
+    </div>
+  {% empty %}
+    <div style="padding: var(--space-2xl); text-align: center;">
+      <p>No assets found in the selected category.</p>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

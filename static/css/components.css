@@ -1,0 +1,295 @@
+/*
+ * idesignweb Component Primitives
+ * Strict Constraints: Flat surfaces, hairline borders, single CTA accent,
+ * zero emoji, zero icon fonts/SVGs, zero em dashes.
+ */
+
+/* Button Primitives */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-size: var(--text-small);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 14px 28px;
+  border-radius: 0;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+/* Primary CTA - The SOLE location of the Accent Color */
+.btn-primary {
+  background-color: var(--accent-cta);
+  border-color: var(--accent-cta);
+  color: var(--accent-cta-text);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-cta-hover);
+  border-color: var(--accent-cta-hover);
+  color: var(--accent-cta-text);
+}
+
+/* Secondary Button - Flat White with Hairline Border */
+.btn-secondary {
+  background-color: var(--bg-primary);
+  border-color: var(--border-hairline-strong);
+  color: var(--text-main);
+}
+
+.btn-secondary:hover {
+  background-color: var(--text-main);
+  border-color: var(--text-main);
+  color: var(--text-inverse);
+}
+
+/* Dark Button - Flat Black Solid */
+.btn-dark {
+  background-color: var(--text-main);
+  border-color: var(--text-main);
+  color: var(--text-inverse);
+}
+
+.btn-dark:hover {
+  background-color: #333333;
+  border-color: #333333;
+  color: var(--text-inverse);
+}
+
+/* Ghost Button - Border Only */
+.btn-ghost {
+  background-color: transparent;
+  border-color: var(--border-hairline);
+  color: var(--text-main);
+}
+
+.btn-ghost:hover {
+  border-color: var(--border-hairline-strong);
+}
+
+.btn-sm {
+  padding: 8px 16px;
+  font-size: var(--text-tiny);
+}
+
+.btn-block {
+  display: flex;
+  width: 100%;
+}
+
+/* Card Primitives - Flat Surfaces with Hairline Borders */
+.card-hairline {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-hairline);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+}
+
+.card-hairline-dark {
+  background-color: var(--bg-dark-surface);
+  border: 1px solid var(--border-hairline-dark);
+  color: var(--text-inverse);
+  padding: var(--space-xl);
+}
+
+/* Service Card (01-04 Grid System) */
+.card-service {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-hairline);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 380px;
+  position: relative;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.card-service:hover {
+  border-color: var(--border-hairline-strong);
+  background-color: var(--bg-surface);
+}
+
+.card-service-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-hairline);
+  padding-bottom: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.card-service-numeral {
+  font-family: var(--font-mono);
+  font-size: var(--text-h3);
+  font-weight: var(--weight-bold);
+  letter-spacing: -0.05em;
+  color: var(--text-main);
+}
+
+.card-service-title {
+  font-size: var(--text-h2);
+  margin-bottom: var(--space-sm);
+}
+
+.card-service-tagline {
+  font-size: var(--text-body);
+  color: var(--text-muted);
+  margin-bottom: var(--space-lg);
+  line-height: 1.5;
+}
+
+.card-service-deliverables {
+  list-style: none;
+  margin-bottom: var(--space-xl);
+}
+
+.card-service-deliverables li {
+  font-size: var(--text-small);
+  color: var(--text-muted);
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border-hairline);
+  display: flex;
+  align-items: baseline;
+}
+
+.card-service-deliverables li::before {
+  content: "+";
+  font-family: var(--font-mono);
+  font-weight: var(--weight-bold);
+  color: var(--text-main);
+  margin-right: 8px;
+}
+
+.card-service-action {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-main);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-service-action:hover {
+  text-decoration: underline;
+}
+
+/* Badges and Numerals */
+.numeral-badge {
+  font-family: var(--font-mono);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-tiny);
+  letter-spacing: 0.05em;
+  padding: 4px 8px;
+  border: 1px solid var(--border-hairline);
+  display: inline-block;
+  background-color: var(--bg-surface);
+  color: var(--text-main);
+}
+
+/* Status Tags - Pure Typography and Hairline Borders */
+.status-tag {
+  font-family: var(--font-mono);
+  font-size: var(--text-tiny);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 4px 8px;
+  border: 1px solid var(--border-hairline);
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.status-approved {
+  border-color: #111111;
+  background-color: #111111;
+  color: #FFFFFF;
+}
+
+.status-in-review {
+  border-color: #777777;
+  background-color: #FFFFFF;
+  color: #111111;
+}
+
+.status-draft {
+  border-color: var(--border-hairline);
+  background-color: var(--bg-surface);
+  color: var(--text-muted);
+}
+
+/* Form Controls - Flat, Crisp, Unrounded */
+.form-group {
+  margin-bottom: var(--space-lg);
+}
+
+.form-label {
+  display: block;
+  font-size: var(--text-small);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+  color: var(--text-main);
+}
+
+.form-input, .form-textarea, .form-select {
+  width: 100%;
+  padding: 12px 16px;
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  border: 1px solid var(--border-hairline);
+  border-radius: 0;
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  transition: border-color 0.15s ease;
+}
+
+.form-input:focus, .form-textarea:focus, .form-select:focus {
+  border-color: var(--border-hairline-strong);
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 1px;
+}
+
+.form-hint {
+  font-size: var(--text-tiny);
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* Alert Notification Banner */
+.alert-banner {
+  border: 1px solid var(--border-hairline-strong);
+  background-color: var(--bg-surface);
+  padding: var(--space-md) var(--space-lg);
+  margin-bottom: var(--space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.alert-banner-text {
+  font-size: var(--text-small);
+  font-weight: var(--weight-bold);
+}
+
+.alert-dismiss {
+  background: transparent;
+  border: none;
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  font-weight: var(--weight-bold);
+  cursor: pointer;
+  padding: 4px 8px;
+}
