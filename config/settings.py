@@ -17,13 +17,42 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-+rz26ne259ic%2=tb*3s&#be%w
 
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = [h.strip() for h in os.getenv('ALLOWED_HOSTS', '*').split(',') if h.strip()]
+# Allowed hosts configuration
+allowed_hosts_raw = os.getenv('ALLOWED_HOSTS', '*').strip()
+if not allowed_hosts_raw or allowed_hosts_raw == '*':
+    ALLOWED_HOSTS = ['*']
+else:
+    raw_hosts = [h.strip() for h in allowed_hosts_raw.split(',') if h.strip()]
+    ALLOWED_HOSTS = []
+    for h in raw_hosts:
+        # Strip scheme (http:// or https://) and path if entered by mistake
+        h_clean = h.replace('https://', '').replace('http://', '').split('/')[0].strip()
+        if h_clean.startswith('*.'):
+            h_clean = h_clean[1:]  # Convert *.domain.com to .domain.com for Django wildcard
+        if h_clean and h_clean not in ALLOWED_HOSTS:
+            ALLOWED_HOSTS.append(h_clean)
+
+# Automatically ensure domain fallbacks and local loopbacks are allowed
+for default_h in ['idesignweb.echowithin.xyz', '.echowithin.xyz', 'localhost', '127.0.0.1', 'testserver']:
+    if default_h not in ALLOWED_HOSTS and '*' not in ALLOWED_HOSTS:
+        ALLOWED_HOSTS.append(default_h)
 
 # Traefik Reverse Proxy & HTTPS Configuration for Dokploy
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-csrf_origins_env = os.getenv('CSRF_TRUSTED_ORIGINS', '')
+csrf_origins_env = os.getenv('CSRF_TRUSTED_ORIGINS', '').strip()
 if csrf_origins_env:
     CSRF_TRUSTED_ORIGINS = [o.strip() for o in csrf_origins_env.split(',') if o.strip()]
+else:
+    CSRF_TRUSTED_ORIGINS = []
+
+for default_csrf in [
+    'https://idesignweb.echowithin.xyz',
+    'https://*.echowithin.xyz',
+    'http://idesignweb.echowithin.xyz',
+    'http://*.echowithin.xyz',
+]:
+    if default_csrf not in CSRF_TRUSTED_ORIGINS:
+        CSRF_TRUSTED_ORIGINS.append(default_csrf)
 
 # Application definition
 INSTALLED_APPS = [
