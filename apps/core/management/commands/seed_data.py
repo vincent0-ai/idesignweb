@@ -1,6 +1,7 @@
 """
-Management command to populate MongoDB and SQLite with initial data for idesignweb.
-Ensures zero emoji, zero em dashes, and complete flat design consistency.
+Management command to seed MongoDB and SQLite for Idesignweb.
+Content adapted from company brand materials and Squarespace inspired architecture.
+Zero emoji, zero em dashes, and complete flat design consistency.
 """
 
 from django.core.management.base import BaseCommand
@@ -9,7 +10,7 @@ from apps.core.db import get_db, init_indexes
 import datetime
 
 class Command(BaseCommand):
-    help = 'Seeds initial services, case studies, insights, portal data, and demo user'
+    help = 'Seeds services, case studies, articles, and portal spaces adapted from company brief'
 
     def handle(self, *args, **options):
         self.stdout.write('Initializing indexes...')
@@ -18,37 +19,38 @@ class Command(BaseCommand):
         db = get_db()
         now = datetime.datetime.now(datetime.timezone.utc)
         
-        # 1. Seed Services (01-04)
+        # 1. Seed Services (Web Development, Graphic Design, Video Editing, Cybersecurity)
         self.stdout.write('Seeding services collection...')
         db.services.delete_many({})
         services_data = [
             {
-                'slug': 'graphic-design',
+                'slug': 'web-development',
                 'service_number': '01',
-                'title': 'Graphic Design',
-                'tagline': 'Visual identities, typography systems, and print architecture.',
-                'overview': 'We build comprehensive visual identity systems, poster series, and editorial structures founded on rigorous typographic discipline and balanced layout grids.',
+                'title': 'Web Development',
+                'tagline': 'Smart websites, online stores, and customer portals that grow your business.',
+                'overview': 'We build high-performing, mobile-friendly websites that help you attract customers, build trust, and increase sales. From custom business landing pages to full e-commerce stores with secure payment processing, every site is fast, modern, and search engine optimized.',
                 'deliverables': [
-                    'Brand identity guidelines and token specifications',
-                    'Poster series and high-impact physical collateral',
-                    'Custom display typography and typographic hierarchies',
-                    'Packaging systems and technical specifications'
+                    'Custom website design tailored to your brand',
+                    'Mobile-responsive development looking perfect on all screens',
+                    'E-commerce stores with secure payment integrations',
+                    'Website management, content updates, and routine backups',
+                    'Search engine optimization (SEO) and speed tuning'
                 ],
                 'process_steps': [
                     {
                         'step_number': '01',
-                        'title': 'Typography and Grid Audit',
-                        'description': 'Evaluating core proportions, reading distance, and medium constraints.'
+                        'title': 'Discovery and Sitemap',
+                        'description': 'We discuss your business goals, target customers, and page structure to create a tailored blueprint.'
                     },
                     {
                         'step_number': '02',
-                        'title': 'System Formulation',
-                        'description': 'Drafting modular typographic pairings, spatial rules, and baseline alignments.'
+                        'title': 'Design and Development',
+                        'description': 'We craft custom layouts and write clean, fast code tested on mobile phones, tablets, and desktops.'
                     },
                     {
                         'step_number': '03',
-                        'title': 'Deliverable Production',
-                        'description': 'Finalizing vector packages, print-ready files, and mechanical specifications.'
+                        'title': 'Launch and Maintenance',
+                        'description': 'We launch your website live, connect your domain, and provide ongoing support whenever you need help.'
                     }
                 ],
                 'featured': True,
@@ -56,32 +58,32 @@ class Command(BaseCommand):
                 'updated_at': now
             },
             {
-                'slug': 'video-editing',
+                'slug': 'graphic-design',
                 'service_number': '02',
-                'title': 'Video Editing',
-                'tagline': 'Post-production, motion graphics, and narrative editing.',
-                'overview': 'Precision editorial assembly for commercial, documentary, and product narratives. We combine structured pacing with subtle motion design and disciplined color grading.',
+                'title': 'Graphic Design',
+                'tagline': 'Brand identity, logos, poster design, and print marketing collateral.',
+                'overview': 'A strong visual identity sets your business apart from competitors. We design unique logos, brand style guides, promotional posters, business cards, and digital marketing graphics that build immediate credibility with your audience.',
                 'deliverables': [
-                    'Master assembly cuts and multi-format adaptations',
-                    'Motion typography and kinetic informational graphics',
-                    'Sound mixing, dialogue balancing, and acoustic mastering',
-                    'Color grading tailored for calibrated digital displays'
+                    'Unique logo design and complete brand guidelines',
+                    'Promotional posters, flyers, and event graphics',
+                    'Business cards and print-ready stationery',
+                    'Social media banners and advertising graphics'
                 ],
                 'process_steps': [
                     {
                         'step_number': '01',
-                        'title': 'Rhythm and Cut Assembly',
-                        'description': 'Structuring chronological narrative flow, dialogue density, and thematic timing.'
+                        'title': 'Brand Consultation',
+                        'description': 'We identify your brand personality, color preferences, and market positioning.'
                     },
                     {
                         'step_number': '02',
-                        'title': 'Motion Integration',
-                        'description': 'Applying frame-accurate kinetic typography and informational overlays.'
+                        'title': 'Concept Creation',
+                        'description': 'We create visual concepts, logo options, and typography layouts for your review.'
                     },
                     {
                         'step_number': '03',
-                        'title': 'Master Mastering',
-                        'description': 'Color pass, audio master leveling, and high-bitrate output delivery.'
+                        'title': 'Final Vector Delivery',
+                        'description': 'We deliver all final vector and print-ready files ready for web and physical production.'
                     }
                 ],
                 'featured': True,
@@ -89,32 +91,32 @@ class Command(BaseCommand):
                 'updated_at': now
             },
             {
-                'slug': 'web-development',
+                'slug': 'video-editing',
                 'service_number': '03',
-                'title': 'Web Development',
-                'tagline': 'Engineered digital platforms, clean codebases, and performant systems.',
-                'overview': 'Modern web solutions constructed without unnecessary bloat. Fast loading, strictly typed, accessible, and structured for long-term maintainability.',
+                'title': 'Video Editing',
+                'tagline': 'Commercials, social media videos, YouTube content, and motion titles.',
+                'overview': 'Engage your audience with professional video content. We transform raw footage into compelling stories with sharp cuts, clean audio balancing, animated title cards, and color grading tailored for web and social platforms.',
                 'deliverables': [
-                    'Semantic server-rendered and progressive web applications',
-                    'Bespoke content management pipelines and custom admin tools',
-                    'High-efficiency relational and document storage integrations',
-                    'Lighthouse 100 performance benchmarks and full accessibility audits'
+                    'Promotional business videos and commercial edits',
+                    'Social media clips formatted for Instagram, TikTok, and YouTube',
+                    'Motion graphics and animated text overlays',
+                    'Audio cleanup, background music mixing, and color grading'
                 ],
                 'process_steps': [
                     {
                         'step_number': '01',
-                        'title': 'Architecture and Schema Blueprint',
-                        'description': 'Formulating clean data contracts, routing structures, and caching layers.'
+                        'title': 'Footage Review',
+                        'description': 'We review your raw recordings and organize the best shots for the storyline.'
                     },
                     {
                         'step_number': '02',
-                        'title': 'Component Engineering',
-                        'description': 'Constructing accessible HTML, lightweight CSS, and modular script layers.'
+                        'title': 'Timeline Assembly',
+                        'description': 'We cut the story to rhythm, sync audio, and share an initial cut for your feedback.'
                     },
                     {
                         'step_number': '03',
-                        'title': 'Testing and Verification',
-                        'description': 'Rigorous latency testing, security review, and cross-browser verification.'
+                        'title': 'Master Polish',
+                        'description': 'We finalize colors, master sound levels, and deliver high-definition video files.'
                     }
                 ],
                 'featured': True,
@@ -125,29 +127,29 @@ class Command(BaseCommand):
                 'slug': 'cybersecurity',
                 'service_number': '04',
                 'title': 'Cybersecurity',
-                'tagline': 'Vulnerability assessments, infrastructure hardening, and defensive auditing.',
-                'overview': 'Systematic threat modeling and technical assessment to protect web infrastructure, client data repositories, and digital workflow pipelines against modern adversaries.',
+                'tagline': 'Website security checks, malware defense, server hardening, and backups.',
+                'overview': 'Keep your website, customer data, and online reputation safe from cyber attacks. We conduct vulnerability reviews, fix security loopholes, set up automated backups, and protect your server against unauthorized access.',
                 'deliverables': [
-                    'Comprehensive penetration testing and web application vulnerability audits',
-                    'Infrastructure configuration hardening and credential lifecycle policies',
-                    'Network traffic analysis and threat perimeter modeling',
-                    'Compliance documentation and incident response playbooks'
+                    'Website security audits and vulnerability checks',
+                    'Malware scanning and rapid cleanup',
+                    'SSL configuration, firewall setup, and server hardening',
+                    'Automated regular backups and continuous uptime monitoring'
                 ],
                 'process_steps': [
                     {
                         'step_number': '01',
-                        'title': 'Perimeter Reconnaissance',
-                        'description': 'Mapping external attack surfaces, exposed services, and configuration drift.'
+                        'title': 'Security Audit',
+                        'description': 'We inspect your website code and server settings for vulnerabilities and outdated software.'
                     },
                     {
                         'step_number': '02',
-                        'title': 'Defensive Hardening',
-                        'description': 'Closing exploit vectors, enforcing zero-trust policies, and patching endpoints.'
+                        'title': 'Protection Implementation',
+                        'description': 'We patch loopholes, configure firewalls, and install automated defense safeguards.'
                     },
                     {
                         'step_number': '03',
-                        'title': 'Formal Verification',
-                        'description': 'Delivering technical remediation reports and ongoing defensive telemetry.'
+                        'title': 'Ongoing Monitoring',
+                        'description': 'We keep your website backed up and monitored against unexpected attacks or downtime.'
                     }
                 ],
                 'featured': True,
@@ -162,74 +164,74 @@ class Command(BaseCommand):
         db.case_studies.delete_many({})
         case_studies_data = [
             {
-                'slug': 'nordic-furniture-brand-system',
-                'title': 'Nordic Furniture Visual Identity',
+                'slug': 'klar-form-modern-website',
+                'title': 'Responsive E-Commerce Platform for Klar Form',
                 'client': 'Klar Form',
+                'category': 'Web Development',
+                'year': '2026',
+                'summary': 'A fast, mobile-friendly online store with instant product search and secure payment checkout.',
+                'challenge': 'Klar Form was losing customers because their previous website took too long to load on mobile phones.',
+                'solution': 'We built a modern responsive store with clean layouts, fast image loading, and a simple 2-step checkout.',
+                'results': [
+                    {'metric': '1.1s', 'label': 'Average mobile page load time'},
+                    {'metric': '+42%', 'label': 'Increase in completed online sales'},
+                    {'metric': '100%', 'label': 'Mobile responsiveness rating'}
+                ],
+                'deliverables_summary': 'Custom website, online store setup, payment gateway, SEO configuration.',
+                'published_at': now,
+                'is_published': True
+            },
+            {
+                'slug': 'nordic-furniture-brand-system',
+                'title': 'Brand Identity and Logo Suite for Furniture Studio',
+                'client': 'Klar Form Studio',
                 'category': 'Graphic Design',
                 'year': '2026',
-                'summary': 'A complete typographic framework and packaging architecture for an architectural furniture studio.',
-                'challenge': 'The client required a brand identity that avoided decorative excess while commanding immediate authority in gallery and retail environments.',
-                'solution': 'Engineered a modular hairline grid system, custom numeral styles, and a monochrome structural packaging palette.',
+                'summary': 'A complete visual identity redesign including logo suite, packaging templates, and promotional posters.',
+                'challenge': 'The client needed an elevated, professional brand image to sell into premium retail galleries.',
+                'solution': 'We designed a memorable minimalist logo, unified color palette, and elegant print collateral.',
                 'results': [
-                    {'metric': '+48%', 'label': 'Increase in direct architect inquiries'},
-                    {'metric': '100%', 'label': 'Packaging material standardization across product lines'},
-                    {'metric': '03', 'label': 'International design awards received'}
+                    {'metric': '+55%', 'label': 'Increase in retail inquiries'},
+                    {'metric': '100%', 'label': 'Standardized print packaging'},
+                    {'metric': '03', 'label': 'Design showcase features'}
                 ],
-                'deliverables_summary': 'Identity manual, mechanical packaging blueprints, poster catalog series.',
+                'deliverables_summary': 'Vector logo package, brand guidelines PDF, poster series, business cards.',
                 'published_at': now,
                 'is_published': True
             },
             {
                 'slug': 'kinetic-documentary-short',
-                'title': 'Industrial Architecture Motion Short',
-                'client': 'Brutal Arch Review',
+                'title': 'Promotional Film and Social Cutdowns for Architecture Firm',
+                'client': 'Modern Spaces',
                 'category': 'Video Editing',
                 'year': '2026',
-                'summary': 'Six-minute architectural documentary examining concrete forms across Central Europe.',
-                'challenge': 'Translating massive static concrete structures into compelling cinematic progression without intrusive music or exaggerated pacing.',
-                'solution': 'Developed an austere cutting rhythm based on architectural vanishing points, augmented with ambient sound field balancing and minimalist typographic chapter titles.',
+                'summary': 'A six-minute showcase film paired with 15-second vertical cuts for Instagram and YouTube campaigns.',
+                'challenge': 'The client needed engaging video content to demonstrate their commercial architectural work to prospective clients.',
+                'solution': 'We edited footage with crisp cuts, natural ambient soundscapes, clean text overlays, and 4K color correction.',
                 'results': [
-                    {'metric': '240K', 'label': 'Organic festival and digital stream views'},
-                    {'metric': '84%', 'label': 'Full completion rate on digital platforms'},
-                    {'metric': '4K', 'label': 'Native HDR master delivery specification'}
+                    {'metric': '240K', 'label': 'Total views across video channels'},
+                    {'metric': '82%', 'label': 'Average watch completion rate'},
+                    {'metric': '4K', 'label': 'High resolution master delivered'}
                 ],
-                'deliverables_summary': 'Master 4K theatrical cut, high-bitrate streaming deliverable, archival master.',
-                'published_at': now,
-                'is_published': True
-            },
-            {
-                'slug': 'high-throughput-fintech-interface',
-                'title': 'High-Throughput Financial Analytics Platform',
-                'client': 'Aura Ledger',
-                'category': 'Web Development',
-                'year': '2026',
-                'summary': 'Real-time settlement interface handling dense tabular transaction streams with zero visual lag.',
-                'challenge': 'Eliminating layout shifts and rendering latency for high-frequency algorithmic traders monitoring millions of ledger entries.',
-                'solution': 'Constructed a custom server-rendered layout with targeted vanilla DOM updates and tabular numeric alignment.',
-                'results': [
-                    {'metric': '18ms', 'label': 'Median server response time under peak load'},
-                    {'metric': '0.00', 'label': 'Cumulative Layout Shift (CLS) score'},
-                    {'metric': '60fps', 'label': 'Sustained display rendering rate'}
-                ],
-                'deliverables_summary': 'Platform codebase, database indexing blueprint, component documentation.',
+                'deliverables_summary': 'Master 4K video, 4 social media cuts, sound mix, YouTube master files.',
                 'published_at': now,
                 'is_published': True
             },
             {
                 'slug': 'zero-trust-cloud-infrastructure-audit',
-                'title': 'Zero-Trust Infrastructure Hardening',
-                'client': 'Vector Vault',
+                'title': 'Website Security Hardening and Automated Backups',
+                'client': 'Vertex Media',
                 'category': 'Cybersecurity',
                 'year': '2026',
-                'summary': 'Comprehensive vulnerability assessment and attack surface remediation for an enterprise data vault.',
-                'challenge': 'Complex legacy firewall rules and distributed IAM roles left undocumented privilege escalation pathways.',
-                'solution': 'Executed automated and manual penetration testing routines, followed by strict least-privilege role consolidation and endpoint hardening.',
+                'summary': 'A comprehensive security checkup, malware cleanup, and automated daily backup system for a media platform.',
+                'challenge': 'Vertex Media experienced spam injections and required security hardening to protect client accounts.',
+                'solution': 'We patched outdated software, installed web application firewalls, and configured automated daily offsite backups.',
                 'results': [
-                    {'metric': '100%', 'label': 'Critical vulnerabilities identified and resolved'},
-                    {'metric': '-72%', 'label': 'Reduction in external exposed surface area'},
-                    {'metric': 'ISO', 'label': 'Certification readiness achieved ahead of schedule'}
+                    {'metric': '0', 'label': 'Vulnerabilities remaining'},
+                    {'metric': '99.99%', 'label': 'Uptime maintained'},
+                    {'metric': 'Daily', 'label': 'Automated backups verified'}
                 ],
-                'deliverables_summary': 'Threat matrix report, remediation scripts, executive defense summary.',
+                'deliverables_summary': 'Security audit report, server patches, firewall configuration, backup system.',
                 'published_at': now,
                 'is_published': True
             }
@@ -241,53 +243,52 @@ class Command(BaseCommand):
         db.posts.delete_many({})
         posts_data = [
             {
-                'slug': 'principles-of-hairline-ui-design',
-                'title': 'Principles of Hairline Interface Design',
-                'excerpt': 'Why removing decorative shadows and gradients yields faster, more authoritative interfaces.',
+                'slug': 'why-every-business-needs-a-website',
+                'title': '4 Reasons Every Business Needs a Professional Website',
+                'excerpt': 'From 24/7 visibility to customer trust, a modern website is your most powerful tool for business growth.',
                 'content': (
-                    'Visual clarity in digital product design often degrades through the accumulation of decorative treatments: '
-                    'subtle gradients, diffuse shadows, and unnecessary icon flourishes. When these elements are eliminated, '
-                    'structure and typography must perform the structural communication.\n\n'
-                    'A hairline border (0.5px to 1px) creates exact spatial boundaries without introducing visual weight. '
-                    'Paired with disciplined tabular numerals and a restricted typographic hierarchy, interfaces communicate '
-                    'data density cleanly and with institutional authority.'
+                    'In today\'s digital world, your website is often the very first interaction a customer has with your business. '
+                    'Having a professional website works for you around the clock, showcasing your services even while you sleep.\n\n'
+                    'First, it provides 24/7 online presence, making your business visible to customers anytime and anywhere. '
+                    'Second, it lets you reach more customers locally and globally, expanding your market far beyond foot traffic.\n\n'
+                    'Third, it builds credibility and trust. Customers expect legitimate businesses to have a clean, modern online home. '
+                    'And fourth, it directly increases sales by turning casual visitors into paying customers.'
                 ),
-                'author': 'idesignweb Architecture',
+                'author': 'Timothy Owino',
+                'reading_time': '3 min read',
+                'category': 'Business Growth',
+                'published_at': now,
+                'is_published': True
+            },
+            {
+                'slug': 'why-website-speed-matters',
+                'title': 'Why Fast-Loading Websites Convert More Customers',
+                'excerpt': 'A delay of just two seconds can cause over half your mobile visitors to leave. Here is how clean design keeps them engaged.',
+                'content': (
+                    'Mobile visitors expect websites to load instantly. When a site takes too long to appear, potential buyers click back to search results '
+                    'and buy from your competitors instead.\n\n'
+                    'At Idesignweb, we prioritize clean code and optimized media. By avoiding bloated plugins and heavy animations, '
+                    'our websites load rapidly on all mobile networks, resulting in higher search rankings and happier customers.'
+                ),
+                'author': 'Timothy Owino',
+                'reading_time': '3 min read',
+                'category': 'Web Development',
+                'published_at': now,
+                'is_published': True
+            },
+            {
+                'slug': 'essential-website-security-tips',
+                'title': 'Simple Steps to Protect Your Website from Online Threats',
+                'excerpt': 'Practical, non-technical steps any business owner can take to keep their website and customer information secure.',
+                'content': (
+                    'Keeping your website secure does not have to be complicated. Most security breaches happen because of simple oversights '
+                    'like outdated software, weak passwords, or lack of automated backups.\n\n'
+                    'By keeping your server software updated, enabling HTTPS encryption certificates, and scheduling automated daily backups, '
+                    'you can protect your online store or company website from unexpected downtime.'
+                ),
+                'author': 'Timothy Owino',
                 'reading_time': '4 min read',
-                'category': 'Design Systems',
-                'published_at': now,
-                'is_published': True
-            },
-            {
-                'slug': 'securing-modern-web-workloads',
-                'title': 'Securing Modern Web Workloads Without Cognitive Friction',
-                'excerpt': 'Strategic defense mechanisms that protect member portals without encumbering legitimate users.',
-                'content': (
-                    'Gated digital platforms require uncompromising perimeter defenses. However, complex defense configurations '
-                    'frequently introduce friction that damages operational velocity.\n\n'
-                    'By deploying strict HTTP security headers, mandatory noindex directives on authenticated routes, '
-                    'and rate-limited session validation at the routing layer, systems achieve robust threat isolation '
-                    'while preserving rapid user interactions.'
-                ),
-                'author': 'idesignweb Security Team',
-                'reading_time': '6 min read',
-                'category': 'Cybersecurity',
-                'published_at': now,
-                'is_published': True
-            },
-            {
-                'slug': 'typographic-motion-in-brand-systems',
-                'title': 'Typographic Motion in Brand Systems',
-                'excerpt': 'How disciplined kinetic typography reinforces corporate identity across video and interactive media.',
-                'content': (
-                    'Kinetic typography should never exist solely for spectacle. In a disciplined brand system, motion communicates '
-                    'cadence, hierarchy, and relationship between concepts.\n\n'
-                    'By constraining motion curves to linear or crisp cubic bezier transitions and maintaining rigid baseline alignment, '
-                    'typographic movement amplifies the message rather than distracting from it.'
-                ),
-                'author': 'idesignweb Motion Group',
-                'reading_time': '5 min read',
-                'category': 'Video & Motion',
+                'category': 'Security Advice',
                 'published_at': now,
                 'is_published': True
             }
@@ -299,18 +300,18 @@ class Command(BaseCommand):
         db.announcements.delete_many({})
         announcements_data = [
             {
-                'title': 'Scheduled Infrastructure Upgrade Notice',
-                'body': 'Platform database optimization is scheduled for Sunday at 02:00 UTC. No deliverable approval workflows will be interrupted.',
-                'priority': 'Normal',
+                'title': 'Scheduled Routine Server Updates This Sunday',
+                'body': 'We will perform routine server updates this Sunday at 2:00 AM UTC. Services will remain available, and all project files are safe.',
+                'priority': 'Notice',
                 'audience': 'all',
                 'date_str': '2026-09-12',
                 'created_at': now,
                 'active': True
             },
             {
-                'title': 'Asset Library Version 2.0 Released',
-                'body': 'The client asset library now features direct checksum verification and batch archive downloads for approved vector packages.',
-                'priority': 'Info',
+                'title': 'High Resolution File Downloads Available in Asset Library',
+                'body': 'You can now preview and download all your approved logo packages and brand assets directly from your client member portal.',
+                'priority': 'Update',
                 'audience': 'all',
                 'date_str': '2026-09-08',
                 'created_at': now,
@@ -326,7 +327,7 @@ class Command(BaseCommand):
             {
                 'project_code': 'PRJ-2026-001',
                 'client_username': 'client_apex',
-                'title': 'E-Commerce Core Web Architecture',
+                'title': 'New Responsive E-Commerce Website',
                 'service_category': 'Web Development',
                 'status': 'In Progress',
                 'progress_percent': 70,
@@ -335,27 +336,27 @@ class Command(BaseCommand):
                 'deliverables': [
                     {
                         'deliverable_id': 'DEL-01',
-                        'title': 'System Information Architecture and Data Contracts',
+                        'title': 'Website sitemap and page layouts',
                         'version': '1.0',
                         'status': 'Approved',
                         'due_date': '2026-08-20',
-                        'client_notes': 'Confirmed and approved by technical director.'
+                        'client_notes': 'Approved by client.'
                     },
                     {
                         'deliverable_id': 'DEL-02',
-                        'title': 'Core Layout Templates and Component System',
+                        'title': 'Homepage and product catalog templates',
                         'version': '2.0',
                         'status': 'In Review',
                         'due_date': '2026-09-15',
-                        'client_notes': 'Pending final client review of responsive breakpoints.'
+                        'client_notes': 'Please review mobile menu alignment.'
                     },
                     {
                         'deliverable_id': 'DEL-03',
-                        'title': 'Backend Data Store and Caching Integration',
+                        'title': 'Online checkout and payment setup',
                         'version': '0.9',
                         'status': 'Draft',
                         'due_date': '2026-10-01',
-                        'client_notes': 'Internal testing in progress.'
+                        'client_notes': ''
                     }
                 ],
                 'created_at': now,
@@ -364,7 +365,7 @@ class Command(BaseCommand):
             {
                 'project_code': 'PRJ-2026-002',
                 'client_username': 'client_apex',
-                'title': 'Identity and Typographic Design Guidelines',
+                'title': 'Brand Identity and Style Guidelines',
                 'service_category': 'Graphic Design',
                 'status': 'In Review',
                 'progress_percent': 90,
@@ -373,19 +374,19 @@ class Command(BaseCommand):
                 'deliverables': [
                     {
                         'deliverable_id': 'DEL-04',
-                        'title': 'Primary Vector Wordmark and Monogram System',
+                        'title': 'Logo concepts and color palette',
                         'version': '1.2',
                         'status': 'Approved',
                         'due_date': '2026-08-30',
-                        'client_notes': 'Approved without revision.'
+                        'client_notes': 'Approved option 2.'
                     },
                     {
                         'deliverable_id': 'DEL-05',
-                        'title': 'Brand Manual and Mechanical Print Specifications',
+                        'title': 'Print collateral and social media banners',
                         'version': '1.0',
                         'status': 'In Review',
                         'due_date': '2026-09-20',
-                        'client_notes': 'Client review underway.'
+                        'client_notes': ''
                     }
                 ],
                 'created_at': now,
@@ -401,9 +402,9 @@ class Command(BaseCommand):
             {
                 'client_username': 'client_apex',
                 'asset_code': 'AST-01',
-                'name': 'Primary Brand Wordmark Vector Suite',
-                'category': 'Identity',
-                'format': 'SVG, PDF',
+                'name': 'Main Brand Logo Vector Package',
+                'category': 'Logos',
+                'format': 'SVG, PNG',
                 'size': '2.4 MB',
                 'version': '1.2',
                 'updated_date': '2026-09-02'
@@ -411,9 +412,9 @@ class Command(BaseCommand):
             {
                 'client_username': 'client_apex',
                 'asset_code': 'AST-02',
-                'name': 'Typography Specification and Token Map',
-                'category': 'Design Tokens',
-                'format': 'JSON, PDF',
+                'name': 'Brand Color Palette and Font Guide',
+                'category': 'Style Guide',
+                'format': 'PDF',
                 'size': '420 KB',
                 'version': '1.0',
                 'updated_date': '2026-09-04'
@@ -421,9 +422,9 @@ class Command(BaseCommand):
             {
                 'client_username': 'client_apex',
                 'asset_code': 'AST-03',
-                'name': 'Motion Title Kit and Video Presets',
-                'category': 'Video Assets',
-                'format': 'ZIP, ProRes',
+                'name': 'Promotional Video Intro Templates',
+                'category': 'Video Templates',
+                'format': 'MP4, MOV',
                 'size': '184 MB',
                 'version': '1.1',
                 'updated_date': '2026-09-05'
@@ -431,9 +432,9 @@ class Command(BaseCommand):
             {
                 'client_username': 'client_apex',
                 'asset_code': 'AST-04',
-                'name': 'Infrastructure Vulnerability Assessment Report',
-                'category': 'Security Audit',
-                'format': 'Encrypted PDF',
+                'name': 'Website Security Checkup Summary',
+                'category': 'Security Report',
+                'format': 'PDF',
                 'size': '1.8 MB',
                 'version': '1.0',
                 'updated_date': '2026-09-09'
@@ -448,7 +449,7 @@ class Command(BaseCommand):
             {
                 'ticket_id': 'TCK-1001',
                 'client_username': 'client_apex',
-                'subject': 'Clarification on web font licensing scope',
+                'subject': 'Question about logo file formats for print',
                 'priority': 'Medium',
                 'status': 'Resolved',
                 'created_at': now - datetime.timedelta(days=5),
@@ -457,13 +458,13 @@ class Command(BaseCommand):
                     {
                         'sender': 'client_apex',
                         'role': 'client',
-                        'text': 'Does the enterprise license cover internal subdomains for staging environments?',
+                        'text': 'Which logo file should our printing vendor use for our new business cards?',
                         'date_str': '2026-09-05 10:14'
                     },
                     {
-                        'sender': 'idesignweb Support',
+                        'sender': 'Timothy Owino',
                         'role': 'staff',
-                        'text': 'Yes, the enterprise typography license encompasses all development, staging, and production subdomains.',
+                        'text': 'Please share the vector PDF or EPS file in your asset library with your printer for the highest quality.',
                         'date_str': '2026-09-05 11:30'
                     }
                 ]
@@ -471,7 +472,7 @@ class Command(BaseCommand):
             {
                 'ticket_id': 'TCK-1002',
                 'client_username': 'client_apex',
-                'subject': 'Request for secondary video cut in 9:16 aspect ratio',
+                'subject': 'Request for vertical video cut for Instagram',
                 'priority': 'High',
                 'status': 'In Progress',
                 'created_at': now - datetime.timedelta(days=1),
@@ -480,13 +481,13 @@ class Command(BaseCommand):
                     {
                         'sender': 'client_apex',
                         'role': 'client',
-                        'text': 'We require a vertical 9:16 cut of the industrial architecture film for digital showcase displays.',
+                        'text': 'Can we get a vertical 9:16 version of our promotional video for an Instagram story campaign?',
                         'date_str': '2026-09-09 14:20'
                     },
                     {
-                        'sender': 'idesignweb Support',
+                        'sender': 'Timothy Owino',
                         'role': 'staff',
-                        'text': 'Reframing sequence underway. Render expected in the deliverable space by tomorrow 16:00 UTC.',
+                        'text': 'Working on the vertical reframe now. We will upload it to your project space by tomorrow afternoon.',
                         'date_str': '2026-09-09 15:45'
                     }
                 ]

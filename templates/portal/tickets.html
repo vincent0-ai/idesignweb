@@ -3,20 +3,20 @@
 {% block title %}Support Tickets : Member Portal : {{ site_title }}{% endblock %}
 
 {% block portal_content %}
-<div style="margin-bottom: var(--space-2xl); display: flex; justify-content: space-between; align-items: flex-end;">
+<div style="margin-bottom: var(--space-2xl); display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: var(--space-md);">
   <div>
     <div class="hero-meta">
       <span class="numeral">PORTAL / 05</span>
-      <span>SUPPORT AND COMMUNICATIONS DESK</span>
+      <span>CLIENT SUPPORT</span>
     </div>
-    <h1 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">Technical Support Tickets</h1>
+    <h1 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">Support Tickets</h1>
     <p style="font-size: var(--text-body); color: var(--text-muted); margin-bottom: 0;">
-      Direct technical dispatch for production queries, scope adjustments, and asset requests.
+      Ask questions, request file adjustments, or report website issues directly to our team.
     </p>
   </div>
   <div>
     <a href="{% url 'portal:create_ticket' %}" class="btn btn-secondary">
-      + OPEN NEW TICKET
+      + NEW TICKET
     </a>
   </div>
 </div>
@@ -56,9 +56,9 @@
     </article>
   {% empty %}
     <div class="card-hairline" style="text-align: center; padding: var(--space-2xl);">
-      <p>No support tickets currently open for this client.</p>
+      <p>No support tickets currently open.</p>
       <a href="{% url 'portal:create_ticket' %}" class="btn btn-secondary btn-sm" style="margin-top: var(--space-md);">
-        SUBMIT NEW TICKET
+        SUBMIT A TICKET
       </a>
     </div>
   {% endfor %}

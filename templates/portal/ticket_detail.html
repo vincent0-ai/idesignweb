@@ -35,14 +35,14 @@
 
 <!-- Messages Conversation Log -->
 <div style="margin-bottom: var(--space-2xl);">
-  <div class="footer-col-title">MESSAGE TIMELINE</div>
+  <div class="footer-col-title">MESSAGES</div>
 
   <div style="display: flex; flex-direction: column; gap: var(--space-md);">
     {% for msg in ticket.messages %}
       <div class="card-hairline" style="background-color: {% if msg.role == 'staff' %}var(--bg-surface){% else %}var(--bg-primary){% endif %};">
         <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-sm);">
           <div>
-            <span class="numeral-badge">{% if msg.role == 'staff' %}TEAM DISPATCH{% else %}CLIENT{% endif %}</span>
+            <span class="numeral-badge">{% if msg.role == 'staff' %}IDESIGNWEB TEAM{% else %}CLIENT{% endif %}</span>
             <span style="font-weight: var(--weight-bold); font-size: var(--text-small); margin-left: 8px;">{{ msg.sender }}</span>
           </div>
           <span class="numeral" style="font-size: var(--text-tiny); color: var(--text-dim);">{{ msg.date_str }}</span>
@@ -58,18 +58,18 @@
 
 <!-- Reply Section -->
 <div class="card-hairline">
-  <div class="footer-col-title">ADD REPLY TO TICKET</div>
+  <div class="footer-col-title">REPLY TO THIS TICKET</div>
 
   <form method="POST" action="{% url 'portal:ticket_detail' ticket.ticket_id %}">
     {% csrf_token %}
 
     <div class="form-group">
-      <label for="reply_text" class="form-label">Message Content</label>
-      <textarea id="reply_text" name="reply_text" rows="4" class="form-textarea" required placeholder="Type reply message..."></textarea>
+      <label for="reply_text" class="form-label">Your Reply</label>
+      <textarea id="reply_text" name="reply_text" rows="4" class="form-textarea" required placeholder="Type your message here..."></textarea>
     </div>
 
     <button type="submit" class="btn btn-secondary">
-      POST REPLY
+      SEND REPLY
     </button>
   </form>
 </div>

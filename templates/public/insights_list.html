@@ -1,21 +1,20 @@
 {% extends 'base/base.html' %}
 
-{% block title %}Field Insights and Notes : {{ site_title }}{% endblock %}
+{% block title %}Blog & Insights : {{ site_title }}{% endblock %}
 
 {% block content %}
 <section class="section">
   <div class="container">
-    <div class="hero-meta">
-      <span class="numeral">04</span>
-      <span>TECHNICAL WRITING AND ANALYSIS</span>
+    <div style="margin-bottom: var(--space-md);">
+      <span class="numeral-badge">BLOG & INSIGHTS</span>
     </div>
 
     <h1 style="font-size: var(--text-h1); max-width: 800px; margin-bottom: var(--space-md);">
-      Insights and Field Notes
+      Articles & Guides
     </h1>
 
     <p style="font-size: 1.125rem; color: var(--text-muted); max-width: 680px; margin-bottom: var(--space-2xl);">
-      Engineering essays, typographic principles, and defensive threat modeling writeups published by our technical leads.
+      Practical advice on web design, video editing, branding, and keeping your business website safe.
     </p>
 
     <!-- Articles List -->
@@ -31,20 +30,20 @@
             <a href="{% url 'public:insight_detail' post.slug %}">{{ post.title }}</a>
           </h2>
 
-          <p style="font-size: var(--text-body); color: var(--text-muted); margin-bottom: var(--space-md);">
+          <p style="font-size: var(--text-body); color: var(--text-muted); margin-bottom: var(--space-md); line-height: 1.6;">
             {{ post.excerpt }}
           </p>
 
           <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-hairline); padding-top: var(--space-sm); margin-top: auto;">
-            <span style="font-family: var(--font-mono); font-size: var(--text-tiny); color: var(--text-dim);">AUTHOR: {{ post.author }}</span>
+            <span style="font-family: var(--font-mono); font-size: var(--text-tiny); color: var(--text-dim);">BY {{ post.author }}</span>
             <a href="{% url 'public:insight_detail' post.slug %}" class="card-service-action" style="font-size: var(--text-tiny);">
-              READ ESSAY [->]
+              READ ARTICLE [->]
             </a>
           </div>
         </article>
       {% empty %}
         <div class="card-hairline" style="text-align: center; padding: var(--space-2xl);">
-          <p>No insight articles currently published.</p>
+          <p>No articles currently published.</p>
         </div>
       {% endfor %}
     </div>

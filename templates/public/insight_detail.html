@@ -1,19 +1,19 @@
 {% extends 'base/base.html' %}
 
-{% block title %}{{ post.title }} : Insights : {{ site_title }}{% endblock %}
+{% block title %}{{ post.title }} : Blog : {{ site_title }}{% endblock %}
 
 {% block content %}
 <article class="section">
   <div class="container" style="max-width: 840px;">
     <div style="margin-bottom: var(--space-xl);">
       <a href="{% url 'public:insights_list' %}" class="card-service-action" style="font-size: var(--text-small);">
-        <span>[<-] ALL INSIGHT ARTICLES</span>
+        <span>[<-] BACK TO ALL ARTICLES</span>
       </a>
     </div>
 
     <div class="hero-meta">
       <span class="numeral-badge">{{ post.category }}</span>
-      <span>{{ post.reading_time }} / AUTHOR: {{ post.author }}</span>
+      <span>{{ post.reading_time }} / BY {{ post.author }}</span>
     </div>
 
     <h1 style="font-size: var(--text-h1); margin-bottom: var(--space-lg); line-height: 1.15;">
@@ -28,12 +28,12 @@
       {{ post.content|linebreaks }}
     </div>
 
-    <div style="border-top: 1px solid var(--border-hairline); padding-top: var(--space-2xl); margin-top: var(--space-3xl); display: flex; justify-content: space-between; align-items: center;">
+    <div style="border-top: 1px solid var(--border-hairline); padding-top: var(--space-2xl); margin-top: var(--space-3xl); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-md);">
       <a href="{% url 'public:insights_list' %}" class="btn btn-secondary">
-        BACK TO INSIGHTS
+        BACK TO BLOG
       </a>
       <a href="{% url 'public:contact' %}" class="btn btn-primary">
-        COMMISSION AN ENGAGEMENT
+        GET IN TOUCH
       </a>
     </div>
 

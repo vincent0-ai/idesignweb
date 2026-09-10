@@ -1,101 +1,125 @@
 {% extends 'base/base.html' %}
 
-{% block title %}Direct Inquiries and Commissioning : {{ site_title }}{% endblock %}
+{% block title %}Contact Us & Get a Quote : {{ site_title }}{% endblock %}
 
 {% block content %}
 <section class="section">
   <div class="container">
-    <div class="hero-meta">
-      <span class="numeral">05</span>
-      <span>COMMISSIONING AND INQUIRIES</span>
+    <div style="margin-bottom: var(--space-md);">
+      <span class="numeral-badge">GET IN TOUCH</span>
     </div>
 
     <h1 style="font-size: var(--text-h1); max-width: 800px; margin-bottom: var(--space-md);">
-      Initiate an Engagement
+      Let's Build Something Amazing Together
     </h1>
 
     <p style="font-size: 1.125rem; color: var(--text-muted); max-width: 680px; margin-bottom: var(--space-2xl);">
-      Submit your project parameters below. Technical leads review every submission directly and deliver formal responses within 24 hours.
+      Contact Timothy Owino today and let's bring your ideas to life online. Fill out the form below or reach out directly by phone or email.
     </p>
 
     <div class="grid-2" style="align-items: start;">
-      <!-- Inquiry Submission Form -->
+      <!-- Project Inquiry Form -->
       <div class="card-hairline">
-        <div class="footer-col-title">PROJECT SPECIFICATION FORM</div>
+        <div class="footer-col-title">GET A FREE QUOTE</div>
 
         <form method="POST" action="{% url 'public:contact' %}">
           {% csrf_token %}
 
           <div class="form-group">
             <label for="full_name" class="form-label">Full Name *</label>
-            <input type="text" id="full_name" name="full_name" class="form-input" required placeholder="e.g. Eleanor Vance">
+            <input type="text" id="full_name" name="full_name" class="form-input" required placeholder="e.g. John Kamau">
           </div>
 
           <div class="form-group">
-            <label for="email" class="form-label">Work Email Address *</label>
-            <input type="email" id="email" name="email" class="form-input" required placeholder="e.g. eleanor@organization.com">
+            <label for="email" class="form-label">Email Address *</label>
+            <input type="email" id="email" name="email" class="form-input" required placeholder="e.g. john@example.com">
           </div>
 
           <div class="form-group">
-            <label for="service_interest" class="form-label">Primary Practice Interest</label>
+            <label for="service_interest" class="form-label">Service Needed</label>
             <select id="service_interest" name="service_interest" class="form-select">
-              <option value="Graphic Design">01 / Graphic Design (Identity, Typography, Print)</option>
-              <option value="Video Editing">02 / Video Editing (Post-Production, Motion, Sound)</option>
-              <option value="Web Development">03 / Web Development (Architecture, Frontend, Full-Stack)</option>
-              <option value="Cybersecurity">04 / Cybersecurity (Vulnerability Audits, Hardening)</option>
-              <option value="Integrated Engagement">00 / Integrated Multi-Discipline Engagement</option>
+              <option value="Custom Website Design" selected>01 / Custom Website Design</option>
+              <option value="Responsive Web Development">02 / Responsive Web Development</option>
+              <option value="E-Commerce Online Store">03 / E-Commerce Online Store</option>
+              <option value="Website Management & Maintenance">04 / Website Management & Maintenance</option>
+              <option value="Graphic Design & Brand Identity">05 / Graphic Design & Brand Identity</option>
+              <option value="Video Editing & Motion Graphics">06 / Video Editing & Motion Graphics</option>
+              <option value="Cybersecurity & Website Protection">07 / Cybersecurity & Website Protection</option>
             </select>
           </div>
 
           <div class="form-group">
-            <label for="budget_range" class="form-label">Anticipated Capital Allocation</label>
+            <label for="budget_range" class="form-label">Project Budget</label>
             <select id="budget_range" name="budget_range" class="form-select">
-              <option value="Under 10k">Under $10,000</option>
-              <option value="10k - 25k" selected>$10,000 - $25,000</option>
-              <option value="25k - 50k">$25,000 - $50,000</option>
-              <option value="50k+">$50,000+</option>
+              <option value="Under 20k">Under 20,000 KES</option>
+              <option value="20k - 50k" selected>20,000 - 50,000 KES</option>
+              <option value="50k - 100k">50,000 - 100,000 KES</option>
+              <option value="100k+">100,000+ KES</option>
             </select>
           </div>
 
           <div class="form-group">
-            <label for="message" class="form-label">Project Objectives and Technical Parameters *</label>
-            <textarea id="message" name="message" rows="5" class="form-textarea" required placeholder="Describe deliverables, target delivery timeline, and technical constraints..."></textarea>
-            <div class="form-hint">Do not include sensitive production secrets or private cryptographic keys.</div>
+            <label for="message" class="form-label">Tell Us About Your Project *</label>
+            <textarea id="message" name="message" rows="5" class="form-textarea" required placeholder="Describe your business, goals, and timeline..."></textarea>
           </div>
 
           <button type="submit" class="btn btn-primary btn-block">
-            SUBMIT INQUIRY SPECIFICATION
+            SEND MESSAGE & GET QUOTE
           </button>
         </form>
       </div>
 
-      <!-- Operational Directory and Security Disclosures -->
+      <!-- Direct Contact Details -->
       <div style="display: flex; flex-direction: column; gap: var(--space-xl);">
         <div class="card-hairline">
-          <div class="footer-col-title">OPERATIONAL PARAMETERS</div>
-          <div style="display: flex; flex-direction: column; gap: var(--space-md);">
+          <div class="footer-col-title">DIRECT CONTACT DETAILS</div>
+          <div style="display: flex; flex-direction: column; gap: var(--space-lg);">
             <div>
-              <div class="form-label" style="font-size: var(--text-tiny);">PRIMARY DISPATCH</div>
-              <div style="font-family: var(--font-mono); font-size: var(--text-small);">inquiries@idesignweb.com</div>
+              <div class="form-label" style="font-size: var(--text-tiny);">CONTACT PERSON</div>
+              <div style="font-size: var(--text-h4); font-weight: var(--weight-bold);">{{ founder_name }}</div>
+              <div style="font-size: var(--text-small); color: var(--text-muted);">{{ founder_title }}</div>
             </div>
+
             <div>
-              <div class="form-label" style="font-size: var(--text-tiny);">SECURITY ESCALATIONS</div>
-              <div style="font-family: var(--font-mono); font-size: var(--text-small);">security@idesignweb.com</div>
+              <div class="form-label" style="font-size: var(--text-tiny);">PHONE / CALL / WHATSAPP</div>
+              <div style="font-family: var(--font-mono); font-size: 1.25rem; font-weight: var(--weight-bold); color: var(--text-main);">
+                <a href="tel:{{ company_phone }}">{{ company_phone }}</a>
+              </div>
             </div>
+
             <div>
-              <div class="form-label" style="font-size: var(--text-tiny);">RESPONSE PROTOCOL</div>
-              <div style="font-size: var(--text-small); color: var(--text-muted);">Initial technical evaluation dispatched within 24 business hours.</div>
+              <div class="form-label" style="font-size: var(--text-tiny);">DIRECT EMAIL</div>
+              <div style="font-family: var(--font-mono); font-size: var(--text-small);">
+                <a href="mailto:{{ company_email }}" style="text-decoration: underline;">{{ company_email }}</a>
+              </div>
+            </div>
+
+            <div>
+              <div class="form-label" style="font-size: var(--text-tiny);">WORK LOCATION</div>
+              <div style="font-size: var(--text-small); color: var(--text-main);">{{ company_location }}</div>
             </div>
           </div>
         </div>
 
         <div class="card-hairline" style="background-color: var(--bg-surface);">
-          <div class="footer-col-title">CRYPTOGRAPHIC VERIFICATION</div>
-          <p style="font-size: var(--text-tiny); color: var(--text-muted); line-height: 1.6; margin-bottom: var(--space-sm);">
-            For sensitive security disclosure reports or proprietary vector assets, utilize our public key fingerprint:
-          </p>
-          <div style="font-family: var(--font-mono); font-size: var(--text-tiny); background: var(--bg-primary); border: 1px solid var(--border-hairline); padding: var(--space-sm); word-break: break-all;">
-            4A8F 90B2 3C1E 7D45 892A 11DF 5580 9E34 76BC 0021
+          <div class="footer-col-title">WHY WORK WITH US</div>
+          <div style="display: flex; flex-direction: column; gap: var(--space-md); font-size: var(--text-small);">
+            <div>
+              <span class="numeral-badge">FAST DELIVERY</span>
+              <span style="color: var(--text-muted); margin-left: 8px;">On time, every time.</span>
+            </div>
+            <div>
+              <span class="numeral-badge">QUALITY WORK</span>
+              <span style="color: var(--text-muted); margin-left: 8px;">Meticulous attention to detail.</span>
+            </div>
+            <div>
+              <span class="numeral-badge">ONGOING SUPPORT</span>
+              <span style="color: var(--text-muted); margin-left: 8px;">Here whenever you need us.</span>
+            </div>
+            <div>
+              <span class="numeral-badge">100% SATISFACTION</span>
+              <span style="color: var(--text-muted); margin-left: 8px;">Your results are our priority.</span>
+            </div>
           </div>
         </div>
       </div>

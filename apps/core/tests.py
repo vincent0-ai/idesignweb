@@ -14,20 +14,23 @@ import re
 class PublicZoneTests(TestCase):
     def setUp(self):
         self.client = Client()
+        db = get_db()
+        db.inquiries.delete_many({'email': 'test@client.com'})
 
     def test_public_pages_render_successfully(self):
         urls = [
             '/',
             '/services/',
+            '/services/web-development/',
             '/services/graphic-design/',
             '/services/video-editing/',
-            '/services/web-development/',
             '/services/cybersecurity/',
             '/work/',
+            '/work/klar-form-modern-website/',
             '/work/nordic-furniture-brand-system/',
             '/about/',
             '/insights/',
-            '/insights/principles-of-hairline-ui-design/',
+            '/insights/why-every-business-needs-a-website/',
             '/contact/',
             '/login/',
         ]
@@ -45,9 +48,9 @@ class PublicZoneTests(TestCase):
         post_data = {
             'full_name': 'Test Client',
             'email': 'test@client.com',
-            'service_interest': 'Web Development',
-            'budget_range': '25k - 50k',
-            'message': 'Automated test inquiry regarding systems architecture.'
+            'service_interest': 'Custom Website Design',
+            'budget_range': '20k - 50k',
+            'message': 'Automated test inquiry regarding new website build.'
         }
         response = self.client.post('/contact/', post_data, follow=True)
         self.assertEqual(response.status_code, 200)
@@ -59,7 +62,7 @@ class PublicZoneTests(TestCase):
         inquiry = db.inquiries.find_one({'email': 'test@client.com'})
         self.assertIsNotNone(inquiry)
         self.assertEqual(inquiry['full_name'], 'Test Client')
-        self.assertEqual(inquiry['service_interest'], 'Web Development')
+        self.assertEqual(inquiry['service_interest'], 'Custom Website Design')
 
 
 class MemberPortalZoneTests(TestCase):

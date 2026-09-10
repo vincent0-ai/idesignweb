@@ -10,10 +10,10 @@
 </div>
 
 <div class="card-hairline" style="max-width: 720px;">
-  <div class="footer-col-title">SUPPORT DISPATCH</div>
-  <h1 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">Submit Support Inquiry</h1>
+  <div class="footer-col-title">SUPPORT REQUEST</div>
+  <h1 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">Submit a Support Ticket</h1>
   <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-xl);">
-    Our team monitors active member channels continuously. Provide exact specifications below.
+    Have a question about your website or need updates on your project? Tell us below.
   </p>
 
   <form method="POST" action="{% url 'portal:create_ticket' %}">
@@ -21,22 +21,22 @@
 
     <div class="form-group">
       <label for="subject" class="form-label">Subject *</label>
-      <input type="text" id="subject" name="subject" class="form-input" required placeholder="e.g. Export request for 9:16 mobile cut">
+      <input type="text" id="subject" name="subject" class="form-input" required placeholder="e.g. Question about new product page layout">
     </div>
 
     <div class="form-group">
       <label for="priority" class="form-label">Priority Level</label>
       <select id="priority" name="priority" class="form-select">
-        <option value="Low">Low (General question, informational)</option>
-        <option value="Medium" selected>Medium (Standard production query)</option>
-        <option value="High">High (Impending delivery milestone)</option>
-        <option value="Critical">Critical (Production blocker)</option>
+        <option value="Low">Low (General inquiry or question)</option>
+        <option value="Medium" selected>Medium (Standard revision or update)</option>
+        <option value="High">High (Time sensitive request)</option>
+        <option value="Critical">Critical (Website issue)</option>
       </select>
     </div>
 
     <div class="form-group">
-      <label for="message" class="form-label">Detailed Description *</label>
-      <textarea id="message" name="message" rows="6" class="form-textarea" required placeholder="Provide context, affected deliverable IDs, and specific requirements..."></textarea>
+      <label for="message" class="form-label">Message Details *</label>
+      <textarea id="message" name="message" rows="6" class="form-textarea" required placeholder="Please describe what you need assistance with..."></textarea>
     </div>
 
     <div style="display: flex; gap: var(--space-md);">

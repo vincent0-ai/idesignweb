@@ -1,23 +1,19 @@
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
-      <!-- Col 1: Identity & Ethos -->
+      <!-- Col 1: About -->
       <div class="footer-col">
         <div class="brand-mark" style="margin-bottom: var(--space-md);">
           <span>IDESIGNWEB</span>
-          <span class="brand-sub">EST. 2026</span>
         </div>
         <p style="font-size: var(--text-small); max-width: 320px; line-height: 1.6;">
-          Disciplined digital solutions practice engineering visual identities, motion narratives, performant web platforms, and defensive cybersecurity architectures.
+          We help businesses build memorable brands, compelling videos, fast modern websites, and secure digital platforms.
         </p>
-        <div style="margin-top: var(--space-md);">
-          <span class="numeral-badge">SYSTEM VERSION 2.4.0</span>
-        </div>
       </div>
 
-      <!-- Col 2: Services Hub -->
+      <!-- Col 2: Services -->
       <div class="footer-col">
-        <div class="footer-col-title">PRACTICES</div>
+        <div class="footer-col-title">SERVICES</div>
         <div class="footer-links">
           {% for s in service_links %}
             <a href="{% url 'public:service_detail' s.slug %}" class="footer-link">
@@ -30,20 +26,20 @@
 
       <!-- Col 3: Navigation -->
       <div class="footer-col">
-        <div class="footer-col-title">DIRECTORY</div>
+        <div class="footer-col-title">NAVIGATION</div>
         <div class="footer-links">
-          <a href="{% url 'public:work_list' %}" class="footer-link">Work and Case Studies</a>
-          <a href="{% url 'public:about' %}" class="footer-link">About and Standards</a>
-          <a href="{% url 'public:insights_list' %}" class="footer-link">Insights and Writing</a>
-          <a href="{% url 'public:contact' %}" class="footer-link">Direct Inquiries</a>
+          <a href="{% url 'public:work_list' %}" class="footer-link">Case Studies</a>
+          <a href="{% url 'public:about' %}" class="footer-link">About Us</a>
+          <a href="{% url 'public:insights_list' %}" class="footer-link">Blog & Insights</a>
+          <a href="{% url 'public:contact' %}" class="footer-link">Contact</a>
         </div>
       </div>
 
-      <!-- Col 4: Member Portal Access -->
+      <!-- Col 4: Client Portal -->
       <div class="footer-col">
-        <div class="footer-col-title">MEMBER PORTAL</div>
+        <div class="footer-col-title">CLIENT PORTAL</div>
         <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-md);">
-          Client workspace for deliverables review, asset library downloads, and ticket management.
+          Access your project workspace, review deliverables, and download your brand files.
         </p>
         <div>
           {% if user.is_authenticated %}
@@ -52,22 +48,20 @@
             </a>
           {% else %}
             <a href="{% url 'portal:login' %}" class="btn btn-secondary btn-sm btn-block">
-              MEMBER ACCESS
+              CLIENT LOGIN
             </a>
           {% endif %}
         </div>
       </div>
     </div>
 
-    <!-- Bottom Hairline Row -->
+    <!-- Bottom Row -->
     <div class="footer-bottom">
       <div>
-        (C) {{ current_year }} IDESIGNWEB. ALL RIGHTS RESERVED. ZERO GRADIENTS. ZERO SHADOWS.
+        (C) {{ current_year }} idesignweb. All rights reserved.
       </div>
       <div>
-        <span>TERMINAL: 127.0.0.1</span>
-        <span style="margin: 0 8px;">/</span>
-        <span>STATUS: SECURE</span>
+        <span>Design, Video, Web & Security</span>
       </div>
     </div>
   </div>

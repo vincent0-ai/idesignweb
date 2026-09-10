@@ -10,9 +10,9 @@
   <!-- Portal Sidebar Navigation -->
   <aside class="portal-sidebar">
     <div style="margin-bottom: var(--space-xl); border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-md);">
-      <div class="form-label" style="font-size: var(--text-tiny);">AUTHENTICATED MEMBER</div>
+      <div class="form-label" style="font-size: var(--text-tiny);">LOGGED IN AS:</div>
       <div style="font-size: var(--text-h4); font-weight: var(--weight-bold);">{{ user.username }}</div>
-      <div class="numeral" style="font-size: var(--text-tiny); color: var(--text-muted);">ORG: APEX CORP</div>
+      <div class="numeral" style="font-size: var(--text-tiny); color: var(--text-muted);">CLIENT ACCOUNT</div>
     </div>
 
     <nav class="portal-nav-list" aria-label="Portal Navigation">
@@ -25,7 +25,7 @@
         <span class="numeral">-></span>
       </a>
       <a href="{% url 'portal:projects' %}" class="portal-nav-item {% if active_section == 'projects' %}active{% endif %}">
-        <span>03 PROJECT SPACES</span>
+        <span>03 PROJECTS & DELIVERABLES</span>
         <span class="numeral">-></span>
       </a>
       <a href="{% url 'portal:assets' %}" class="portal-nav-item {% if active_section == 'assets' %}active{% endif %}">
@@ -40,7 +40,7 @@
 
     <div style="margin-top: var(--space-3xl); border-top: 1px solid var(--border-hairline); padding-top: var(--space-md);">
       <a href="{% url 'portal:logout' %}" class="btn btn-ghost btn-sm btn-block">
-        TERMINATE SESSION
+        LOGOUT
       </a>
     </div>
   </aside>

@@ -1,27 +1,26 @@
 {% extends 'base/base.html' %}
 
-{% block title %}Work and Case Studies : {{ site_title }}{% endblock %}
+{% block title %}Our Work & Case Studies : {{ site_title }}{% endblock %}
 
 {% block content %}
 <section class="section">
   <div class="container">
-    <div class="hero-meta">
-      <span class="numeral">02</span>
-      <span>SELECTED PORTFOLIO</span>
+    <div style="margin-bottom: var(--space-md);">
+      <span class="numeral-badge">PORTFOLIO</span>
     </div>
     
     <h1 style="font-size: var(--text-h1); margin-bottom: var(--space-md);">
-      Work and Case Studies
+      Our Work & Case Studies
     </h1>
     
     <p style="font-size: 1.125rem; color: var(--text-muted); max-width: 720px; margin-bottom: var(--space-xl);">
-      Documented outcomes across branding, motion editorial, web systems, and defensive cybersecurity audits.
+      Real results delivered for our clients across websites, brand identity, video production, and cybersecurity.
     </p>
 
     <!-- Category Filter Controls -->
     <div style="display: flex; gap: var(--space-xs); flex-wrap: wrap; margin-bottom: var(--space-2xl); border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-md);">
       <a href="{% url 'public:work_list' %}" class="btn btn-ghost btn-sm {% if selected_category == 'all' %}btn-secondary{% endif %}">
-        ALL PRACTICES
+        ALL PROJECTS
       </a>
       {% for cat in categories %}
         <a href="{% url 'public:work_list' %}?category={{ cat|urlencode }}" class="btn btn-ghost btn-sm {% if selected_category == cat %}btn-secondary{% endif %}">
@@ -36,18 +35,18 @@
         <article class="card-hairline">
           <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-md);">
             <span class="numeral-badge">{{ case.category }}</span>
-            <span class="numeral" style="font-size: var(--text-tiny); color: var(--text-dim);">YEAR {{ case.year }}</span>
+            <span class="numeral" style="font-size: var(--text-tiny); color: var(--text-dim);">{{ case.year }}</span>
           </div>
 
           <h2 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">
             <a href="{% url 'public:work_detail' case.slug %}">{{ case.title }}</a>
           </h2>
-          <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-lg);">
+          <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-lg); line-height: 1.6;">
             {{ case.summary }}
           </p>
 
-          <!-- Metrics Highlights -->
-          <div style="display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--border-hairline); margin-bottom: var(--space-lg);">
+          <!-- Results Highlights -->
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--border-hairline); margin-bottom: var(--space-lg); background: var(--bg-surface);">
             {% for res in case.results %}
               <div style="padding: var(--space-sm); border-right: 1px solid var(--border-hairline); text-align: center;">
                 <div class="numeral" style="font-size: 1.25rem; font-weight: var(--weight-bold);">{{ res.metric }}</div>
@@ -59,14 +58,14 @@
           <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-hairline); padding-top: var(--space-md); margin-top: auto;">
             <span style="font-size: var(--text-tiny); font-family: var(--font-mono); color: var(--text-dim);">CLIENT: {{ case.client }}</span>
             <a href="{% url 'public:work_detail' case.slug %}" class="card-service-action" style="font-size: var(--text-tiny);">
-              FULL CASE ANALYSIS [->]
+              VIEW CASE STUDY [->]
             </a>
           </div>
         </article>
       {% empty %}
         <div class="card-hairline" style="grid-column: 1 / -1; text-align: center; padding: var(--space-2xl);">
-          <p>No case studies found for the selected practice category.</p>
-          <a href="{% url 'public:work_list' %}" class="btn btn-secondary btn-sm" style="margin-top: var(--space-md);">RESET FILTER</a>
+          <p>No case studies found for this category.</p>
+          <a href="{% url 'public:work_list' %}" class="btn btn-secondary btn-sm" style="margin-top: var(--space-md);">ALL PROJECTS</a>
         </div>
       {% endfor %}
     </div>

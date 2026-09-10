@@ -1,32 +1,31 @@
 {% extends 'base/base.html' %}
 
-{% block title %}About and Architectural Standards : {{ site_title }}{% endblock %}
+{% block title %}About Us : {{ site_title }}{% endblock %}
 
 {% block content %}
 <section class="section">
   <div class="container">
-    <div class="hero-meta">
-      <span class="numeral">03</span>
-      <span>FIRM BACKGROUND AND PHILOSOPHY</span>
+    <div style="margin-bottom: var(--space-md);">
+      <span class="numeral-badge">ABOUT IDESIGNWEB</span>
     </div>
 
     <h1 style="font-size: var(--text-h1); max-width: 900px; margin-bottom: var(--space-md);">
-      Digital Solutions Founded on Disciplined Architecture
+      We Build Websites That Grow Your Business
     </h1>
 
     <p style="font-size: 1.25rem; color: var(--text-muted); max-width: 760px; margin-bottom: var(--space-3xl);">
-      idesignweb was created to eliminate the bloat, decorative distractions, and security lapses endemic to contemporary digital studios. We build brand systems, video sequences, software platforms, and threat defenses that prioritize functional clarity above all else.
+      Idesignweb is a digital agency led by Timothy Owino. We specialize in custom website development, graphic design, video editing, and cybersecurity. We work with clients remotely from anywhere, helping businesses build a strong online presence and drive real customer growth.
     </p>
 
-    <!-- Standards Grid -->
+    <!-- Values Grid -->
     <div style="margin-bottom: var(--space-3xl);">
       <div class="section-header">
         <div class="section-title-wrap">
-          <div class="section-numeral">OPERATIONAL CODES</div>
-          <h2 class="section-title">Design and Engineering Principles</h2>
+          <div class="section-numeral">OUR VALUES</div>
+          <h2 class="section-title">What Guides Our Work</h2>
         </div>
         <div>
-          <span class="numeral-badge">NON-NEGOTIABLE STANDARDS</span>
+          <span class="numeral-badge">CLIENT COMMITMENT</span>
         </div>
       </div>
 
@@ -43,31 +42,43 @@
       </div>
     </div>
 
-    <!-- Technical Infrastructure Statement -->
-    <div class="card-hairline" style="background-color: var(--bg-surface); margin-bottom: var(--space-3xl);">
-      <div class="footer-col-title">SYSTEM SPECIFICATION</div>
-      <h2 style="font-size: var(--text-h3); margin-bottom: var(--space-sm);">The idesignweb Architectural System</h2>
-      <p style="line-height: 1.7; margin-bottom: var(--space-md);">
-        This entire platform operates on strict constraints: flat surfaces with solid fills, 1px hairline borders, zero gradients, zero emoji, zero icon fonts, and a single accent color reserved exclusively for the primary Call-To-Action button. We rely on tabular typography, modular type scales, and high contrast to provide intuitive structural orientation.
-      </p>
-      <div style="display: flex; gap: var(--space-sm); flex-wrap: wrap;">
-        <span class="numeral-badge">FLAT INTERFACES</span>
-        <span class="numeral-badge">HAIRLINE BORDERS</span>
-        <span class="numeral-badge">TABULAR NUMERALS</span>
-        <span class="numeral-badge">PYTHON 3.13 + DJANGO</span>
-        <span class="numeral-badge">MONGODB STORAGE</span>
+    <!-- Meet the Lead Section -->
+    <div class="card-hairline" style="margin-bottom: var(--space-3xl); background-color: var(--bg-surface); padding: var(--space-2xl);">
+      <div class="footer-col-title">LEADERSHIP & CONTACT</div>
+      <div class="grid-2" style="align-items: center;">
+        <div>
+          <h2 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">{{ founder_name }}</h2>
+          <div style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-md);">{{ founder_title }}</div>
+          <p style="font-size: var(--text-body); color: var(--text-muted); line-height: 1.6; margin-bottom: var(--space-lg);">
+            With a passion for clean design and fast code, Timothy leads every project from initial consultation to final deployment. We believe every business deserves a professional website that works as hard as they do.
+          </p>
+          <div style="display: flex; gap: var(--space-md); flex-wrap: wrap;">
+            <a href="tel:{{ company_phone }}" class="btn btn-secondary btn-sm">CALL: {{ company_phone }}</a>
+            <a href="mailto:{{ company_email }}" class="btn btn-ghost btn-sm">EMAIL US</a>
+          </div>
+        </div>
+
+        <div style="border: 1px solid var(--border-hairline); background: var(--bg-primary); padding: var(--space-xl);">
+          <div class="form-label" style="font-size: var(--text-tiny);">DIRECT INFORMATION</div>
+          <div style="display: flex; flex-direction: column; gap: var(--space-sm); font-size: var(--text-small);">
+            <div><strong>Location:</strong> {{ company_location }}</div>
+            <div><strong>Phone:</strong> {{ company_phone }}</div>
+            <div><strong>Email:</strong> {{ company_email }}</div>
+            <div><strong>Availability:</strong> Monday to Saturday, 8:00 AM to 7:00 PM</div>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- Contact Banner -->
-    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-hairline); padding-top: var(--space-xl);">
+    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-hairline); padding-top: var(--space-xl); flex-wrap: wrap; gap: var(--space-md);">
       <div>
-        <div class="form-label" style="font-size: var(--text-tiny);">TECHNICAL CONSULTATION</div>
-        <div style="font-size: var(--text-h3); font-weight: var(--weight-bold);">Discuss your technical roadmap with us.</div>
+        <div style="font-size: var(--text-h3); font-weight: var(--weight-bold);">Ready to work with us?</div>
+        <div style="font-size: var(--text-small); color: var(--text-muted);">Get in touch today for a free consultation and project quote.</div>
       </div>
       <div>
         <a href="{% url 'public:contact' %}" class="btn btn-primary">
-          COMMENCE CONSULTATION
+          GET IN TOUCH
         </a>
       </div>
     </div>

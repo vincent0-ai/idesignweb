@@ -1,33 +1,146 @@
 {% extends 'base/base.html' %}
 {% load static %}
 
-{% block title %}idesignweb : Digital Solutions Architecture{% endblock %}
+{% block title %}Idesignweb : Smart Websites. Stronger Businesses. Better Results.{% endblock %}
 
 {% block content %}
-<!-- Full-Bleed Hero Block -->
+<!-- Full-Bleed Hero Section -->
 <section class="hero-section">
   <div class="container">
-    <div class="hero-meta">
-      <span class="numeral">00</span>
-      <span>SYSTEMS ARCHITECTURE / DIGITAL SOLUTIONS</span>
+    <div style="margin-bottom: var(--space-md);">
+      <span class="numeral-badge">WEBSITE DEVELOPMENT & DIGITAL DESIGN</span>
     </div>
     <h1 class="hero-headline">
-      Engineered digital systems, disciplined identities, and defensive infrastructure.
+      Smart Websites. Stronger Businesses. Better Results.
     </h1>
     <p class="hero-description">
-      idesignweb provides four integrated practices: graphic design, video editing, web development, and cybersecurity. We reject decorative excess in favor of typographic rigor, fast loading speeds, and robust protection.
+      We build high-performing, mobile-friendly websites that help you attract customers, build trust, and grow your business.
     </p>
     <div class="hero-actions">
       <!-- Sole Primary CTA with Accent Color -->
       <a href="{% url 'public:contact' %}" class="btn btn-primary">
-        START AN ENGAGEMENT
+        GET STARTED
       </a>
-      <a href="{% url 'public:services_hub' %}" class="btn btn-secondary">
-        VIEW ALL PRACTICES
+      <a href="{% url 'public:work_list' %}" class="btn btn-secondary">
+        VIEW OUR WORK
       </a>
       <a href="{% url 'portal:login' %}" class="btn btn-ghost">
-        MEMBER LOGIN
+        CLIENT LOGIN
       </a>
+    </div>
+
+    <!-- Core Website Pillars Row -->
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-md); margin-top: var(--space-3xl); border-top: 1px solid var(--border-hairline); padding-top: var(--space-xl);">
+      <div>
+        <div class="numeral" style="font-size: var(--text-tiny); color: var(--text-dim); margin-bottom: 4px;">01 / PILLAR</div>
+        <div style="font-weight: var(--weight-bold); font-size: var(--text-small); margin-bottom: 4px;">MODERN DESIGN</div>
+        <div style="font-size: var(--text-tiny); color: var(--text-muted); line-height: 1.5;">Clean, professional, and tailored to your brand.</div>
+      </div>
+      <div>
+        <div class="numeral" style="font-size: var(--text-tiny); color: var(--text-dim); margin-bottom: 4px;">02 / PILLAR</div>
+        <div style="font-weight: var(--weight-bold); font-size: var(--text-small); margin-bottom: 4px;">RESPONSIVE</div>
+        <div style="font-size: var(--text-tiny); color: var(--text-muted); line-height: 1.5;">Looks perfect on phones, tablets, and laptops.</div>
+      </div>
+      <div>
+        <div class="numeral" style="font-size: var(--text-tiny); color: var(--text-dim); margin-bottom: 4px;">03 / PILLAR</div>
+        <div style="font-weight: var(--weight-bold); font-size: var(--text-small); margin-bottom: 4px;">FAST & SECURE</div>
+        <div style="font-size: var(--text-tiny); color: var(--text-muted); line-height: 1.5;">Built for rapid speed and dependable security.</div>
+      </div>
+      <div>
+        <div class="numeral" style="font-size: var(--text-tiny); color: var(--text-dim); margin-bottom: 4px;">04 / PILLAR</div>
+        <div style="font-weight: var(--weight-bold); font-size: var(--text-small); margin-bottom: 4px;">SEO FRIENDLY</div>
+        <div style="font-size: var(--text-tiny); color: var(--text-muted); line-height: 1.5;">Structured to help customers find you on Google.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why You Need a Website Section -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <div class="section-numeral">GROWTH ADVANTAGES</div>
+        <h2 class="section-title">Why You Need a Website</h2>
+      </div>
+      <div>
+        <span class="numeral-badge">ESSENTIAL BUSINESS TOOL</span>
+      </div>
+    </div>
+
+    <div class="grid-4" style="margin-bottom: var(--space-2xl);">
+      <div class="card-hairline" style="background-color: var(--bg-primary);">
+        <div class="numeral" style="font-size: var(--text-h3); font-weight: var(--weight-bold); margin-bottom: var(--space-xs); border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs);">
+          01
+        </div>
+        <h3 style="font-size: var(--text-h4); margin-bottom: var(--space-xs);">24/7 Online Presence</h3>
+        <p style="font-size: var(--text-small); color: var(--text-muted); line-height: 1.6; margin-bottom: 0;">
+          Your business is visible to customers anytime, anywhere. Customers can discover your products even when your physical doors are closed.
+        </p>
+      </div>
+
+      <div class="card-hairline" style="background-color: var(--bg-primary);">
+        <div class="numeral" style="font-size: var(--text-h3); font-weight: var(--weight-bold); margin-bottom: var(--space-xs); border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs);">
+          02
+        </div>
+        <h3 style="font-size: var(--text-h4); margin-bottom: var(--space-xs);">Reach More Customers</h3>
+        <p style="font-size: var(--text-small); color: var(--text-muted); line-height: 1.6; margin-bottom: 0;">
+          Attract new customers locally and globally. Expand your market and introduce your services to people searching online for what you offer.
+        </p>
+      </div>
+
+      <div class="card-hairline" style="background-color: var(--bg-primary);">
+        <div class="numeral" style="font-size: var(--text-h3); font-weight: var(--weight-bold); margin-bottom: var(--space-xs); border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs);">
+          03
+        </div>
+        <h3 style="font-size: var(--text-h4); margin-bottom: var(--space-xs);">Build Credibility & Trust</h3>
+        <p style="font-size: var(--text-small); color: var(--text-muted); line-height: 1.6; margin-bottom: 0;">
+          A professional website builds trust and adds legitimacy to your brand. It gives potential clients confidence to choose your business.
+        </p>
+      </div>
+
+      <div class="card-hairline" style="background-color: var(--bg-primary);">
+        <div class="numeral" style="font-size: var(--text-h3); font-weight: var(--weight-bold); margin-bottom: var(--space-xs); border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs);">
+          04
+        </div>
+        <h3 style="font-size: var(--text-h4); margin-bottom: var(--space-xs);">Increase Sales & Growth</h3>
+        <p style="font-size: var(--text-small); color: var(--text-muted); line-height: 1.6; margin-bottom: 0;">
+          Turn visitors into paying customers with clear calls to action, easy contact options, and seamless online shopping experiences.
+        </p>
+      </div>
+    </div>
+
+    <!-- Highlight Callout Banner -->
+    <div class="card-hairline" style="background-color: var(--bg-primary); border-left: 4px solid var(--accent-cta); padding: var(--space-lg) var(--space-xl);">
+      <div style="font-size: 1.125rem; font-weight: var(--weight-bold); color: var(--text-main); margin-bottom: 4px;">
+        No matter the size of your business, a website is your most powerful tool for growth in today's digital world.
+      </div>
+      <div style="font-size: var(--text-small); color: var(--text-muted);">
+        Let us build a website that delivers measurable results for your brand.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Our Services Grid (01-04) -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-title-wrap">
+        <div class="section-numeral">WHAT WE DO</div>
+        <h2 class="section-title">Our Services</h2>
+      </div>
+      <div>
+        <a href="{% url 'public:services_hub' %}" class="btn btn-ghost btn-sm">
+          EXPLORE ALL SERVICES [->]
+        </a>
+      </div>
+    </div>
+
+    <div class="grid-4">
+      {% for service in services %}
+        {% include 'components/service_card.html' with service=service %}
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -43,39 +156,16 @@
   </div>
 </section>
 
-<!-- Numbered Service Cards Grid (01-04) -->
-<section class="section">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-title-wrap">
-        <div class="section-numeral">01 / CAPABILITIES</div>
-        <h2 class="section-title">Integrated Technical Practices</h2>
-      </div>
-      <div>
-        <a href="{% url 'public:services_hub' %}" class="btn btn-ghost btn-sm">
-          FULL PRACTICE SPECIFICATIONS [->]
-        </a>
-      </div>
-    </div>
-
-    <div class="grid-4">
-      {% for service in services %}
-        {% include 'components/service_card.html' with service=service %}
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
-<!-- How It Works Process Section -->
+<!-- How We Work Process Section -->
 <section class="section section-alt">
   <div class="container">
     <div class="section-header">
       <div class="section-title-wrap">
-        <div class="section-numeral">02 / PROTOCOL</div>
-        <h2 class="section-title">Delivery Methodology</h2>
+        <div class="section-numeral">OUR METHODOLOGY</div>
+        <h2 class="section-title">How We Work</h2>
       </div>
       <div>
-        <span class="numeral-badge">THREE-PHASE LIFECYCLE</span>
+        <span class="numeral-badge">CLEAR THREE-STEP PROCESS</span>
       </div>
     </div>
 
@@ -92,8 +182,8 @@
   <div class="container">
     <div class="section-header">
       <div class="section-title-wrap">
-        <div class="section-numeral">03 / EVIDENCE</div>
-        <h2 class="section-title">Selected Case Studies</h2>
+        <div class="section-numeral">PORTFOLIO</div>
+        <h2 class="section-title">Recent Work</h2>
       </div>
       <div>
         <a href="{% url 'public:work_list' %}" class="btn btn-ghost btn-sm">
@@ -107,7 +197,7 @@
         <article class="card-hairline">
           <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-sm); margin-bottom: var(--space-md);">
             <span class="numeral-badge">{{ case.category }}</span>
-            <span class="numeral" style="font-size: var(--text-tiny); color: var(--text-muted);">YEAR {{ case.year }}</span>
+            <span class="numeral" style="font-size: var(--text-tiny); color: var(--text-muted);">{{ case.year }}</span>
           </div>
           <h3 style="font-size: var(--text-h3); margin-bottom: var(--space-sm);">{{ case.title }}</h3>
           <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-lg);">{{ case.summary }}</p>
@@ -115,7 +205,7 @@
           <div style="border-top: 1px solid var(--border-hairline); padding-top: var(--space-md); margin-top: auto; display: flex; justify-content: space-between; align-items: baseline;">
             <span style="font-size: var(--text-tiny); font-family: var(--font-mono); color: var(--text-dim);">CLIENT: {{ case.client }}</span>
             <a href="{% url 'public:work_detail' case.slug %}" class="card-service-action" style="font-size: var(--text-tiny);">
-              READ STUDY [->]
+              READ CASE STUDY [->]
             </a>
           </div>
         </article>
@@ -124,57 +214,56 @@
   </div>
 </section>
 
-<!-- Insights Preview Section -->
+<!-- Value Commitments Row -->
 <section class="section section-alt">
   <div class="container">
-    <div class="section-header">
-      <div class="section-title-wrap">
-        <div class="section-numeral">04 / ARCHITECTURE</div>
-        <h2 class="section-title">Field Insights and Notes</h2>
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-lg); border: 1px solid var(--border-hairline); background-color: var(--bg-primary); padding: var(--space-xl);">
+      <div>
+        <div class="numeral-badge" style="margin-bottom: var(--space-xs);">SPEED</div>
+        <div style="font-weight: var(--weight-bold); font-size: var(--text-body); margin-bottom: 4px;">FAST DELIVERY</div>
+        <div style="font-size: var(--text-small); color: var(--text-muted);">On time, every time. Clear delivery milestones from day one.</div>
       </div>
       <div>
-        <a href="{% url 'public:insights_list' %}" class="btn btn-ghost btn-sm">
-          ALL INSIGHTS [->]
-        </a>
+        <div class="numeral-badge" style="margin-bottom: var(--space-xs);">STANDARDS</div>
+        <div style="font-weight: var(--weight-bold); font-size: var(--text-body); margin-bottom: 4px;">QUALITY WORK</div>
+        <div style="font-size: var(--text-small); color: var(--text-muted);">High quality, clean code, and meticulous attention to detail.</div>
       </div>
-    </div>
-
-    <div class="grid-3">
-      {% for post in posts %}
-        <article class="card-hairline" style="background-color: var(--bg-primary);">
-          <div style="margin-bottom: var(--space-sm);">
-            <span class="numeral-badge">{{ post.category }}</span>
-          </div>
-          <h3 style="font-size: var(--text-h4); margin-bottom: var(--space-xs);">
-            <a href="{% url 'public:insight_detail' post.slug %}">{{ post.title }}</a>
-          </h3>
-          <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-md);">
-            {{ post.excerpt }}
-          </p>
-          <div style="font-family: var(--font-mono); font-size: var(--text-tiny); color: var(--text-dim); margin-top: auto; border-top: 1px solid var(--border-hairline); padding-top: var(--space-sm);">
-            <span>{{ post.reading_time }}</span>
-          </div>
-        </article>
-      {% endfor %}
+      <div>
+        <div class="numeral-badge" style="margin-bottom: var(--space-xs);">ASSISTANCE</div>
+        <div style="font-weight: var(--weight-bold); font-size: var(--text-body); margin-bottom: 4px;">ONGOING SUPPORT</div>
+        <div style="font-size: var(--text-small); color: var(--text-muted);">We are here whenever you need updates, questions, or guidance.</div>
+      </div>
+      <div>
+        <div class="numeral-badge" style="margin-bottom: var(--space-xs);">GUARANTEE</div>
+        <div style="font-weight: var(--weight-bold); font-size: var(--text-body); margin-bottom: 4px;">100% SATISFACTION</div>
+        <div style="font-size: var(--text-small); color: var(--text-muted);">Your satisfaction and business results are our top priority.</div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Final Call-To-Action Block -->
+<!-- Direct Call-To-Action Banner -->
 <section class="section">
   <div class="container">
     <div class="card-hairline" style="text-align: center; padding: var(--space-3xl) var(--space-xl);">
-      <div class="section-numeral" style="margin-bottom: var(--space-sm);">ENGAGEMENT INITIATION</div>
-      <h2 style="font-size: var(--text-h1); max-width: 720px; margin-left: auto; margin-right: auto; margin-bottom: var(--space-md);">
-        Ready to engineer your next digital system?
+      <h2 style="font-size: var(--text-h1); max-width: 760px; margin-left: auto; margin-right: auto; margin-bottom: var(--space-md);">
+        Let's build something amazing together!
       </h2>
-      <p style="max-width: 580px; margin-left: auto; margin-right: auto; margin-bottom: var(--space-xl);">
-        Direct consultation with our technical leads. We audit requirements, establish clear deliverables, and commence production within five business days.
+      <p style="font-size: 1.125rem; max-width: 620px; margin-left: auto; margin-right: auto; margin-bottom: var(--space-xl);">
+        Contact Timothy Owino today and let's bring your ideas to life online.
       </p>
-      <div>
+      <div style="display: flex; justify-content: center; gap: var(--space-md); flex-wrap: wrap; margin-bottom: var(--space-2xl);">
         <a href="{% url 'public:contact' %}" class="btn btn-primary">
-          INITIATE INQUIRY
+          GET A QUOTE
         </a>
+        <a href="tel:{{ company_phone }}" class="btn btn-secondary">
+          CALL: {{ company_phone }}
+        </a>
+      </div>
+      <div style="display: flex; justify-content: center; gap: var(--space-xl); font-family: var(--font-mono); font-size: var(--text-small); color: var(--text-muted); flex-wrap: wrap;">
+        <div>PHONE: {{ company_phone }}</div>
+        <div>EMAIL: {{ company_email }}</div>
+        <div>LOCATION: {{ company_location }}</div>
       </div>
     </div>
   </div>

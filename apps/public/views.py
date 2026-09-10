@@ -1,6 +1,6 @@
 """
 Public marketing zone views for idesignweb.
-Renders home, services hub, service details, case studies, about, insights, and contact form.
+Clean, professional copy in plain English.
 All content is retrieved from MongoDB collections.
 """
 
@@ -17,26 +17,26 @@ def home_view(request):
     posts = list(db.posts.find({'is_published': True}).sort('published_at', -1).limit(3))
     
     stats = [
-        {'metric': '99.9%', 'label': 'System Reliability and Defense SLA'},
-        {'metric': '100+', 'label': 'Production Deliverables Deployed'},
-        {'metric': '18ms', 'label': 'Median Server Response Latency'}
+        {'metric': '100+', 'label': 'Completed Client Projects'},
+        {'metric': '99.9%', 'label': 'Website Uptime Guarantee'},
+        {'metric': '24h', 'label': 'Support Response Time'}
     ]
     
     process_steps = [
         {
             'step_number': '01',
-            'title': 'Reconnaissance and Systems Audit',
-            'description': 'We evaluate your category landscape, existing codebase architecture, and security attack surfaces before writing code or drafting design systems.'
+            'title': 'Discovery and Planning',
+            'description': 'We discuss your business goals, target audience, and project requirements to create a clear, realistic plan.'
         },
         {
             'step_number': '02',
-            'title': 'Disciplined Engineering and Assembly',
-            'description': 'Building accessible semantic interfaces, motion typography sequences, and hardened cloud services using strict hairline design standards.'
+            'title': 'Design and Development',
+            'description': 'We craft your brand visuals, video edits, website, or security safeguards with regular check-ins along the way.'
         },
         {
             'step_number': '03',
-            'title': 'Verification and Continuous Defense',
-            'description': 'Every release passes rigorous latency benchmarks, automated test suites, and ongoing threat monitoring in dedicated client project spaces.'
+            'title': 'Launch and Support',
+            'description': 'We deliver all final files or launch your website, providing ongoing support whenever you need help.'
         }
     ]
     
@@ -58,7 +58,7 @@ def service_detail_view(request, slug):
     db = get_db()
     service = db.services.find_one({'slug': slug})
     if not service:
-        raise Http404('Service practice not found')
+        raise Http404('Service not found')
         
     related_cases = list(db.case_studies.find({'category': service['title']}).limit(2))
     context = {
@@ -96,18 +96,18 @@ def about_view(request):
     standards = [
         {
             'numeral': '01',
-            'title': 'Zero Visual Noise',
-            'desc': 'No gradients, no decorative shadows, and no generic emoji. We communicate strictly through typographic scale, weights, and hairline boundaries.'
+            'title': 'Clarity and Focus',
+            'desc': 'We keep things simple and easy to understand. Clean typography and clear layouts help your customers find what they need quickly.'
         },
         {
             'numeral': '02',
-            'title': 'Engineered Performance',
-            'desc': 'Every digital deliverable is optimized for sub-50ms execution, accessibility compliance, and low resource overhead.'
+            'title': 'Speed and Quality',
+            'desc': 'Fast-loading websites, high-definition videos, and prompt responses to your questions. We build things right the first time.'
         },
         {
             'numeral': '03',
-            'title': 'Integrated Defense',
-            'desc': 'Design and code are treated with the same rigor as infrastructure security. Vulnerability management is embedded in our workflow.'
+            'title': 'Reliable Protection',
+            'desc': 'Security is built into our websites from the start, protecting your business and customer information against online threats.'
         }
     ]
     return render(request, 'public/about.html', {'standards': standards})
@@ -121,7 +121,7 @@ def insight_detail_view(request, slug):
     db = get_db()
     post = db.posts.find_one({'slug': slug, 'is_published': True})
     if not post:
-        raise Http404('Insight article not found')
+        raise Http404('Article not found')
         
     return render(request, 'public/insight_detail.html', {'post': post})
 
@@ -136,7 +136,7 @@ def contact_view(request):
         message = request.POST.get('message', '').strip()
         
         if not full_name or not email or not message:
-            messages.error(request, 'Please complete all required fields (Name, Email, and Message).')
+            messages.error(request, 'Please fill in all required fields (Name, Email, and Message).')
         else:
             inquiry_doc = {
                 'full_name': full_name,
@@ -148,7 +148,7 @@ def contact_view(request):
                 'submitted_at': datetime.datetime.now(datetime.timezone.utc)
             }
             db.inquiries.insert_one(inquiry_doc)
-            messages.success(request, 'Inquiry successfully registered. Our technical team will review your specifications within 24 hours.')
+            messages.success(request, 'Thank you for reaching out. We have received your message and will get back to you within 24 hours.')
             return redirect('public:contact')
             
     return render(request, 'public/contact.html')
