@@ -502,20 +502,22 @@ class Command(BaseCommand):
         # 8. Seed SQLite Demo Users
         self.stdout.write('Seeding SQLite authentication users...')
         if not User.objects.filter(username='client_apex').exists():
+            client_pass = os.getenv('CLIENT_INITIAL_PASSWORD', 'MemberPass2026!')
             User.objects.create_user(
                 username='client_apex',
                 email='client@apex.com',
-                password='MemberPass2026!',
+                password=client_pass,
                 first_name='Apex',
                 last_name='Corporation'
             )
             self.stdout.write('Created client user: client_apex')
             
         if not User.objects.filter(username='admin').exists():
+            admin_pass = os.getenv('ADMIN_INITIAL_PASSWORD', 'AdminPass2026!')
             User.objects.create_superuser(
                 username='admin',
                 email='admin@idesignweb.com',
-                password='AdminPass2026!'
+                password=admin_pass
             )
             self.stdout.write('Created admin user: admin')
             

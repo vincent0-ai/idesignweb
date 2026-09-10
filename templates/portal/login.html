@@ -22,7 +22,7 @@
 
         <div class="form-group">
           <label for="username" class="form-label">Username</label>
-          <input type="text" id="username" name="username" class="form-input" required autocomplete="username" placeholder="e.g. client_apex">
+          <input type="text" id="username" name="username" class="form-input" required autocomplete="username" placeholder="Enter username">
         </div>
 
         <div class="form-group">
@@ -30,18 +30,15 @@
           <input type="password" id="password" name="password" class="form-input" required autocomplete="current-password" placeholder="Enter password">
         </div>
 
-        <button type="submit" class="btn btn-primary btn-block" style="margin-bottom: var(--space-lg);">
+        <button type="submit" class="btn btn-primary btn-block" style="margin-bottom: var(--space-md);">
           Log In
         </button>
       </form>
 
-      <!-- Demonstration Credentials Box -->
-      <div style="background-color: var(--bg-surface); border: 1px solid var(--border-hairline); padding: var(--space-md);">
-        <div class="form-label" style="font-size: var(--text-tiny);">Demo Account Details</div>
-        <div style="font-size: var(--text-tiny); color: var(--text-muted);">
-          <div>Username: <span style="color: var(--text-main); font-weight: bold;">client_apex</span></div>
-          <div>Password: <span style="color: var(--text-main); font-weight: bold;">MemberPass2026!</span></div>
-        </div>
+      <div style="text-align: center; border-top: 1px solid var(--border-hairline); padding-top: var(--space-md); margin-top: var(--space-md);">
+        <a href="{% url 'public:contact' %}" class="card-service-action" style="font-size: var(--text-tiny);">
+          Need client access? Contact our team
+        </a>
       </div>
     </div>
   </div>
