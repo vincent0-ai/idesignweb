@@ -6,9 +6,6 @@
 <section class="section"
   style="background: var(--bg-muted); border-bottom: 1px solid var(--border-hairline); padding: var(--space-2xl) 0;">
   <div class="container">
-    <div style="margin-bottom: var(--space-sm);">
-      <span class="story-tag">START A CONVERSATION</span>
-    </div>
 
     <h1
       style="font-size: var(--text-display); max-width: 860px; margin-bottom: var(--space-md); text-transform: uppercase;">
@@ -29,7 +26,7 @@
       <div class="card" style="padding: var(--space-2xl);">
         <div class="story-tag" style="margin-bottom: var(--space-sm);">PROJECT INQUIRY FORM</div>
         <h2 style="font-size: var(--text-h3); margin-bottom: var(--space-lg); text-transform: uppercase;">Tell us what
-          you're <em>building</em></h2>
+          you're building</h2>
 
         <form method="POST" action="{% url 'public:contact' %}">
           {% csrf_token %}
