@@ -3,18 +3,21 @@
 {% block title %}Start a Project & Get a Quote : {{ site_title }}{% endblock %}
 
 {% block content %}
-<section class="section" style="background: var(--bg-muted); border-bottom: 1px solid var(--border-hairline); padding: var(--space-2xl) 0;">
+<section class="section"
+  style="background: var(--bg-muted); border-bottom: 1px solid var(--border-hairline); padding: var(--space-2xl) 0;">
   <div class="container">
     <div style="margin-bottom: var(--space-sm);">
       <span class="story-tag">START A CONVERSATION</span>
     </div>
 
-    <h1 style="font-size: var(--text-display); max-width: 860px; margin-bottom: var(--space-md); text-transform: uppercase;">
-      Let's build something <em>exceptional</em> together.
+    <h1
+      style="font-size: var(--text-display); max-width: 860px; margin-bottom: var(--space-md); text-transform: uppercase;">
+      Ready to start? Let's discuss your project.
     </h1>
 
     <p style="font-size: 1.25rem; color: var(--text-body); max-width: 740px; margin-bottom: 0; line-height: 1.6;">
-      Reach out directly to founder <strong>Timothy Owino</strong> and co-founder <strong>Vincent Odhiambo</strong>. Whether you have detailed technical specifications or an early-stage concept, we will review your requirements and provide a direct proposal within 24 hours.
+      Reach out directly to us. Whether you have detailed technical specifications or an early-stage concept, we will
+      review your requirements and provide a direct proposal within 24 hours.
     </p>
   </div>
 </section>
@@ -25,14 +28,16 @@
       <!-- Project Inquiry Form -->
       <div class="card" style="padding: var(--space-2xl);">
         <div class="story-tag" style="margin-bottom: var(--space-sm);">PROJECT INQUIRY FORM</div>
-        <h2 style="font-size: var(--text-h3); margin-bottom: var(--space-lg); text-transform: uppercase;">Tell us what you're <em>building</em></h2>
+        <h2 style="font-size: var(--text-h3); margin-bottom: var(--space-lg); text-transform: uppercase;">Tell us what
+          you're <em>building</em></h2>
 
         <form method="POST" action="{% url 'public:contact' %}">
           {% csrf_token %}
 
           <div class="form-group">
             <label for="full_name" class="form-label">Full Name *</label>
-            <input type="text" id="full_name" name="full_name" class="form-input" required placeholder="e.g. John Kamau">
+            <input type="text" id="full_name" name="full_name" class="form-input" required
+              placeholder="e.g. John Kamau">
           </div>
 
           <div class="form-group">
@@ -47,7 +52,8 @@
               <option value="Cybersecurity Audit & Server Hardening">Cybersecurity Audit & Server Hardening</option>
               <option value="E-Commerce Platform with Payments">E-Commerce Platform with Payments</option>
               <option value="Brand Identity & Vector Logo System">Brand Identity & Vector Logo System</option>
-              <option value="Commercial Video Production & Social Cuts">Commercial Video Production & Social Cuts</option>
+              <option value="Commercial Video Production & Social Cuts">Commercial Video Production & Social Cuts
+              </option>
               <option value="Full Retainer / Managed Systems">Full Retainer / Managed Systems</option>
             </select>
           </div>
@@ -64,10 +70,12 @@
 
           <div class="form-group">
             <label for="message" class="form-label">Tell Us About Your Project *</label>
-            <textarea id="message" name="message" rows="5" class="form-textarea" required placeholder="Describe your business, objectives, technical requirements, and target timeline..."></textarea>
+            <textarea id="message" name="message" rows="5" class="form-textarea" required
+              placeholder="Describe your business, objectives, technical requirements, and target timeline..."></textarea>
           </div>
 
-          <button type="submit" class="btn btn-green" style="width: 100%; justify-content: center; padding: 14px 24px; font-size: 0.95rem;">
+          <button type="submit" class="btn btn-green"
+            style="width: 100%; justify-content: center; padding: 14px 24px; font-size: 0.95rem;">
             <span>Submit Inquiry & Schedule Discovery</span>
             <span>&rarr;</span>
           </button>
@@ -78,71 +86,96 @@
       <div style="display: flex; flex-direction: column; gap: var(--space-xl);">
         <div class="card-sky" style="padding: var(--space-2xl);">
           <div class="story-tag" style="margin-bottom: var(--space-sm);">DIRECT FOUNDER ACCESS</div>
-          
+
           <div style="display: flex; flex-direction: column; gap: var(--space-lg);">
             <!-- Founder: Timothy Owino -->
             <div>
-              <div style="font-size: var(--text-tiny); font-family: var(--font-mono); color: var(--color-blue); text-transform: uppercase; font-weight: var(--weight-bold); margin-bottom: 4px;">Creative Direction & Full-Stack</div>
+              <div
+                style="font-size: var(--text-tiny); font-family: var(--font-mono); color: var(--color-blue); text-transform: uppercase; font-weight: var(--weight-bold); margin-bottom: 4px;">
+                Creative Direction & Full-Stack</div>
               <div style="display: flex; justify-content: space-between; align-items: baseline;">
-                <div style="font-size: 1.15rem; font-weight: var(--weight-bold); color: var(--text-main);">Timothy Owino</div>
-                <span class="numeral-badge" style="background: rgba(45, 0, 251, 0.1); color: var(--color-blue); font-size: 0.7rem; font-weight: var(--weight-bold);">FOUNDER</span>
+                <div style="font-size: 1.15rem; font-weight: var(--weight-bold); color: var(--text-main);">Timothy Owino
+                </div>
+                <span class="numeral-badge"
+                  style="background: rgba(45, 0, 251, 0.1); color: var(--color-blue); font-size: 0.7rem; font-weight: var(--weight-bold);">FOUNDER</span>
               </div>
-              <div style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: 8px;">Founder, Creative Director & Full-Stack Developer</div>
+              <div style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: 8px;">Founder, Creative
+                Director & Full-Stack Developer</div>
               <div style="display: flex; flex-direction: column; gap: 6px; font-size: var(--text-small);">
-                <div><span style="color: var(--text-muted);">Phone:</span> <a href="tel:0115709680" style="color: var(--color-blue); font-weight: var(--weight-bold);">0115709680</a></div>
-                <div><span style="color: var(--text-muted);">Email:</span> <a href="mailto:otienotimothy198@gmail.com" style="color: var(--color-blue); font-weight: var(--weight-medium);">otienotimothy198@gmail.com</a></div>
+                <div><span style="color: var(--text-muted);">Phone:</span> <a href="tel:0115709680"
+                    style="color: var(--color-blue); font-weight: var(--weight-bold);">0115709680</a></div>
+                <div><span style="color: var(--text-muted);">Email:</span> <a href="mailto:otienotimothy198@gmail.com"
+                    style="color: var(--color-blue); font-weight: var(--weight-medium);">otienotimothy198@gmail.com</a>
+                </div>
               </div>
             </div>
 
             <!-- Co-Founder: Vincent Odhiambo -->
             <div style="border-top: 1px solid var(--border-hairline); padding-top: var(--space-md);">
-              <div style="font-size: var(--text-tiny); font-family: var(--font-mono); color: var(--color-blue); text-transform: uppercase; font-weight: var(--weight-bold); margin-bottom: 4px;">Software Engineering & Cybersecurity</div>
+              <div
+                style="font-size: var(--text-tiny); font-family: var(--font-mono); color: var(--color-blue); text-transform: uppercase; font-weight: var(--weight-bold); margin-bottom: 4px;">
+                Software Engineering & Cybersecurity</div>
               <div style="display: flex; justify-content: space-between; align-items: baseline;">
-                <div style="font-size: 1.15rem; font-weight: var(--weight-bold); color: var(--text-main);">Vincent Odhiambo</div>
-                <span class="numeral-badge" style="background: rgba(45, 0, 251, 0.1); color: var(--color-blue); font-size: 0.7rem; font-weight: var(--weight-bold);">CO-FOUNDER</span>
+                <div style="font-size: 1.15rem; font-weight: var(--weight-bold); color: var(--text-main);">Vincent
+                  Odhiambo</div>
+                <span class="numeral-badge"
+                  style="background: rgba(45, 0, 251, 0.1); color: var(--color-blue); font-size: 0.7rem; font-weight: var(--weight-bold);">CO-FOUNDER</span>
               </div>
-              <div style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: 8px;">Co-Founder, Lead Software Engineer & Cybersecurity Analyst</div>
+              <div style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: 8px;">Co-Founder, Lead
+                Software Engineer & Cybersecurity Analyst</div>
               <div style="display: flex; flex-direction: column; gap: 6px; font-size: var(--text-small);">
-                <div><span style="color: var(--text-muted);">Phone:</span> <a href="tel:0768072566" style="color: var(--color-blue); font-weight: var(--weight-bold);">0768072566</a></div>
-                <div><span style="color: var(--text-muted);">Email:</span> <a href="mailto:vinnyochi13249@gmail.com" style="color: var(--color-blue); font-weight: var(--weight-medium);">vinnyochi13249@gmail.com</a></div>
+                <div><span style="color: var(--text-muted);">Phone:</span> <a href="tel:0768072566"
+                    style="color: var(--color-blue); font-weight: var(--weight-bold);">0768072566</a></div>
+                <div><span style="color: var(--text-muted);">Email:</span> <a href="mailto:vinnyochi13249@gmail.com"
+                    style="color: var(--color-blue); font-weight: var(--weight-medium);">vinnyochi13249@gmail.com</a>
+                </div>
               </div>
             </div>
 
             <div style="border-top: 1px solid var(--border-hairline); padding-top: var(--space-md);">
-              <div class="form-label" style="font-size: var(--text-tiny); text-transform: uppercase;">Studio Operating Hours</div>
-              <div style="font-size: var(--text-small); color: var(--text-main); font-weight: var(--weight-medium);">Monday to Saturday, 8:00 AM - 7:00 PM EAT</div>
-              <div style="font-size: var(--text-tiny); color: var(--text-muted); margin-top: 2px;">Direct WhatsApp and phone consultations available during studio hours.</div>
+              <div class="form-label" style="font-size: var(--text-tiny); text-transform: uppercase;">Studio Operating
+                Hours</div>
+              <div style="font-size: var(--text-small); color: var(--text-main); font-weight: var(--weight-medium);">
+                Monday to Saturday, 8:00 AM - 7:00 PM EAT</div>
+              <div style="font-size: var(--text-tiny); color: var(--text-muted); margin-top: 2px;">Direct WhatsApp and
+                phone consultations available during studio hours.</div>
             </div>
 
             <div>
-              <div class="form-label" style="font-size: var(--text-tiny); text-transform: uppercase;">Studio Location</div>
+              <div class="form-label" style="font-size: var(--text-tiny); text-transform: uppercase;">Studio Location
+              </div>
               <div style="font-size: var(--text-small); color: var(--text-main);">{{ company_location }}</div>
             </div>
           </div>
         </div>
 
         <div class="card-dark" style="padding: var(--space-xl);">
-          <div class="story-tag" style="color: var(--color-green); margin-bottom: var(--space-md);">WHY WORK WITH US</div>
+          <div class="story-tag" style="color: var(--color-green); margin-bottom: var(--space-md);">WHY WORK WITH US
+          </div>
           <div style="display: flex; flex-direction: column; gap: var(--space-md); font-size: var(--text-small);">
             <div style="display: flex; align-items: flex-start; gap: 12px;">
-              <span style="color: var(--color-green); font-weight: var(--weight-bold); font-size: 1.1rem;">&#10003;</span>
+              <span
+                style="color: var(--color-green); font-weight: var(--weight-bold); font-size: 1.1rem;">&#10003;</span>
               <div>
                 <strong style="color: #FFFFFF;">Zero Account Managers:</strong>
                 <span style="color: var(--text-on-dark-muted);"> You work directly with Vincent and Timothy.</span>
               </div>
             </div>
             <div style="display: flex; align-items: flex-start; gap: 12px;">
-              <span style="color: var(--color-green); font-weight: var(--weight-bold); font-size: 1.1rem;">&#10003;</span>
+              <span
+                style="color: var(--color-green); font-weight: var(--weight-bold); font-size: 1.1rem;">&#10003;</span>
               <div>
                 <strong style="color: #FFFFFF;">24-Hour Proposal Turnaround:</strong>
                 <span style="color: var(--text-on-dark-muted);"> Transparent scope, milestones, and deliverables.</span>
               </div>
             </div>
             <div style="display: flex; align-items: flex-start; gap: 12px;">
-              <span style="color: var(--color-green); font-weight: var(--weight-bold); font-size: 1.1rem;">&#10003;</span>
+              <span
+                style="color: var(--color-green); font-weight: var(--weight-bold); font-size: 1.1rem;">&#10003;</span>
               <div>
                 <strong style="color: #FFFFFF;">Defended by Default:</strong>
-                <span style="color: var(--text-on-dark-muted);"> Hardened security and automated backups included.</span>
+                <span style="color: var(--text-on-dark-muted);"> Hardened security and automated backups
+                  included.</span>
               </div>
             </div>
           </div>

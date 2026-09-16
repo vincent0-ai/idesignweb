@@ -7,16 +7,14 @@
 <!-- Hero Section (Oberlo Signature Style) -->
 <section class="hero-section">
   <div class="container hero-inner">
-    <div class="hero-meta">
-      <span class="category-badge">Web Engineering &middot; Cybersecurity &middot; Design</span>
-    </div>
 
     <h1 class="hero-headline">
       We build websites that actually <em>sell</em>
     </h1>
 
     <p class="hero-description">
-      Idesignweb provides custom web development, e-commerce stores, bulletproof cybersecurity, and distinctive brand identities to turn your business vision into reality.
+      Idesignweb provides custom web development, e-commerce stores, bulletproof cybersecurity, and distinctive brand
+      identities to turn your business vision into reality.
     </p>
 
     <div class="hero-actions">
@@ -26,10 +24,6 @@
       <a href="{% url 'public:work_list' %}" class="btn btn-outline btn-lg">
         Explore Our Work
       </a>
-    </div>
-
-    <div class="hero-founder-attribution">
-      Founded by <strong>Timothy Owino</strong> &middot; Co-Founded by <strong>Vincent Odhiambo</strong>
     </div>
   </div>
 </section>
@@ -41,7 +35,7 @@
       <div>
         <div class="section-numeral">OUR PICKS</div>
         <h2 class="section-title text-display" style="color: var(--color-blue); text-transform: uppercase;">
-          Featured <em>outcomes</em>
+          Featured outcomes
         </h2>
       </div>
       <div>
@@ -53,78 +47,84 @@
 
     <!-- Oberlo Split Pick Box (Sky-Blue Callout) -->
     {% if case_studies %}
-      {% with primary_case=case_studies.0 %}
-        <div class="grid-picks">
-          <div class="picks-content">
-            <div class="category-label">{{ primary_case.category }}</div>
-            <h3 style="font-size: var(--text-h2); color: var(--text-main); margin-bottom: var(--space-sm); font-weight: var(--weight-bold);">
-              <a href="{% url 'public:work_detail' primary_case.slug %}" class="hover:underline">
-                {{ primary_case.title }}
-              </a>
-            </h3>
-            <p style="font-size: var(--text-body); color: var(--text-body); line-height: 1.65; margin-bottom: var(--space-lg);">
-              {{ primary_case.summary }}
-            </p>
-            <div class="author-byline">
-              <span class="author-avatar">TO</span>
-              <span>by <strong>Timothy Owino</strong> &middot; Founder</span>
-            </div>
-            <div style="margin-top: var(--space-lg);">
-              <a href="{% url 'public:work_detail' primary_case.slug %}" class="btn btn-blue btn-sm">
-                Read Case Study
-              </a>
-            </div>
-          </div>
+    {% with primary_case=case_studies.0 %}
+    <div class="grid-picks">
+      <div class="picks-content">
+        <div class="category-label">{{ primary_case.category }}</div>
+        <h3
+          style="font-size: var(--text-h2); color: var(--text-main); margin-bottom: var(--space-sm); font-weight: var(--weight-bold);">
+          <a href="{% url 'public:work_detail' primary_case.slug %}" class="hover:underline">
+            {{ primary_case.title }}
+          </a>
+        </h3>
+        <p
+          style="font-size: var(--text-body); color: var(--text-body); line-height: 1.65; margin-bottom: var(--space-lg);">
+          {{ primary_case.summary }}
+        </p>
+        <div class="author-byline">
+          <span class="author-avatar">TO</span>
+          <span>by <strong>Timothy Owino</strong> &middot; Founder</span>
+        </div>
+        <div style="margin-top: var(--space-lg);">
+          <a href="{% url 'public:work_detail' primary_case.slug %}" class="btn btn-blue btn-sm">
+            Read Case Study
+          </a>
+        </div>
+      </div>
 
-          <div class="picks-image-wrap">
-            {% if primary_case.image_url %}
-              <img src="{% static primary_case.image_url %}" alt="{{ primary_case.title }}" class="picks-image" loading="lazy">
-            {% else %}
-              <div style="width: 100%; height: 100%; background: var(--bg-muted); display: flex; align-items: center; justify-content: center; color: var(--text-muted);">
-                Featured Project
-              </div>
-            {% endif %}
+      <div class="picks-image-wrap">
+        {% if primary_case.image_url %}
+        <img src="{% static primary_case.image_url %}" alt="{{ primary_case.title }}" class="picks-image"
+          loading="lazy">
+        {% else %}
+        <div
+          style="width: 100%; height: 100%; background: var(--bg-muted); display: flex; align-items: center; justify-content: center; color: var(--text-muted);">
+          Featured Project
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% endwith %}
+
+    <!-- 3-Column Editorial Grid for Remaining Cases -->
+    <div class="grid-3">
+      {% for case in case_studies|slice:"1:4" %}
+      <article class="card-article">
+        <a href="{% url 'public:work_detail' case.slug %}" class="card-image-wrap" tabindex="-1" aria-hidden="true">
+          {% if case.image_url %}
+          <img src="{% static case.image_url %}" alt="{{ case.title }}" class="card-image" loading="lazy">
+          {% else %}
+          <div style="width: 100%; height: 100%; background: var(--bg-muted);"></div>
+          {% endif %}
+        </a>
+        <div class="card-body">
+          <div class="category-label">{{ case.category }}</div>
+          <h3 style="font-size: 1.15rem; margin-bottom: var(--space-xs); font-weight: var(--weight-bold);">
+            <a href="{% url 'public:work_detail' case.slug %}" class="btn-link" style="color: var(--text-main);">
+              {{ case.title }}
+            </a>
+          </h3>
+          <p
+            style="font-size: var(--text-small); color: var(--text-muted); line-height: 1.55; margin-bottom: var(--space-md); flex-grow: 1;">
+            {{ case.summary }}
+          </p>
+          <div class="author-byline">
+            <span class="author-avatar"
+              style="{% if case.category == 'Cybersecurity' %}background-color: #03002F;{% endif %}">
+              {% if case.category == 'Cybersecurity' %}VO{% else %}TO{% endif %}
+            </span>
+            <span>
+              {% if case.category == 'Cybersecurity' %}
+              by <strong>Vincent Odhiambo</strong> &middot; Co-Founder
+              {% else %}
+              by <strong>Timothy Owino</strong> &middot; Founder
+              {% endif %}
+            </span>
           </div>
         </div>
-      {% endwith %}
-
-      <!-- 3-Column Editorial Grid for Remaining Cases -->
-      <div class="grid-3">
-        {% for case in case_studies|slice:"1:4" %}
-          <article class="card-article">
-            <a href="{% url 'public:work_detail' case.slug %}" class="card-image-wrap" tabindex="-1" aria-hidden="true">
-              {% if case.image_url %}
-                <img src="{% static case.image_url %}" alt="{{ case.title }}" class="card-image" loading="lazy">
-              {% else %}
-                <div style="width: 100%; height: 100%; background: var(--bg-muted);"></div>
-              {% endif %}
-            </a>
-            <div class="card-body">
-              <div class="category-label">{{ case.category }}</div>
-              <h3 style="font-size: 1.15rem; margin-bottom: var(--space-xs); font-weight: var(--weight-bold);">
-                <a href="{% url 'public:work_detail' case.slug %}" class="btn-link" style="color: var(--text-main);">
-                  {{ case.title }}
-                </a>
-              </h3>
-              <p style="font-size: var(--text-small); color: var(--text-muted); line-height: 1.55; margin-bottom: var(--space-md); flex-grow: 1;">
-                {{ case.summary }}
-              </p>
-              <div class="author-byline">
-                <span class="author-avatar" style="{% if case.category == 'Cybersecurity' %}background-color: #03002F;{% endif %}">
-                  {% if case.category == 'Cybersecurity' %}VO{% else %}TO{% endif %}
-                </span>
-                <span>
-                  {% if case.category == 'Cybersecurity' %}
-                    by <strong>Vincent Odhiambo</strong> &middot; Co-Founder
-                  {% else %}
-                    by <strong>Timothy Owino</strong> &middot; Founder
-                  {% endif %}
-                </span>
-              </div>
-            </div>
-          </article>
-        {% endfor %}
-      </div>
+      </article>
+      {% endfor %}
+    </div>
     {% endif %}
   </div>
 </section>
@@ -134,17 +134,23 @@
   <div class="container">
     <div class="stories-grid">
       <div class="stories-intro">
-        <div style="color: var(--bg-sky); font-size: 0.75rem; font-weight: var(--weight-bold); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-xs);">
+        <div
+          style="color: var(--bg-sky); font-size: 0.75rem; font-weight: var(--weight-bold); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-xs);">
           OUR THESIS
         </div>
-        <h2 style="font-size: var(--text-h1); color: #FFFFFF; text-transform: uppercase; margin-bottom: var(--space-md);">
+        <h2
+          style="font-size: var(--text-h1); color: #FFFFFF; text-transform: uppercase; margin-bottom: var(--space-md);">
           Why most websites <em>fail</em>
         </h2>
-        <p style="color: var(--text-on-dark-muted); line-height: 1.7; font-size: 1.05rem; margin-bottom: var(--space-lg);">
-          Most web agencies force you to choose between two extremes: a pretty website that loads slowly and gets hacked, or a clunky technical tool that no customer wants to use.
+        <p
+          style="color: var(--text-on-dark-muted); line-height: 1.7; font-size: 1.05rem; margin-bottom: var(--space-lg);">
+          Most web agencies force you to choose between two extremes: a pretty website that loads slowly and gets
+          hacked, or a clunky technical tool that no customer wants to use.
         </p>
-        <p style="color: var(--text-on-dark-muted); line-height: 1.7; font-size: 1.05rem; margin-bottom: var(--space-xl);">
-          We founded Idesignweb to eliminate that false choice. Every store, website, and brand we deliver combines fluid, high-converting design with rock-solid cybersecurity and clean code.
+        <p
+          style="color: var(--text-on-dark-muted); line-height: 1.7; font-size: 1.05rem; margin-bottom: var(--space-xl);">
+          We founded Idesignweb to eliminate that false choice. Every store, website, and brand we deliver combines
+          fluid, high-converting design with rock-solid cybersecurity and clean code.
         </p>
         <div>
           <a href="{% url 'public:about' %}" class="btn btn-green btn-sm">
@@ -152,43 +158,8 @@
           </a>
         </div>
       </div>
-
-      <div class="stories-cards">
-        <div style="background-color: var(--bg-dark-card); border: 1px solid rgba(255, 255, 255, 0.1); padding: var(--space-xl); border-radius: var(--radius-xs); display: flex; flex-direction: column; justify-content: space-between;">
-          <div>
-            <div style="color: var(--color-green); font-size: 0.75rem; font-weight: var(--weight-bold); text-transform: uppercase; margin-bottom: 8px;">
-              CREATIVE DIRECTION
-            </div>
-            <h3 style="font-size: 1.25rem; color: #FFFFFF; margin-bottom: var(--space-sm); font-weight: var(--weight-bold);">
-              High-Converting User Experience
-            </h3>
-            <p style="font-size: var(--text-small); color: var(--text-on-dark-muted); line-height: 1.6;">
-              Led by Timothy Owino. Every layout is crafted for speed, mobile thumb-scrolling, clear calls-to-action, and brand credibility that turns casual visitors into repeat buyers.
-            </p>
-          </div>
-          <div style="font-size: var(--text-tiny); color: var(--bg-sky); font-weight: bold; margin-top: var(--space-md);">
-            TIMOTHY OWINO &middot; FOUNDER
-          </div>
-        </div>
-
-        <div style="background-color: var(--bg-dark-card); border: 1px solid rgba(255, 255, 255, 0.1); padding: var(--space-xl); border-radius: var(--radius-xs); display: flex; flex-direction: column; justify-content: space-between;">
-          <div>
-            <div style="color: #60A5FA; font-size: 0.75rem; font-weight: var(--weight-bold); text-transform: uppercase; margin-bottom: 8px;">
-              CYBER DEFENSE
-            </div>
-            <h3 style="font-size: 1.25rem; color: #FFFFFF; margin-bottom: var(--space-sm); font-weight: var(--weight-bold);">
-              Zero Loopholes & Automatic Backups
-            </h3>
-            <p style="font-size: var(--text-small); color: var(--text-on-dark-muted); line-height: 1.6;">
-              Led by Vincent Odhiambo. We harden your server, configure modern SSL encryption, seal security loopholes against attacks, and set up daily offsite disaster recovery.
-            </p>
-          </div>
-          <div style="font-size: var(--text-tiny); color: var(--bg-sky); font-weight: bold; margin-top: var(--space-md);">
-            VINCENT ODHIAMBO &middot; CO-FOUNDER
-          </div>
-        </div>
-      </div>
     </div>
+  </div>
   </div>
 </section>
 
@@ -211,32 +182,32 @@
 
     <div class="grid-4">
       {% for service in services %}
-        <div class="card-service">
-          <div>
-            <div class="card-service-header">
-              <span class="service-number">{{ service.service_number }}</span>
-              <span class="category-badge">{{ service.slug|upper }}</span>
-            </div>
-            <h3 class="service-title">
-              <a href="{% url 'public:service_detail' service.slug %}" style="color: inherit;">
-                {{ service.title }}
-              </a>
-            </h3>
-            <p class="service-tagline">{{ service.tagline }}</p>
-            
-            <div class="service-deliverables">
-              {% for d in service.deliverables|slice:":3" %}
-                <div class="service-deliverable-item">{{ d }}</div>
-              {% endfor %}
-            </div>
+      <div class="card-service">
+        <div>
+          <div class="card-service-header">
+            <span class="service-number">{{ service.service_number }}</span>
+            <span class="category-badge">{{ service.slug|upper }}</span>
           </div>
-
-          <div>
-            <a href="{% url 'public:service_detail' service.slug %}" class="btn btn-outline btn-block btn-sm">
-              Learn More &rarr;
+          <h3 class="service-title">
+            <a href="{% url 'public:service_detail' service.slug %}" style="color: inherit;">
+              {{ service.title }}
             </a>
+          </h3>
+          <p class="service-tagline">{{ service.tagline }}</p>
+
+          <div class="service-deliverables">
+            {% for d in service.deliverables|slice:":3" %}
+            <div class="service-deliverable-item">{{ d }}</div>
+            {% endfor %}
           </div>
         </div>
+
+        <div>
+          <a href="{% url 'public:service_detail' service.slug %}" class="btn btn-outline btn-block btn-sm">
+            Learn More &rarr;
+          </a>
+        </div>
+      </div>
       {% endfor %}
     </div>
   </div>
@@ -249,11 +220,8 @@
       <div>
         <div class="section-numeral">DIRECT LEADERSHIP</div>
         <h2 class="section-title text-display" style="text-transform: uppercase; color: var(--color-blue);">
-          Meet the <em>founders</em>
+          Meet the founders
         </h2>
-      </div>
-      <div>
-        <span class="numeral-badge">Direct Access &middot; Zero Middlemen</span>
       </div>
     </div>
 
@@ -268,8 +236,11 @@
           <span class="badge-founder">FOUNDER</span>
         </div>
 
-        <p style="font-size: var(--text-body); color: var(--text-body); line-height: 1.65; margin-bottom: var(--space-md); flex-grow: 1;">
-          Founder of Idesignweb. Timothy leads user experience, visual identity systems, and responsive frontend engineering. Combining graphic design mastery with clean, high-performance web development, Timothy translates business goals into intuitive, visually unforgettable digital products.
+        <p
+          style="font-size: var(--text-body); color: var(--text-body); line-height: 1.65; margin-bottom: var(--space-md); flex-grow: 1;">
+          Founder of Idesignweb. Timothy leads user experience, visual identity systems, and responsive frontend
+          engineering. Combining graphic design mastery with clean, high-performance web development, Timothy translates
+          business goals into intuitive, visually unforgettable digital products.
         </p>
 
         <div class="founder-skills">
@@ -280,7 +251,8 @@
           <span class="founder-skill-pill">Speed Optimization</span>
         </div>
 
-        <div style="display: flex; gap: var(--space-md); margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--border-hairline); flex-wrap: wrap;">
+        <div
+          style="display: flex; gap: var(--space-md); margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--border-hairline); flex-wrap: wrap;">
           <a href="tel:0115709680" class="btn btn-green btn-sm">Call 0115709680</a>
           <a href="mailto:otienotimothy198@gmail.com" class="btn btn-outline btn-sm">Email Timothy</a>
         </div>
@@ -296,8 +268,11 @@
           <span class="badge-co-founder">CO-FOUNDER</span>
         </div>
 
-        <p style="font-size: var(--text-body); color: var(--text-body); line-height: 1.65; margin-bottom: var(--space-md); flex-grow: 1;">
-          Co-Founder of Idesignweb. Vincent leads backend architectures, system programming, and cybersecurity defense. With deep expertise in defensive engineering, vulnerability assessment, and server hardening, Vincent ensures our client platforms are safeguarded against cyber attacks while maintaining sub-second execution.
+        <p
+          style="font-size: var(--text-body); color: var(--text-body); line-height: 1.65; margin-bottom: var(--space-md); flex-grow: 1;">
+          Co-Founder of Idesignweb. Vincent leads backend architectures, system programming, and cybersecurity defense.
+          With deep expertise in defensive engineering, vulnerability assessment, and server hardening, Vincent ensures
+          our client platforms are safeguarded against cyber attacks while maintaining sub-second execution.
         </p>
 
         <div class="founder-skills">
@@ -308,7 +283,8 @@
           <span class="founder-skill-pill">Automated Backups</span>
         </div>
 
-        <div style="display: flex; gap: var(--space-md); margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--border-hairline); flex-wrap: wrap;">
+        <div
+          style="display: flex; gap: var(--space-md); margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--border-hairline); flex-wrap: wrap;">
           <a href="tel:0768072566" class="btn btn-blue btn-sm">Call 0768072566</a>
           <a href="mailto:vinnyochi13249@gmail.com" class="btn btn-outline btn-sm">Email Vincent</a>
         </div>
@@ -317,72 +293,16 @@
   </div>
 </section>
 
-<!-- Free Business Tools & Assessments (Oberlo Style) -->
-<section class="section section-sky">
-  <div class="container">
-    <div class="section-header">
-      <div>
-        <div class="section-numeral">FREE ASSESSMENTS</div>
-        <h2 class="section-title text-display" style="text-transform: uppercase; color: var(--color-blue);">
-          Business <em>tools</em>
-        </h2>
-      </div>
-      <div>
-        <span class="category-badge">Zero Cost &middot; 24-Hour Review</span>
-      </div>
-    </div>
-
-    <div class="grid-3">
-      <div class="card-hairline" style="background-color: #FFFFFF;">
-        <div class="category-label">PROJECT SCOPE</div>
-        <h3 style="font-size: 1.25rem; font-weight: var(--weight-bold); margin-bottom: var(--space-xs);">
-          Website Cost & Timeline Estimator
-        </h3>
-        <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-lg);">
-          Answer 4 quick questions about your project requirements to receive a fixed-price proposal and milestone roadmap.
-        </p>
-        <a href="{% url 'public:contact' %}" class="btn btn-outline btn-sm">
-          Get Instant Estimate &rarr;
-        </a>
-      </div>
-
-      <div class="card-hairline" style="background-color: #FFFFFF;">
-        <div class="category-label">SECURITY CHECKUP</div>
-        <h3 style="font-size: 1.25rem; font-weight: var(--weight-bold); margin-bottom: var(--space-xs);">
-          Cybersecurity & Vulnerability Audit
-        </h3>
-        <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-lg);">
-          Have Vincent Odhiambo review your existing website code, server ports, and SSL configuration for loopholes.
-        </p>
-        <a href="{% url 'public:contact' %}" class="btn btn-outline btn-sm">
-          Request Security Review &rarr;
-        </a>
-      </div>
-
-      <div class="card-hairline" style="background-color: #FFFFFF;">
-        <div class="category-label">FOUNDER CONSULTATION</div>
-        <h3 style="font-size: 1.25rem; font-weight: var(--weight-bold); margin-bottom: var(--space-xs);">
-          Direct Discovery Call
-        </h3>
-        <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-lg);">
-          Speak directly with Timothy Owino and Vincent Odhiambo via phone or WhatsApp to brainstorm your concept.
-        </p>
-        <a href="tel:0115709680" class="btn btn-outline btn-sm">
-          Call 0115709680 &rarr;
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- High-Conversion Bottom CTA (Oberlo Style) -->
 <section class="section" style="text-align: center; background-color: var(--bg-muted);">
   <div class="container" style="max-width: 800px;">
-    <h2 class="text-display" style="text-transform: uppercase; color: var(--color-blue); margin-bottom: var(--space-md);">
+    <h2 class="text-display"
+      style="text-transform: uppercase; color: var(--color-blue); margin-bottom: var(--space-md);">
       Start building <em>today</em>
     </h2>
     <p style="font-size: 1.25rem; color: var(--text-body); line-height: 1.6; margin-bottom: var(--space-xl);">
-      Whether you need an e-commerce platform, security overhaul, brand identity suite, or commercial video, we're ready to bring your vision to life.
+      Whether you need an e-commerce platform, security overhaul, brand identity suite, or commercial video, we're ready
+      to bring your vision to life.
     </p>
     <a href="{% url 'public:contact' %}" class="btn btn-green btn-lg">
       Start a Project & Get a Quote
