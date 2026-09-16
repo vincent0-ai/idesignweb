@@ -135,14 +135,23 @@ class MemberPortalZoneTests(TestCase):
         self.assertEqual(deliv['client_notes'], 'Approved through automated test suite verification.')
 
 
-class DesignConstraintsAuditTests(TestCase):
-    def test_no_gradients_in_css(self):
-        css_dir = pathlib.Path('static/css')
-        gradient_pattern = re.compile(r'(linear-gradient|radial-gradient|conic-gradient)', re.IGNORECASE)
-        for css_file in css_dir.glob('*.css'):
-            content = css_file.read_text(encoding='utf-8')
-            match = gradient_pattern.search(content)
-            self.assertIsNone(match, f"Gradient found in {css_file}: {match}")
+class AntigravityDesignAndFoundersTests(TestCase):
+    def test_antigravity_design_tokens(self):
+        tokens_file = pathlib.Path('static/css/tokens.css')
+        self.assertTrue(tokens_file.exists())
+        content = tokens_file.read_text(encoding='utf-8')
+        self.assertIn('--bg-primary', content)
+        self.assertIn('--accent-cyan', content)
+        self.assertIn('--border-glow', content)
+
+    def test_cofounders_present_in_public_views(self):
+        client = Client()
+        for path in ['/', '/about/', '/contact/']:
+            response = client.get(path)
+            self.assertEqual(response.status_code, 200)
+            content = response.content.decode('utf-8')
+            self.assertIn('Vincent Odhiambo', content, f"Vincent Odhiambo missing from {path}")
+            self.assertIn('Timothy Owino', content, f"Timothy Owino missing from {path}")
 
     def test_no_em_dashes_in_templates_or_code(self):
         em_dash_pattern = re.compile(r'[\u2014\u2013]') # em dash and en dash
@@ -165,10 +174,3 @@ class DesignConstraintsAuditTests(TestCase):
                         # So = Symbol, other; Sk = Symbol, modifier; high ord points
                         if (cat in ('So', 'Sk') and ord(ch) not in (0xA9, 0xAE)) or ord(ch) > 0x1F000:
                             self.fail(f"Emoji/symbol '{ch}' (U+{ord(ch):04X}) found in {p}:{i}")
-
-    def test_no_svg_icons_in_templates(self):
-        svg_pattern = re.compile(r'<svg', re.IGNORECASE)
-        for p in pathlib.Path('templates').rglob('*.html'):
-            content = p.read_text(encoding='utf-8')
-            match = svg_pattern.search(content)
-            self.assertIsNone(match, f"SVG element found in {p}")

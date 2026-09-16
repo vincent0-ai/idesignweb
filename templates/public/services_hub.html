@@ -1,20 +1,23 @@
 {% extends 'base/base.html' %}
 
-{% block title %}Our Services : {{ site_title }}{% endblock %}
+{% block title %}Studio Capabilities : {{ site_title }}{% endblock %}
 
 {% block content %}
 <section class="section">
   <div class="container">
     <div style="margin-bottom: var(--space-md);">
-      <span class="numeral-badge">WHAT WE DO</span>
+      <span class="numeral-badge">
+        <span class="pulse-dot"></span>
+        <span>STUDIO PRACTICES</span>
+      </span>
     </div>
 
-    <h1 style="font-size: var(--text-h1); max-width: 800px; margin-bottom: var(--space-md);">
-      Creative and Technical Services
+    <h1 style="font-size: var(--text-display); max-width: 900px; margin-bottom: var(--space-md); color: #FFFFFF;">
+      Engineering, security, and design capabilities.
     </h1>
 
-    <p style="font-size: 1.125rem; color: var(--text-muted); max-width: 720px; margin-bottom: var(--space-2xl);">
-      We offer full-service digital solutions to help your business stand out and grow. Whether you need a modern website, brand design, video editing, or security protection, we deliver quality work on time.
+    <p style="font-size: 1.25rem; color: var(--text-muted); max-width: 760px; margin-bottom: var(--space-3xl); line-height: 1.65;">
+      From custom full-stack web applications and proactive cybersecurity audits to scalable brand identities and commercial video post-production, we deliver high-impact technical solutions built to perform.
     </p>
 
     <!-- Services Grid (01-04) -->
@@ -23,15 +26,15 @@
         <article class="card-hairline">
           <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-sm); margin-bottom: var(--space-md);">
             <span class="card-service-numeral">{{ service.service_number }}</span>
-            <span class="numeral-badge">Service</span>
+            <span class="numeral-badge">Practice</span>
           </div>
 
-          <h2 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">{{ service.title }}</h2>
-          <p style="font-size: var(--text-body); color: var(--text-main); font-weight: var(--weight-bold); margin-bottom: var(--space-sm);">{{ service.tagline }}</p>
+          <h2 style="font-size: var(--text-h2); color: #FFFFFF; margin-bottom: var(--space-xs);">{{ service.title }}</h2>
+          <p style="font-size: var(--text-body); color: var(--accent-cyan); font-weight: var(--weight-medium); margin-bottom: var(--space-sm);">{{ service.tagline }}</p>
           <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-lg); line-height: 1.6;">{{ service.overview }}</p>
           
           <div style="margin-bottom: var(--space-lg);">
-            <div class="form-label" style="font-size: var(--text-tiny);">What is included:</div>
+            <div style="font-size: var(--text-tiny); font-weight: var(--weight-bold); text-transform: uppercase; color: var(--text-main); margin-bottom: 8px; letter-spacing: 0.04em;">Deliverable Scope:</div>
             <ul class="card-service-deliverables" style="margin-bottom: 0;">
               {% for d in service.deliverables %}
                 <li>{{ d }}</li>
@@ -41,51 +44,51 @@
 
           <div style="border-top: 1px solid var(--border-hairline); padding-top: var(--space-md); margin-top: auto; display: flex; justify-content: space-between; align-items: center;">
             <a href="{% url 'public:service_detail' service.slug %}" class="card-service-action">
-              <span>Learn More</span>
+              <span>View Practice Details &rarr;</span>
             </a>
           </div>
         </article>
       {% endfor %}
     </div>
 
-    <!-- Web Development Capabilities Breakdown (from Flyer) -->
+    <!-- Web Development Capabilities Breakdown -->
     <div class="card-hairline" style="background-color: var(--bg-surface); padding: var(--space-2xl);">
       <div class="section-header" style="margin-bottom: var(--space-xl);">
         <div class="section-title-wrap">
-          <div class="section-numeral">Capabilities</div>
-          <h2 class="section-title" style="font-size: var(--text-h3);">Complete Website Solutions</h2>
+          <div class="section-numeral">TECHNICAL ARCHITECTURE</div>
+          <h2 class="section-title" style="font-size: var(--text-h3);">Production Engineering Standards</h2>
         </div>
       </div>
 
       <div class="grid-3">
-        <div style="background: var(--bg-primary); border: 1px solid var(--border-hairline); padding: var(--space-lg);">
-          <h3 style="font-size: var(--text-h4); margin-bottom: var(--space-xs);">Custom Website Design</h3>
-          <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: 0;">Unique, modern, and professional designs tailored to your brand identity.</p>
+        <div style="background: var(--bg-card); border: 1px solid var(--border-hairline); border-radius: var(--radius-md); padding: var(--space-lg);">
+          <h3 style="font-size: var(--text-h4); color: #FFFFFF; margin-bottom: var(--space-xs);">Custom Web Architecture</h3>
+          <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: 0;">Bespoke Django, Python, and frontend web applications tailored to your business logic.</p>
         </div>
 
-        <div style="background: var(--bg-primary); border: 1px solid var(--border-hairline); padding: var(--space-lg);">
-          <h3 style="font-size: var(--text-h4); margin-bottom: var(--space-xs);">Responsive Development</h3>
-          <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: 0;">Mobile-friendly websites that look and function smoothly on all devices.</p>
+        <div style="background: var(--bg-card); border: 1px solid var(--border-hairline); border-radius: var(--radius-md); padding: var(--space-lg);">
+          <h3 style="font-size: var(--text-h4); color: #FFFFFF; margin-bottom: var(--space-xs);">Penetration Tested & Hardened</h3>
+          <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: 0;">Audited against OWASP vulnerabilities, port scanning, and unauthorized access vectors.</p>
         </div>
 
-        <div style="background: var(--bg-primary); border: 1px solid var(--border-hairline); padding: var(--space-lg);">
-          <h3 style="font-size: var(--text-h4); margin-bottom: var(--space-xs);">E-Commerce Solutions</h3>
-          <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: 0;">Online stores with secure payment systems to help you sell products easily.</p>
+        <div style="background: var(--bg-card); border: 1px solid var(--border-hairline); border-radius: var(--radius-md); padding: var(--space-lg);">
+          <h3 style="font-size: var(--text-h4); color: #FFFFFF; margin-bottom: var(--space-xs);">E-Commerce & Payments</h3>
+          <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: 0;">Seamless checkout with M-Pesa, Stripe, and card gateways backed by automated receipts.</p>
         </div>
 
-        <div style="background: var(--bg-primary); border: 1px solid var(--border-hairline); padding: var(--space-lg);">
-          <h3 style="font-size: var(--text-h4); margin-bottom: var(--space-xs);">Website Management</h3>
-          <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: 0;">We handle updates, content changes, and backups so you can focus on business.</p>
+        <div style="background: var(--bg-card); border: 1px solid var(--border-hairline); border-radius: var(--radius-md); padding: var(--space-lg);">
+          <h3 style="font-size: var(--text-h4); color: #FFFFFF; margin-bottom: var(--space-xs);">Automated Offsite Snapshots</h3>
+          <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: 0;">Encrypted daily backups stored in isolated storage buckets with single-command restore.</p>
         </div>
 
-        <div style="background: var(--bg-primary); border: 1px solid var(--border-hairline); padding: var(--space-lg);">
-          <h3 style="font-size: var(--text-h4); margin-bottom: var(--space-xs);">Website Maintenance</h3>
-          <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: 0;">Ongoing support, security monitoring, and regular performance optimization.</p>
+        <div style="background: var(--bg-card); border: 1px solid var(--border-hairline); border-radius: var(--radius-md); padding: var(--space-lg);">
+          <h3 style="font-size: var(--text-h4); color: #FFFFFF; margin-bottom: var(--space-xs);">Sub-Second Core Web Vitals</h3>
+          <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: 0;">Edge CDN distribution, asset minification, Brotli compression, and optimized database queries.</p>
         </div>
 
-        <div style="background: var(--bg-primary); border: 1px solid var(--border-hairline); padding: var(--space-lg);">
-          <h3 style="font-size: var(--text-h4); margin-bottom: var(--space-xs);">SEO & Speed Optimization</h3>
-          <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: 0;">We optimize your website to rank higher on search engines and load faster.</p>
+        <div style="background: var(--bg-card); border: 1px solid var(--border-hairline); border-radius: var(--radius-md); padding: var(--space-lg);">
+          <h3 style="font-size: var(--text-h4); color: #FFFFFF; margin-bottom: var(--space-xs);">Direct Technical Support</h3>
+          <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: 0;">Direct access to Vincent and Timothy for rapid issue resolution and proactive feature updates.</p>
         </div>
       </div>
     </div>

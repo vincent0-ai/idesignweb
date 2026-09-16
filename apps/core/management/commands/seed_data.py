@@ -8,6 +8,7 @@ from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 from apps.core.db import get_db, init_indexes
 import datetime
+import os
 
 class Command(BaseCommand):
     help = 'Seeds services, case studies, articles, and portal spaces adapted from company brief'
@@ -274,7 +275,7 @@ class Command(BaseCommand):
                     'At Idesignweb, we prioritize clean code and optimized media. By avoiding bloated plugins and heavy animations, '
                     'our websites load rapidly on all mobile networks, resulting in higher search rankings and happier customers.'
                 ),
-                'author': 'Timothy Owino',
+                'author': 'Vincent Odhiambo',
                 'reading_time': '3 min read',
                 'category': 'Web Development',
                 'published_at': now,
@@ -290,9 +291,9 @@ class Command(BaseCommand):
                     'By keeping your server software updated, enabling HTTPS encryption certificates, and scheduling automated daily backups, '
                     'you can protect your online store or company website from unexpected downtime.'
                 ),
-                'author': 'Timothy Owino',
+                'author': 'Vincent Odhiambo',
                 'reading_time': '4 min read',
-                'category': 'Security Advice',
+                'category': 'Cybersecurity',
                 'published_at': now,
                 'is_published': True
             }
@@ -493,6 +494,29 @@ class Command(BaseCommand):
                         'role': 'staff',
                         'text': 'Working on the vertical reframe now. We will upload it to your project space by tomorrow afternoon.',
                         'date_str': 'Sep 9, 2026 at 3:45 PM'
+                    }
+                ]
+            },
+            {
+                'ticket_id': 'TCK-1003',
+                'client_username': 'client_apex',
+                'subject': 'SSL renewal and DNS firewall hardening check',
+                'priority': 'Medium',
+                'status': 'Resolved',
+                'created_at': now - datetime.timedelta(days=2),
+                'updated_at': now - datetime.timedelta(days=1),
+                'messages': [
+                    {
+                        'sender': 'client_apex',
+                        'role': 'client',
+                        'text': 'Can you confirm our SSL certificates and HTTP security headers are updated for the quarter?',
+                        'date_str': 'Sep 8, 2026 at 9:15 AM'
+                    },
+                    {
+                        'sender': 'Vincent Odhiambo',
+                        'role': 'staff',
+                        'text': 'SSL certificates renewed and HSTS/CSP headers verified with an A+ security grade. All systems are protected.',
+                        'date_str': 'Sep 8, 2026 at 10:05 AM'
                     }
                 ]
             }

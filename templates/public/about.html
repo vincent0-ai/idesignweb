@@ -1,88 +1,175 @@
 {% extends 'base/base.html' %}
+{% load static %}
 
-{% block title %}About Us : {{ site_title }}{% endblock %}
+{% block title %}Founders & Philosophy : {{ site_title }}{% endblock %}
 
 {% block content %}
 <section class="section">
   <div class="container">
     <div style="margin-bottom: var(--space-md);">
-      <span class="numeral-badge">ABOUT IDESIGNWEB</span>
+      <span class="numeral-badge">
+        <span class="pulse-dot"></span>
+        <span>THE IDESIGNWEB STORY</span>
+      </span>
     </div>
 
-    <h1 style="font-size: var(--text-h1); max-width: 900px; margin-bottom: var(--space-md);">
-      We Build Websites That Grow Your Business
+    <h1 style="font-size: var(--text-display); max-width: 960px; margin-bottom: var(--space-md); color: #FFFFFF;">
+      Engineering depth meets distinctive visual craft.
     </h1>
 
-    <p style="font-size: 1.25rem; color: var(--text-muted); max-width: 760px; margin-bottom: var(--space-3xl);">
-      Idesignweb is a digital agency led by Timothy Owino. We specialize in custom website development, graphic design, video editing, and cybersecurity. We work with clients remotely from anywhere, helping businesses build a strong online presence and drive real customer growth.
+    <p style="font-size: 1.25rem; color: var(--text-muted); max-width: 820px; margin-bottom: var(--space-3xl); line-height: 1.65;">
+      Idesignweb is an independent technology and design studio founded by <strong>Timothy Owino</strong> with co-founder <strong>Vincent Odhiambo</strong>. We operate at the intersection of robust backend programming, proactive cybersecurity, and refined creative design - building digital platforms that look exceptional and are defended from the ground up.
     </p>
 
-    <!-- Values Grid -->
+    <!-- Why We Founded Idesignweb (The Thesis) -->
+    <div class="card-hairline" style="margin-bottom: var(--space-3xl); padding: var(--space-2xl); background: radial-gradient(circle at 100% 0%, rgba(6, 182, 212, 0.1) 0%, var(--bg-card) 60%);">
+      <div class="section-numeral">OUR THESIS</div>
+      <h2 style="font-size: var(--text-h2); color: #FFFFFF; margin-bottom: var(--space-sm); max-width: 800px;">
+        Why Most Websites Fail: The False Choice Between Aesthetics and Security
+      </h2>
+      <p style="font-size: var(--text-body); color: var(--text-muted); line-height: 1.7; max-width: 840px; margin-bottom: var(--space-md);">
+        Most digital agencies either build aesthetically pleasing websites that are sluggish, bloated, and riddled with security loopholes - or technical tools with clunky, frustrating user experiences.
+      </p>
+      <p style="font-size: var(--text-body); color: var(--text-muted); line-height: 1.7; max-width: 840px; margin-bottom: 0;">
+        We founded Idesignweb to eliminate that tradeoff. By pairing founder Timothy Owino (creative director and full-stack developer) with co-founder Vincent Odhiambo (lead programmer and cybersecurity analyst), every project we deploy is visually magnetic, sub-second fast, and fortified against modern threats.
+      </p>
+    </div>
+
+    <!-- Meet the Leadership Section -->
     <div style="margin-bottom: var(--space-3xl);">
       <div class="section-header">
         <div class="section-title-wrap">
-          <div class="section-numeral">OUR VALUES</div>
-          <h2 class="section-title">What Guides Our Work</h2>
+          <div class="section-numeral">STUDIO LEADERSHIP</div>
+          <h2 class="section-title">Meet the Founders</h2>
         </div>
         <div>
-          <span class="numeral-badge">CLIENT COMMITMENT</span>
+          <span class="numeral-badge">Direct Access</span>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <!-- Founder: Timothy Owino -->
+        <div class="card-founder">
+          <div class="founder-header">
+            <div>
+              <h2 class="founder-name">Timothy Owino</h2>
+              <div class="founder-role">Founder, Creative Director & Full-Stack Developer</div>
+            </div>
+            <span class="numeral-badge" style="color: var(--accent-blue); border-color: rgba(59, 130, 246, 0.3);">FOUNDER</span>
+          </div>
+
+          <p style="font-size: var(--text-body); color: var(--text-muted); line-height: 1.65; margin-bottom: var(--space-md); flex-grow: 1;">
+            Founder of Idesignweb. Timothy leads user experience, visual identity systems, and frontend interface development. Combining graphic design mastery with modern CSS and frontend engineering, Timothy translates business value propositions into fluid, high-converting digital products, memorable brand packages, and commercial video edits.
+          </p>
+
+          <div style="margin-bottom: var(--space-md);">
+            <div style="font-size: var(--text-tiny); font-weight: var(--weight-bold); text-transform: uppercase; color: var(--text-main); margin-bottom: 6px; letter-spacing: 0.04em;">
+              Core Creative Focus:
+            </div>
+            <div class="founder-skills" style="margin-top: 0; padding-top: 0; border-top: none;">
+              <span class="founder-skill-pill">Full-Stack Development</span>
+              <span class="founder-skill-pill">UI/UX Interaction Design</span>
+              <span class="founder-skill-pill">Brand Identity & Vector Logos</span>
+              <span class="founder-skill-pill">Commercial 4K Video Editing</span>
+              <span class="founder-skill-pill">SEO & Conversion Optimization</span>
+              <span class="founder-skill-pill">Responsive Design Systems</span>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: var(--space-md); padding-top: var(--space-md); border-top: 1px solid var(--border-hairline); flex-wrap: wrap;">
+            <a href="tel:0115709680" class="btn btn-secondary btn-sm">Direct: 0115709680</a>
+            <a href="mailto:otienotimothy198@gmail.com" class="btn btn-ghost btn-sm">Email Timothy</a>
+          </div>
+        </div>
+
+        <!-- Co-Founder: Vincent Odhiambo -->
+        <div class="card-founder">
+          <div class="founder-header">
+            <div>
+              <h2 class="founder-name">Vincent Odhiambo</h2>
+              <div class="founder-role">Co-Founder, Lead Software Engineer & Cybersecurity Analyst</div>
+            </div>
+            <span class="numeral-badge" style="color: var(--accent-cyan); border-color: rgba(6, 182, 212, 0.3);">CO-FOUNDER</span>
+          </div>
+
+          <p style="font-size: var(--text-body); color: var(--text-muted); line-height: 1.65; margin-bottom: var(--space-md); flex-grow: 1;">
+            Co-founder of Idesignweb. Vincent leads technical architecture, system programming, and cybersecurity operations. With deep expertise in defensive engineering, vulnerability assessment, and server hardening, Vincent ensures our client platforms are safeguarded against SQL injections, cross-site attacks, and zero-day threats while maintaining sub-second API execution.
+          </p>
+
+          <div style="margin-bottom: var(--space-md);">
+            <div style="font-size: var(--text-tiny); font-weight: var(--weight-bold); text-transform: uppercase; color: var(--text-main); margin-bottom: 6px; letter-spacing: 0.04em;">
+              Core Technical Focus:
+            </div>
+            <div class="founder-skills" style="margin-top: 0; padding-top: 0; border-top: none;">
+              <span class="founder-skill-pill">Web Systems Programming</span>
+              <span class="founder-skill-pill">Penetration Testing</span>
+              <span class="founder-skill-pill">Vulnerability Audits</span>
+              <span class="founder-skill-pill">Infrastructure Hardening</span>
+              <span class="founder-skill-pill">Automated Disaster Recovery</span>
+              <span class="founder-skill-pill">Python / Backend Architectures</span>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: var(--space-md); padding-top: var(--space-md); border-top: 1px solid var(--border-hairline); flex-wrap: wrap;">
+            <a href="tel:0768072566" class="btn btn-secondary btn-sm">Direct: 0768072566</a>
+            <a href="mailto:vinnyochi13249@gmail.com" class="btn btn-ghost btn-sm">Email Vincent</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Operating Standards Grid -->
+    <div style="margin-bottom: var(--space-3xl);">
+      <div class="section-header">
+        <div class="section-title-wrap">
+          <div class="section-numeral">OUR PRINCIPLES</div>
+          <h2 class="section-title">How We Build & Operate</h2>
+        </div>
+        <div>
+          <span class="numeral-badge">Studio Ethics</span>
         </div>
       </div>
 
       <div class="grid-3">
         {% for std in standards %}
           <div class="card-hairline">
-            <div class="numeral" style="font-size: var(--text-h3); font-weight: var(--weight-bold); margin-bottom: var(--space-sm); border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs);">
+            <div class="numeral" style="font-family: var(--font-mono); font-size: var(--text-small); color: var(--accent-cyan); font-weight: var(--weight-bold); margin-bottom: var(--space-sm); border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs);">
               {{ std.numeral }}
             </div>
-            <h3 style="font-size: var(--text-h3); margin-bottom: var(--space-xs);">{{ std.title }}</h3>
-            <p style="font-size: var(--text-small); color: var(--text-muted); line-height: 1.6;">{{ std.desc }}</p>
+            <h3 style="font-size: var(--text-h3); color: #FFFFFF; margin-bottom: var(--space-xs);">{{ std.title }}</h3>
+            <p style="font-size: var(--text-small); color: var(--text-muted); line-height: 1.6; margin-bottom: 0;">{{ std.desc }}</p>
           </div>
         {% endfor %}
       </div>
     </div>
 
-    <!-- Meet the Lead Section -->
-    <div class="card-hairline" style="margin-bottom: var(--space-3xl); background-color: var(--bg-surface); padding: var(--space-2xl);">
-      <div class="footer-col-title">LEADERSHIP & CONTACT</div>
+    <!-- Direct Studio Contact Info -->
+    <div class="card-hairline" style="background: var(--bg-surface); padding: var(--space-2xl); margin-bottom: var(--space-3xl);">
+      <div class="footer-col-title">DIRECT STUDIO INFORMATION</div>
       <div class="grid-2" style="align-items: center;">
         <div>
-          <h2 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">{{ founder_name }}</h2>
-          <div style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-md);">{{ founder_title }}</div>
+          <h2 style="font-size: var(--text-h2); color: #FFFFFF; margin-bottom: var(--space-xs);">Collaborate directly with the makers.</h2>
           <p style="font-size: var(--text-body); color: var(--text-muted); line-height: 1.6; margin-bottom: var(--space-lg);">
-            With a passion for clean design and fast code, Timothy leads every project from initial consultation to final deployment. We believe every business deserves a professional website that works as hard as they do.
+            Whether you are launching a new e-commerce venture, revamping your corporate identity, or need an urgent security audit to harden your web servers, we are ready to assist.
           </p>
           <div style="display: flex; gap: var(--space-md); flex-wrap: wrap;">
-            <a href="tel:{{ company_phone }}" class="btn btn-secondary btn-sm">CALL: {{ company_phone }}</a>
-            <a href="mailto:{{ company_email }}" class="btn btn-ghost btn-sm">EMAIL US</a>
+            <a href="{% url 'public:contact' %}" class="btn btn-primary btn-sm">Request Proposal</a>
+            <a href="tel:{{ company_phone }}" class="btn btn-secondary btn-sm">Call Founders</a>
           </div>
         </div>
 
-        <div style="border: 1px solid var(--border-hairline); background: var(--bg-primary); padding: var(--space-xl);">
-          <div class="form-label" style="font-size: var(--text-tiny);">DIRECT INFORMATION</div>
-          <div style="display: flex; flex-direction: column; gap: var(--space-sm); font-size: var(--text-small);">
-            <div><strong>Location:</strong> {{ company_location }}</div>
-            <div><strong>Phone:</strong> {{ company_phone }}</div>
-            <div><strong>Email:</strong> {{ company_email }}</div>
-            <div><strong>Availability:</strong> Monday to Saturday, 8:00 AM to 7:00 PM</div>
+        <div style="border: 1px solid var(--border-hairline); background: var(--bg-card); border-radius: var(--radius-md); padding: var(--space-xl);">
+          <div style="display: flex; flex-direction: column; gap: var(--space-md); font-size: var(--text-small);">
+            <div><span style="color: var(--text-dim);">Studio Location:</span> <strong style="color: var(--text-main);">{{ company_location }}</strong></div>
+            <div><span style="color: var(--text-dim);">Direct Phone / WhatsApp:</span> <strong style="color: var(--text-main);">{{ company_phone }}</strong></div>
+            <div><span style="color: var(--text-dim);">Direct Email:</span> <strong style="color: var(--text-main);">{{ company_email }}</strong></div>
+            <div><span style="color: var(--text-dim);">Turnaround:</span> <strong style="color: #34D399;">Proposals delivered within 24 hours</strong></div>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Contact Banner -->
-    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-hairline); padding-top: var(--space-xl); flex-wrap: wrap; gap: var(--space-md);">
-      <div>
-        <div style="font-size: var(--text-h3); font-weight: var(--weight-bold);">Ready to work with us?</div>
-        <div style="font-size: var(--text-small); color: var(--text-muted);">Get in touch today for a free consultation and project quote.</div>
-      </div>
-      <div>
-        <a href="{% url 'public:contact' %}" class="btn btn-primary">
-          GET IN TOUCH
-        </a>
       </div>
     </div>
 
   </div>
 </section>
 {% endblock %}
+

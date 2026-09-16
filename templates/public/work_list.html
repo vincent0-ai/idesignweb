@@ -1,30 +1,33 @@
 {% extends 'base/base.html' %}
 {% load static %}
 
-{% block title %}Our Work & Case Studies : {{ site_title }}{% endblock %}
+{% block title %}Selected Work & Case Studies : {{ site_title }}{% endblock %}
 
 {% block content %}
 <section class="section">
   <div class="container">
     <div style="margin-bottom: var(--space-md);">
-      <span class="numeral-badge">PORTFOLIO</span>
+      <span class="numeral-badge">
+        <span class="pulse-dot"></span>
+        <span>STUDIO ARCHIVE</span>
+      </span>
     </div>
     
-    <h1 style="font-size: var(--text-h1); margin-bottom: var(--space-md);">
-      Our Work & Case Studies
+    <h1 style="font-size: var(--text-display); color: #FFFFFF; margin-bottom: var(--space-md);">
+      Featured Work & Proven Results
     </h1>
     
-    <p style="font-size: 1.125rem; color: var(--text-muted); max-width: 720px; margin-bottom: var(--space-xl);">
-      Real results delivered for our clients across websites, brand identity, video production, and cybersecurity.
+    <p style="font-size: 1.25rem; color: var(--text-muted); max-width: 760px; margin-bottom: var(--space-xl); line-height: 1.65;">
+      Measured outcomes delivered across custom web engineering, vulnerability defense, visual brand identity, and commercial video production.
     </p>
 
     <!-- Category Filter Controls -->
-    <div style="display: flex; gap: var(--space-xs); flex-wrap: wrap; margin-bottom: var(--space-2xl); border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-md);">
-      <a href="{% url 'public:work_list' %}" class="btn btn-ghost btn-sm {% if selected_category == 'all' %}btn-secondary{% endif %}">
-        All Projects
+    <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: var(--space-2xl); border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-lg);">
+      <a href="{% url 'public:work_list' %}" class="btn btn-sm {% if selected_category == 'all' %}btn-primary{% else %}btn-ghost{% endif %}">
+        All Practices
       </a>
       {% for cat in categories %}
-        <a href="{% url 'public:work_list' %}?category={{ cat|urlencode }}" class="btn btn-ghost btn-sm {% if selected_category == cat %}btn-secondary{% endif %}">
+        <a href="{% url 'public:work_list' %}?category={{ cat|urlencode }}" class="btn btn-sm {% if selected_category == cat %}btn-primary{% else %}btn-ghost{% endif %}">
           {{ cat }}
         </a>
       {% endfor %}
@@ -43,22 +46,22 @@
           <div class="card-body">
             <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-sm);">
               <span class="numeral-badge">{{ case.category }}</span>
-              <span style="font-size: var(--text-tiny); color: var(--text-dim);">{{ case.year }}</span>
+              <span style="font-size: var(--text-tiny); font-family: var(--font-mono); color: var(--text-dim);">{{ case.year }}</span>
             </div>
 
-            <h2 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">
-              <a href="{% url 'public:work_detail' case.slug %}">{{ case.title }}</a>
+            <h2 style="font-size: var(--text-h2); color: #FFFFFF; margin-bottom: var(--space-xs);">
+              <a href="{% url 'public:work_detail' case.slug %}" style="color: #FFFFFF;">{{ case.title }}</a>
             </h2>
             <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-lg); line-height: 1.6;">
               {{ case.summary }}
             </p>
 
             <!-- Results Highlights -->
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--border-hairline); margin-bottom: var(--space-lg); background: var(--bg-surface);">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--border-hairline); border-radius: var(--radius-sm); margin-bottom: var(--space-lg); background: rgba(0, 0, 0, 0.25); overflow: hidden;">
               {% for res in case.results %}
-                <div style="padding: var(--space-sm); border-right: 1px solid var(--border-hairline); text-align: center;">
-                  <div style="font-size: 1.25rem; font-weight: var(--weight-bold); color: var(--text-main);">{{ res.metric }}</div>
-                  <div style="font-size: var(--text-tiny); color: var(--text-muted);">{{ res.label }}</div>
+                <div style="padding: var(--space-sm) var(--space-md); border-right: 1px solid var(--border-hairline); text-align: center;">
+                  <div style="font-size: 1.25rem; font-weight: var(--weight-bold); color: #34D399; font-family: var(--font-mono);">{{ res.metric }}</div>
+                  <div style="font-size: var(--text-tiny); color: var(--text-muted); margin-top: 2px;">{{ res.label }}</div>
                 </div>
               {% endfor %}
             </div>
@@ -66,14 +69,14 @@
             <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-hairline); padding-top: var(--space-md); margin-top: auto;">
               <span style="font-size: var(--text-tiny); color: var(--text-dim);">Client: {{ case.client }}</span>
               <a href="{% url 'public:work_detail' case.slug %}" class="card-service-action" style="font-size: var(--text-tiny);">
-                View Case Study
+                Explore Case Study &rarr;
               </a>
             </div>
           </div>
         </article>
       {% empty %}
         <div class="card-hairline" style="grid-column: 1 / -1; text-align: center; padding: var(--space-2xl);">
-          <p>No case studies found for this category.</p>
+          <p style="color: var(--text-muted);">No case studies found for this category.</p>
           <a href="{% url 'public:work_list' %}" class="btn btn-secondary btn-sm" style="margin-top: var(--space-md);">All Projects</a>
         </div>
       {% endfor %}
@@ -82,3 +85,4 @@
   </div>
 </section>
 {% endblock %}
+

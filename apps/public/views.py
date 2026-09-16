@@ -13,30 +13,31 @@ import datetime
 def home_view(request):
     db = get_db()
     services = list(db.services.find({'featured': True}).sort('sort_order', 1))
-    case_studies = list(db.case_studies.find({'is_published': True}).sort('published_at', -1).limit(2))
+    case_studies = list(db.case_studies.find({'is_published': True}).sort('published_at', -1).limit(4))
     posts = list(db.posts.find({'is_published': True}).sort('published_at', -1).limit(3))
     
-    stats = [
-        {'metric': '100+', 'label': 'Completed Client Projects'},
-        {'metric': '99.9%', 'label': 'Website Uptime Guarantee'},
-        {'metric': '24h', 'label': 'Support Response Time'}
+    telemetry = [
+        {'metric': '99.99%', 'label': 'Platform Uptime SLA', 'detail': 'Zero unplanned outages'},
+        {'metric': '0', 'label': 'Exploit Incidents', 'detail': 'Rigorous defensive security'},
+        {'metric': '1.1s', 'label': 'Core Web Speed', 'detail': 'Engineered for instant conversion'},
+        {'metric': '< 24h', 'label': 'Founder Direct Response', 'detail': 'Direct access to engineers'}
     ]
     
     process_steps = [
         {
             'step_number': '01',
-            'title': 'Discovery and Planning',
-            'description': 'We discuss your business goals, target audience, and project requirements to create a clear, realistic plan.'
+            'title': 'Architecture & Threat Surface Audit',
+            'description': 'We dissect your brand goals, target customers, and operational bottlenecks. We map out full-stack specs and security safeguards before writing a single line of code.'
         },
         {
             'step_number': '02',
-            'title': 'Design and Development',
-            'description': 'We craft your brand visuals, video edits, website, or security safeguards with regular check-ins along the way.'
+            'title': 'High-Performance Engineering & Design',
+            'description': 'Vincent implements secure backend pipelines, database schemes, and penetration-tested code while Timothy designs fluid interfaces, brand identities, and motion media.'
         },
         {
             'step_number': '03',
-            'title': 'Launch and Support',
-            'description': 'We deliver all final files or launch your website, providing ongoing support whenever you need help.'
+            'title': 'Hardened Deployment & Ongoing Defense',
+            'description': 'We push to production with automated off-site backups, SSL/TLS certificates, web application firewalls, and active monitoring to ensure your business stays protected 24/7.'
         }
     ]
     
@@ -44,10 +45,11 @@ def home_view(request):
         'services': services,
         'case_studies': case_studies,
         'posts': posts,
-        'stats': stats,
+        'telemetry': telemetry,
         'process_steps': process_steps,
     }
     return render(request, 'public/home.html', context)
+
 
 def services_hub_view(request):
     db = get_db()
@@ -96,21 +98,22 @@ def about_view(request):
     standards = [
         {
             'numeral': '01',
-            'title': 'Clarity and Focus',
-            'desc': 'We keep things simple and easy to understand. Clean typography and clear layouts help your customers find what they need quickly.'
+            'title': 'Defensive Engineering by Default',
+            'desc': 'Vincent architects every backend and infrastructure node with zero-trust principles. Vulnerability scanning, encryption in transit and at rest, and automated off-site backups are built-in from line one.'
         },
         {
             'numeral': '02',
-            'title': 'Speed and Quality',
-            'desc': 'Fast-loading websites, high-definition videos, and prompt responses to your questions. We build things right the first time.'
+            'title': 'Sub-Second Performance & Craft',
+            'desc': 'Timothy crafts lightning-fast frontend interfaces and clean brand identities. We ruthlessly prune unnecessary dependencies so your users enjoy silky 60fps responsiveness and instant page loads.'
         },
         {
             'numeral': '03',
-            'title': 'Reliable Protection',
-            'desc': 'Security is built into our websites from the start, protecting your business and customer information against online threats.'
+            'title': 'Direct Founder Accountability',
+            'desc': 'No bureaucratic account managers or juniors passing messages. You work directly with Vincent and Timothy through every phase, from technical architecture to production deployment.'
         }
     ]
     return render(request, 'public/about.html', {'standards': standards})
+
 
 def insights_list_view(request):
     db = get_db()

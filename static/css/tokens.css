@@ -1,65 +1,95 @@
 /*
- * idesignweb Design System Tokens
- * Clean, elegant modern agency typography.
- * Strict Constraints: Flat surfaces, hairline borders, zero gradients,
- * zero emoji, zero icon fonts, two-weight hierarchy.
+ * Idesignweb Design Tokens
+ * Sleek, high-craft dark aesthetic inspired by antigravity.google and modern tech studios.
+ * Deep obsidian surfaces, frosted glassmorphism, luminous accents, and clean typography.
  */
 
 :root {
-  /* Color Palette - Clean Flat Surfaces */
-  --bg-primary: #FFFFFF;
-  --bg-surface: #F8F9FA;
-  --bg-surface-alt: #F1F3F5;
-  --bg-dark: #121212;
-  --bg-dark-surface: #1E1E1E;
+  /* Color Palette - Modern Studio Obsidian Dark */
+  --bg-primary: #07090e;
+  --bg-surface: #0e111a;
+  --bg-surface-alt: #131722;
+  --bg-card: #121623;
+  --bg-card-hover: #181d2e;
+  --bg-glass: rgba(14, 17, 26, 0.75);
+  --bg-glass-card: rgba(19, 23, 34, 0.65);
+  --bg-glass-hover: rgba(28, 34, 51, 0.75);
+  --bg-dark: #040508;
+  --bg-dark-surface: #0a0c12;
   
-  --text-main: #1A1A1A;
-  --text-muted: #595959;
-  --text-dim: #8C8C8C;
-  --text-inverse: #FFFFFF;
-  --text-inverse-muted: #CCCCCC;
+  /* Text System */
+  --text-main: #F3F4F6;
+  --text-muted: #9CA3AF;
+  --text-dim: #6B7280;
+  --text-inverse: #07090E;
+  --text-inverse-muted: #4B5563;
+  --text-gradient: linear-gradient(135deg, #FFFFFF 0%, #CBD5E1 100%);
   
-  /* Hairline Borders */
-  --border-hairline: #E5E7EB;
-  --border-hairline-strong: #111111;
-  --border-hairline-dark: #2E2E2E;
+  /* Borders & Dividers */
+  --border-hairline: rgba(255, 255, 255, 0.08);
+  --border-hairline-strong: rgba(255, 255, 255, 0.16);
+  --border-hairline-dark: rgba(255, 255, 255, 0.05);
+  --border-glow: rgba(59, 130, 246, 0.4);
+  --border-cyan-glow: rgba(6, 182, 212, 0.4);
   
-  /* Primary CTA Accent - Single Accent for Action */
-  --accent-cta: #0047FF;
-  --accent-cta-hover: #0036CC;
+  /* Accents & Brand Lighting */
+  --accent-cta: #2563EB;
+  --accent-cta-hover: #1D4ED8;
   --accent-cta-text: #FFFFFF;
+  --accent-blue: #3B82F6;
+  --accent-cyan: #06B6D4;
+  --accent-emerald: #10B981;
+  --accent-glow: rgba(37, 99, 235, 0.3);
+  --accent-cyan-glow: rgba(6, 182, 212, 0.25);
   
   /* Focus States */
-  --focus-ring: #0047FF;
+  --focus-ring: #3B82F6;
   
-  /* Clean Sans-Serif Typography (No Monospace/Robotic Fonts for UI) */
-  --font-sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-mono: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+  /* Typography */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", "Inter", "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", "Fira Code", Consolas, monospace;
   
-  /* Two-Weight System */
+  /* Font Weights */
   --weight-regular: 400;
+  --weight-medium: 500;
   --weight-bold: 600;
   --weight-black: 700;
   
   /* Type Scale */
-  --text-display: clamp(2.25rem, 4.5vw, 3.75rem);
-  --text-h1: clamp(1.85rem, 3vw, 2.75rem);
-  --text-h2: clamp(1.4rem, 2.2vw, 2rem);
-  --text-h3: 1.25rem;
-  --text-h4: 1.05rem;
+  --text-display: clamp(2.5rem, 5.5vw, 4.25rem);
+  --text-h1: clamp(2rem, 3.8vw, 3rem);
+  --text-h2: clamp(1.5rem, 2.5vw, 2.25rem);
+  --text-h3: 1.35rem;
+  --text-h4: 1.125rem;
   --text-body: 1rem;
   --text-small: 0.875rem;
   --text-tiny: 0.75rem;
   
+  /* Radii */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-pill: 9999px;
+  
+  /* Shadows & Ambient Glows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.6);
+  --glow-ambient: 0 0 80px -20px rgba(37, 99, 235, 0.2);
+  --glow-cyan: 0 0 60px -15px rgba(6, 182, 212, 0.2);
+  
   /* Layout Spacing */
-  --container-max: 1200px;
-  --header-height: 68px;
+  --container-max: 1240px;
+  --header-height: 72px;
   --space-unit: 8px;
   --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 16px;
   --space-lg: 24px;
   --space-xl: 36px;
-  --space-2xl: 56px;
-  --space-3xl: 80px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
 }
+
