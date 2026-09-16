@@ -1,386 +1,392 @@
 {% extends 'base/base.html' %}
 {% load static %}
 
-{% block title %}Idesignweb : Web Engineering, Cybersecurity & Brand Studio{% endblock %}
+{% block title %}Idesignweb : Web Development, Cybersecurity & Design Studio{% endblock %}
 
 {% block content %}
-<!-- Hero Section with Ambient Atmospheric Glow -->
+<!-- Hero Section (Oberlo Signature Style) -->
 <section class="hero-section">
-  <div class="container">
+  <div class="container hero-inner">
     <div class="hero-meta">
-      <span class="numeral-badge">
-        <span class="pulse-dot"></span>
-        <span>Accepting Select Projects for 2026</span>
-      </span>
-      <span style="color: var(--text-dim); font-size: var(--text-tiny); font-family: var(--font-mono);">Nairobi / Global Remote</span>
+      <span class="category-badge">Web Engineering &middot; Cybersecurity &middot; Design</span>
     </div>
 
     <h1 class="hero-headline">
-      We engineer high-performance web products and defend them with proactive cybersecurity.
+      We build websites that actually <em>sell</em>
     </h1>
 
     <p class="hero-description">
-      Founded by <strong>Timothy Owino</strong> with Co-Founder <strong>Vincent Odhiambo</strong>, Idesignweb combines full-stack programming, rigorous vulnerability assessments, and bespoke interface design to build digital experiences that drive real business growth.
+      Idesignweb provides custom web development, e-commerce stores, bulletproof cybersecurity, and distinctive brand identities to turn your business vision into reality.
     </p>
 
     <div class="hero-actions">
-      <a href="{% url 'public:contact' %}" class="btn btn-primary">
-        <span>Start a Project</span>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      <a href="{% url 'public:contact' %}" class="btn btn-green btn-lg">
+        Start a Project
       </a>
-      <a href="{% url 'public:work_list' %}" class="btn btn-secondary">
-        <span>Explore Work</span>
-      </a>
-      <a href="{% url 'public:about' %}" class="btn btn-ghost">
-        <span>Meet Founders</span>
+      <a href="{% url 'public:work_list' %}" class="btn btn-outline btn-lg">
+        Explore Our Work
       </a>
     </div>
 
-    <!-- Antigravity-Style Interactive Studio Console Dock -->
-    <div class="console-dock" id="studioConsole">
-      <div class="console-header">
-        <div class="console-dots">
-          <span class="console-dot" style="background-color: #EF4444;"></span>
-          <span class="console-dot" style="background-color: #F59E0B;"></span>
-          <span class="console-dot" style="background-color: #10B981;"></span>
-          <span style="font-family: var(--font-mono); font-size: var(--text-tiny); color: var(--text-dim); margin-left: 6px;">idesignweb-console // v2.6</span>
-        </div>
-
-        <div class="console-tabs" role="tablist">
-          <button type="button" class="console-tab active" data-tab="web" role="tab" aria-selected="true">01 Web Engineering</button>
-          <button type="button" class="console-tab" data-tab="security" role="tab" aria-selected="false">02 Cybersecurity</button>
-          <button type="button" class="console-tab" data-tab="brand" role="tab" aria-selected="false">03 Brand Systems</button>
-          <button type="button" class="console-tab" data-tab="motion" role="tab" aria-selected="false">04 Motion Media</button>
-        </div>
-      </div>
-
-      <div class="console-content">
-        <!-- Panel 1: Web Engineering -->
-        <div class="console-panel active" id="panel-web">
-          <div>
-            <div class="numeral-badge" style="margin-bottom: var(--space-sm); color: var(--accent-cyan); border-color: rgba(6, 182, 212, 0.3);">
-              ENGINEERING ARCHITECTURE
-            </div>
-            <h3 style="font-size: var(--text-h2); color: #FFFFFF; margin-bottom: var(--space-sm);">
-              Sub-second page speeds, mobile-first responsiveness, and zero bloat.
-            </h3>
-            <p style="font-size: var(--text-body); color: var(--text-muted); line-height: 1.6; margin-bottom: var(--space-lg);">
-              We build custom web applications, e-commerce stores, and customer portals engineered on modern frameworks with clean REST APIs and database optimization. Tested across hundreds of viewport sizes for flawless usability.
-            </p>
-            <div style="display: flex; gap: var(--space-md); flex-wrap: wrap;">
-              <span class="founder-skill-pill">Python / Django</span>
-              <span class="founder-skill-pill">PostgreSQL / MongoDB</span>
-              <span class="founder-skill-pill">Core Web Vitals &lt; 1.2s</span>
-              <span class="founder-skill-pill">E-Commerce & Stripe/M-Pesa</span>
-            </div>
-          </div>
-          <div>
-            <div style="background: rgba(0, 0, 0, 0.4); border: 1px solid var(--border-hairline); border-radius: var(--radius-md); padding: var(--space-lg); font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.7; color: #94A3B8;">
-              <div style="color: #64748B;">// Production Web Stack Audit</div>
-              <div><span style="color: #38BDF8;">const</span> <span style="color: #F1F5F9;">platform</span> = <span style="color: #FBBF24;">new</span> <span style="color: #38BDF8;">WebEngine</span>({</div>
-              <div style="padding-left: 16px;"><span style="color: #94A3B8;">ttfb:</span> <span style="color: #34D399;">"85ms"</span>,</div>
-              <div style="padding-left: 16px;"><span style="color: #94A3B8;">responsiveRating:</span> <span style="color: #34D399;">"100%"</span>,</div>
-              <div style="padding-left: 16px;"><span style="color: #94A3B8;">seoIndexScore:</span> <span style="color: #34D399;">98</span>,</div>
-              <div style="padding-left: 16px;"><span style="color: #94A3B8;">compression:</span> <span style="color: #34D399;">"Brotli + CDN"</span></div>
-              <div>});</div>
-              <div style="margin-top: 8px; color: #34D399;">[PASS] All Core Web Vitals Passed</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Panel 2: Cybersecurity -->
-        <div class="console-panel" id="panel-security">
-          <div>
-            <div class="numeral-badge" style="margin-bottom: var(--space-sm); color: #34D399; border-color: rgba(16, 185, 129, 0.3);">
-              DEFENSIVE POSTURE
-            </div>
-            <h3 style="font-size: var(--text-h2); color: #FFFFFF; margin-bottom: var(--space-sm);">
-              Hardened infrastructure, penetration audits, and automated recovery.
-            </h3>
-            <p style="font-size: var(--text-body); color: var(--text-muted); line-height: 1.6; margin-bottom: var(--space-lg);">
-              Led by Vincent Odhiambo, our security practice eliminates vulnerabilities before attackers find them. We configure web application firewalls, SSL/TLS 1.3 encryption, automated daily off-site backups, and malware protection.
-            </p>
-            <div style="display: flex; gap: var(--space-md); flex-wrap: wrap;">
-              <span class="founder-skill-pill">Vulnerability Audits</span>
-              <span class="founder-skill-pill">WAF & DDoS Defense</span>
-              <span class="founder-skill-pill">Malware Inoculation</span>
-              <span class="founder-skill-pill">Automated Daily Snapshots</span>
-            </div>
-          </div>
-          <div>
-            <div style="background: rgba(0, 0, 0, 0.4); border: 1px solid var(--border-hairline); border-radius: var(--radius-md); padding: var(--space-lg); font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.7; color: #94A3B8;">
-              <div style="color: #64748B;">// Security Posture Live Feed</div>
-              <div><span style="color: #34D399;">[PASS]</span> TLS 1.3 Strict-Transport-Security verified</div>
-              <div><span style="color: #34D399;">[PASS]</span> OWASP Top 10 automated test suites clean</div>
-              <div><span style="color: #34D399;">[PASS]</span> Server Ports Hardened (Non-essential closed)</div>
-              <div><span style="color: #34D399;">[PASS]</span> Daily Encrypted Backup dispatched offsite</div>
-              <div style="margin-top: 8px; color: #38BDF8;">Active Defenses: 24/7 Threat Protection</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Panel 3: Brand Systems -->
-        <div class="console-panel" id="panel-brand">
-          <div>
-            <div class="numeral-badge" style="margin-bottom: var(--space-sm); color: #F59E0B; border-color: rgba(245, 158, 11, 0.3);">
-              VISUAL IDENTITY
-            </div>
-            <h3 style="font-size: var(--text-h2); color: #FFFFFF; margin-bottom: var(--space-sm);">
-              Distinctive logos, typography systems, and high-impact marketing assets.
-            </h3>
-            <p style="font-size: var(--text-body); color: var(--text-muted); line-height: 1.6; margin-bottom: var(--space-lg);">
-              Directed by Timothy Owino, we craft memorable visual identities that stand out in crowded markets. Vector logos, cohesive typography tokens, print stationery, and digital campaign collateral delivered ready for scale.
-            </p>
-            <div style="display: flex; gap: var(--space-md); flex-wrap: wrap;">
-              <span class="founder-skill-pill">Vector Logo Suites</span>
-              <span class="founder-skill-pill">Brand Guidelines & Tokens</span>
-              <span class="founder-skill-pill">Print & Packaging Collateral</span>
-              <span class="founder-skill-pill">High-DPI Design Assets</span>
-            </div>
-          </div>
-          <div>
-            <div style="background: rgba(0, 0, 0, 0.4); border: 1px solid var(--border-hairline); border-radius: var(--radius-md); padding: var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md);">
-              <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs);">
-                <span style="font-family: var(--font-mono); font-size: var(--text-tiny); color: var(--text-dim);">DELIVERABLE ASSETS</span>
-                <span class="numeral-badge">VECTOR SUITE</span>
-              </div>
-              <div style="font-size: 1.1rem; color: #FFFFFF; font-weight: var(--weight-bold);">
-                Scalable Identity & Design Tokens
-              </div>
-              <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: 0;">
-                SVGs, print-ready CMYK PDFs, web font hierarchies, and color tokens calibrated for dark & light viewports.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Panel 4: Motion Media -->
-        <div class="console-panel" id="panel-motion">
-          <div>
-            <div class="numeral-badge" style="margin-bottom: var(--space-sm); color: #A855F7; border-color: rgba(168, 85, 247, 0.3);">
-              POST-PRODUCTION
-            </div>
-            <h3 style="font-size: var(--text-h2); color: #FFFFFF; margin-bottom: var(--space-sm);">
-              Commercial video cuts, balanced audio mastering, and motion graphics.
-            </h3>
-            <p style="font-size: var(--text-body); color: var(--text-muted); line-height: 1.6; margin-bottom: var(--space-lg);">
-              Engage clients with cinematic commercial edits. We transform raw footage into rhythmically edited stories with 4K color grading, pristine sound cleanup, and format exports for YouTube, TikTok, and Instagram.
-            </p>
-            <div style="display: flex; gap: var(--space-md); flex-wrap: wrap;">
-              <span class="founder-skill-pill">4K Master Delivery</span>
-              <span class="founder-skill-pill">Vertical Social Cutdowns (9:16)</span>
-              <span class="founder-skill-pill">Clean Voice & Ambient Mixing</span>
-              <span class="founder-skill-pill">Motion Typography Overlays</span>
-            </div>
-          </div>
-          <div>
-            <div style="background: rgba(0, 0, 0, 0.4); border: 1px solid var(--border-hairline); border-radius: var(--radius-md); padding: var(--space-lg); font-family: var(--font-mono); font-size: 0.85rem; line-height: 1.7; color: #94A3B8;">
-              <div style="color: #64748B;">// Video Master Timeline Specs</div>
-              <div>Resolution: <span style="color: #38BDF8;">3840x2160 (4K UHD) @ 60fps</span></div>
-              <div>Color Grade: <span style="color: #38BDF8;">Rec.709 Mastered</span></div>
-              <div>Loudness Standard: <span style="color: #38BDF8;">-14 LUFS (Web Optimized)</span></div>
-              <div>Export Multi-Ratios: <span style="color: #34D399;">16:9 Landscape / 9:16 Mobile Reels</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Live Telemetry Bar -->
-    <div class="telemetry-bar">
-      {% for t in telemetry %}
-        <div class="telemetry-item">
-          <div class="telemetry-val">
-            <span>{{ t.metric }}</span>
-          </div>
-          <div class="telemetry-lbl">{{ t.label }}</div>
-          <div style="font-size: var(--text-tiny); color: var(--text-dim); margin-top: 4px;">{{ t.detail }}</div>
-        </div>
-      {% endfor %}
+    <div class="hero-founder-attribution">
+      Founded by <strong>Timothy Owino</strong> &middot; Co-Founded by <strong>Vincent Odhiambo</strong>
     </div>
   </div>
 </section>
 
-<!-- Core Capabilities Grid -->
+<!-- Our Picks (Featured Case Study & Editorial Grid - Oberlo Signature) -->
 <section class="section">
   <div class="container">
     <div class="section-header">
-      <div class="section-title-wrap">
-        <div class="section-numeral">CAPABILITIES</div>
-        <h2 class="section-title">What We Build & Defend</h2>
+      <div>
+        <div class="section-numeral">OUR PICKS</div>
+        <h2 class="section-title text-display" style="color: var(--color-blue); text-transform: uppercase;">
+          Featured <em>outcomes</em>
+        </h2>
       </div>
       <div>
-        <a href="{% url 'public:services_hub' %}" class="btn btn-ghost btn-sm">
-          All Capabilities &rarr;
+        <a href="{% url 'public:work_list' %}" class="btn-link">
+          All Case Studies &rarr;
+        </a>
+      </div>
+    </div>
+
+    <!-- Oberlo Split Pick Box (Sky-Blue Callout) -->
+    {% if case_studies %}
+      {% with primary_case=case_studies.0 %}
+        <div class="grid-picks">
+          <div class="picks-content">
+            <div class="category-label">{{ primary_case.category }}</div>
+            <h3 style="font-size: var(--text-h2); color: var(--text-main); margin-bottom: var(--space-sm); font-weight: var(--weight-bold);">
+              <a href="{% url 'public:work_detail' primary_case.slug %}" class="hover:underline">
+                {{ primary_case.title }}
+              </a>
+            </h3>
+            <p style="font-size: var(--text-body); color: var(--text-body); line-height: 1.65; margin-bottom: var(--space-lg);">
+              {{ primary_case.summary }}
+            </p>
+            <div class="author-byline">
+              <span class="author-avatar">TO</span>
+              <span>by <strong>Timothy Owino</strong> &middot; Founder</span>
+            </div>
+            <div style="margin-top: var(--space-lg);">
+              <a href="{% url 'public:work_detail' primary_case.slug %}" class="btn btn-blue btn-sm">
+                Read Case Study
+              </a>
+            </div>
+          </div>
+
+          <div class="picks-image-wrap">
+            {% if primary_case.image_url %}
+              <img src="{% static primary_case.image_url %}" alt="{{ primary_case.title }}" class="picks-image" loading="lazy">
+            {% else %}
+              <div style="width: 100%; height: 100%; background: var(--bg-muted); display: flex; align-items: center; justify-content: center; color: var(--text-muted);">
+                Featured Project
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endwith %}
+
+      <!-- 3-Column Editorial Grid for Remaining Cases -->
+      <div class="grid-3">
+        {% for case in case_studies|slice:"1:4" %}
+          <article class="card-article">
+            <a href="{% url 'public:work_detail' case.slug %}" class="card-image-wrap" tabindex="-1" aria-hidden="true">
+              {% if case.image_url %}
+                <img src="{% static case.image_url %}" alt="{{ case.title }}" class="card-image" loading="lazy">
+              {% else %}
+                <div style="width: 100%; height: 100%; background: var(--bg-muted);"></div>
+              {% endif %}
+            </a>
+            <div class="card-body">
+              <div class="category-label">{{ case.category }}</div>
+              <h3 style="font-size: 1.15rem; margin-bottom: var(--space-xs); font-weight: var(--weight-bold);">
+                <a href="{% url 'public:work_detail' case.slug %}" class="btn-link" style="color: var(--text-main);">
+                  {{ case.title }}
+                </a>
+              </h3>
+              <p style="font-size: var(--text-small); color: var(--text-muted); line-height: 1.55; margin-bottom: var(--space-md); flex-grow: 1;">
+                {{ case.summary }}
+              </p>
+              <div class="author-byline">
+                <span class="author-avatar" style="{% if case.category == 'Cybersecurity' %}background-color: #03002F;{% endif %}">
+                  {% if case.category == 'Cybersecurity' %}VO{% else %}TO{% endif %}
+                </span>
+                <span>
+                  {% if case.category == 'Cybersecurity' %}
+                    by <strong>Vincent Odhiambo</strong> &middot; Co-Founder
+                  {% else %}
+                    by <strong>Timothy Owino</strong> &middot; Founder
+                  {% endif %}
+                </span>
+              </div>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- Stories & Founding Philosophy (Oberlo Midnight-Navy Contrast Section) -->
+<section class="section section-dark" style="background-color: var(--bg-dark);">
+  <div class="container">
+    <div class="stories-grid">
+      <div class="stories-intro">
+        <div style="color: var(--bg-sky); font-size: 0.75rem; font-weight: var(--weight-bold); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-xs);">
+          OUR THESIS
+        </div>
+        <h2 style="font-size: var(--text-h1); color: #FFFFFF; text-transform: uppercase; margin-bottom: var(--space-md);">
+          Why most websites <em>fail</em>
+        </h2>
+        <p style="color: var(--text-on-dark-muted); line-height: 1.7; font-size: 1.05rem; margin-bottom: var(--space-lg);">
+          Most web agencies force you to choose between two extremes: a pretty website that loads slowly and gets hacked, or a clunky technical tool that no customer wants to use.
+        </p>
+        <p style="color: var(--text-on-dark-muted); line-height: 1.7; font-size: 1.05rem; margin-bottom: var(--space-xl);">
+          We founded Idesignweb to eliminate that false choice. Every store, website, and brand we deliver combines fluid, high-converting design with rock-solid cybersecurity and clean code.
+        </p>
+        <div>
+          <a href="{% url 'public:about' %}" class="btn btn-green btn-sm">
+            Read Founders' Story
+          </a>
+        </div>
+      </div>
+
+      <div class="stories-cards">
+        <div style="background-color: var(--bg-dark-card); border: 1px solid rgba(255, 255, 255, 0.1); padding: var(--space-xl); border-radius: var(--radius-xs); display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="color: var(--color-green); font-size: 0.75rem; font-weight: var(--weight-bold); text-transform: uppercase; margin-bottom: 8px;">
+              CREATIVE DIRECTION
+            </div>
+            <h3 style="font-size: 1.25rem; color: #FFFFFF; margin-bottom: var(--space-sm); font-weight: var(--weight-bold);">
+              High-Converting User Experience
+            </h3>
+            <p style="font-size: var(--text-small); color: var(--text-on-dark-muted); line-height: 1.6;">
+              Led by Timothy Owino. Every layout is crafted for speed, mobile thumb-scrolling, clear calls-to-action, and brand credibility that turns casual visitors into repeat buyers.
+            </p>
+          </div>
+          <div style="font-size: var(--text-tiny); color: var(--bg-sky); font-weight: bold; margin-top: var(--space-md);">
+            TIMOTHY OWINO &middot; FOUNDER
+          </div>
+        </div>
+
+        <div style="background-color: var(--bg-dark-card); border: 1px solid rgba(255, 255, 255, 0.1); padding: var(--space-xl); border-radius: var(--radius-xs); display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="color: #60A5FA; font-size: 0.75rem; font-weight: var(--weight-bold); text-transform: uppercase; margin-bottom: 8px;">
+              CYBER DEFENSE
+            </div>
+            <h3 style="font-size: 1.25rem; color: #FFFFFF; margin-bottom: var(--space-sm); font-weight: var(--weight-bold);">
+              Zero Loopholes & Automatic Backups
+            </h3>
+            <p style="font-size: var(--text-small); color: var(--text-on-dark-muted); line-height: 1.6;">
+              Led by Vincent Odhiambo. We harden your server, configure modern SSL encryption, seal security loopholes against attacks, and set up daily offsite disaster recovery.
+            </p>
+          </div>
+          <div style="font-size: var(--text-tiny); color: var(--bg-sky); font-weight: bold; margin-top: var(--space-md);">
+            VINCENT ODHIAMBO &middot; CO-FOUNDER
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Capabilities Grid (Oberlo Clean Cards) -->
+<section class="section section-muted">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-numeral">CAPABILITIES</div>
+        <h2 class="section-title text-display" style="text-transform: uppercase; color: var(--color-blue);">
+          What we <em>build</em>
+        </h2>
+      </div>
+      <div>
+        <a href="{% url 'public:services_hub' %}" class="btn-link">
+          Explore All Services &rarr;
         </a>
       </div>
     </div>
 
     <div class="grid-4">
       {% for service in services %}
-        {% include 'components/service_card.html' with service=service %}
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
-<!-- Meet the Leadership & Co-Founders Section -->
-<section class="section section-alt">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-title-wrap">
-        <div class="section-numeral">LEADERSHIP</div>
-        <h2 class="section-title">Direct Founder Collaboration</h2>
-      </div>
-      <div>
-        <span class="numeral-badge">
-          <span class="pulse-dot"></span>
-          <span>Zero Middlemen</span>
-        </span>
-      </div>
-    </div>
-
-    <div class="grid-2" style="margin-bottom: var(--space-2xl);">
-      {% for f in founders %}
-        <div class="card-founder">
-          <div class="founder-header">
-            <div>
-              <h3 class="founder-name">{{ f.name }}</h3>
-              <div class="founder-role">{{ f.role }}</div>
+        <div class="card-service">
+          <div>
+            <div class="card-service-header">
+              <span class="service-number">{{ service.service_number }}</span>
+              <span class="category-badge">{{ service.slug|upper }}</span>
             </div>
-            <span class="numeral-badge">{{ f.title_badge|default:"LEADERSHIP" }}</span>
+            <h3 class="service-title">
+              <a href="{% url 'public:service_detail' service.slug %}" style="color: inherit;">
+                {{ service.title }}
+              </a>
+            </h3>
+            <p class="service-tagline">{{ service.tagline }}</p>
+            
+            <div class="service-deliverables">
+              {% for d in service.deliverables|slice:":3" %}
+                <div class="service-deliverable-item">{{ d }}</div>
+              {% endfor %}
+            </div>
           </div>
 
-          <p style="font-size: var(--text-body); color: var(--text-muted); line-height: 1.6; margin-bottom: var(--space-md); flex-grow: 1;">
-            {{ f.bio }}
-          </p>
-
-          <div class="founder-skills">
-            {% for skill in f.skills %}
-              <span class="founder-skill-pill">{{ skill }}</span>
-            {% endfor %}
-          </div>
-
-          <div style="display: flex; gap: var(--space-md); margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--border-hairline); flex-wrap: wrap;">
-            <a href="tel:{{ f.phone }}" class="btn btn-secondary btn-sm">Call {{ f.name|slice:":7" }}</a>
-            <a href="mailto:{{ f.email }}" class="btn btn-ghost btn-sm">Email Direct</a>
+          <div>
+            <a href="{% url 'public:service_detail' service.slug %}" class="btn btn-outline btn-block btn-sm">
+              Learn More &rarr;
+            </a>
           </div>
         </div>
       {% endfor %}
     </div>
-
-    <div class="card-hairline" style="border-left: 3px solid var(--accent-blue); padding: var(--space-lg) var(--space-xl); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-md);">
-      <div>
-        <div style="font-weight: var(--weight-bold); color: #FFFFFF; font-size: 1.1rem; margin-bottom: 2px;">
-          Engineering depth meets visual distinction.
-        </div>
-        <div style="font-size: var(--text-small); color: var(--text-muted);">
-          Every project is crafted and defended directly by founder Timothy Owino and co-founder Vincent Odhiambo.
-        </div>
-      </div>
-      <div>
-        <a href="{% url 'public:about' %}" class="btn btn-ghost btn-sm">
-          Read Founder Story &rarr;
-        </a>
-      </div>
-    </div>
   </div>
 </section>
 
-<!-- Selected Work Showcase -->
+<!-- Meet the Founders (Human, Editorial Spotlight) -->
 <section class="section">
   <div class="container">
     <div class="section-header">
-      <div class="section-title-wrap">
-        <div class="section-numeral">SELECTED WORK</div>
-        <h2 class="section-title">Case Studies & Outcomes</h2>
+      <div>
+        <div class="section-numeral">DIRECT LEADERSHIP</div>
+        <h2 class="section-title text-display" style="text-transform: uppercase; color: var(--color-blue);">
+          Meet the <em>founders</em>
+        </h2>
       </div>
       <div>
-        <a href="{% url 'public:work_list' %}" class="btn btn-ghost btn-sm">
-          View All Case Studies &rarr;
-        </a>
+        <span class="numeral-badge">Direct Access &middot; Zero Middlemen</span>
       </div>
     </div>
 
     <div class="grid-2">
-      {% for case in case_studies %}
-        <article class="card-hairline-image">
-          {% if case.image_url %}
-            <div class="card-image-wrap">
-              <img src="{% static case.image_url %}" alt="{{ case.title }}" class="card-image" loading="lazy">
-            </div>
-          {% endif %}
-          <div class="card-body">
-            <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-sm);">
-              <span class="numeral-badge">{{ case.category }}</span>
-              <span style="font-size: var(--text-tiny); font-family: var(--font-mono); color: var(--text-dim);">{{ case.year }}</span>
-            </div>
-            <h3 style="font-size: var(--text-h3); color: #FFFFFF; margin-bottom: var(--space-xs);">{{ case.title }}</h3>
-            <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-lg); line-height: 1.6;">{{ case.summary }}</p>
-            
-            <div style="border-top: 1px solid var(--border-hairline); padding-top: var(--space-md); margin-top: auto; display: flex; justify-content: space-between; align-items: baseline;">
-              <span style="font-size: var(--text-tiny); color: var(--text-dim);">Client: {{ case.client }}</span>
-              <a href="{% url 'public:work_detail' case.slug %}" class="card-service-action" style="font-size: var(--text-tiny);">
-                Explore Case Study &rarr;
-              </a>
-            </div>
+      <!-- Founder 1: Timothy Owino -->
+      <div class="card-founder">
+        <div class="founder-header">
+          <div>
+            <h3 class="founder-name">Timothy Owino</h3>
+            <div class="founder-role">Founder, Creative Director & Full-Stack Developer</div>
           </div>
-        </article>
-      {% endfor %}
+          <span class="badge-founder">FOUNDER</span>
+        </div>
+
+        <p style="font-size: var(--text-body); color: var(--text-body); line-height: 1.65; margin-bottom: var(--space-md); flex-grow: 1;">
+          Founder of Idesignweb. Timothy leads user experience, visual identity systems, and responsive frontend engineering. Combining graphic design mastery with clean, high-performance web development, Timothy translates business goals into intuitive, visually unforgettable digital products.
+        </p>
+
+        <div class="founder-skills">
+          <span class="founder-skill-pill">Full-Stack Development</span>
+          <span class="founder-skill-pill">UI/UX Interface Design</span>
+          <span class="founder-skill-pill">Brand Identity & Logos</span>
+          <span class="founder-skill-pill">Commercial Video Editing</span>
+          <span class="founder-skill-pill">Speed Optimization</span>
+        </div>
+
+        <div style="display: flex; gap: var(--space-md); margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--border-hairline); flex-wrap: wrap;">
+          <a href="tel:0115709680" class="btn btn-green btn-sm">Call 0115709680</a>
+          <a href="mailto:otienotimothy198@gmail.com" class="btn btn-outline btn-sm">Email Timothy</a>
+        </div>
+      </div>
+
+      <!-- Founder 2: Vincent Odhiambo -->
+      <div class="card-founder">
+        <div class="founder-header">
+          <div>
+            <h3 class="founder-name">Vincent Odhiambo</h3>
+            <div class="founder-role">Co-Founder, Lead Software Engineer & Cybersecurity Analyst</div>
+          </div>
+          <span class="badge-co-founder">CO-FOUNDER</span>
+        </div>
+
+        <p style="font-size: var(--text-body); color: var(--text-body); line-height: 1.65; margin-bottom: var(--space-md); flex-grow: 1;">
+          Co-Founder of Idesignweb. Vincent leads backend architectures, system programming, and cybersecurity defense. With deep expertise in defensive engineering, vulnerability assessment, and server hardening, Vincent ensures our client platforms are safeguarded against cyber attacks while maintaining sub-second execution.
+        </p>
+
+        <div class="founder-skills">
+          <span class="founder-skill-pill">Web Systems Programming</span>
+          <span class="founder-skill-pill">Penetration Testing</span>
+          <span class="founder-skill-pill">Vulnerability Audits</span>
+          <span class="founder-skill-pill">Server Hardening</span>
+          <span class="founder-skill-pill">Automated Backups</span>
+        </div>
+
+        <div style="display: flex; gap: var(--space-md); margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid var(--border-hairline); flex-wrap: wrap;">
+          <a href="tel:0768072566" class="btn btn-blue btn-sm">Call 0768072566</a>
+          <a href="mailto:vinnyochi13249@gmail.com" class="btn btn-outline btn-sm">Email Vincent</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Modern 3-Step Methodology -->
-<section class="section section-alt">
+<!-- Free Business Tools & Assessments (Oberlo Style) -->
+<section class="section section-sky">
   <div class="container">
     <div class="section-header">
-      <div class="section-title-wrap">
-        <div class="section-numeral">OUR METHODOLOGY</div>
-        <h2 class="section-title">How We Deliver Work</h2>
+      <div>
+        <div class="section-numeral">FREE ASSESSMENTS</div>
+        <h2 class="section-title text-display" style="text-transform: uppercase; color: var(--color-blue);">
+          Business <em>tools</em>
+        </h2>
       </div>
       <div>
-        <span class="numeral-badge">Disciplined Pipeline</span>
+        <span class="category-badge">Zero Cost &middot; 24-Hour Review</span>
       </div>
     </div>
 
-    <div class="process-list">
-      {% for step in process_steps %}
-        {% include 'components/process_step.html' with step=step %}
-      {% endfor %}
+    <div class="grid-3">
+      <div class="card-hairline" style="background-color: #FFFFFF;">
+        <div class="category-label">PROJECT SCOPE</div>
+        <h3 style="font-size: 1.25rem; font-weight: var(--weight-bold); margin-bottom: var(--space-xs);">
+          Website Cost & Timeline Estimator
+        </h3>
+        <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-lg);">
+          Answer 4 quick questions about your project requirements to receive a fixed-price proposal and milestone roadmap.
+        </p>
+        <a href="{% url 'public:contact' %}" class="btn btn-outline btn-sm">
+          Get Instant Estimate &rarr;
+        </a>
+      </div>
+
+      <div class="card-hairline" style="background-color: #FFFFFF;">
+        <div class="category-label">SECURITY CHECKUP</div>
+        <h3 style="font-size: 1.25rem; font-weight: var(--weight-bold); margin-bottom: var(--space-xs);">
+          Cybersecurity & Vulnerability Audit
+        </h3>
+        <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-lg);">
+          Have Vincent Odhiambo review your existing website code, server ports, and SSL configuration for loopholes.
+        </p>
+        <a href="{% url 'public:contact' %}" class="btn btn-outline btn-sm">
+          Request Security Review &rarr;
+        </a>
+      </div>
+
+      <div class="card-hairline" style="background-color: #FFFFFF;">
+        <div class="category-label">FOUNDER CONSULTATION</div>
+        <h3 style="font-size: 1.25rem; font-weight: var(--weight-bold); margin-bottom: var(--space-xs);">
+          Direct Discovery Call
+        </h3>
+        <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-lg);">
+          Speak directly with Timothy Owino and Vincent Odhiambo via phone or WhatsApp to brainstorm your concept.
+        </p>
+        <a href="tel:0115709680" class="btn btn-outline btn-sm">
+          Call 0115709680 &rarr;
+        </a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Direct Call-To-Action Banner -->
-<section class="section">
-  <div class="container">
-    <div class="card-hairline" style="text-align: center; padding: var(--space-3xl) var(--space-xl); background: radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.15) 0%, var(--bg-card) 70%);">
-      <div class="numeral-badge" style="margin-bottom: var(--space-md);">
-        START A CONVERSATION
-      </div>
-      <h2 style="font-size: var(--text-display); max-width: 820px; margin-left: auto; margin-right: auto; margin-bottom: var(--space-md); color: #FFFFFF;">
-        Ready to build software that scales and converts?
-      </h2>
-      <p style="font-size: 1.15rem; max-width: 640px; margin-left: auto; margin-right: auto; margin-bottom: var(--space-xl); color: var(--text-muted);">
-        Reach out to Vincent Odhiambo and Timothy Owino for a tailored proposal and technical assessment within 24 hours.
-      </p>
-      <div style="display: flex; justify-content: center; gap: var(--space-md); flex-wrap: wrap; margin-bottom: var(--space-2xl);">
-        <a href="{% url 'public:contact' %}" class="btn btn-primary">
-          <span>Get a Free Quote</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-        </a>
-        <a href="tel:{{ company_phone }}" class="btn btn-secondary">
-          <span>Call or WhatsApp: {{ company_phone }}</span>
-        </a>
-      </div>
-      <div style="display: flex; justify-content: center; gap: var(--space-xl); font-size: var(--text-small); color: var(--text-dim); flex-wrap: wrap;">
-        <div>Direct Phone: <strong style="color: var(--text-main);">{{ company_phone }}</strong></div>
-        <div>Email: <strong style="color: var(--text-main);">{{ company_email }}</strong></div>
-        <div>Location: <strong style="color: var(--text-main);">{{ company_location }}</strong></div>
-      </div>
-    </div>
+<!-- High-Conversion Bottom CTA (Oberlo Style) -->
+<section class="section" style="text-align: center; background-color: var(--bg-muted);">
+  <div class="container" style="max-width: 800px;">
+    <h2 class="text-display" style="text-transform: uppercase; color: var(--color-blue); margin-bottom: var(--space-md);">
+      Start building <em>today</em>
+    </h2>
+    <p style="font-size: 1.25rem; color: var(--text-body); line-height: 1.6; margin-bottom: var(--space-xl);">
+      Whether you need an e-commerce platform, security overhaul, brand identity suite, or commercial video, we're ready to bring your vision to life.
+    </p>
+    <a href="{% url 'public:contact' %}" class="btn btn-green btn-lg">
+      Start a Project & Get a Quote
+    </a>
   </div>
 </section>
 {% endblock %}
-

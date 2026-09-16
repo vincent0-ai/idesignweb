@@ -1,10 +1,9 @@
 <header class="site-header">
   <div class="container header-inner">
-    <!-- Brand Wordmark -->
-    <a href="{% url 'public:home' %}" class="brand-mark" aria-label="idesignweb homepage">
+    <!-- Oberlo-Style Brand Wordmark -->
+    <a href="{% url 'public:home' %}" class="brand-mark" aria-label="Idesignweb home">
       <span class="brand-dot"></span>
       <span>IDESIGNWEB</span>
-      <span class="brand-sub">STUDIO</span>
     </a>
 
     <!-- Mobile Nav Toggle -->
@@ -12,29 +11,63 @@
       Menu
     </button>
 
-    <!-- Main Navigation Bar -->
+    <!-- Main Navigation Bar with Oberlo Dropdowns -->
     <nav id="main-nav" class="main-nav" aria-label="Main Navigation">
-      {% for item in main_nav_items %}
-        <a href="{% url item.url_name %}" class="nav-link {% if request.resolver_match.view_name == item.url_name %}active{% endif %}">
-          <span>{{ item.label }}</span>
-        </a>
-      {% endfor %}
+      <!-- Capabilities Dropdown -->
+      <details class="nav-dropdown">
+        <summary class="nav-dropdown-summary">
+          <span>Capabilities</span>
+          <span style="font-size: 0.65rem; color: var(--color-blue);">&#9662;</span>
+        </summary>
+        <div class="nav-dropdown-menu">
+          {% for s in service_links %}
+            <a href="{% url 'public:service_detail' s.slug %}" class="nav-dropdown-item">
+              <span style="font-weight: bold; color: var(--color-blue); margin-right: 6px;">{{ s.num }}</span>
+              {{ s.title }}
+            </a>
+          {% endfor %}
+          <div style="border-top: 1px solid var(--border-hairline); margin-top: 6px; padding-top: 6px;">
+            <a href="{% url 'public:services_hub' %}" class="nav-dropdown-item" style="color: var(--color-blue); font-weight: bold;">
+              All Capabilities &rarr;
+            </a>
+          </div>
+        </div>
+      </details>
+
+      <a href="{% url 'public:work_list' %}" class="nav-link {% if request.resolver_match.view_name == 'public:work_list' %}active{% endif %}">
+        Case Studies
+      </a>
+
+      <a href="{% url 'public:about' %}" class="nav-link {% if request.resolver_match.view_name == 'public:about' %}active{% endif %}">
+        Founders & Philosophy
+      </a>
+
+      <a href="{% url 'public:insights_list' %}" class="nav-link {% if request.resolver_match.view_name == 'public:insights_list' %}active{% endif %}">
+        Articles
+      </a>
+
+      <a href="{% url 'public:contact' %}" class="nav-link {% if request.resolver_match.view_name == 'public:contact' %}active{% endif %}">
+        Contact
+      </a>
     </nav>
 
-    <!-- Action / Member Access Area -->
+    <!-- Oberlo Vertical Divider + Action Buttons -->
     <div class="header-actions">
-      <a href="{% url 'public:contact' %}" class="btn btn-primary btn-sm">
-        Start a Project
-      </a>
       {% if user.is_authenticated %}
-        <a href="{% url 'portal:dashboard' %}" class="btn btn-secondary btn-sm">
+        <a href="{% url 'portal:dashboard' %}" class="nav-link" style="font-size: 0.85rem;">
           Portal
         </a>
       {% else %}
-        <a href="{% url 'portal:login' %}" class="btn btn-secondary btn-sm">
+        <a href="{% url 'portal:login' %}" class="nav-link" style="font-size: 0.85rem;">
           Client Login
         </a>
       {% endif %}
+
+      <div class="nav-divider" aria-hidden="true"></div>
+
+      <a href="{% url 'public:contact' %}" class="btn btn-green btn-sm">
+        Start a Project
+      </a>
     </div>
   </div>
 </header>

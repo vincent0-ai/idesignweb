@@ -1,19 +1,18 @@
 <footer class="site-footer">
   <div class="container">
     <div class="footer-grid">
-      <!-- Col 1: Studio & Founders -->
+      <!-- Col 1: Studio & Mission -->
       <div class="footer-col">
-        <div class="brand-mark" style="margin-bottom: var(--space-md);">
-          <span class="brand-dot"></span>
-          <span>IDESIGNWEB</span>
-          <span class="brand-sub">STUDIO</span>
-        </div>
-        <p style="font-size: var(--text-small); max-width: 340px; line-height: 1.6; margin-bottom: var(--space-md);">
-          High-performance web applications, proactive cybersecurity defense, and distinctive visual identities.
+        <a href="{% url 'public:home' %}" class="brand-mark" style="color: #FFFFFF; margin-bottom: var(--space-md); display: inline-flex;">
+          <span class="brand-dot" style="background-color: var(--color-green);"></span>
+          <span style="letter-spacing: -0.02em;">IDESIGNWEB</span>
+        </a>
+        <p style="font-size: var(--text-small); max-width: 340px; line-height: 1.6; margin-bottom: var(--space-lg); color: var(--text-on-dark-muted);">
+          High-performance web applications, secure e-commerce systems, and distinctive brand identities designed to grow your business.
         </p>
-        <div style="font-size: var(--text-tiny); color: var(--text-muted); line-height: 1.5;">
-          <div><strong>Timothy Owino</strong> · Founder, Design & Full-Stack</div>
-          <div><strong>Vincent Odhiambo</strong> · Co-Founder, Programming & Cybersecurity</div>
+        <div style="font-size: var(--text-small); color: var(--text-on-dark-muted); line-height: 1.6;">
+          <div style="margin-bottom: 4px;"><strong style="color: #FFFFFF;">Timothy Owino</strong> · Founder, Design & Full-Stack</div>
+          <div><strong style="color: #FFFFFF;">Vincent Odhiambo</strong> · Co-Founder, Engineering & Cybersecurity</div>
         </div>
       </div>
 
@@ -23,7 +22,6 @@
         <div class="footer-links">
           {% for s in service_links %}
             <a href="{% url 'public:service_detail' s.slug %}" class="footer-link">
-              <span class="numeral" style="color: var(--accent-cyan); margin-right: 6px; font-family: var(--font-mono);">{{ s.num }}</span>
               {{ s.title }}
             </a>
           {% endfor %}
@@ -34,31 +32,37 @@
       <div class="footer-col">
         <div class="footer-col-title">NAVIGATION</div>
         <div class="footer-links">
-          <a href="{% url 'public:work_list' %}" class="footer-link">Featured Work</a>
+          <a href="{% url 'public:work_list' %}" class="footer-link">Case Studies</a>
           <a href="{% url 'public:about' %}" class="footer-link">Founders & Story</a>
-          <a href="{% url 'public:insights_list' %}" class="footer-link">Articles & Insights</a>
+          <a href="{% url 'public:insights_list' %}" class="footer-link">Articles & Resources</a>
           <a href="{% url 'public:contact' %}" class="footer-link">Start a Project</a>
         </div>
       </div>
 
-      <!-- Col 4: Direct Contacts & Status -->
+      <!-- Col 4: Direct Founder Access -->
       <div class="footer-col">
-        <div class="footer-col-title">DIRECT INQUIRY</div>
-        <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-md);">
-          Direct collaboration with the founders. Rapid turnaround on quotes and technical assessments.
+        <div class="footer-col-title">DIRECT FOUNDER ACCESS</div>
+        <p style="font-size: var(--text-small); color: var(--text-on-dark-muted); margin-bottom: var(--space-md);">
+          Work directly with the founders. Rapid turnaround on quotes and project blue-printing.
         </p>
         <div style="display: flex; flex-direction: column; gap: 8px; font-size: var(--text-small); margin-bottom: var(--space-lg);">
-          <div><span style="color: var(--text-dim);">Phone / WhatsApp:</span> <a href="tel:{{ company_phone }}" style="color: #FFFFFF;">{{ company_phone }}</a></div>
-          <div><span style="color: var(--text-dim);">Email:</span> <a href="mailto:{{ company_email }}" style="color: #FFFFFF;">{{ company_email }}</a></div>
+          <div>
+            <span style="color: var(--text-dim);">Timothy (Founder):</span>
+            <a href="tel:0115709680" style="color: #FFFFFF; text-decoration: underline;">0115709680</a>
+          </div>
+          <div>
+            <span style="color: var(--text-dim);">Vincent (Co-Founder):</span>
+            <a href="tel:0768072566" style="color: #FFFFFF; text-decoration: underline;">0768072566</a>
+          </div>
         </div>
         <div>
           {% if user.is_authenticated %}
-            <a href="{% url 'portal:dashboard' %}" class="btn btn-secondary btn-sm btn-block">
-              Open Dashboard
+            <a href="{% url 'portal:dashboard' %}" class="btn btn-outline btn-sm" style="color: #FFFFFF; border-color: rgba(255, 255, 255, 0.2);">
+              Open Client Workspace
             </a>
           {% else %}
-            <a href="{% url 'portal:login' %}" class="btn btn-secondary btn-sm btn-block">
-              Client Portal
+            <a href="{% url 'portal:login' %}" class="btn btn-outline btn-sm" style="color: #FFFFFF; border-color: rgba(255, 255, 255, 0.2);">
+              Client Portal Login
             </a>
           {% endif %}
         </div>
@@ -70,9 +74,9 @@
       <div>
         &copy; {{ current_year }} Idesignweb Studio. Founded by Timothy Owino, Co-Founded by Vincent Odhiambo.
       </div>
-      <div style="display: flex; align-items: center; gap: 8px;">
-        <span class="pulse-dot"></span>
-        <span style="color: var(--text-muted); font-size: var(--text-tiny);">All Systems Operational & Protected</span>
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <span>Nairobi, Kenya &middot; Remote Globally</span>
+        <a href="{% url 'public:contact' %}" style="color: var(--color-green); font-weight: bold;">Work With Us &rarr;</a>
       </div>
     </div>
   </div>

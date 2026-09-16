@@ -1,44 +1,48 @@
 {% extends 'base/base.html' %}
 {% load static %}
 
-{% block title %}{{ case_study.title }} : Case Study : {{ site_title }}{% endblock %}
+{% block title %}Case Study: {{ case_study.title }} : {{ site_title }}{% endblock %}
 
 {% block content %}
-<section class="section">
+<section class="section" style="background: var(--bg-muted); border-bottom: 1px solid var(--border-hairline); padding: var(--space-2xl) 0;">
   <div class="container">
-    <div style="margin-bottom: var(--space-xl);">
-      <a href="{% url 'public:work_list' %}" class="btn btn-ghost btn-sm">
+    <div style="margin-bottom: var(--space-md);">
+      <a href="{% url 'public:work_list' %}" class="btn btn-outline btn-sm">
         <span>&larr; Back to Case Studies</span>
       </a>
     </div>
 
-    <div class="hero-meta">
-      <span class="numeral-badge">{{ case_study.category }}</span>
+    <div style="display: flex; gap: 12px; align-items: center; margin-bottom: var(--space-sm);">
+      <span class="story-tag" style="margin-bottom: 0;">{{ case_study.category }}</span>
       <span style="font-size: var(--text-small); color: var(--text-muted); font-family: var(--font-mono);">Client: {{ case_study.client }} &bull; {{ case_study.year }}</span>
     </div>
 
-    <h1 style="font-size: var(--text-display); max-width: 960px; margin-bottom: var(--space-md); color: #FFFFFF;">
+    <h1 style="font-size: var(--text-display); max-width: 960px; margin-bottom: var(--space-md); text-transform: uppercase;">
       {{ case_study.title }}
     </h1>
 
-    <p style="font-size: 1.25rem; color: var(--text-muted); max-width: 760px; margin-bottom: var(--space-2xl); line-height: 1.65;">
+    <p style="font-size: 1.25rem; color: var(--text-body); max-width: 760px; margin-bottom: 0; line-height: 1.65;">
       {{ case_study.summary }}
     </p>
+  </div>
+</section>
 
+<section class="section">
+  <div class="container">
     {% if case_study.image_url %}
       <!-- Featured Case Study Visual Showcase -->
-      <div style="border: 1px solid var(--border-hairline); border-radius: var(--radius-lg); margin-bottom: var(--space-3xl); overflow: hidden; background: var(--bg-surface);">
+      <div style="border: 1px solid var(--border-hairline); border-radius: var(--radius-sm); margin-bottom: var(--space-3xl); overflow: hidden; background: #FFFFFF; box-shadow: var(--shadow-sm);">
         <img src="{% static case_study.image_url %}" alt="{{ case_study.title }}" style="width: 100%; max-height: 520px; object-fit: cover; display: block;">
       </div>
     {% endif %}
 
     <!-- Results Banner -->
-    <div class="card-hairline" style="margin-bottom: var(--space-3xl); background-color: var(--bg-surface);">
-      <div class="footer-col-title">KEY RESULTS & CLIENT IMPACT</div>
+    <div class="card-sky" style="margin-bottom: var(--space-3xl); padding: var(--space-2xl);">
+      <div class="story-tag" style="margin-bottom: var(--space-md);">KEY RESULTS & CLIENT IMPACT</div>
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md);">
         {% for r in case_study.results %}
-          <div style="background-color: var(--bg-card); border: 1px solid var(--border-hairline); border-radius: var(--radius-sm); padding: var(--space-lg); text-align: center;">
-            <div class="stat-metric" style="font-size: 2.25rem; color: #34D399; font-family: var(--font-mono); font-weight: var(--weight-bold); margin-bottom: 4px;">{{ r.metric }}</div>
+          <div class="card" style="padding: var(--space-lg); text-align: center;">
+            <div style="font-size: 2.25rem; color: var(--color-blue); font-family: var(--font-mono); font-weight: var(--weight-bold); margin-bottom: 4px;">{{ r.metric }}</div>
             <div style="font-size: var(--text-small); color: var(--text-muted);">{{ r.label }}</div>
           </div>
         {% endfor %}
@@ -47,31 +51,33 @@
 
     <!-- Case Study Deep Dive Breakdown -->
     <div class="grid-2" style="margin-bottom: var(--space-3xl);">
-      <div class="card-hairline">
-        <h2 style="font-size: var(--text-h3); color: #FFFFFF; margin-bottom: var(--space-sm);">The Client Challenge</h2>
-        <p style="line-height: 1.7; font-size: var(--text-body); color: var(--text-muted); margin-bottom: 0;">{{ case_study.challenge }}</p>
+      <div class="card" style="padding: var(--space-2xl);">
+        <div class="story-tag" style="margin-bottom: var(--space-xs);">BACKGROUND</div>
+        <h2 style="font-size: var(--text-h3); margin-bottom: var(--space-sm); text-transform: uppercase;">The Client Challenge</h2>
+        <p style="line-height: 1.7; font-size: var(--text-body); color: var(--text-body); margin-bottom: 0;">{{ case_study.challenge }}</p>
       </div>
 
-      <div class="card-hairline">
-        <h2 style="font-size: var(--text-h3); color: #FFFFFF; margin-bottom: var(--space-sm);">The Technical Solution</h2>
-        <p style="line-height: 1.7; font-size: var(--text-body); color: var(--text-muted); margin-bottom: 0;">{{ case_study.solution }}</p>
+      <div class="card" style="padding: var(--space-2xl);">
+        <div class="story-tag" style="margin-bottom: var(--space-xs);">EXECUTION</div>
+        <h2 style="font-size: var(--text-h3); margin-bottom: var(--space-sm); text-transform: uppercase;">The Technical Solution</h2>
+        <p style="line-height: 1.7; font-size: var(--text-body); color: var(--text-body); margin-bottom: 0;">{{ case_study.solution }}</p>
       </div>
     </div>
 
     <!-- Deliverables Manifest -->
-    <div class="card-hairline" style="margin-bottom: var(--space-3xl);">
-      <h2 style="font-size: var(--text-h3); color: #FFFFFF; margin-bottom: var(--space-sm);">Completed Deliverables</h2>
-      <p style="color: var(--text-muted); font-size: var(--text-body); margin-bottom: 0;">{{ case_study.deliverables_summary }}</p>
+    <div class="card" style="padding: var(--space-2xl); margin-bottom: var(--space-3xl);">
+      <div class="story-tag" style="margin-bottom: var(--space-xs);">COMPLETED OUTPUTS</div>
+      <h2 style="font-size: var(--text-h3); margin-bottom: var(--space-sm); text-transform: uppercase;">Completed Deliverables</h2>
+      <p style="color: var(--text-body); font-size: var(--text-body); margin-bottom: 0; line-height: 1.6;">{{ case_study.deliverables_summary }}</p>
     </div>
 
     <!-- Bottom CTA -->
     <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-hairline); padding-top: var(--space-xl); flex-wrap: wrap; gap: var(--space-md);">
-      <a href="{% url 'public:work_list' %}" class="btn btn-secondary">
+      <a href="{% url 'public:work_list' %}" class="btn btn-outline">
         <span>View More Work</span>
       </a>
-      <a href="{% url 'public:contact' %}" class="btn btn-primary">
-        <span>Start a Similar Project</span>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      <a href="{% url 'public:contact' %}" class="btn btn-green">
+        <span>Start a Similar Project &rarr;</span>
       </a>
     </div>
 

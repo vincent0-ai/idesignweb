@@ -1,6 +1,6 @@
 /*
  * Idesignweb Base Styles and Typography Reset
- * Modern, human, engineering studio aesthetic.
+ * Cloned from Oberlo design system: bright, crisp, editorial layout.
  */
 
 *, *::before, *::after {
@@ -15,7 +15,6 @@ html {
   scroll-behavior: smooth;
   background-color: var(--bg-primary);
   color: var(--text-main);
-  color-scheme: dark;
 }
 
 body {
@@ -23,7 +22,7 @@ body {
   font-weight: var(--weight-regular);
   font-size: var(--text-body);
   line-height: 1.6;
-  color: var(--text-main);
+  color: var(--text-body);
   background-color: var(--bg-primary);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -32,35 +31,28 @@ body {
   position: relative;
 }
 
-/* Background Atmosphere Glow */
-body::before {
-  content: "";
-  position: fixed;
-  top: -15vw;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 70vw;
-  height: 40vw;
-  max-width: 1000px;
-  max-height: 600px;
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.12) 0%, rgba(6, 182, 212, 0.04) 50%, transparent 75%);
-  pointer-events: none;
-  z-index: 0;
-  filter: blur(60px);
-}
-
 ::selection {
-  background-color: rgba(59, 130, 246, 0.35);
-  color: #FFFFFF;
+  background-color: #DDF0FB;
+  color: var(--color-blue);
 }
 
-/* Typography Hierarchy */
+/* Typography Hierarchy - Oberlo Style */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-sans);
   font-weight: var(--weight-bold);
   color: var(--text-main);
-  line-height: 1.2;
+  line-height: 1.15;
   letter-spacing: -0.02em;
+}
+
+/* Signature Oberlo Italic Accent Typography in headings */
+h1 em, h2 em, h3 em, .font-display em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  text-transform: lowercase;
+  color: var(--color-blue);
+  padding: 0 4px;
 }
 
 h1 { font-size: var(--text-h1); margin-bottom: var(--space-md); }
@@ -70,7 +62,7 @@ h4 { font-size: var(--text-h4); }
 
 p {
   margin-bottom: var(--space-md);
-  color: var(--text-muted);
+  color: var(--text-body);
   line-height: 1.65;
 }
 
@@ -81,11 +73,11 @@ p:last-child {
 a {
   color: inherit;
   text-decoration: none;
-  transition: color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+  transition: color 0.15s ease, opacity 0.15s ease;
 }
 
 a:hover {
-  color: #FFFFFF;
+  color: var(--color-blue);
 }
 
 ul, ol {
@@ -98,31 +90,9 @@ img {
   display: block;
 }
 
-/* Code & Monospace Elements */
-code, pre, kbd {
-  font-family: var(--font-mono);
-  font-size: 0.9em;
-}
-
-pre {
-  background-color: var(--bg-surface-alt);
-  border: 1px solid var(--border-hairline);
-  border-radius: var(--radius-md);
-  padding: var(--space-md) var(--space-lg);
-  overflow-x: auto;
-  color: var(--text-main);
-}
-
-/* Numerals & Tabular Display */
-.numeral, .tabular {
-  font-family: var(--font-sans);
-  font-weight: var(--weight-bold);
-  letter-spacing: normal;
-}
-
 /* Accessible Focus States */
 a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
-  outline: 2px solid var(--focus-ring);
+  outline: 2px solid var(--color-blue);
   outline-offset: 2px;
 }
 
@@ -130,22 +100,33 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .text-display {
   font-size: var(--text-display);
   font-weight: var(--weight-bold);
-  line-height: 1.05;
-  letter-spacing: -0.03em;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
 }
 
-.text-gradient {
-  background: linear-gradient(135deg, #FFFFFF 20%, #94A3B8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
+.text-blue { color: var(--color-blue); }
 .text-muted { color: var(--text-muted); }
 .text-dim { color: var(--text-dim); }
 .text-bold { font-weight: var(--weight-bold); }
 .text-medium { font-weight: var(--weight-medium); }
 .text-regular { font-weight: var(--weight-regular); }
-.text-caps { text-transform: uppercase; letter-spacing: 0.05em; font-size: var(--text-tiny); font-weight: var(--weight-bold); }
+.text-caps { 
+  text-transform: uppercase; 
+  letter-spacing: 0.05em; 
+  font-size: var(--text-tiny); 
+  font-weight: var(--weight-bold); 
+}
+
+/* Category Label (Oberlo style) */
+.category-label {
+  font-size: 0.75rem;
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-blue);
+  display: inline-block;
+  margin-bottom: var(--space-xs);
+}
 
 /* Structural Dividers */
 hr {

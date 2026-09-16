@@ -1,85 +1,80 @@
 /*
  * Idesignweb Design Tokens
- * Sleek, high-craft dark aesthetic inspired by antigravity.google and modern tech studios.
- * Deep obsidian surfaces, frosted glassmorphism, luminous accents, and clean typography.
+ * Cloned from Oberlo (https://www.oberlo.com/)
+ * Clean editorial light aesthetic, electric cobalt blue (#2D00FB), high-conversion green (#00D084),
+ * pastel sky-blue accent containers (#EBF6FC), midnight-navy contrast sections (#03002F), and bold uppercase display typography with italic serif accents.
  */
 
 :root {
-  /* Color Palette - Modern Studio Obsidian Dark */
-  --bg-primary: #07090e;
-  --bg-surface: #0e111a;
-  --bg-surface-alt: #131722;
-  --bg-card: #121623;
-  --bg-card-hover: #181d2e;
-  --bg-glass: rgba(14, 17, 26, 0.75);
-  --bg-glass-card: rgba(19, 23, 34, 0.65);
-  --bg-glass-hover: rgba(28, 34, 51, 0.75);
-  --bg-dark: #040508;
-  --bg-dark-surface: #0a0c12;
+  /* Color Palette - Oberlo Design System */
+  --bg-primary: #FFFFFF;
+  --bg-surface: #FFFFFF;
+  --bg-muted: #F4F4F6;        /* Oberlo bg-gray-10 */
+  --bg-muted-hover: #ECECF0;
+  --bg-sky: #EBF6FC;          /* Oberlo bg-sky-30 */
+  --bg-sky-hover: #DDF0FB;
+  --bg-dark: #03002F;         /* Oberlo signature deep midnight navy */
+  --bg-dark-surface: #0A0738;
+  --bg-dark-card: #0F0C42;
+
+  /* Brand Accents */
+  --color-blue: #2D00FB;       /* Oberlo electric cobalt blue */
+  --color-blue-hover: #1F00B8;
+  --color-blue-subtle: rgba(45, 0, 251, 0.08);
+  --color-green: #00D084;      /* Oberlo high-conversion CTA green */
+  --color-green-hover: #00B36E;
+  --color-green-focus: rgba(0, 208, 132, 0.25);
   
   /* Text System */
-  --text-main: #F3F4F6;
-  --text-muted: #9CA3AF;
-  --text-dim: #6B7280;
-  --text-inverse: #07090E;
-  --text-inverse-muted: #4B5563;
-  --text-gradient: linear-gradient(135deg, #FFFFFF 0%, #CBD5E1 100%);
-  
+  --text-main: #111827;        /* Deep charcoal/black */
+  --text-body: #374151;        /* Highly readable slate body */
+  --text-muted: #6B7280;       /* Neutral gray */
+  --text-dim: #9CA3AF;         /* Muted caption gray */
+  --text-blue: #2D00FB;        /* Oberlo blue headline text */
+  --text-on-dark: #FFFFFF;
+  --text-on-dark-muted: #D1D5DB;
+  --text-on-dark-sky: #EBF6FC;
+
   /* Borders & Dividers */
-  --border-hairline: rgba(255, 255, 255, 0.08);
-  --border-hairline-strong: rgba(255, 255, 255, 0.16);
-  --border-hairline-dark: rgba(255, 255, 255, 0.05);
-  --border-glow: rgba(59, 130, 246, 0.4);
-  --border-cyan-glow: rgba(6, 182, 212, 0.4);
-  
-  /* Accents & Brand Lighting */
-  --accent-cta: #2563EB;
-  --accent-cta-hover: #1D4ED8;
-  --accent-cta-text: #FFFFFF;
-  --accent-blue: #3B82F6;
-  --accent-cyan: #06B6D4;
-  --accent-emerald: #10B981;
-  --accent-glow: rgba(37, 99, 235, 0.3);
-  --accent-cyan-glow: rgba(6, 182, 212, 0.25);
-  
-  /* Focus States */
-  --focus-ring: #3B82F6;
-  
+  --border-hairline: #E5E7EB;
+  --border-subtle: #E2E8F0;
+  --border-strong: #D1D5DB;
+  --border-dark: rgba(255, 255, 255, 0.12);
+
   /* Typography */
-  --font-sans: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", "Inter", "Segoe UI", Roboto, sans-serif;
-  --font-mono: "JetBrains Mono", "SF Mono", "Fira Code", Consolas, monospace;
-  
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Playfair Display", Georgia, Cambria, "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", Consolas, monospace;
+
   /* Font Weights */
   --weight-regular: 400;
   --weight-medium: 500;
-  --weight-bold: 600;
-  --weight-black: 700;
-  
+  --weight-bold: 700;
+  --weight-black: 800;
+
   /* Type Scale */
-  --text-display: clamp(2.5rem, 5.5vw, 4.25rem);
-  --text-h1: clamp(2rem, 3.8vw, 3rem);
-  --text-h2: clamp(1.5rem, 2.5vw, 2.25rem);
-  --text-h3: 1.35rem;
-  --text-h4: 1.125rem;
+  --text-display: clamp(2.25rem, 5.2vw, 3.75rem);
+  --text-h1: clamp(1.85rem, 3.5vw, 2.75rem);
+  --text-h2: clamp(1.4rem, 2.4vw, 2rem);
+  --text-h3: 1.25rem;
+  --text-h4: 1.1rem;
   --text-body: 1rem;
   --text-small: 0.875rem;
   --text-tiny: 0.75rem;
-  
-  /* Radii */
-  --radius-xs: 4px;
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 18px;
-  --radius-xl: 24px;
-  --radius-pill: 9999px;
-  
-  /* Shadows & Ambient Glows */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.6);
-  --glow-ambient: 0 0 80px -20px rgba(37, 99, 235, 0.2);
-  --glow-cyan: 0 0 60px -15px rgba(6, 182, 212, 0.2);
-  
+
+  /* Radii - Oberlo uses crisp, clean 3px/4px corners */
+  --radius-xs: 2px;
+  --radius-sm: 3px;           /* Oberlo button standard rounded-[3px] */
+  --radius-md: 6px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.1);
+  --shadow-green: 0 4px 14px rgba(0, 208, 132, 0.35);
+
   /* Layout Spacing */
   --container-max: 1240px;
   --header-height: 72px;

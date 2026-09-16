@@ -3,41 +3,42 @@
 {% block title %}{{ service.title }} : Studio Practice : {{ site_title }}{% endblock %}
 
 {% block content %}
-<section class="section">
+<section class="section" style="background: var(--bg-muted); border-bottom: 1px solid var(--border-hairline); padding: var(--space-2xl) 0;">
   <div class="container">
-    <div style="margin-bottom: var(--space-md);">
-      <span class="numeral-badge">
-        <span class="pulse-dot"></span>
-        <span>PRACTICE {{ service.service_number }}</span>
-      </span>
+    <div style="margin-bottom: var(--space-sm);">
+      <span class="story-tag">PRACTICE {{ service.service_number }}</span>
     </div>
     
-    <h1 style="font-size: var(--text-display); max-width: 900px; margin-bottom: var(--space-md); color: #FFFFFF;">
+    <h1 style="font-size: var(--text-display); max-width: 900px; margin-bottom: var(--space-md); text-transform: uppercase;">
       {{ service.title }}
     </h1>
     
-    <p style="font-size: 1.25rem; color: var(--accent-cyan); max-width: 780px; margin-bottom: var(--space-2xl); font-weight: var(--weight-medium);">
+    <p style="font-size: 1.25rem; color: var(--color-blue); max-width: 780px; margin-bottom: 0; font-weight: var(--weight-medium);">
       {{ service.tagline }}
     </p>
+  </div>
+</section>
 
+<section class="section">
+  <div class="container">
     <div class="grid-2" style="align-items: start; margin-bottom: var(--space-3xl);">
       <!-- Service Description -->
-      <div class="card-hairline">
-        <div class="footer-col-title">PRACTICE OVERVIEW</div>
-        <p style="line-height: 1.7; margin-bottom: var(--space-lg); font-size: var(--text-body); color: var(--text-muted);">
+      <div class="card" style="padding: var(--space-2xl);">
+        <div class="story-tag" style="margin-bottom: var(--space-sm);">PRACTICE OVERVIEW</div>
+        <p style="line-height: 1.7; margin-bottom: var(--space-lg); font-size: var(--text-body); color: var(--text-body);">
           {{ service.overview }}
         </p>
         <div>
-          <a href="{% url 'public:contact' %}?service={{ service.slug }}" class="btn btn-primary">
+          <a href="{% url 'public:contact' %}?service={{ service.slug }}" class="btn btn-green">
             <span>Request Proposal for {{ service.title }}</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            <span>&rarr;</span>
           </a>
         </div>
       </div>
 
       <!-- Deliverables List -->
-      <div class="card-hairline">
-        <div class="footer-col-title">DELIVERABLE SCOPE</div>
+      <div class="card-sky" style="padding: var(--space-2xl);">
+        <div class="story-tag" style="margin-bottom: var(--space-sm);">DELIVERABLE SCOPE</div>
         <ul class="card-service-deliverables">
           {% for d in service.deliverables %}
             <li>{{ d }}</li>
@@ -50,8 +51,8 @@
     <div style="margin-bottom: var(--space-3xl);">
       <div class="section-header">
         <div class="section-title-wrap">
-          <div class="section-numeral">EXECUTION WORKFLOW</div>
-          <h2 class="section-title">How We Deliver This Practice</h2>
+          <div class="story-tag">EXECUTION WORKFLOW</div>
+          <h2 class="section-title">How We Deliver This <em>Practice</em></h2>
         </div>
         <div>
           <span class="numeral-badge">Structured Pipeline</span>
@@ -70,19 +71,19 @@
       <div>
         <div class="section-header">
           <div class="section-title-wrap">
-            <div class="section-numeral">PROVEN OUTCOMES</div>
-            <h2 class="section-title">Related Case Studies</h2>
+            <div class="story-tag">PROVEN OUTCOMES</div>
+            <h2 class="section-title">Related <em>Case Studies</em></h2>
           </div>
         </div>
 
         <div class="grid-2">
           {% for case in related_cases %}
-            <article class="card-hairline">
+            <article class="card" style="padding: var(--space-xl); display: flex; flex-direction: column;">
               <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-md);">
                 <span class="numeral-badge">Client: {{ case.client }}</span>
                 <span style="font-size: var(--text-tiny); font-family: var(--font-mono); color: var(--text-dim);">{{ case.year }}</span>
               </div>
-              <h3 style="font-size: var(--text-h3); color: #FFFFFF; margin-bottom: var(--space-xs);">{{ case.title }}</h3>
+              <h3 style="font-size: var(--text-h3); margin-bottom: var(--space-xs); text-transform: uppercase;">{{ case.title }}</h3>
               <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-lg); line-height: 1.6;">{{ case.summary }}</p>
               <div style="margin-top: auto; border-top: 1px solid var(--border-hairline); padding-top: var(--space-md);">
                 <a href="{% url 'public:work_detail' case.slug %}" class="card-service-action" style="font-size: var(--text-tiny);">

@@ -135,14 +135,17 @@ class MemberPortalZoneTests(TestCase):
         self.assertEqual(deliv['client_notes'], 'Approved through automated test suite verification.')
 
 
-class AntigravityDesignAndFoundersTests(TestCase):
-    def test_antigravity_design_tokens(self):
+class OberloDesignAndFoundersTests(TestCase):
+    def test_oberlo_design_tokens(self):
         tokens_file = pathlib.Path('static/css/tokens.css')
         self.assertTrue(tokens_file.exists())
         content = tokens_file.read_text(encoding='utf-8')
         self.assertIn('--bg-primary', content)
-        self.assertIn('--accent-cyan', content)
-        self.assertIn('--border-glow', content)
+        self.assertIn('--color-blue', content)
+        self.assertIn('--color-green', content)
+        self.assertIn('--bg-sky', content)
+        self.assertIn('--bg-dark', content)
+        self.assertIn('--font-serif', content)
 
     def test_cofounders_present_in_public_views(self):
         client = Client()
