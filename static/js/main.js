@@ -13,6 +13,22 @@ document.addEventListener('DOMContentLoaded', function() {
       const isOpen = mainNav.classList.toggle('mobile-open');
       navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       navToggle.textContent = isOpen ? 'Close' : 'Menu';
+
+      // Prevent body scroll when nav is open
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+
+    // Close mobile nav when a link is clicked
+    const mobileLinks = mainNav.querySelectorAll('.nav-link, .nav-dropdown-item');
+    mobileLinks.forEach(function(link) {
+      link.addEventListener('click', function() {
+        if (mainNav.classList.contains('mobile-open')) {
+          mainNav.classList.remove('mobile-open');
+          navToggle.setAttribute('aria-expanded', 'false');
+          navToggle.textContent = 'Menu';
+          document.body.style.overflow = '';
+        }
+      });
     });
   }
 

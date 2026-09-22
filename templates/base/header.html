@@ -54,9 +54,25 @@
         class="nav-link {% if request.resolver_match.view_name == 'public:contact' %}active{% endif %}">
         Contact
       </a>
+
+      <!-- Mobile-only: show these links inside the drawer -->
+      <div class="mobile-nav-extras">
+        {% if user.is_authenticated %}
+        <a href="{% url 'portal:dashboard' %}" class="nav-link">
+          Client Portal
+        </a>
+        {% else %}
+        <a href="{% url 'portal:login' %}" class="nav-link">
+          Client Login
+        </a>
+        {% endif %}
+        <a href="{% url 'public:contact' %}" class="nav-link" style="color: var(--color-green); font-weight: var(--weight-bold);">
+          Start a Project &rarr;
+        </a>
+      </div>
     </nav>
 
-    <!-- Oberlo Vertical Divider + Action Buttons -->
+    <!-- Oberlo Vertical Divider + Action Buttons (desktop only) -->
     <div class="header-actions">
       {% if user.is_authenticated %}
       <a href="{% url 'portal:dashboard' %}" class="nav-link" style="font-size: 0.85rem;">

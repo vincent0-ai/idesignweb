@@ -43,7 +43,6 @@
 
   /* Typography */
   --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-serif: "Playfair Display", Georgia, Cambria, "Times New Roman", serif;
   --font-mono: "JetBrains Mono", Consolas, monospace;
 
   /* Font Weights */
@@ -53,20 +52,20 @@
   --weight-black: 800;
 
   /* Type Scale */
-  --text-display: clamp(2.25rem, 5.2vw, 3.75rem);
-  --text-h1: clamp(1.85rem, 3.5vw, 2.75rem);
-  --text-h2: clamp(1.4rem, 2.4vw, 2rem);
+  --text-display: clamp(2rem, 5.2vw, 3.75rem);
+  --text-h1: clamp(1.65rem, 3.5vw, 2.75rem);
+  --text-h2: clamp(1.3rem, 2.4vw, 2rem);
   --text-h3: 1.25rem;
   --text-h4: 1.1rem;
   --text-body: 1rem;
   --text-small: 0.875rem;
   --text-tiny: 0.75rem;
 
-  /* Radii - Oberlo uses crisp, clean 3px/4px corners */
-  --radius-xs: 2px;
-  --radius-sm: 3px;           /* Oberlo button standard rounded-[3px] */
-  --radius-md: 6px;
-  --radius-lg: 12px;
+  /* Radii — softer, modern rounded corners */
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
   --radius-full: 9999px;
 
   /* Shadows */
@@ -75,9 +74,14 @@
   --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.1);
   --shadow-green: 0 4px 14px rgba(0, 208, 132, 0.35);
 
+  /* Transitions */
+  --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-base: 0.2s var(--ease-smooth);
+  --transition-slow: 0.35s var(--ease-smooth);
+
   /* Layout Spacing */
   --container-max: 1240px;
-  --header-height: 72px;
+  --header-height: 64px;
   --space-unit: 8px;
   --space-xs: 4px;
   --space-sm: 8px;
@@ -86,5 +90,6 @@
   --space-xl: 36px;
   --space-2xl: 64px;
   --space-3xl: 96px;
+  --space-4xl: 128px;
 }
 

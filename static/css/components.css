@@ -16,14 +16,18 @@
   text-transform: uppercase;
   letter-spacing: -0.02em;
   padding: 12px 24px;
-  border-radius: var(--radius-sm); /* Oberlo 3px rounded standard */
+  border-radius: var(--radius-sm);
   border: 1px solid transparent;
   cursor: pointer;
   text-align: center;
   white-space: nowrap;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+  transition: background-color var(--transition-base), color var(--transition-base), border-color var(--transition-base), transform 0.15s ease, box-shadow var(--transition-base);
   text-decoration: none;
   gap: 8px;
+}
+
+.btn:active {
+  transform: scale(0.97);
 }
 
 /* Primary CTA - Oberlo High-Conversion Green Button */
@@ -37,6 +41,7 @@
   background-color: var(--color-green-hover);
   border-color: var(--color-green-hover);
   color: #FFFFFF;
+  box-shadow: var(--shadow-green);
 }
 
 .btn-primary:active, .btn-green:active {
@@ -117,19 +122,19 @@
 .card-sky {
   background-color: var(--bg-sky);
   padding: var(--space-xl);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-md);
   position: relative;
 }
 
 /* 2. Oberlo White Clean Card */
-.card-hairline, .card-light {
+.card-hairline, .card-light, .card {
   background-color: #FFFFFF;
   border: 1px solid var(--border-hairline);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-md);
   padding: var(--space-xl);
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
 }
 
 .card-hairline:hover, .card-light:hover {
@@ -141,11 +146,11 @@
 .card-hairline-image, .card-article {
   background-color: #FFFFFF;
   border: 1px solid var(--border-hairline);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-md);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
 .card-hairline-image:hover, .card-article:hover {
@@ -166,7 +171,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.35s ease;
+  transition: transform var(--transition-slow);
 }
 
 .card-hairline-image:hover .card-image,
@@ -185,7 +190,7 @@
 .card-dark, .section-dark {
   background-color: var(--bg-dark);
   color: var(--text-on-dark);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-md);
   padding: var(--space-2xl);
 }
 
@@ -201,13 +206,13 @@
 .card-service {
   background-color: #FFFFFF;
   border: 1px solid var(--border-hairline);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-md);
   padding: var(--space-xl);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   min-height: 340px;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
 }
 
 .card-service:hover {
@@ -230,7 +235,7 @@
 }
 
 .service-title {
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   color: var(--text-main);
   margin-bottom: var(--space-xs);
   font-weight: var(--weight-bold);
@@ -268,11 +273,11 @@
 .card-founder {
   background-color: #FFFFFF;
   border: 1px solid var(--border-hairline);
-  border-radius: var(--radius-xs);
+  border-radius: var(--radius-md);
   padding: var(--space-xl);
   display: flex;
   flex-direction: column;
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  transition: box-shadow var(--transition-base), border-color var(--transition-base);
 }
 
 .card-founder:hover {
@@ -287,10 +292,11 @@
   margin-bottom: var(--space-md);
   padding-bottom: var(--space-md);
   border-bottom: 1px solid var(--border-hairline);
+  gap: var(--space-sm);
 }
 
 .founder-name {
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: var(--weight-bold);
   color: var(--text-main);
   margin-bottom: 2px;
@@ -313,8 +319,8 @@
 .founder-skill-pill {
   font-size: var(--text-tiny);
   font-weight: var(--weight-medium);
-  padding: 4px 10px;
-  border-radius: var(--radius-xs);
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
   background-color: var(--bg-muted);
   border: 1px solid var(--border-hairline);
   color: var(--text-body);
@@ -330,11 +336,12 @@
   font-weight: var(--weight-bold);
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  padding: 3px 8px;
-  border-radius: var(--radius-xs);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
   color: var(--color-blue);
   background-color: var(--color-blue-subtle);
   border: 1px solid rgba(45, 0, 251, 0.15);
+  white-space: nowrap;
 }
 
 .badge-founder {
@@ -344,8 +351,8 @@
   font-size: 0.7rem;
   font-weight: var(--weight-bold);
   text-transform: uppercase;
-  padding: 3px 8px;
-  border-radius: var(--radius-xs);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
 }
 
 .badge-co-founder {
@@ -355,8 +362,18 @@
   font-size: 0.7rem;
   font-weight: var(--weight-bold);
   text-transform: uppercase;
-  padding: 3px 8px;
-  border-radius: var(--radius-xs);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+}
+
+/* Story Tag (used across pages) */
+.story-tag {
+  font-size: 0.7rem;
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-blue);
+  margin-bottom: var(--space-xs);
 }
 
 /* Author Byline (Oberlo Style) */
@@ -371,8 +388,8 @@
 }
 
 .author-avatar {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background-color: var(--color-blue);
   color: #FFFFFF;
@@ -381,6 +398,7 @@
   justify-content: center;
   font-size: 0.65rem;
   font-weight: bold;
+  flex-shrink: 0;
 }
 
 /* Section Header Structure */
@@ -423,7 +441,7 @@
   font-weight: var(--weight-medium);
   font-size: var(--text-small);
   color: var(--text-main);
-  transition: color 0.15s ease;
+  transition: color var(--transition-base);
 }
 
 .nav-dropdown-summary::-webkit-details-marker {
@@ -442,7 +460,7 @@
   background-color: #FFFFFF;
   border-top: 3px solid var(--color-blue);
   box-shadow: var(--shadow-lg);
-  border-radius: 0 0 var(--radius-xs) var(--radius-xs);
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
   padding: var(--space-sm) 0;
   z-index: 50;
   display: flex;
@@ -453,7 +471,7 @@
   padding: 10px 20px;
   font-size: var(--text-small);
   color: var(--text-main);
-  transition: background-color 0.15s ease, color 0.15s ease;
+  transition: background-color var(--transition-base), color var(--transition-base);
   display: block;
   text-decoration: none;
 }
@@ -469,8 +487,8 @@
   font-weight: var(--weight-bold);
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  padding: 3px 8px;
-  border-radius: var(--radius-xs);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
   display: inline-flex;
   align-items: center;
   white-space: nowrap;
@@ -513,7 +531,8 @@
   border-radius: var(--radius-sm);
   background-color: #FFFFFF;
   color: var(--text-main);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  width: 100%;
 }
 
 .form-input:focus, .form-textarea:focus, .form-select:focus {
@@ -554,3 +573,205 @@
   cursor: pointer;
   padding: 0 4px;
 }
+
+/* Service card deliverables list */
+.card-service-deliverables {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card-service-deliverables li {
+  font-size: var(--text-small);
+  color: var(--text-body);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.5;
+}
+
+.card-service-deliverables li::before {
+  content: "•";
+  color: var(--color-blue);
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+/* Service card numeral */
+.card-service-numeral {
+  font-family: var(--font-mono);
+  font-weight: var(--weight-bold);
+  font-size: 1.1rem;
+  color: var(--color-blue);
+}
+
+/* Service action link */
+.card-service-action {
+  font-weight: var(--weight-bold);
+  color: var(--color-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: color var(--transition-base);
+}
+
+.card-service-action:hover {
+  text-decoration: underline;
+  color: var(--color-blue-hover);
+}
+
+/* Process steps */
+.process-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Outline-white button for dark sections */
+.btn-outline-white {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-size: var(--text-tiny);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background-color: transparent;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: background-color var(--transition-base), border-color var(--transition-base);
+  text-decoration: none;
+}
+
+.btn-outline-white:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #FFFFFF;
+}
+
+/* Card article thumbnail for work list */
+.card-article-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background-color: var(--bg-muted);
+}
+
+.card-article-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--transition-slow);
+}
+
+.card-article:hover .card-article-img {
+  transform: scale(1.05);
+}
+
+/* Results Metrics Grid */
+.results-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+.results-metrics-grid--compact {
+  border: 1px solid var(--border-hairline);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-lg);
+  background: var(--bg-muted);
+  overflow: hidden;
+  gap: 0;
+}
+
+.results-metrics-grid--compact > div {
+  border-right: 1px solid var(--border-hairline);
+}
+
+.results-metrics-grid--compact > div:last-child {
+  border-right: none;
+}
+
+/* ============================================================ */
+/* Component Responsive Overrides                                */
+/* ============================================================ */
+
+@media (max-width: 768px) {
+  .btn-lg {
+    padding: 14px 24px;
+    font-size: 0.95rem;
+  }
+
+  .card-service {
+    min-height: auto;
+  }
+
+  .card-dark, .section-dark {
+    padding: var(--space-xl);
+    border-radius: var(--radius-sm);
+  }
+
+  .card-sky {
+    padding: var(--space-lg);
+  }
+
+  .founder-header {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .section-header {
+    margin-bottom: var(--space-xl);
+  }
+
+  .card-body {
+    padding: var(--space-md);
+  }
+
+  /* Form controls on mobile */
+  .form-input, .form-textarea, .form-select {
+    padding: 10px 14px;
+    font-size: 0.95rem;
+  }
+
+  /* Results metrics grid collapses */
+  .results-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .results-metrics-grid--compact > div {
+    border-right: none;
+    border-bottom: 1px solid var(--border-hairline);
+  }
+
+  .results-metrics-grid--compact > div:last-child {
+    border-bottom: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .founder-skill-pill {
+    font-size: 0.65rem;
+    padding: 3px 8px;
+  }
+
+  .numeral-badge, .category-badge {
+    font-size: 0.65rem;
+    padding: 3px 8px;
+  }
+
+  .btn {
+    padding: 10px 18px;
+    font-size: 0.85rem;
+  }
+
+  .btn-sm {
+    padding: 7px 14px;
+    font-size: 0.7rem;
+  }
+}
+

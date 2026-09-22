@@ -66,11 +66,10 @@
           </p>
 
           <!-- Results Highlights -->
-          <div
-            style="display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--border-hairline); border-radius: var(--radius-sm); margin-bottom: var(--space-lg); background: var(--bg-muted); overflow: hidden;">
+          <div class="results-metrics-grid results-metrics-grid--compact">
             {% for res in case.results %}
             <div
-              style="padding: var(--space-sm) var(--space-md); border-right: 1px solid var(--border-hairline); text-align: center;">
+              style="padding: var(--space-sm) var(--space-md); text-align: center;">
               <div
                 style="font-size: 1.2rem; font-weight: var(--weight-bold); color: var(--color-blue); font-family: var(--font-mono);">
                 {{ res.metric }}</div>

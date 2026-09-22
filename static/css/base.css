@@ -45,14 +45,11 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.02em;
 }
 
-/* Signature Oberlo Italic Accent Typography in headings */
+/* Accent word styling in headings — same font, just colored */
 h1 em, h2 em, h3 em, .font-display em {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 400;
-  text-transform: lowercase;
+  font-style: normal;
+  font-weight: inherit;
   color: var(--color-blue);
-  padding: 0 4px;
 }
 
 h1 { font-size: var(--text-h1); margin-bottom: var(--space-md); }
@@ -73,7 +70,7 @@ p:last-child {
 a {
   color: inherit;
   text-decoration: none;
-  transition: color 0.15s ease, opacity 0.15s ease;
+  transition: color var(--transition-base), opacity var(--transition-base);
 }
 
 a:hover {
