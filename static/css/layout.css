@@ -225,18 +225,29 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--space-xl);
+  min-width: 0;
+  max-width: 100%;
 }
 
 .grid-3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-xl);
+  min-width: 0;
+  max-width: 100%;
 }
 
 .grid-4 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--space-lg);
+  min-width: 0;
+  max-width: 100%;
+}
+
+.grid-2 > *, .grid-3 > *, .grid-4 > *, .grid-picks > *, .stories-grid > *, .portal-layout > * {
+  min-width: 0;
+  max-width: 100%;
 }
 
 /* Oberlo "Our Picks" Featured Split Grid */
@@ -305,17 +316,78 @@
   display: grid;
   grid-template-columns: 280px 1fr;
   min-height: calc(100vh - var(--header-height));
+  min-width: 0;
+  max-width: 100%;
 }
 
 .portal-sidebar {
   border-right: 1px solid var(--border-hairline);
   background-color: var(--bg-muted);
   padding: var(--space-xl) var(--space-lg);
+  min-width: 0;
+  max-width: 100%;
 }
 
 .portal-main {
   padding: var(--space-2xl);
   background-color: var(--bg-primary);
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Responsive Table, Grid & Filter Helpers */
+.table-responsive {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: var(--space-lg);
+  border: 1px solid var(--border-hairline);
+}
+
+.filter-scroll-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: var(--space-2xl);
+  border-bottom: 1px solid var(--border-hairline);
+  padding-bottom: var(--space-lg);
+  max-width: 100%;
+}
+
+.card-action-row {
+  border-top: 1px solid var(--border-hairline);
+  padding-top: var(--space-md);
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  width: 100%;
+}
+
+.project-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--border-hairline);
+  margin-bottom: var(--space-md);
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (max-width: 640px) {
+  .project-meta-grid {
+    grid-template-columns: 1fr;
+  }
+  .project-meta-grid > div {
+    border-right: none !important;
+    border-bottom: 1px solid var(--border-hairline);
+  }
+  .project-meta-grid > div:last-child {
+    border-bottom: none;
+  }
 }
 
 .portal-nav-list {
@@ -600,8 +672,24 @@
 
   .footer-bottom {
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
     align-items: flex-start;
+  }
+
+  .footer-bottom > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    max-width: 100%;
+  }
+
+  /* Portal on mobile */
+  .portal-main {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .portal-sidebar {
+    padding: var(--space-lg) var(--space-md);
   }
 
   .site-footer {
@@ -667,6 +755,14 @@
 
   .hero-section {
     padding: var(--space-lg) 0 var(--space-xl);
+  }
+
+  .portal-main {
+    padding: var(--space-md) var(--space-sm);
+  }
+
+  .portal-sidebar {
+    padding: var(--space-md) var(--space-sm);
   }
 }
 

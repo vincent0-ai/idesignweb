@@ -21,7 +21,7 @@
     Service: {{ project.service_category }} &bull; Client: {{ project.client_username }}
   </div>
 
-  <div style="display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--border-hairline); margin-bottom: var(--space-md);">
+  <div class="project-meta-grid">
     <div style="padding: var(--space-sm); border-right: 1px solid var(--border-hairline);">
       <div class="form-label" style="font-size: var(--text-tiny);">Start Date</div>
       <div style="font-size: var(--text-small); font-weight: bold;">{{ project.start_date }}</div>
@@ -48,7 +48,7 @@
     <h2 class="section-title" style="font-size: var(--text-h3);">Deliverables & Approval Workflow</h2>
   </div>
   <!-- Status Filter Controls -->
-  <div style="display: flex; gap: var(--space-xs);">
+  <div style="display: flex; gap: var(--space-xs); flex-wrap: wrap;">
     <button type="button" class="btn btn-ghost btn-sm active" data-filter-status="all">All</button>
     <button type="button" class="btn btn-ghost btn-sm" data-filter-status="In Review">In Review</button>
     <button type="button" class="btn btn-ghost btn-sm" data-filter-status="Approved">Approved</button>

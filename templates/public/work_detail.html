@@ -12,7 +12,7 @@
       </a>
     </div>
 
-    <div style="display: flex; gap: 12px; align-items: center; margin-bottom: var(--space-sm);">
+    <div style="display: flex; gap: 8px 12px; align-items: center; margin-bottom: var(--space-sm); flex-wrap: wrap;">
       <span class="story-tag" style="margin-bottom: 0;">{{ case_study.category }}</span>
       <span style="font-size: var(--text-small); color: var(--text-muted); font-family: var(--font-mono);">Client: {{ case_study.client }} &bull; {{ case_study.year }}</span>
     </div>
@@ -37,11 +37,11 @@
     {% endif %}
 
     <!-- Results Banner -->
-    <div class="card-sky" style="margin-bottom: var(--space-3xl); padding: var(--space-2xl);">
+    <div class="card-sky" style="margin-bottom: var(--space-3xl);">
       <div class="story-tag" style="margin-bottom: var(--space-md);">KEY RESULTS & CLIENT IMPACT</div>
       <div class="results-metrics-grid">
         {% for r in case_study.results %}
-          <div class="card" style="padding: var(--space-lg); text-align: center;">
+          <div class="card" style="text-align: center;">
             <div style="font-size: 2.25rem; color: var(--color-blue); font-family: var(--font-mono); font-weight: var(--weight-bold); margin-bottom: 4px;">{{ r.metric }}</div>
             <div style="font-size: var(--text-small); color: var(--text-muted);">{{ r.label }}</div>
           </div>
@@ -51,13 +51,13 @@
 
     <!-- Case Study Deep Dive Breakdown -->
     <div class="grid-2" style="margin-bottom: var(--space-3xl);">
-      <div class="card" style="padding: var(--space-2xl);">
+      <div class="card">
         <div class="story-tag" style="margin-bottom: var(--space-xs);">BACKGROUND</div>
         <h2 style="font-size: var(--text-h3); margin-bottom: var(--space-sm); text-transform: uppercase;">The Client Challenge</h2>
         <p style="line-height: 1.7; font-size: var(--text-body); color: var(--text-body); margin-bottom: 0;">{{ case_study.challenge }}</p>
       </div>
 
-      <div class="card" style="padding: var(--space-2xl);">
+      <div class="card">
         <div class="story-tag" style="margin-bottom: var(--space-xs);">EXECUTION</div>
         <h2 style="font-size: var(--text-h3); margin-bottom: var(--space-sm); text-transform: uppercase;">The Technical Solution</h2>
         <p style="line-height: 1.7; font-size: var(--text-body); color: var(--text-body); margin-bottom: 0;">{{ case_study.solution }}</p>
@@ -65,14 +65,14 @@
     </div>
 
     <!-- Deliverables Manifest -->
-    <div class="card" style="padding: var(--space-2xl); margin-bottom: var(--space-3xl);">
+    <div class="card" style="margin-bottom: var(--space-3xl);">
       <div class="story-tag" style="margin-bottom: var(--space-xs);">COMPLETED OUTPUTS</div>
       <h2 style="font-size: var(--text-h3); margin-bottom: var(--space-sm); text-transform: uppercase;">Completed Deliverables</h2>
       <p style="color: var(--text-body); font-size: var(--text-body); margin-bottom: 0; line-height: 1.6;">{{ case_study.deliverables_summary }}</p>
     </div>
 
     <!-- Bottom CTA -->
-    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-hairline); padding-top: var(--space-xl); flex-wrap: wrap; gap: var(--space-md);">
+    <div class="card-action-row" style="padding-top: var(--space-xl); margin-top: var(--space-3xl);">
       <a href="{% url 'public:work_list' %}" class="btn btn-outline">
         <span>View More Work</span>
       </a>

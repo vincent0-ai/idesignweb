@@ -19,7 +19,7 @@ def global_context(request):
                 'short_role': 'Creative Direction & Full-Stack Development',
                 'bio': 'Founder of Idesignweb. Passionate about seamless user experiences, responsive frontend engineering, brand identity systems, and commercial video storytelling. Timothy turns strategic business vision into intuitive, visually unforgettable digital products.',
                 'skills': ['Full-Stack Development', 'UI/UX Interface Design', 'Brand Identity Systems', 'Commercial Video Editing', 'SEO & Performance'],
-                'phone': '0115709680',
+                'phone': '+254115709680',
                 'email': 'otienotimothy198@gmail.com',
             },
             {
@@ -29,11 +29,11 @@ def global_context(request):
                 'short_role': 'Software Engineering & Cybersecurity',
                 'bio': 'Co-Founder of Idesignweb. Specializing in backend system architectures, web application development, penetration testing, and security hardening. Vincent ensures every platform is resilient against vulnerabilities, scalable, and built on rock-solid foundations.',
                 'skills': ['Web Systems Programming', 'Cybersecurity & Audits', 'Infrastructure Hardening', 'Database Architecture', 'Penetration Testing'],
-                'phone': '0768072566',
+                'phone': '+254768072566',
                 'email': 'vinnyochi13249@gmail.com',
             }
         ],
-        'company_phone': '0115709680',
+        'company_phone': '+254115709680',
         'company_email': 'otienotimothy198@gmail.com',
         'company_location': 'Nairobi, Kenya / Remote Globally',
         'current_year': datetime.datetime.now().year,

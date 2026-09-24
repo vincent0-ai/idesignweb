@@ -8,7 +8,7 @@
   style="background: var(--bg-muted); border-bottom: 1px solid var(--border-hairline); padding: var(--space-2xl) 0;">
   <div class="container">
     <div style="margin-bottom: var(--space-sm);">
-      <span class="story-tag">STUDIO ARCHIVE</span>
+      <span class="story-tag">CASE ARCHIVE</span>
     </div>
 
     <h1 style="font-size: var(--text-display); margin-bottom: var(--space-md); text-transform: uppercase;">
@@ -25,8 +25,7 @@
 <section class="section">
   <div class="container">
     <!-- Category Filter Controls -->
-    <div
-      style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: var(--space-2xl); border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-lg);">
+    <div class="filter-scroll-row">
       <a href="{% url 'public:work_list' %}"
         class="btn btn-sm {% if selected_category == 'all' %}btn-green{% else %}btn-outline{% endif %}">
         All Practices
@@ -49,9 +48,9 @@
         </div>
         {% endif %}
 
-        <div style="padding: var(--space-xl); display: flex; flex-direction: column; flex-grow: 1;">
+        <div class="card-body">
           <div
-            style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-sm);">
+            style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-sm); flex-wrap: wrap; gap: 4px;">
             <span class="story-tag" style="margin-bottom: 0;">{{ case.category }}</span>
             <span style="font-size: var(--text-tiny); font-family: var(--font-mono); color: var(--text-dim);">{{
               case.year }}</span>
@@ -68,8 +67,7 @@
           <!-- Results Highlights -->
           <div class="results-metrics-grid results-metrics-grid--compact">
             {% for res in case.results %}
-            <div
-              style="padding: var(--space-sm) var(--space-md); text-align: center;">
+            <div style="padding: var(--space-sm) var(--space-md); text-align: center;">
               <div
                 style="font-size: 1.2rem; font-weight: var(--weight-bold); color: var(--color-blue); font-family: var(--font-mono);">
                 {{ res.metric }}</div>
@@ -78,8 +76,7 @@
             {% endfor %}
           </div>
 
-          <div
-            style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-hairline); padding-top: var(--space-md); margin-top: auto;">
+          <div class="card-action-row">
             <span style="font-size: var(--text-tiny); color: var(--text-dim);">Client: {{ case.client }}</span>
             <a href="{% url 'public:work_detail' case.slug %}" class="btn btn-outline btn-sm">
               Explore Case Study &rarr;

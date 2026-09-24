@@ -19,9 +19,9 @@
     <!-- Articles List -->
     <div style="display: flex; flex-direction: column; gap: var(--space-xl); max-width: 920px;">
       {% for post in posts %}
-      <article class="card" style="padding: var(--space-2xl);">
+      <article class="card">
         <div
-          style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-sm);">
+          style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-sm); flex-wrap: wrap; gap: 4px;">
           <span class="story-tag" style="margin-bottom: 0;">{{ post.category }}</span>
           <span style="font-size: var(--text-tiny); font-family: var(--font-mono); color: var(--text-dim);">{{
             post.reading_time }}</span>
@@ -36,8 +36,7 @@
           {{ post.excerpt }}
         </p>
 
-        <div
-          style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-hairline); padding-top: var(--space-md); margin-top: auto;">
+        <div class="card-action-row">
           <span style="font-size: var(--text-small); color: var(--text-muted); font-weight: var(--weight-medium);">By {{
             post.author }}</span>
           <a href="{% url 'public:insight_detail' post.slug %}" class="btn btn-outline btn-sm">

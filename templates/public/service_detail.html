@@ -23,13 +23,13 @@
   <div class="container">
     <div class="grid-2" style="align-items: start; margin-bottom: var(--space-3xl);">
       <!-- Service Description -->
-      <div class="card" style="padding: var(--space-2xl);">
+      <div class="card">
         <div class="story-tag" style="margin-bottom: var(--space-sm);">PRACTICE OVERVIEW</div>
         <p style="line-height: 1.7; margin-bottom: var(--space-lg); font-size: var(--text-body); color: var(--text-body);">
           {{ service.overview }}
         </p>
         <div>
-          <a href="{% url 'public:contact' %}?service={{ service.slug }}" class="btn btn-green">
+          <a href="{% url 'public:contact' %}?service={{ service.slug }}" class="btn btn-green btn-proposal-cta">
             <span>Request Proposal for {{ service.title }}</span>
             <span>&rarr;</span>
           </a>
@@ -37,7 +37,7 @@
       </div>
 
       <!-- Deliverables List -->
-      <div class="card-sky" style="padding: var(--space-2xl);">
+      <div class="card-sky">
         <div class="story-tag" style="margin-bottom: var(--space-sm);">DELIVERABLE SCOPE</div>
         <ul class="card-service-deliverables">
           {% for d in service.deliverables %}

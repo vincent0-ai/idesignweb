@@ -23,37 +23,39 @@
 </div>
 
 <!-- Asset Table / Grid -->
-<div style="border: 1px solid var(--border-hairline); background-color: var(--bg-primary);">
-  <div style="display: grid; grid-template-columns: 1fr 180px 140px 100px 140px; padding: 12px 16px; background-color: var(--bg-surface); border-bottom: 1px solid var(--border-hairline); font-size: var(--text-tiny); font-weight: var(--weight-bold); color: var(--text-muted); text-transform: uppercase;">
-    <div>Asset Name</div>
-    <div>Category</div>
-    <div>Format</div>
-    <div>Size</div>
-    <div style="text-align: right;">Action</div>
-  </div>
+<div class="table-responsive">
+  <div style="min-width: 640px; background-color: var(--bg-primary);">
+    <div style="display: grid; grid-template-columns: 1fr 160px 120px 90px 110px; padding: 12px 16px; background-color: var(--bg-surface); border-bottom: 1px solid var(--border-hairline); font-size: var(--text-tiny); font-weight: var(--weight-bold); color: var(--text-muted); text-transform: uppercase;">
+      <div>Asset Name</div>
+      <div>Category</div>
+      <div>Format</div>
+      <div>Size</div>
+      <div style="text-align: right;">Action</div>
+    </div>
 
-  {% for asset in assets %}
-    <div style="display: grid; grid-template-columns: 1fr 180px 140px 100px 140px; padding: 16px; border-bottom: 1px solid var(--border-hairline); align-items: center; font-size: var(--text-small);">
-      <div>
-        <span class="numeral-badge" style="margin-right: 8px;">{{ asset.asset_code }}</span>
-        <span style="font-weight: var(--weight-bold);">{{ asset.name }}</span>
-        <div style="font-size: var(--text-tiny); color: var(--text-dim); margin-top: 4px;">v{{ asset.version }} &bull; Updated {{ asset.updated_date }}</div>
+    {% for asset in assets %}
+      <div style="display: grid; grid-template-columns: 1fr 160px 120px 90px 110px; padding: 16px; border-bottom: 1px solid var(--border-hairline); align-items: center; font-size: var(--text-small);">
+        <div>
+          <span class="numeral-badge" style="margin-right: 8px;">{{ asset.asset_code }}</span>
+          <span style="font-weight: var(--weight-bold);">{{ asset.name }}</span>
+          <div style="font-size: var(--text-tiny); color: var(--text-dim); margin-top: 4px;">v{{ asset.version }} &bull; Updated {{ asset.updated_date }}</div>
+        </div>
+        <div>
+          <span class="numeral-badge">{{ asset.category }}</span>
+        </div>
+        <div style="font-size: var(--text-tiny); color: var(--text-muted);">{{ asset.format }}</div>
+        <div style="font-size: var(--text-tiny); color: var(--text-muted);">{{ asset.size }}</div>
+        <div style="text-align: right;">
+          <button type="button" class="btn btn-ghost btn-sm" onclick="alert('Asset {{ asset.asset_code }} downloaded.')">
+            Download
+          </button>
+        </div>
       </div>
-      <div>
-        <span class="numeral-badge">{{ asset.category }}</span>
+    {% empty %}
+      <div style="padding: var(--space-2xl); text-align: center;">
+        <p>No assets found in the selected category.</p>
       </div>
-      <div style="font-size: var(--text-tiny); color: var(--text-muted);">{{ asset.format }}</div>
-      <div style="font-size: var(--text-tiny); color: var(--text-muted);">{{ asset.size }}</div>
-      <div style="text-align: right;">
-        <button type="button" class="btn btn-ghost btn-sm" onclick="alert('Asset {{ asset.asset_code }} downloaded.')">
-          Download
-        </button>
-      </div>
-    </div>
-  {% empty %}
-    <div style="padding: var(--space-2xl); text-align: center;">
-      <p>No assets found in the selected category.</p>
-    </div>
-  {% endfor %}
+    {% endfor %}
+  </div>
 </div>
 {% endblock %}

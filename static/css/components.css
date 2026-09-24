@@ -20,7 +20,10 @@
   border: 1px solid transparent;
   cursor: pointer;
   text-align: center;
-  white-space: nowrap;
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.35;
+  max-width: 100%;
   transition: background-color var(--transition-base), color var(--transition-base), border-color var(--transition-base), transform 0.15s ease, box-shadow var(--transition-base);
   text-decoration: none;
   gap: 8px;
@@ -701,9 +704,29 @@
 /* ============================================================ */
 
 @media (max-width: 768px) {
+  .btn {
+    white-space: normal;
+    max-width: 100%;
+    text-align: center;
+  }
+
   .btn-lg {
-    padding: 14px 24px;
+    padding: 14px 20px;
     font-size: 0.95rem;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .btn-proposal-cta {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .card, .card-hairline, .card-light, .card-service, .card-founder {
+    padding: var(--space-lg);
+    min-height: auto;
+    min-width: 0;
+    max-width: 100%;
   }
 
   .card-service {
@@ -711,7 +734,7 @@
   }
 
   .card-dark, .section-dark {
-    padding: var(--space-xl);
+    padding: var(--space-lg);
     border-radius: var(--radius-sm);
   }
 
@@ -736,6 +759,7 @@
   .form-input, .form-textarea, .form-select {
     padding: 10px 14px;
     font-size: 0.95rem;
+    max-width: 100%;
   }
 
   /* Results metrics grid collapses */
@@ -751,9 +775,28 @@
   .results-metrics-grid--compact > div:last-child {
     border-bottom: none;
   }
+
+  .card-action-row > .btn,
+  .card-action-row > a.btn {
+    flex: 1 1 auto;
+    justify-content: center;
+    text-align: center;
+  }
 }
 
 @media (max-width: 480px) {
+  .card, .card-hairline, .card-light, .card-service, .card-founder {
+    padding: var(--space-md);
+  }
+
+  .card-dark, .section-dark {
+    padding: var(--space-md);
+  }
+
+  .card-sky {
+    padding: var(--space-md);
+  }
+
   .founder-skill-pill {
     font-size: 0.65rem;
     padding: 3px 8px;
@@ -765,13 +808,24 @@
   }
 
   .btn {
-    padding: 10px 18px;
+    padding: 10px 16px;
     font-size: 0.85rem;
   }
 
   .btn-sm {
-    padding: 7px 14px;
-    font-size: 0.7rem;
+    padding: 7px 12px;
+    font-size: 0.72rem;
+  }
+
+  .card-action-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .card-action-row > .btn,
+  .card-action-row > a.btn {
+    width: 100%;
+    justify-content: center;
   }
 }
 
