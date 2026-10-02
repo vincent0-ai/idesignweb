@@ -36,8 +36,6 @@ else:
 for default_h in [
     'idesignweb.co.ke',
     '.idesignweb.co.ke',
-    'idesignweb.echowithin.xyz',
-    '.echowithin.xyz',
     'localhost',
     '127.0.0.1',
     'testserver',
@@ -58,10 +56,6 @@ for default_csrf in [
     'https://*.idesignweb.co.ke',
     'http://idesignweb.co.ke',
     'http://*.idesignweb.co.ke',
-    'https://idesignweb.echowithin.xyz',
-    'https://*.echowithin.xyz',
-    'http://idesignweb.echowithin.xyz',
-    'http://*.echowithin.xyz',
 ]:
     if default_csrf not in CSRF_TRUSTED_ORIGINS:
         CSRF_TRUSTED_ORIGINS.append(default_csrf)
