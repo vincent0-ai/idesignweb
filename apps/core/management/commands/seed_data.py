@@ -23,6 +23,38 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
+        # 0. Superuser Account Initialization (Configurable via Environment)
+        admin_pass = os.getenv('DJANGO_SUPERUSER_PASSWORD') or os.getenv('ADMIN_PASSWORD')
+        admin_username = os.getenv('DJANGO_SUPERUSER_USERNAME') or os.getenv('ADMIN_USERNAME')
+        admin_email = os.getenv('DJANGO_SUPERUSER_EMAIL') or os.getenv('ADMIN_EMAIL') or 'admin@idesignweb.co.ke'
+        
+        # Sanitize email in case domain is missing (e.g. admin@idesignweb -> admin@idesignweb.co.ke)
+        if not admin_email or '@' not in admin_email or '.' not in admin_email.split('@')[-1]:
+            admin_email = f"{admin_email.split('@')[0]}@idesignweb.co.ke"
+
+        if admin_pass and admin_username:
+            self.stdout.write(f'Configuring administrator account from environment: {admin_username}...')
+            admin_user = User.objects.filter(username=admin_username).first()
+            if not admin_user:
+                admin_user = User.objects.create_user(
+                    username=admin_username,
+                    email=admin_email,
+                    password=admin_pass
+                )
+                admin_user.is_staff = True
+                admin_user.is_superuser = True
+                admin_user.save()
+                self.stdout.write(self.style.SUCCESS(f'Created superuser from env: {admin_username} ({admin_email})'))
+            else:
+                admin_user.is_staff = True
+                admin_user.is_superuser = True
+                admin_user.email = admin_email
+                admin_user.set_password(admin_pass)
+                admin_user.save()
+                self.stdout.write(self.style.SUCCESS(f'Updated administrator credentials from env: {admin_username}'))
+        else:
+            self.stdout.write('No DJANGO_SUPERUSER_PASSWORD / USERNAME set in environment. Skipping administrator creation.')
+
         self.stdout.write('Initializing indexes...')
         init_indexes()
         
@@ -253,29 +285,5 @@ class Command(BaseCommand):
                 }
             )
 
-        # 4. Superuser Account Initialization (Configurable via Environment)
-        admin_pass = os.getenv('DJANGO_SUPERUSER_PASSWORD') or os.getenv('ADMIN_PASSWORD')
-        admin_username = os.getenv('DJANGO_SUPERUSER_USERNAME') or os.getenv('ADMIN_USERNAME')
-        admin_email = os.getenv('DJANGO_SUPERUSER_EMAIL') or os.getenv('ADMIN_EMAIL') or 'admin@idesignweb.co.ke'
-
-        if admin_pass and admin_username:
-            self.stdout.write(f'Configuring administrator account from environment: {admin_username}...')
-            admin_user = User.objects.filter(username=admin_username).first()
-            if not admin_user:
-                User.objects.create_superuser(
-                    username=admin_username,
-                    email=admin_email,
-                    password=admin_pass
-                )
-                self.stdout.write(self.style.SUCCESS(f'Created superuser from env: {admin_username} ({admin_email})'))
-            else:
-                admin_user.is_staff = True
-                admin_user.is_superuser = True
-                admin_user.email = admin_email
-                admin_user.set_password(admin_pass)
-                admin_user.save()
-                self.stdout.write(f'Updated administrator credentials from env: {admin_username}')
-        else:
-            self.stdout.write('No DJANGO_SUPERUSER_PASSWORD / USERNAME set in environment. Skipping administrator creation.')
-
         self.stdout.write(self.style.SUCCESS('Platform initialization completed.'))
+
