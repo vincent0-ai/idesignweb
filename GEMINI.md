@@ -8,9 +8,15 @@ This project follows strict minimalist, modern digital studio and engineering ag
 - **No Unsolicited Third-Party Buttons**: **NEVER add WhatsApp buttons**, chat bubbles, or third-party contact pills unless explicitly requested in the prompt.
 - **No Kicker Tags & Pill Clutter**: Do NOT add uppercase meta tags (`OUR PICKS`, `CAPABILITIES`, `OUR THESIS`, `DIRECT LEADERSHIP`, `PRACTICE 01`) above headings.
 - **No Author Avatar Circles**: Do NOT display avatar chips (e.g. `TO`, `VO`) on card fronts.
-- **No Bullet Lists Inside Cards**: Cards are teasers and hooks. Deliverable bullet lists belong on detail pages, not card fronts.
+- **No Bullet Lists Inside Cards**: Cards are teasers and hooks. Deliverable bullet lists belong strictly on detail pages (`.detail-deliverables-list`), NEVER on card fronts. Do not use global hide rules (`display: none`) that bleed into detail templates.
 - **No Trailing Arrow Decorations**: Avoid appending `&rarr;`, `&larr;`, or chevron symbols to every link and button.
-- **No Shouting All-Caps Headings**: Avoid `text-transform: uppercase` on headings. Use clean Title Case or Sentence Case with tight editorial line-height (`1.15`–`1.25`).
+- **No Shouting All-Caps Headings**: Avoid `text-transform: uppercase` on headings. Use clean Title Case or Sentence Case with tight editorial line-height (`1.15` to `1.25`).
+
+---
+
+## 1.1 Page Headers & Alignment
+- **Centered Hierarchy**: All primary page headers (`.page-header`) and section headers (`.section-header-center`) must be centered horizontally.
+- **Subtitle Constraints**: Subtitles must use `text-align: center; max-width: 640px; margin: 0 auto; line-height: 1.6; color: var(--text-muted);` to prevent overly wide line-wrapping.
 
 ---
 
