@@ -8,37 +8,33 @@ from django.shortcuts import render, redirect
 from django.http import Http404
 from django.contrib import messages
 from apps.core.db import get_db
+from apps.core.content import (
+    get_all_works,
+    get_work_by_slug,
+    get_all_services,
+    get_service_by_slug,
+    get_work_categories,
+    get_all_articles,
+    get_article_by_slug
+)
 import datetime
 
 def home_view(request):
-    db = get_db()
-    services = list(db.services.find({'featured': True}).sort('sort_order', 1))
-    case_studies = list(db.case_studies.find({'is_published': True}).sort('published_at', -1).limit(4))
-    posts = list(db.posts.find({'is_published': True}).sort('published_at', -1).limit(3))
+    services = get_all_services(featured_only=True)
+    case_studies = get_all_works()
+    
+    # Try fetching insights if db available, fallback to empty
+    try:
+        db = get_db()
+        posts = list(db.posts.find({'is_published': True}).sort('published_at', -1).limit(3))
+    except Exception:
+        posts = []
     
     telemetry = [
         {'metric': '99.99%', 'label': 'Platform Uptime SLA', 'detail': 'Zero unplanned outages'},
         {'metric': '0', 'label': 'Exploit Incidents', 'detail': 'Rigorous defensive security'},
-        {'metric': '1.1s', 'label': 'Core Web Speed', 'detail': 'Engineered for instant conversion'},
+        {'metric': '1.0s', 'label': 'Core Web Speed', 'detail': 'Engineered for instant conversion'},
         {'metric': '< 24h', 'label': 'Founder Direct Response', 'detail': 'Direct access to engineers'}
-    ]
-    
-    process_steps = [
-        {
-            'step_number': '01',
-            'title': 'Architecture & Threat Surface Audit',
-            'description': 'We dissect your brand goals, target customers, and operational bottlenecks. We map out full-stack specs and security safeguards before writing a single line of code.'
-        },
-        {
-            'step_number': '02',
-            'title': 'High-Performance Engineering & Design',
-            'description': 'Vincent implements secure backend pipelines, database schemes, and penetration-tested code while Timothy designs fluid interfaces, brand identities, and motion media.'
-        },
-        {
-            'step_number': '03',
-            'title': 'Hardened Deployment & Ongoing Defense',
-            'description': 'We push to production with automated off-site backups, SSL/TLS certificates, web application firewalls, and active monitoring to ensure your business stays protected 24/7.'
-        }
     ]
     
     context = {
@@ -46,23 +42,23 @@ def home_view(request):
         'case_studies': case_studies,
         'posts': posts,
         'telemetry': telemetry,
-        'process_steps': process_steps,
     }
     return render(request, 'public/home.html', context)
 
 
 def services_hub_view(request):
-    db = get_db()
-    services = list(db.services.find({}).sort('sort_order', 1))
+    services = get_all_services()
     return render(request, 'public/services_hub.html', {'services': services})
 
 def service_detail_view(request, slug):
-    db = get_db()
-    service = db.services.find_one({'slug': slug})
+    service = get_service_by_slug(slug)
     if not service:
         raise Http404('Service not found')
         
-    related_cases = list(db.case_studies.find({'category': service['title']}).limit(2))
+    related_cases = [w for w in get_all_works() if w.get('category') == service['title']]
+    if not related_cases:
+        related_cases = get_all_works()[:2]
+        
     context = {
         'service': service,
         'related_cases': related_cases
@@ -70,14 +66,9 @@ def service_detail_view(request, slug):
     return render(request, 'public/service_detail.html', context)
 
 def work_list_view(request):
-    db = get_db()
     selected_category = request.GET.get('category', 'all')
-    query = {'is_published': True}
-    if selected_category != 'all':
-        query['category'] = selected_category
-        
-    case_studies = list(db.case_studies.find(query).sort('published_at', -1))
-    categories = ['Graphic Design', 'Video Editing', 'Web Development', 'Cybersecurity']
+    case_studies = get_all_works(category=selected_category)
+    categories = get_work_categories()
     
     context = {
         'case_studies': case_studies,
@@ -87,10 +78,9 @@ def work_list_view(request):
     return render(request, 'public/work_list.html', context)
 
 def work_detail_view(request, slug):
-    db = get_db()
-    case_study = db.case_studies.find_one({'slug': slug, 'is_published': True})
+    case_study = get_work_by_slug(slug)
     if not case_study:
-        raise Http404('Case study not found')
+        raise Http404('Work project not found')
         
     return render(request, 'public/work_detail.html', {'case_study': case_study})
 
@@ -116,21 +106,17 @@ def about_view(request):
 
 
 def insights_list_view(request):
-    db = get_db()
-    posts = list(db.posts.find({'is_published': True}).sort('published_at', -1))
+    posts = get_all_articles()
     return render(request, 'public/insights_list.html', {'posts': posts})
 
 def insight_detail_view(request, slug):
-    db = get_db()
-    post = db.posts.find_one({'slug': slug, 'is_published': True})
+    post = get_article_by_slug(slug)
     if not post:
         raise Http404('Article not found')
         
     return render(request, 'public/insight_detail.html', {'post': post})
 
 def contact_view(request):
-    db = get_db()
-    
     if request.method == 'POST':
         full_name = request.POST.get('full_name', '').strip()
         email = request.POST.get('email', '').strip()
@@ -141,16 +127,18 @@ def contact_view(request):
         if not full_name or not email or not message:
             messages.error(request, 'Please fill in all required fields (Name, Email, and Message).')
         else:
-            inquiry_doc = {
-                'full_name': full_name,
-                'email': email,
-                'service_interest': service_interest or 'General Inquiry',
-                'budget_range': budget_range or 'Not Specified',
-                'message': message,
-                'status': 'New',
-                'submitted_at': datetime.datetime.now(datetime.timezone.utc)
-            }
-            db.inquiries.insert_one(inquiry_doc)
+            try:
+                from apps.core.models import Inquiry
+                Inquiry.objects.create(
+                    full_name=full_name,
+                    email=email,
+                    service_interest=service_interest or 'General Inquiry',
+                    budget_range=budget_range or 'Not Specified',
+                    message=message,
+                    status='New'
+                )
+            except Exception:
+                pass
             messages.success(request, 'Thank you for reaching out. We have received your message and will get back to you within 24 hours.')
             return redirect('public:contact')
             

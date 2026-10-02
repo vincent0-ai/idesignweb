@@ -28,6 +28,11 @@
       <a href="{% url 'portal:communications' %}" class="portal-nav-item {% if active_section == 'communications' %}active{% endif %}">
         <span>Announcements</span>
       </a>
+      {% if user.is_staff %}
+        <a href="{% url 'portal:clients' %}" class="portal-nav-item {% if active_section == 'clients' %}active{% endif %}">
+          <span>Client Accounts</span>
+        </a>
+      {% endif %}
       <a href="{% url 'portal:projects' %}" class="portal-nav-item {% if active_section == 'projects' %}active{% endif %}">
         <span>Projects & Deliverables</span>
       </a>

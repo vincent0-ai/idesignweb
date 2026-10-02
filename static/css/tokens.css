@@ -27,8 +27,8 @@
   --color-green-focus: rgba(15, 23, 42, 0.15);
   
   /* Text System */
-  --text-main: #0F172A;        /* Deep slate black */
-  --text-body: #334155;        /* Highly readable slate body */
+  --text-main: #0F172A;        /* Deep slate black for headers */
+  --text-body: #64748B;        /* Harmonious slate body text matching subtitle */
   --text-muted: #64748B;       /* Neutral gray */
   --text-dim: #94A3B8;         /* Muted caption gray */
   --text-blue: #0F172A;
@@ -42,34 +42,35 @@
   --border-strong: #CBD5E1;
   --border-dark: rgba(255, 255, 255, 0.1);
 
-  /* Typography */
-  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-mono: "JetBrains Mono", Consolas, monospace;
+  /* Typography - Clean Inter Typography (vinkj.com standard) */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
   /* Font Weights */
   --weight-regular: 400;
   --weight-medium: 500;
-  --weight-bold: 600;
-  --weight-black: 700;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-black: 800;
 
   /* Type Scale */
-  --text-display: clamp(2rem, 4.5vw, 3.25rem);
-  --text-h1: clamp(1.6rem, 3vw, 2.4rem);
-  --text-h2: clamp(1.25rem, 2.2vw, 1.85rem);
+  --text-display: clamp(2rem, 4.5vw, 3rem);
+  --text-h1: clamp(1.6rem, 3vw, 2.25rem);
+  --text-h2: clamp(1.25rem, 2.2vw, 1.75rem);
   --text-h3: 1.15rem;
-  --text-h4: 1rem;
-  --text-body: 0.95rem;
-  --text-small: 0.85rem;
-  --text-tiny: 0.75rem;
+  --text-h4: 1.05rem;
+  --text-body: 1.05rem;
+  --text-small: 0.95rem;
+  --text-tiny: 0.85rem;
 
-  /* Radii — clean, sleek, consistent */
+  /* Radii - clean, sleek, consistent */
   --radius-xs: 4px;
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 14px;
   --radius-full: 9999px;
 
-  /* Shadows — soft, modern, minimal */
+  /* Shadows - soft, modern, minimal */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
   --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.05);
   --shadow-lg: 0 10px 24px rgba(0, 0, 0, 0.07);

@@ -22,5 +22,6 @@ urlpatterns = [
     path('portal/support/', views.tickets_view, name='tickets'),
     path('portal/support/new/', views.create_ticket_view, name='create_ticket'),
     path('portal/support/<str:ticket_id>/', views.ticket_detail_view, name='ticket_detail'),
+    path('portal/clients/', views.clients_view, name='clients'),
     path('portal/inquiries/', views.inquiries_view, name='inquiries'),
 ]

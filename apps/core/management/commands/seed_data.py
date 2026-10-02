@@ -2,16 +2,25 @@
 Management command to seed MongoDB and SQLite for Idesignweb.
 Content adapted from company brand materials and Squarespace inspired architecture.
 Zero emoji, zero em dashes, and complete flat design consistency.
+Safe, idempotent upserts: does not wipe production customer data.
 """
 
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 from apps.core.db import get_db, init_indexes
+from apps.core.models import Work, Article
 import datetime
 import os
 
 class Command(BaseCommand):
-    help = 'Seeds services, case studies, articles, and portal spaces adapted from company brief'
+    help = 'Seeds services, case studies, articles, and optionally demo portal spaces'
+
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '--clean-demo',
+            action='store_true',
+            help='Purges dummy demo client portal records (client_apex, demo projects, tickets, assets)'
+        )
 
     def handle(self, *args, **options):
         self.stdout.write('Initializing indexes...')
@@ -19,10 +28,27 @@ class Command(BaseCommand):
         
         db = get_db()
         now = datetime.datetime.now(datetime.timezone.utc)
-        
-        # 1. Seed Services (Web Development, Graphic Design, Video Editing, Cybersecurity)
-        self.stdout.write('Seeding services collection...')
-        db.services.delete_many({})
+        clean_demo = options.get('clean_demo', False)
+
+        # Optional Clean Demo Data
+        if clean_demo:
+            self.stdout.write('Purging demo client portal records...')
+            User.objects.filter(username='client_apex').delete()
+            db.projects.delete_many({'client_username': 'client_apex'})
+            db.assets.delete_many({'client_username': 'client_apex'})
+            db.tickets.delete_many({'client_username': 'client_apex'})
+            db.announcements.delete_many({
+                'title': {
+                    '$in': [
+                        'Scheduled Routine Server Maintenance This Sunday',
+                        'High Resolution File Downloads Available in Asset Library'
+                    ]
+                }
+            })
+            self.stdout.write(self.style.SUCCESS('Purged demo client records.'))
+
+        # 1. Seed Core Public Services (Idempotent upsert)
+        self.stdout.write('Ensuring public services catalog...')
         services_data = [
             {
                 'slug': 'web-development',
@@ -36,23 +62,6 @@ class Command(BaseCommand):
                     'E-commerce stores with secure payment integrations',
                     'Website management, content updates, and routine backups',
                     'Search engine optimization (SEO) and speed tuning'
-                ],
-                'process_steps': [
-                    {
-                        'step_number': '01',
-                        'title': 'Discovery and Sitemap',
-                        'description': 'We discuss your business goals, target customers, and page structure to create a tailored blueprint.'
-                    },
-                    {
-                        'step_number': '02',
-                        'title': 'Design and Development',
-                        'description': 'We craft custom layouts and write clean, fast code tested on mobile phones, tablets, and desktops.'
-                    },
-                    {
-                        'step_number': '03',
-                        'title': 'Launch and Maintenance',
-                        'description': 'We launch your website live, connect your domain, and provide ongoing support whenever you need help.'
-                    }
                 ],
                 'featured': True,
                 'sort_order': 1,
@@ -70,23 +79,6 @@ class Command(BaseCommand):
                     'Business cards and print-ready stationery',
                     'Social media banners and advertising graphics'
                 ],
-                'process_steps': [
-                    {
-                        'step_number': '01',
-                        'title': 'Brand Consultation',
-                        'description': 'We identify your brand personality, color preferences, and market positioning.'
-                    },
-                    {
-                        'step_number': '02',
-                        'title': 'Concept Creation',
-                        'description': 'We create visual concepts, logo options, and typography layouts for your review.'
-                    },
-                    {
-                        'step_number': '03',
-                        'title': 'Final Vector Delivery',
-                        'description': 'We deliver all final vector and print-ready files ready for web and physical production.'
-                    }
-                ],
                 'featured': True,
                 'sort_order': 2,
                 'updated_at': now
@@ -102,23 +94,6 @@ class Command(BaseCommand):
                     'Social media clips formatted for Instagram, TikTok, and YouTube',
                     'Motion graphics and animated text overlays',
                     'Audio cleanup, background music mixing, and color grading'
-                ],
-                'process_steps': [
-                    {
-                        'step_number': '01',
-                        'title': 'Footage Review',
-                        'description': 'We review your raw recordings and organize the best shots for the storyline.'
-                    },
-                    {
-                        'step_number': '02',
-                        'title': 'Timeline Assembly',
-                        'description': 'We cut the story to rhythm, sync audio, and share an initial cut for your feedback.'
-                    },
-                    {
-                        'step_number': '03',
-                        'title': 'Master Polish',
-                        'description': 'We finalize colors, master sound levels, and deliver high-definition video files.'
-                    }
                 ],
                 'featured': True,
                 'sort_order': 3,
@@ -136,116 +111,81 @@ class Command(BaseCommand):
                     'SSL configuration, firewall setup, and server hardening',
                     'Automated regular backups and continuous uptime monitoring'
                 ],
-                'process_steps': [
-                    {
-                        'step_number': '01',
-                        'title': 'Security Audit',
-                        'description': 'We inspect your website code and server settings for vulnerabilities and outdated software.'
-                    },
-                    {
-                        'step_number': '02',
-                        'title': 'Protection Implementation',
-                        'description': 'We patch loopholes, configure firewalls, and install automated defense safeguards.'
-                    },
-                    {
-                        'step_number': '03',
-                        'title': 'Ongoing Monitoring',
-                        'description': 'We keep your website backed up and monitored against unexpected attacks or downtime.'
-                    }
-                ],
                 'featured': True,
                 'sort_order': 4,
                 'updated_at': now
             }
         ]
-        db.services.insert_many(services_data)
-        
-        # 2. Seed Case Studies
-        self.stdout.write('Seeding case_studies collection...')
-        db.case_studies.delete_many({})
+        for s in services_data:
+            db.services.update_one({'slug': s['slug']}, {'$set': s}, upsert=True)
+
+        # 2. Seed Work / Case Studies (Idempotent upsert & ORM sync)
+        self.stdout.write('Ensuring case studies in MongoDB and SQLite...')
         case_studies_data = [
             {
-                'slug': 'klar-form-modern-website',
-                'title': 'Responsive E-Commerce Platform for Klar Form',
-                'client': 'Klar Form',
+                'slug': 'echowithin-encrypted-platform',
+                'title': 'EchoWithin - Private Encrypted Notes & Social Bonds Platform',
+                'client': 'EchoWithin',
                 'category': 'Web Development',
                 'year': '2026',
-                'image_url': 'img/ecommerce.jpg',
-                'summary': 'A fast, mobile-friendly online store with instant product search and secure payment checkout.',
-                'challenge': 'Klar Form was losing customers because their previous website took too long to load on mobile phones.',
-                'solution': 'We built a modern responsive store with clean layouts, fast image loading, and a simple 2-step checkout.',
+                'image_url': 'img/echowithin-platform.webp',
+                'live_url': 'https://echowithin.xyz',
+                'summary': 'A secure digital sanctuary engineered for envelope-encrypted personal notes, relationship bond milestones, and ephemeral whisper messaging.',
+                'challenge': 'The founders required an uncompromisingly private digital space for sensitive personal journaling and relationship bonds. The system demanded zero-knowledge data security, envelope encryption at rest, and instant real-time synchronization across mobile and desktop browsers without sacrificing battery or load speed.',
+                'solution': 'We architected a hardened full-stack platform featuring envelope encryption with client-side key handling, PIN-locked spaces, habit synchronization, 30-day mood check-ins, self-destructing whisper chats with session watermarks and capture alerts, and an integrated community publishing engine.',
                 'results': [
-                    {'metric': '1.1s', 'label': 'Average mobile page load time'},
-                    {'metric': '+42%', 'label': 'Increase in completed online sales'},
-                    {'metric': '100%', 'label': 'Mobile responsiveness rating'}
+                    {'metric': '0', 'label': 'Unencrypted data leaks'},
+                    {'metric': '1.0s', 'label': 'Core web speed index'},
+                    {'metric': '100%', 'label': 'Mobile responsiveness'}
                 ],
-                'deliverables_summary': 'Custom website, online store setup, payment gateway, SEO configuration.',
+                'deliverables_summary': 'Encrypted data architecture, responsive PWA web client, whisper messaging system, relationship habit trackers, automated security hardening.',
                 'published_at': now,
                 'is_published': True
             },
             {
-                'slug': 'nordic-furniture-brand-system',
-                'title': 'Brand Identity and Logo Suite for Furniture Studio',
-                'client': 'Klar Form Studio',
-                'category': 'Graphic Design',
+                'slug': 'vinkj-auto-services-ecommerce',
+                'title': 'VIN-KJ Auto Services - E-Commerce & Service Booking Platform',
+                'client': 'VIN-KJ Auto Services',
+                'category': 'E-Commerce',
                 'year': '2026',
-                'image_url': 'img/branding.jpg',
-                'summary': 'A complete visual identity redesign including logo suite, packaging templates, and promotional posters.',
-                'challenge': 'The client needed an elevated, professional brand image to sell into premium retail galleries.',
-                'solution': 'We designed a memorable minimalist logo, unified color palette, and elegant print collateral.',
+                'image_url': 'img/vinkj-ecommerce.webp',
+                'live_url': 'https://vinkj.com',
+                'summary': 'A high-performance automotive service booking engine and spare parts e-commerce catalog engineered for fast search and instant scheduling.',
+                'challenge': 'VIN-KJ, a premier automotive enhancement workshop in Nairobi, needed to streamline customer bookings for window tinting, PPF, wrapping, and detailing while enabling customers to instantly search and purchase automotive spare parts from a responsive mobile-first catalog.',
+                'solution': 'We engineered a bespoke, ultra-fast web platform featuring instant unified search across services and spare parts, a date-and-time service booking engine, interactive scope filtering, and direct WhatsApp quote routing with local SEO optimization.',
                 'results': [
-                    {'metric': '+55%', 'label': 'Increase in retail inquiries'},
-                    {'metric': '100%', 'label': 'Standardized print packaging'},
-                    {'metric': '3 Features', 'label': 'Design showcase publications'}
+                    {'metric': '< 1.2s', 'label': 'Search & catalog latency'},
+                    {'metric': '+58%', 'label': 'Online booking conversion'},
+                    {'metric': '100%', 'label': 'Mobile-first usability'}
                 ],
-                'deliverables_summary': 'Vector logo package, brand guidelines PDF, poster series, business cards.',
-                'published_at': now,
-                'is_published': True
-            },
-            {
-                'slug': 'kinetic-documentary-short',
-                'title': 'Promotional Film and Social Cutdowns for Architecture Firm',
-                'client': 'Modern Spaces',
-                'category': 'Video Editing',
-                'year': '2026',
-                'image_url': 'img/hero_laptop.jpg',
-                'summary': 'A six-minute showcase film paired with 15-second vertical cuts for Instagram and YouTube campaigns.',
-                'challenge': 'The client needed engaging video content to demonstrate their commercial architectural work to prospective clients.',
-                'solution': 'We edited footage with crisp cuts, natural ambient soundscapes, clean text overlays, and 4K color correction.',
-                'results': [
-                    {'metric': '240K', 'label': 'Total views across video channels'},
-                    {'metric': '82%', 'label': 'Average watch completion rate'},
-                    {'metric': '4K Master', 'label': 'High resolution master delivered'}
-                ],
-                'deliverables_summary': 'Master 4K video, 4 social media cuts, sound mix, YouTube master files.',
-                'published_at': now,
-                'is_published': True
-            },
-            {
-                'slug': 'zero-trust-cloud-infrastructure-audit',
-                'title': 'Website Security Hardening and Automated Backups',
-                'client': 'Vertex Media',
-                'category': 'Cybersecurity',
-                'year': '2026',
-                'image_url': 'img/company_flyer.jpg',
-                'summary': 'A comprehensive security checkup, malware cleanup, and automated daily backup system for a media platform.',
-                'challenge': 'Vertex Media experienced spam injections and required security hardening to protect client accounts.',
-                'solution': 'We patched outdated software, installed web application firewalls, and configured automated daily offsite backups.',
-                'results': [
-                    {'metric': '0 Issues', 'label': 'Vulnerabilities remaining'},
-                    {'metric': '99.99%', 'label': 'Uptime maintained'},
-                    {'metric': 'Daily', 'label': 'Automated backups verified'}
-                ],
-                'deliverables_summary': 'Security audit report, server patches, firewall configuration, backup system.',
+                'deliverables_summary': 'Custom inventory and services catalog, real-time live search engine, appointment booking engine, local SEO optimization, responsive mobile UI.',
                 'published_at': now,
                 'is_published': True
             }
         ]
-        db.case_studies.insert_many(case_studies_data)
-        
-        # 3. Seed Insights (Blog Posts)
-        self.stdout.write('Seeding posts collection...')
-        db.posts.delete_many({})
+        for cs in case_studies_data:
+            db.case_studies.update_one({'slug': cs['slug']}, {'$set': cs}, upsert=True)
+            Work.objects.update_or_create(
+                slug=cs['slug'],
+                defaults={
+                    'title': cs['title'].split(' - ')[0],
+                    'full_title': cs['title'],
+                    'client': cs['client'],
+                    'category': cs['category'],
+                    'year': cs['year'],
+                    'image_url': cs['image_url'],
+                    'live_url': cs['live_url'],
+                    'summary': cs['summary'],
+                    'challenge': cs['challenge'],
+                    'solution': cs['solution'],
+                    'deliverables_summary': cs.get('deliverables_summary', ''),
+                    'is_featured': True,
+                    'is_published': True,
+                }
+            )
+
+        # 3. Seed Insights / Articles (Idempotent upsert & ORM sync)
+        self.stdout.write('Ensuring articles in MongoDB and SQLite...')
         posts_data = [
             {
                 'slug': 'why-every-business-needs-a-website',
@@ -298,251 +238,44 @@ class Command(BaseCommand):
                 'is_published': True
             }
         ]
-        db.posts.insert_many(posts_data)
-        
-        # 4. Seed Member Announcements
-        self.stdout.write('Seeding announcements collection...')
-        db.announcements.delete_many({})
-        announcements_data = [
-            {
-                'title': 'Scheduled Routine Server Maintenance This Sunday',
-                'body': 'We will perform routine server updates this Sunday at 2:00 AM UTC. Services will remain fully accessible, and all your project files are secure.',
-                'priority': 'Notice',
-                'audience': 'all',
-                'date_str': 'September 12, 2026',
-                'created_at': now,
-                'active': True
-            },
-            {
-                'title': 'High Resolution File Downloads Available in Asset Library',
-                'body': 'You can now preview and download all your approved logo packages, vector files, and brand graphics directly from your client workspace.',
-                'priority': 'Update',
-                'audience': 'all',
-                'date_str': 'September 8, 2026',
-                'created_at': now,
-                'active': True
-            }
-        ]
-        db.announcements.insert_many(announcements_data)
-        
-        # 5. Seed Member Project Spaces
-        self.stdout.write('Seeding projects collection...')
-        db.projects.delete_many({})
-        projects_data = [
-            {
-                'project_code': 'PRJ-2026-001',
-                'client_username': 'client_apex',
-                'title': 'New Responsive E-Commerce Website',
-                'service_category': 'Web Development',
-                'status': 'In Progress',
-                'progress_percent': 70,
-                'start_date': 'August 1, 2026',
-                'target_date': 'October 15, 2026',
-                'deliverables': [
-                    {
-                        'deliverable_id': 'DEL-01',
-                        'title': 'Website sitemap and page layouts',
-                        'version': '1.0',
-                        'status': 'Approved',
-                        'due_date': 'August 20, 2026',
-                        'client_notes': 'Approved by client.'
-                    },
-                    {
-                        'deliverable_id': 'DEL-02',
-                        'title': 'Homepage and product catalog templates',
-                        'version': '2.0',
-                        'status': 'In Review',
-                        'due_date': 'September 15, 2026',
-                        'client_notes': 'Please review mobile menu alignment.'
-                    },
-                    {
-                        'deliverable_id': 'DEL-03',
-                        'title': 'Online checkout and payment setup',
-                        'version': '0.9',
-                        'status': 'Draft',
-                        'due_date': 'October 1, 2026',
-                        'client_notes': ''
-                    }
-                ],
-                'created_at': now,
-                'updated_at': now
-            },
-            {
-                'project_code': 'PRJ-2026-002',
-                'client_username': 'client_apex',
-                'title': 'Brand Identity and Style Guidelines',
-                'service_category': 'Graphic Design',
-                'status': 'In Review',
-                'progress_percent': 90,
-                'start_date': 'August 15, 2026',
-                'target_date': 'September 25, 2026',
-                'deliverables': [
-                    {
-                        'deliverable_id': 'DEL-04',
-                        'title': 'Logo concepts and color palette',
-                        'version': '1.2',
-                        'status': 'Approved',
-                        'due_date': 'August 30, 2026',
-                        'client_notes': 'Approved option 2.'
-                    },
-                    {
-                        'deliverable_id': 'DEL-05',
-                        'title': 'Print collateral and social media banners',
-                        'version': '1.0',
-                        'status': 'In Review',
-                        'due_date': 'September 20, 2026',
-                        'client_notes': ''
-                    }
-                ],
-                'created_at': now,
-                'updated_at': now
-            }
-        ]
-        db.projects.insert_many(projects_data)
-        
-        # 6. Seed Member Assets
-        self.stdout.write('Seeding assets collection...')
-        db.assets.delete_many({})
-        assets_data = [
-            {
-                'client_username': 'client_apex',
-                'asset_code': 'AST-01',
-                'name': 'Main Brand Logo Vector Package',
-                'category': 'Logos',
-                'format': 'SVG, PNG',
-                'size': '2.4 MB',
-                'version': '1.2',
-                'updated_date': 'September 2, 2026'
-            },
-            {
-                'client_username': 'client_apex',
-                'asset_code': 'AST-02',
-                'name': 'Brand Color Palette and Font Guide',
-                'category': 'Style Guide',
-                'format': 'PDF',
-                'size': '420 KB',
-                'version': '1.0',
-                'updated_date': 'September 4, 2026'
-            },
-            {
-                'client_username': 'client_apex',
-                'asset_code': 'AST-03',
-                'name': 'Promotional Video Intro Templates',
-                'category': 'Video Templates',
-                'format': 'MP4, MOV',
-                'size': '184 MB',
-                'version': '1.1',
-                'updated_date': 'September 5, 2026'
-            },
-            {
-                'client_username': 'client_apex',
-                'asset_code': 'AST-04',
-                'name': 'Website Security Checkup Summary',
-                'category': 'Security Report',
-                'format': 'PDF',
-                'size': '1.8 MB',
-                'version': '1.0',
-                'updated_date': 'September 9, 2026'
-            }
-        ]
-        db.assets.insert_many(assets_data)
-        
-        # 7. Seed Member Support Tickets
-        self.stdout.write('Seeding tickets collection...')
-        db.tickets.delete_many({})
-        tickets_data = [
-            {
-                'ticket_id': 'TCK-1001',
-                'client_username': 'client_apex',
-                'subject': 'Question about logo file formats for print',
-                'priority': 'Medium',
-                'status': 'Resolved',
-                'created_at': now - datetime.timedelta(days=5),
-                'updated_at': now - datetime.timedelta(days=4),
-                'messages': [
-                    {
-                        'sender': 'client_apex',
-                        'role': 'client',
-                        'text': 'Which logo file should our printing vendor use for our new business cards?',
-                        'date_str': 'Sep 5, 2026 at 10:14 AM'
-                    },
-                    {
-                        'sender': 'Timothy Owino',
-                        'role': 'staff',
-                        'text': 'Please share the vector PDF or EPS file in your asset library with your printer for the highest quality.',
-                        'date_str': 'Sep 5, 2026 at 11:30 AM'
-                    }
-                ]
-            },
-            {
-                'ticket_id': 'TCK-1002',
-                'client_username': 'client_apex',
-                'subject': 'Request for vertical video cut for Instagram',
-                'priority': 'High',
-                'status': 'In Progress',
-                'created_at': now - datetime.timedelta(days=1),
-                'updated_at': now,
-                'messages': [
-                    {
-                        'sender': 'client_apex',
-                        'role': 'client',
-                        'text': 'Can we get a vertical 9:16 version of our promotional video for an Instagram story campaign?',
-                        'date_str': 'Sep 9, 2026 at 2:20 PM'
-                    },
-                    {
-                        'sender': 'Timothy Owino',
-                        'role': 'staff',
-                        'text': 'Working on the vertical reframe now. We will upload it to your project space by tomorrow afternoon.',
-                        'date_str': 'Sep 9, 2026 at 3:45 PM'
-                    }
-                ]
-            },
-            {
-                'ticket_id': 'TCK-1003',
-                'client_username': 'client_apex',
-                'subject': 'SSL renewal and DNS firewall hardening check',
-                'priority': 'Medium',
-                'status': 'Resolved',
-                'created_at': now - datetime.timedelta(days=2),
-                'updated_at': now - datetime.timedelta(days=1),
-                'messages': [
-                    {
-                        'sender': 'client_apex',
-                        'role': 'client',
-                        'text': 'Can you confirm our SSL certificates and HTTP security headers are updated for the quarter?',
-                        'date_str': 'Sep 8, 2026 at 9:15 AM'
-                    },
-                    {
-                        'sender': 'Vincent Odhiambo',
-                        'role': 'staff',
-                        'text': 'SSL certificates renewed and HSTS/CSP headers verified with an A+ security grade. All systems are protected.',
-                        'date_str': 'Sep 8, 2026 at 10:05 AM'
-                    }
-                ]
-            }
-        ]
-        db.tickets.insert_many(tickets_data)
-        
-        # 8. Seed SQLite Demo Users
-        self.stdout.write('Seeding SQLite authentication users...')
-        if not User.objects.filter(username='client_apex').exists():
-            client_pass = os.getenv('CLIENT_INITIAL_PASSWORD', 'MemberPass2026!')
-            User.objects.create_user(
-                username='client_apex',
-                email='client@apex.com',
-                password=client_pass,
-                first_name='Apex',
-                last_name='Corporation'
+        for p in posts_data:
+            db.posts.update_one({'slug': p['slug']}, {'$set': p}, upsert=True)
+            Article.objects.update_or_create(
+                slug=p['slug'],
+                defaults={
+                    'title': p['title'],
+                    'category': p['category'],
+                    'author': p['author'],
+                    'reading_time': p['reading_time'],
+                    'summary': p['excerpt'],
+                    'content': p['content'],
+                    'is_published': True,
+                }
             )
-            self.stdout.write('Created client user: client_apex')
-            
-        if not User.objects.filter(username='admin').exists():
-            admin_pass = os.getenv('ADMIN_INITIAL_PASSWORD', 'AdminPass2026!')
-            User.objects.create_superuser(
-                username='admin',
-                email='admin@idesignweb.com',
-                password=admin_pass
-            )
-            self.stdout.write('Created admin user: admin')
-            
-        self.stdout.write(self.style.SUCCESS('All initial data seeded successfully.'))
+
+        # 4. Superuser Account Initialization (Configurable via Environment)
+        admin_pass = os.getenv('DJANGO_SUPERUSER_PASSWORD') or os.getenv('ADMIN_PASSWORD')
+        admin_username = os.getenv('DJANGO_SUPERUSER_USERNAME') or os.getenv('ADMIN_USERNAME')
+        admin_email = os.getenv('DJANGO_SUPERUSER_EMAIL') or os.getenv('ADMIN_EMAIL') or 'admin@idesignweb.co.ke'
+
+        if admin_pass and admin_username:
+            self.stdout.write(f'Configuring administrator account from environment: {admin_username}...')
+            admin_user = User.objects.filter(username=admin_username).first()
+            if not admin_user:
+                User.objects.create_superuser(
+                    username=admin_username,
+                    email=admin_email,
+                    password=admin_pass
+                )
+                self.stdout.write(self.style.SUCCESS(f'Created superuser from env: {admin_username} ({admin_email})'))
+            else:
+                admin_user.is_staff = True
+                admin_user.is_superuser = True
+                admin_user.email = admin_email
+                admin_user.set_password(admin_pass)
+                admin_user.save()
+                self.stdout.write(f'Updated administrator credentials from env: {admin_username}')
+        else:
+            self.stdout.write('No DJANGO_SUPERUSER_PASSWORD / USERNAME set in environment. Skipping administrator creation.')
+
+        self.stdout.write(self.style.SUCCESS('Platform initialization completed.'))

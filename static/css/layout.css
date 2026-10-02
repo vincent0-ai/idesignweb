@@ -197,9 +197,39 @@
 
 /* Section Shells */
 .section {
-  padding: var(--space-3xl) 0;
+  padding: 40px 0;
   border-bottom: 1px solid var(--border-hairline);
   position: relative;
+}
+
+.page-header {
+  text-align: center;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 36px;
+}
+
+.page-title {
+  font-family: var(--font-sans);
+  font-size: clamp(1.75rem, 3.2vw, 2.25rem);
+  font-weight: var(--weight-bold);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  color: var(--text-main);
+  margin-bottom: 12px;
+}
+
+.page-subtitle {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+  letter-spacing: -0.011em;
+  margin-bottom: 0;
 }
 
 .section-muted {
@@ -346,6 +376,7 @@
   gap: 8px;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   margin-bottom: var(--space-2xl);
   border-bottom: 1px solid var(--border-hairline);
   padding-bottom: var(--space-lg);
@@ -354,7 +385,7 @@
 
 .card-action-row {
   border-top: 1px solid var(--border-hairline);
-  padding-top: var(--space-md);
+  padding-top: 10px;
   margin-top: auto;
   display: flex;
   justify-content: space-between;
@@ -581,6 +612,14 @@
 
   .header-actions {
     display: none;
+  }
+
+  .section {
+    padding: 24px 0;
+  }
+
+  .page-header {
+    margin-bottom: 16px;
   }
 
   .hero-section {

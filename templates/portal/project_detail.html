@@ -40,7 +40,88 @@
   <div style="width: 100%; height: 6px; background: var(--border-hairline); border: 1px solid var(--border-hairline);">
     <div style="width: {{ project.progress_percent }}%; height: 100%; background: var(--text-main);"></div>
   </div>
+
+  {% if user.is_staff %}
+  <!-- Staff Controls: Update Status & Progress -->
+  <div style="margin-top: var(--space-md); padding-top: var(--space-md); border-top: 1px solid var(--border-hairline);">
+    <form method="POST" action="{% url 'portal:project_detail' project.project_code %}" style="display: flex; gap: var(--space-md); align-items: flex-end; flex-wrap: wrap;">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="update_project">
+
+      <div class="form-group" style="margin-bottom: 0; min-width: 140px;">
+        <label class="form-label" style="font-size: var(--text-tiny);">Status:</label>
+        <select name="status" class="form-select" style="padding: 6px 10px; font-size: 0.85rem;">
+          <option value="In Review" {% if project.status == 'In Review' %}selected{% endif %}>In Review</option>
+          <option value="Active" {% if project.status == 'Active' %}selected{% endif %}>Active</option>
+          <option value="Revision Requested" {% if project.status == 'Revision Requested' %}selected{% endif %}>Revision Requested</option>
+          <option value="Approved" {% if project.status == 'Approved' %}selected{% endif %}>Approved</option>
+          <option value="Completed" {% if project.status == 'Completed' %}selected{% endif %}>Completed</option>
+        </select>
+      </div>
+
+      <div class="form-group" style="margin-bottom: 0; width: 120px;">
+        <label class="form-label" style="font-size: var(--text-tiny);">Progress (%):</label>
+        <input type="number" name="progress_percent" min="0" max="100" value="{{ project.progress_percent }}" class="form-input" style="padding: 6px 10px; font-size: 0.85rem;">
+      </div>
+
+      <div class="form-group" style="margin-bottom: 0; min-width: 140px;">
+        <label class="form-label" style="font-size: var(--text-tiny);">Target Timeline:</label>
+        <input type="text" name="target_date" value="{{ project.target_date }}" class="form-input" style="padding: 6px 10px; font-size: 0.85rem;">
+      </div>
+
+      <button type="submit" class="btn btn-outline btn-sm">
+        Update Status
+      </button>
+    </form>
+  </div>
+  {% endif %}
 </div>
+
+<!-- Staff Action: Add Deliverable -->
+{% if user.is_staff %}
+<div class="card" style="padding: var(--space-xl); margin-bottom: var(--space-2xl); border: 1px solid var(--border-hairline);">
+  <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-md);">
+    <h2 style="font-size: var(--text-h3); margin-bottom: 0;">Add New Project Deliverable</h2>
+    <span class="status-tag status-approved">Staff Action</span>
+  </div>
+
+  <form method="POST" action="{% url 'portal:project_detail' project.project_code %}">
+    {% csrf_token %}
+    <input type="hidden" name="action" value="add_deliverable">
+
+    <div class="grid-2" style="gap: var(--space-md); margin-bottom: var(--space-md);">
+      <div class="form-group" style="margin-bottom: 0;">
+        <label for="del_title" class="form-label">Deliverable Title *</label>
+        <input type="text" id="del_title" name="title" class="form-input" required 
+               placeholder="e.g. V1 Architecture & Database Schema">
+      </div>
+
+      <div class="form-group" style="margin-bottom: 0;">
+        <label for="del_asset_type" class="form-label">Asset / Deliverable Type</label>
+        <select id="del_asset_type" name="asset_type" class="form-select">
+          <option value="Specification" selected>Specification</option>
+          <option value="Design System">Design System</option>
+          <option value="Staging Deployment">Staging Deployment</option>
+          <option value="Security Audit">Security Audit</option>
+          <option value="Deliverable">General Deliverable</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group" style="margin-bottom: var(--space-md);">
+      <label for="del_preview" class="form-label">Live Preview / Artifact URL (optional)</label>
+      <input type="url" id="del_preview" name="preview_url" class="form-input" 
+             placeholder="https://staging.echowithin.xyz or Figma URL">
+    </div>
+
+    <div style="display: flex; justify-content: flex-end;">
+      <button type="submit" class="btn btn-primary btn-sm">
+        Add Deliverable to Project
+      </button>
+    </div>
+  </form>
+</div>
+{% endif %}
 
 <!-- Deliverables Section -->
 <div class="section-header">

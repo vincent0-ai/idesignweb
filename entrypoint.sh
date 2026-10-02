@@ -7,9 +7,10 @@ echo "==> Preparing Idesignweb Platform..."
 echo "==> Running Django database migrations..."
 python manage.py migrate --noinput
 
-# Seed MongoDB collections & default accounts if not already present
-echo "==> Checking seed data..."
-python manage.py seed_data || echo "==> Seed data step finished."
+# Ensure production public catalog and admin account from environment
+echo "==> Initializing platform catalog and admin credentials..."
+python manage.py seed_data || echo "==> Initialization step finished."
+
 
 # Collect static assets for WhiteNoise
 echo "==> Collecting static files..."

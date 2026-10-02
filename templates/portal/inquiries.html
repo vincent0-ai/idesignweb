@@ -39,11 +39,16 @@
         {{ inq.message }}
       </p>
 
-      <div style="display: flex; justify-content: space-between; align-items: center; font-size: var(--text-tiny); color: var(--text-muted);">
+      <div style="display: flex; justify-content: space-between; align-items: center; font-size: var(--text-tiny); color: var(--text-muted); flex-wrap: wrap; gap: 8px;">
         <span>Status: <strong>{{ inq.status|default:"New" }}</strong></span>
-        <a href="mailto:{{ inq.email }}?subject=Re: Your Idesignweb Inquiry ({{ inq.service_interest }})" class="btn btn-secondary btn-sm">
-          Reply via Email
-        </a>
+        <div style="display: flex; gap: 8px;">
+          <a href="mailto:{{ inq.email }}?subject=Re: Your Idesignweb Inquiry ({{ inq.service_interest }})" class="btn btn-secondary btn-sm">
+            Reply via Email
+          </a>
+          <a href="{% url 'portal:clients' %}?name={{ inq.full_name|urlencode }}&email={{ inq.email|urlencode }}&service={{ inq.service_interest|urlencode }}" class="btn btn-primary btn-sm">
+            Create Client Account
+          </a>
+        </div>
       </div>
     </article>
   {% empty %}

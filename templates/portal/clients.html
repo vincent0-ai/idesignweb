@@ -1,0 +1,170 @@
+{% extends 'portal/portal_base.html' %}
+
+{% block title %}Client Accounts : Staff Portal : {{ site_title }}{% endblock %}
+
+{% block portal_content %}
+<div style="margin-bottom: var(--space-2xl);">
+  <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: var(--space-md);">
+    <div>
+      <h1 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">Client Accounts</h1>
+      <p style="font-size: var(--text-body); color: var(--text-muted);">
+        Provision and manage authenticated client portal access, project assignments, and credentials.
+      </p>
+    </div>
+    <div>
+      <span class="numeral-badge">Total Clients: {{ clients|length }}</span>
+    </div>
+  </div>
+</div>
+
+<!-- Onboard / Create Client Account Card -->
+<div class="card" style="padding: var(--space-xl); margin-bottom: var(--space-2xl); border: 1px solid var(--border-hairline);">
+  <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-sm); margin-bottom: var(--space-lg);">
+    <div>
+      <h2 style="font-size: var(--text-h3); margin-bottom: 2px;">Create New Client Account</h2>
+      <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: 0;">
+        Sets up their authenticated login at /login/ and provisions their private project workspace.
+      </p>
+    </div>
+    <span class="status-tag status-approved">Staff Action</span>
+  </div>
+
+  <form method="POST" action="{% url 'portal:clients' %}">
+    {% csrf_token %}
+    <input type="hidden" name="action" value="create_client">
+
+    <div class="grid-2" style="gap: var(--space-md); margin-bottom: var(--space-md);">
+      <div class="form-group" style="margin-bottom: 0;">
+        <label for="company_name" class="form-label">Client / Company Name *</label>
+        <input type="text" id="company_name" name="company_name" class="form-input" required 
+               value="{{ prefill.company_name }}" placeholder="e.g. VIN-KJ Auto Services or Acme Corp">
+      </div>
+
+      <div class="form-group" style="margin-bottom: 0;">
+        <label for="username" class="form-label">Login Username *</label>
+        <input type="text" id="username" name="username" class="form-input" required 
+               value="{{ prefill.username }}" placeholder="e.g. client_vinkj (lowercase, no spaces)">
+      </div>
+
+      <div class="form-group" style="margin-bottom: 0;">
+        <label for="email" class="form-label">Contact Email *</label>
+        <input type="email" id="email" name="email" class="form-input" required 
+               value="{{ prefill.email }}" placeholder="e.g. info@vinkj.com">
+      </div>
+
+      <div class="form-group" style="margin-bottom: 0;">
+        <label for="password" class="form-label">Initial Password *</label>
+        <input type="text" id="password" name="password" class="form-input" required 
+               placeholder="e.g. TempPass2026! (provide this to your client)">
+      </div>
+    </div>
+
+    <!-- Optional Automatic Project Space Setup -->
+    <div style="background: var(--bg-muted); border: 1px solid var(--border-hairline); border-radius: var(--radius-sm); padding: var(--space-md); margin-bottom: var(--space-lg);">
+      <div style="font-size: var(--text-small); font-weight: var(--weight-bold); margin-bottom: var(--space-xs); color: var(--text-main);">
+        Initial Project Space (Optional)
+      </div>
+      <p style="font-size: var(--text-tiny); color: var(--text-muted); margin-bottom: var(--space-sm);">
+        Automatically initializes their private project space and onboarding deliverable upon first login.
+      </p>
+
+      <div class="grid-2" style="gap: var(--space-md);">
+        <div class="form-group" style="margin-bottom: 0;">
+          <label for="project_title" class="form-label">Project Title</label>
+          <input type="text" id="project_title" name="project_title" class="form-input" 
+                 placeholder="e.g. VIN-KJ Modern E-Commerce Platform">
+        </div>
+
+        <div class="form-group" style="margin-bottom: 0;">
+          <label for="service_category" class="form-label">Service Capability</label>
+          <select id="service_category" name="service_category" class="form-select">
+            <option value="Web Development" {% if prefill.service_category == 'Web Development' %}selected{% endif %}>Web Development</option>
+            <option value="E-Commerce" {% if prefill.service_category == 'E-Commerce' %}selected{% endif %}>E-Commerce</option>
+            <option value="Cybersecurity" {% if prefill.service_category == 'Cybersecurity' %}selected{% endif %}>Cybersecurity</option>
+            <option value="Graphic Design" {% if prefill.service_category == 'Graphic Design' %}selected{% endif %}>Graphic Design</option>
+            <option value="Video Editing" {% if prefill.service_category == 'Video Editing' %}selected{% endif %}>Video Editing</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; justify-content: flex-end;">
+      <button type="submit" class="btn btn-primary">
+        Create Client Account
+      </button>
+    </div>
+  </form>
+</div>
+
+<!-- Registered Clients Directory -->
+<div class="section-header" style="margin-bottom: var(--space-md);">
+  <div>
+    <h2 class="section-title" style="font-size: var(--text-h3);">Registered Clients</h2>
+  </div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: var(--space-md); max-width: 100%;">
+  {% for cl in clients %}
+    <article class="card-hairline" style="padding: 16px 20px;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: var(--space-md);">
+        <div>
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+            <h3 style="font-size: 1.15rem; margin-bottom: 0; font-weight: 700;">
+              {{ cl.first_name|default:cl.username }}
+            </h3>
+            <span class="numeral-badge" style="text-transform: none;">@{{ cl.username }}</span>
+            {% if cl.is_active %}
+              <span class="status-tag status-approved">Active</span>
+            {% else %}
+              <span class="status-tag status-draft">Inactive</span>
+            {% endif %}
+          </div>
+          <div style="font-size: var(--text-small); color: var(--text-muted);">
+            Email: <a href="mailto:{{ cl.email }}" style="color: var(--text-main); text-decoration: underline;">{{ cl.email }}</a> &bull; Joined: {{ cl.date_joined|date:"M j, Y" }}
+          </div>
+        </div>
+
+        <div style="display: flex; gap: var(--space-sm); align-items: center; flex-wrap: wrap;">
+          <span class="numeral-badge">Projects: {{ cl.project_count }}</span>
+          <span class="numeral-badge">Tickets: {{ cl.ticket_count }}</span>
+
+          <!-- Deactivate / Activate Form -->
+          <form method="POST" action="{% url 'portal:clients' %}" style="display: inline;">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="toggle_status">
+            <input type="hidden" name="target_username" value="{{ cl.username }}">
+            <button type="submit" class="btn btn-outline btn-sm">
+              {% if cl.is_active %}Deactivate{% else %}Activate{% endif %}
+            </button>
+          </form>
+
+          <!-- Password Reset Modal Trigger -->
+          <details style="position: relative; display: inline-block;">
+            <summary class="btn btn-outline btn-sm" style="list-style: none; cursor: pointer;">
+              Reset Password
+            </summary>
+            <div style="position: absolute; right: 0; top: calc(100% + 6px); background: #FFFFFF; border: 1px solid var(--border-hairline); border-radius: var(--radius-sm); padding: var(--space-md); box-shadow: var(--shadow-md); z-index: 50; width: 260px;">
+              <form method="POST" action="{% url 'portal:clients' %}">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="reset_password">
+                <input type="hidden" name="target_username" value="{{ cl.username }}">
+                <div class="form-group" style="margin-bottom: var(--space-xs);">
+                  <label class="form-label" style="font-size: var(--text-tiny);">New Password:</label>
+                  <input type="text" name="new_password" class="form-input" style="padding: 6px 10px; font-size: 0.85rem;" required placeholder="e.g. NewPass2026!">
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm btn-block" style="margin-top: 6px;">
+                  Update Password
+                </button>
+              </form>
+            </div>
+          </details>
+        </div>
+      </div>
+    </article>
+  {% empty %}
+    <div class="card-hairline" style="text-align: center; padding: var(--space-2xl);">
+      <p style="color: var(--text-muted); margin-bottom: 0;">No client accounts registered yet. Use the form above to create your first customer account.</p>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

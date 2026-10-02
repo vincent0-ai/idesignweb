@@ -4,18 +4,85 @@
 
 {% block portal_content %}
 <div style="margin-bottom: var(--space-2xl);">
-  <h1 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">Announcements</h1>
-  <p style="font-size: var(--text-body); color: var(--text-muted);">
-    Updates and notices regarding your services and project milestones.
-  </p>
+  <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: var(--space-md);">
+    <div>
+      <h1 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">Announcements</h1>
+      <p style="font-size: var(--text-body); color: var(--text-muted);">
+        Updates and notices regarding your services and project milestones.
+      </p>
+    </div>
+    <div>
+      <span class="numeral-badge">Total Announcements: {{ announcements|length }}</span>
+    </div>
+  </div>
 </div>
+
+<!-- Staff Action: Publish New Announcement -->
+{% if user.is_staff %}
+<div class="card" style="padding: var(--space-xl); margin-bottom: var(--space-2xl); border: 1px solid var(--border-hairline); max-width: 900px;">
+  <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-md);">
+    <h2 style="font-size: var(--text-h3); margin-bottom: 0;">Publish New Announcement</h2>
+    <span class="status-tag status-approved">Staff Action</span>
+  </div>
+
+  <form method="POST" action="{% url 'portal:communications' %}">
+    {% csrf_token %}
+    <input type="hidden" name="action" value="create">
+
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-md); margin-bottom: var(--space-md);">
+      <div class="form-group" style="margin-bottom: 0;">
+        <label for="ann_title" class="form-label">Announcement Title *</label>
+        <input type="text" id="ann_title" name="title" class="form-input" required 
+               placeholder="e.g. Scheduled Infrastructure Upgrade This Weekend">
+      </div>
+
+      <div class="form-group" style="margin-bottom: 0;">
+        <label for="ann_priority" class="form-label">Type / Category</label>
+        <select id="ann_priority" name="priority" class="form-select">
+          <option value="Notice">Notice</option>
+          <option value="Update" selected>Update</option>
+          <option value="Milestone">Milestone</option>
+          <option value="Security">Security</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group" style="margin-bottom: var(--space-md);">
+      <label for="ann_body" class="form-label">Announcement Body *</label>
+      <textarea id="ann_body" name="body" class="form-textarea" rows="3" required 
+                placeholder="Enter announcement details, instructions, or maintenance timeframes for clients..."></textarea>
+    </div>
+
+    <div style="display: flex; justify-content: flex-end;">
+      <button type="submit" class="btn btn-primary btn-sm">
+        Publish Announcement
+      </button>
+    </div>
+  </form>
+</div>
+{% endif %}
 
 <div style="display: flex; flex-direction: column; gap: var(--space-lg); max-width: 900px;">
   {% for ann in announcements %}
     <article class="card-hairline">
       <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-sm);">
-        <span class="numeral-badge">{{ ann.priority }}</span>
-        <span style="font-size: var(--text-tiny); color: var(--text-dim);">{{ ann.date_str }}</span>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span class="numeral-badge">{{ ann.priority }}</span>
+          <span style="font-size: var(--text-tiny); color: var(--text-dim);">{{ ann.date_str }}</span>
+        </div>
+
+        {% if user.is_staff %}
+        <form method="POST" action="{% url 'portal:communications' %}" style="display: inline;" 
+              onsubmit="return confirm('Are you sure you want to delete this announcement?');">
+          {% csrf_token %}
+          <input type="hidden" name="action" value="delete">
+          <input type="hidden" name="announcement_id" value="{{ ann.announcement_id }}">
+          <button type="submit" class="btn btn-outline btn-sm" 
+                  style="color: #dc2626; border-color: #fca5a5; padding: 2px 8px; font-size: var(--text-tiny);">
+            Delete
+          </button>
+        </form>
+        {% endif %}
       </div>
 
       <h2 style="font-size: var(--text-h3); margin-bottom: var(--space-sm);">{{ ann.title }}</h2>
@@ -26,7 +93,7 @@
     </article>
   {% empty %}
     <div class="card-hairline" style="text-align: center; padding: var(--space-2xl);">
-      <p>No announcements currently on record.</p>
+      <p style="color: var(--text-muted); margin-bottom: 0;">No announcements currently on record.</p>
     </div>
   {% endfor %}
 </div>

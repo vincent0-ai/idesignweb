@@ -42,8 +42,9 @@ This project follows strict minimalist, modern digital studio and engineering ag
   - Restrained Accent: `#2563EB` (clean modern blue, used sparingly).
   - Strictly avoid jarring electric blues (`#2D00FB`), neon greens (`#00D084`), or pastel sky blues (`#EBF6FC`).
 - **Typography**:
-  - Body & Headings: `Plus Jakarta Sans`.
-  - Technical / Numerals: `JetBrains Mono`.
+  - Primary Stack: Google Font **Inter** (`'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif`), matching `vinkj.com`.
+  - Hierarchy & Weights: 400 (body), 500 (meta, labels, buttons), 600 (subheadings, accents), 700 (primary headings & brand wordmark), 800 (heavy display).
+  - No Monospace / Typewriter Clutter: All editorial content, numerals, and badges use clean sans-serif typography.
 
 ---
 

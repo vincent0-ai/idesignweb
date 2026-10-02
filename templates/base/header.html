@@ -21,7 +21,7 @@
         <div class="nav-dropdown-menu">
           {% for s in service_links %}
           <a href="{% url 'public:service_detail' s.slug %}" class="nav-dropdown-item">
-            <span style="font-weight: 600; color: var(--text-dim); margin-right: 8px; font-family: var(--font-mono); font-size: 0.8rem;">{{ s.num }}</span>
+            <span style="font-weight: 600; color: var(--text-dim); margin-right: 8px; font-size: 0.8rem;">{{ s.num }}</span>
             {{ s.title }}
           </a>
           {% endfor %}
@@ -35,7 +35,7 @@
 
       <a href="{% url 'public:work_list' %}"
         class="nav-link {% if request.resolver_match.view_name == 'public:work_list' %}active{% endif %}">
-        Case Studies
+        Work
       </a>
 
       <a href="{% url 'public:about' %}"

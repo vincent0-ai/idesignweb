@@ -3,20 +3,17 @@
 {% block title %}{{ service.title }} : {{ site_title }}{% endblock %}
 
 {% block content %}
-<section class="section" style="background: var(--bg-muted); border-bottom: 1px solid var(--border-hairline); padding: var(--space-2xl) 0;">
+<section class="section" style="padding-top: 32px; padding-bottom: 48px;">
   <div class="container">
-    <h1 style="font-size: var(--text-display); max-width: 900px; margin-bottom: var(--space-sm);">
-      {{ service.title }}
-    </h1>
-    
-    <p style="font-size: 1.15rem; color: var(--text-muted); max-width: 780px; margin-bottom: 0; line-height: 1.6;">
-      {{ service.tagline }}
-    </p>
-  </div>
-</section>
+    <div class="page-header">
+      <h1 class="page-title">
+        {{ service.title }}
+      </h1>
+      <p class="page-subtitle">
+        {{ service.tagline }}
+      </p>
+    </div>
 
-<section class="section">
-  <div class="container">
     <div class="grid-2" style="align-items: start; margin-bottom: var(--space-3xl); gap: var(--space-xl);">
       <!-- Service Description -->
       <div class="card" style="padding: var(--space-xl);">
@@ -34,7 +31,7 @@
       <!-- Deliverables List -->
       <div class="card" style="padding: var(--space-xl);">
         <h3 style="font-size: var(--text-h3); margin-bottom: var(--space-md);">Deliverable Scope</h3>
-        <ul class="card-service-deliverables" style="margin-top: 0; padding-top: 0; border-top: none;">
+        <ul class="detail-deliverables-list">
           {% for d in service.deliverables %}
             <li>{{ d }}</li>
           {% endfor %}
@@ -42,42 +39,26 @@
       </div>
     </div>
 
-    <!-- How We Deliver -->
-    <div style="margin-bottom: var(--space-3xl);">
-      <div class="section-header">
-        <div class="section-title-wrap">
-          <h2 class="section-title">How We Deliver</h2>
-        </div>
-      </div>
-
-      <div class="process-list">
-        {% for step in service.process_steps %}
-          {% include 'components/process_step.html' with step=step %}
-        {% endfor %}
-      </div>
-    </div>
-
-    <!-- Related Case Studies -->
+    <!-- Related Work -->
     {% if related_cases %}
-      <div>
-        <div class="section-header">
-          <div class="section-title-wrap">
-            <h2 class="section-title">Related Case Studies</h2>
+      <div style="margin-top: var(--space-2xl);">
+        <div class="section-header section-header-center">
+          <div>
+            <h2 class="section-title">Related Work</h2>
           </div>
         </div>
 
         <div class="grid-2">
           {% for case in related_cases %}
             <article class="card" style="padding: var(--space-xl); display: flex; flex-direction: column;">
-              <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-md);">
-                <span style="font-size: var(--text-tiny); font-family: var(--font-mono); color: var(--text-dim);">Client: {{ case.client }}</span>
-                <span style="font-size: var(--text-tiny); font-family: var(--font-mono); color: var(--text-dim);">{{ case.year }}</span>
+              <div style="margin-bottom: var(--space-xs);">
+                <span class="category-label">{{ case.category }}</span>
               </div>
               <h3 style="font-size: var(--text-h3); margin-bottom: var(--space-xs);">{{ case.title }}</h3>
               <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-lg); line-height: 1.6;">{{ case.summary }}</p>
               <div style="margin-top: auto; border-top: 1px solid var(--border-hairline); padding-top: var(--space-md);">
-                <a href="{% url 'public:work_detail' case.slug %}" class="card-service-action" style="font-size: var(--text-tiny);">
-                  View Case Study
+                <a href="{% url 'public:work_detail' case.slug %}" class="btn btn-outline btn-sm">
+                  View Work
                 </a>
               </div>
             </article>

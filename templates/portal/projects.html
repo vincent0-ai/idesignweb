@@ -4,11 +4,74 @@
 
 {% block portal_content %}
 <div style="margin-bottom: var(--space-2xl);">
-  <h1 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">Your Projects</h1>
-  <p style="font-size: var(--text-body); color: var(--text-muted);">
-    Track project milestones, review deliverables, and approve work.
-  </p>
+  <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: var(--space-md);">
+    <div>
+      <h1 style="font-size: var(--text-h2); margin-bottom: var(--space-xs);">Project Spaces</h1>
+      <p style="font-size: var(--text-body); color: var(--text-muted);">
+        {% if user.is_staff %}Manage all client workspaces, deliverables, and progress tracking.{% else %}Track your project milestones, review deliverables, and approve work.{% endif %}
+      </p>
+    </div>
+    <div>
+      <span class="numeral-badge">Total Projects: {{ projects|length }}</span>
+    </div>
+  </div>
 </div>
+
+<!-- Staff Action: Initialize New Project Space -->
+{% if user.is_staff %}
+<div class="card" style="padding: var(--space-xl); margin-bottom: var(--space-2xl); border: 1px solid var(--border-hairline);">
+  <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-md);">
+    <h2 style="font-size: var(--text-h3); margin-bottom: 0;">Create New Project Space</h2>
+    <span class="status-tag status-approved">Staff Action</span>
+  </div>
+
+  <form method="POST" action="{% url 'portal:projects' %}">
+    {% csrf_token %}
+    <input type="hidden" name="action" value="create_project">
+
+    <div class="grid-2" style="gap: var(--space-md); margin-bottom: var(--space-md);">
+      <div class="form-group" style="margin-bottom: 0;">
+        <label for="client_username" class="form-label">Assign to Client *</label>
+        <select id="client_username" name="client_username" class="form-select" required>
+          <option value="" disabled selected>-- Select Registered Client --</option>
+          {% for cl in client_users %}
+            <option value="{{ cl.username }}">{{ cl.first_name|default:cl.username }} (@{{ cl.username }})</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="form-group" style="margin-bottom: 0;">
+        <label for="prj_title" class="form-label">Project Title *</label>
+        <input type="text" id="prj_title" name="title" class="form-input" required 
+               placeholder="e.g. Modern Full-Stack Web Platform">
+      </div>
+
+      <div class="form-group" style="margin-bottom: 0;">
+        <label for="service_category" class="form-label">Service Capability</label>
+        <select id="service_category" name="service_category" class="form-select">
+          <option value="Web Development" selected>Web Development</option>
+          <option value="E-Commerce">E-Commerce</option>
+          <option value="Cybersecurity">Cybersecurity</option>
+          <option value="Graphic Design">Graphic Design</option>
+          <option value="Video Editing">Video Editing</option>
+        </select>
+      </div>
+
+      <div class="form-group" style="margin-bottom: 0;">
+        <label for="target_date" class="form-label">Target Delivery Timeline</label>
+        <input type="text" id="target_date" name="target_date" class="form-input" 
+               placeholder="e.g. Q4 2026 or 4 Weeks">
+      </div>
+    </div>
+
+    <div style="display: flex; justify-content: flex-end;">
+      <button type="submit" class="btn btn-primary btn-sm">
+        Initialize Project Space
+      </button>
+    </div>
+  </form>
+</div>
+{% endif %}
 
 <div class="grid-2">
   {% for prj in projects %}

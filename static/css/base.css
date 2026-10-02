@@ -29,6 +29,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.011em;
   overflow-x: hidden;
   max-width: 100%;
   position: relative;
@@ -39,13 +40,19 @@ body {
   color: var(--text-main);
 }
 
-/* Typography Hierarchy - Clean Minimalist Style */
+/* Typography Hierarchy - Clean Minimalist Inter Style (vinkj.com standard) */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-sans);
   font-weight: var(--weight-bold);
   color: var(--text-main);
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+}
+
+button, input, select, textarea {
+  font-family: var(--font-sans);
+  font-size: inherit;
+  color: inherit;
 }
 
 h1 { font-size: var(--text-h1); margin-bottom: var(--space-md); }
@@ -117,10 +124,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 
 /* Category Label */
 .category-label {
-  font-size: 0.72rem;
-  font-weight: var(--weight-bold);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-size: 0.9rem;
+  font-weight: var(--weight-medium);
+  text-transform: none;
+  letter-spacing: normal;
   color: var(--text-muted);
   display: inline-block;
   margin-bottom: var(--space-xs);
