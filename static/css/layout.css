@@ -645,15 +645,21 @@
     width: 100%;
   }
 
-  /* 2-Column Mobile Grid for Cards */
-  .grid-2, .grid-4 {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+  /* Clean 1-Column Vertical Stack for Mobile */
+  .grid-2, .grid-3, .grid-4 {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
   }
 
-  .grid-3 {
-    grid-template-columns: 1fr;
-    gap: var(--space-md);
+  .card-action-row {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .card-action-row .btn {
+    flex: 1 1 120px;
+    text-align: center;
+    justify-content: center;
   }
 
   .picks-content {
@@ -703,9 +709,9 @@
     padding-right: 12px;
   }
 
-  .grid-2, .grid-4 {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+  .grid-2, .grid-3, .grid-4 {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
   }
 
   .hero-headline {

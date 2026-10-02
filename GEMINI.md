@@ -33,9 +33,9 @@ This project follows strict minimalist, modern digital studio and engineering ag
 
 ---
 
-## 3. 2-Column Mobile Grid Layout
-- **Mobile Cards**: Always use a **2-column layout on mobile** (`grid-template-columns: repeat(2, 1fr)`) with compact gutters (`8px` to `12px`).
-- **Zero Side Voids**: In a 2-column mobile layout, card width is ~165px, allowing standard landscape and editorial photography to fill edge-to-edge naturally.
+## 3. Clean 1-Column Mobile Layout
+- **Mobile Stack**: Always use a **single-column layout on mobile** (`grid-template-columns: 1fr`) with clean vertical spacing (`var(--space-lg)` to `var(--space-xl)`).
+- **No Horizontal Squishing**: Never force cards, forms, or content side-by-side into 2-column mobile grids. Full-width cards ensure screenshots, descriptions, and action buttons remain clear and readable.
 
 ---
 
