@@ -1,21 +1,21 @@
 /*
  * Idesignweb Component Primitives
- * Cloned directly from Oberlo (https://www.oberlo.com/)
- * Clean editorial light aesthetic: bold uppercase buttons, pastel sky-blue feature boxes,
- * midnight-navy story blocks, clean article cards with image zoom, and human founder profiles.
+ * Refined Minimalist Editorial Design System
+ * Clean flat cards, zero decorative clutter, crisp typography, and unified buttons.
  */
 
-/* Button Primitives - Oberlo Signature CTA System */
+/* ============================================================ */
+/* Button Primitives                                            */
+/* ============================================================ */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-sans);
-  font-size: 0.95rem;
-  font-weight: var(--weight-bold);
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
-  padding: 12px 24px;
+  font-size: 0.9rem;
+  font-weight: var(--weight-medium);
+  letter-spacing: -0.01em;
+  padding: 10px 20px;
   border-radius: var(--radius-sm);
   border: 1px solid transparent;
   cursor: pointer;
@@ -26,92 +26,94 @@
   max-width: 100%;
   transition: background-color var(--transition-base), color var(--transition-base), border-color var(--transition-base), transform 0.15s ease, box-shadow var(--transition-base);
   text-decoration: none;
-  gap: 8px;
+  gap: 6px;
 }
 
 .btn:active {
-  transform: scale(0.97);
+  transform: scale(0.98);
 }
 
-/* Primary CTA - Oberlo High-Conversion Green Button */
-.btn-primary, .btn-green {
-  background-color: var(--color-green);
-  border-color: var(--color-green);
-  color: #FFFFFF;
-}
-
-.btn-primary:hover, .btn-green:hover {
-  background-color: var(--color-green-hover);
-  border-color: var(--color-green-hover);
-  color: #FFFFFF;
-  box-shadow: var(--shadow-green);
-}
-
-.btn-primary:active, .btn-green:active {
-  background-color: #00995C;
-}
-
-/* Secondary Button - Oberlo Electric Cobalt Blue */
-.btn-secondary, .btn-blue {
+/* Primary CTA - Sleek Obsidian Slate */
+.btn-primary, .btn-green, .btn-blue {
   background-color: var(--color-blue);
   border-color: var(--color-blue);
-  color: #FFFFFF;
+  color: #FFFFFF !important;
 }
 
-.btn-secondary:hover, .btn-blue:hover {
+.btn-primary:hover, .btn-green:hover, .btn-blue:hover {
   background-color: var(--color-blue-hover);
   border-color: var(--color-blue-hover);
-  color: #FFFFFF;
+  color: #FFFFFF !important;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Secondary Button - Subtle Neutral Fill */
+.btn-secondary {
+  background-color: var(--bg-muted);
+  border-color: var(--border-hairline);
+  color: var(--text-main);
+}
+
+.btn-secondary:hover {
+  background-color: var(--bg-muted-hover);
+  border-color: var(--border-strong);
+  color: var(--text-main);
+  transform: translateY(-1px);
 }
 
 /* Outline Button */
 .btn-outline {
   background-color: transparent;
-  border: 1px solid var(--border-strong);
+  border: 1px solid var(--border-hairline);
   color: var(--text-main);
 }
 
 .btn-outline:hover {
-  border-color: var(--color-blue);
-  color: var(--color-blue);
-  background-color: var(--color-blue-subtle);
+  border-color: var(--border-strong);
+  background-color: var(--bg-muted);
+  color: var(--text-main);
+  transform: translateY(-1px);
 }
 
 /* Ghost / Link Button */
 .btn-ghost {
   background-color: transparent;
   border-color: transparent;
-  color: var(--color-blue);
-  font-weight: var(--weight-bold);
+  color: var(--color-accent);
+  font-weight: var(--weight-medium);
   padding: 8px 12px;
 }
 
 .btn-ghost:hover {
   text-decoration: underline;
-  color: var(--color-blue-hover);
+  color: var(--color-accent-hover);
 }
 
 .btn-link {
-  color: var(--color-blue);
+  color: var(--text-main);
   text-decoration: none;
-  font-weight: var(--weight-bold);
+  font-weight: var(--weight-medium);
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  font-size: var(--text-small);
+  transition: color var(--transition-base);
 }
 
 .btn-link:hover {
-  text-decoration: underline;
+  color: var(--color-accent);
 }
 
 .btn-sm {
-  padding: 8px 16px;
+  padding: 7px 14px;
   font-size: var(--text-tiny);
+  border-radius: var(--radius-xs);
 }
 
 .btn-lg {
-  padding: 16px 36px;
-  font-size: 1.05rem;
+  padding: 14px 28px;
+  font-size: 0.95rem;
 }
 
 .btn-block {
@@ -119,18 +121,12 @@
   width: 100%;
 }
 
-/* Card Primitives - Oberlo Signature Styles */
+/* ============================================================ */
+/* Card Primitives ("No Card House" Pattern)                    */
+/* ============================================================ */
 
-/* 1. Oberlo Sky-Blue Callout Container (bg-sky-30) */
-.card-sky {
-  background-color: var(--bg-sky);
-  padding: var(--space-xl);
-  border-radius: var(--radius-md);
-  position: relative;
-}
-
-/* 2. Oberlo White Clean Card */
-.card-hairline, .card-light, .card {
+/* Flat Clean Minimalist Card */
+.card-hairline, .card-light, .card, .card-sky {
   background-color: #FFFFFF;
   border: 1px solid var(--border-hairline);
   border-radius: var(--radius-md);
@@ -140,12 +136,13 @@
   transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
 }
 
-.card-hairline:hover, .card-light:hover {
+.card-hairline:hover, .card-light:hover, .card:hover, .card-sky:hover {
   border-color: var(--border-strong);
   box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
 
-/* 3. Oberlo Article / Showcase Card with Image Hover Zoom */
+/* Article / Case Study Card */
 .card-hairline-image, .card-article {
   background-color: #FFFFFF;
   border: 1px solid var(--border-hairline);
@@ -153,17 +150,18 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transition: transform var(--transition-base), box-shadow var(--transition-base);
+  transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
 }
 
 .card-hairline-image:hover, .card-article:hover {
   box-shadow: var(--shadow-md);
   border-color: var(--border-strong);
+  transform: translateY(-2px);
 }
 
 .card-image-wrap {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 10;
   overflow: hidden;
   background-color: var(--bg-muted);
   position: relative;
@@ -173,13 +171,14 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   display: block;
   transition: transform var(--transition-slow);
 }
 
 .card-hairline-image:hover .card-image,
 .card-article:hover .card-image {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 .card-body {
@@ -189,7 +188,7 @@
   flex-grow: 1;
 }
 
-/* 4. Oberlo Midnight-Navy Contrast Block (bg-black / bg-dark) */
+/* Midnight Contrast Section */
 .card-dark, .section-dark {
   background-color: var(--bg-dark);
   color: var(--text-on-dark);
@@ -205,7 +204,7 @@
   color: var(--text-on-dark-muted);
 }
 
-/* 5. Service Cards */
+/* Service Cards - Minimalist Flat */
 .card-service {
   background-color: #FFFFFF;
   border: 1px solid var(--border-hairline);
@@ -214,13 +213,13 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 340px;
-  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  transition: border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
 }
 
 .card-service:hover {
-  border-color: var(--color-blue);
+  border-color: var(--border-strong);
   box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
 
 .card-service-header {
@@ -230,49 +229,34 @@
   margin-bottom: var(--space-md);
 }
 
-.service-number {
-  font-family: var(--font-sans);
+.service-number, .card-service-numeral {
+  font-family: var(--font-mono);
   font-weight: var(--weight-bold);
-  font-size: 1.25rem;
-  color: var(--color-blue);
+  font-size: 0.95rem;
+  color: var(--text-dim);
 }
 
-.service-title {
-  font-size: 1.25rem;
+.service-title, .card-service-title {
+  font-size: 1.15rem;
   color: var(--text-main);
   margin-bottom: var(--space-xs);
   font-weight: var(--weight-bold);
+  line-height: 1.3;
 }
 
-.service-tagline {
+.service-tagline, .card-service-tagline {
   font-size: var(--text-small);
   color: var(--text-muted);
-  line-height: 1.6;
+  line-height: 1.55;
   margin-bottom: var(--space-md);
 }
 
-.service-deliverables {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: var(--space-lg);
+/* Hide clutter deliverable bullet lists on card fronts */
+.service-deliverables, .card-service-deliverables {
+  display: none;
 }
 
-.service-deliverable-item {
-  font-size: var(--text-small);
-  color: var(--text-body);
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-}
-
-.service-deliverable-item::before {
-  content: "•";
-  color: var(--color-blue);
-  font-weight: bold;
-}
-
-/* 6. Human Founder Cards */
+/* Founder Cards */
 .card-founder {
   background-color: #FFFFFF;
   border: 1px solid var(--border-hairline);
@@ -280,12 +264,13 @@
   padding: var(--space-xl);
   display: flex;
   flex-direction: column;
-  transition: box-shadow var(--transition-base), border-color var(--transition-base);
+  transition: box-shadow var(--transition-base), border-color var(--transition-base), transform var(--transition-base);
 }
 
 .card-founder:hover {
-  border-color: var(--color-blue);
+  border-color: var(--border-strong);
   box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
 
 .founder-header {
@@ -293,13 +278,13 @@
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: var(--space-md);
-  padding-bottom: var(--space-md);
+  padding-bottom: var(--space-sm);
   border-bottom: 1px solid var(--border-hairline);
   gap: var(--space-sm);
 }
 
 .founder-name {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: var(--weight-bold);
   color: var(--text-main);
   margin-bottom: 2px;
@@ -315,93 +300,53 @@
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-top: var(--space-md);
+  margin-top: var(--space-sm);
   margin-bottom: var(--space-md);
 }
 
 .founder-skill-pill {
   font-size: var(--text-tiny);
   font-weight: var(--weight-medium);
-  padding: 5px 12px;
-  border-radius: var(--radius-sm);
+  padding: 4px 10px;
+  border-radius: var(--radius-xs);
   background-color: var(--bg-muted);
   border: 1px solid var(--border-hairline);
   color: var(--text-body);
 }
 
-/* Badges & Tags */
+/* ============================================================ */
+/* Badges & Tags (Refined, Non-Distracting)                     */
+/* ============================================================ */
 .numeral-badge, .category-badge {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
   font-family: var(--font-sans);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: var(--weight-bold);
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  padding: 4px 10px;
-  border-radius: var(--radius-sm);
-  color: var(--color-blue);
-  background-color: var(--color-blue-subtle);
-  border: 1px solid rgba(45, 0, 251, 0.15);
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
+  color: var(--text-muted);
+  background-color: var(--bg-muted);
+  border: 1px solid var(--border-hairline);
   white-space: nowrap;
 }
 
-.badge-founder {
-  background-color: var(--color-blue);
-  color: #FFFFFF;
-  border: none;
-  font-size: 0.7rem;
+.badge-founder, .badge-co-founder {
+  background-color: var(--bg-muted);
+  color: var(--text-main);
+  border: 1px solid var(--border-hairline);
+  font-size: 0.68rem;
   font-weight: var(--weight-bold);
   text-transform: uppercase;
-  padding: 4px 10px;
-  border-radius: var(--radius-sm);
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
 }
 
-.badge-co-founder {
-  background-color: var(--bg-sky);
-  color: var(--color-blue);
-  border: 1px solid rgba(45, 0, 251, 0.2);
-  font-size: 0.7rem;
-  font-weight: var(--weight-bold);
-  text-transform: uppercase;
-  padding: 4px 10px;
-  border-radius: var(--radius-sm);
-}
-
-/* Story Tag (used across pages) */
-.story-tag {
-  font-size: 0.7rem;
-  font-weight: var(--weight-bold);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--color-blue);
-  margin-bottom: var(--space-xs);
-}
-
-/* Author Byline (Oberlo Style) */
+/* Author bylines & avatars hidden on card fronts to prevent clutter */
 .author-byline {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: var(--text-small);
-  color: var(--text-muted);
-  margin-top: auto;
-  padding-top: var(--space-sm);
-}
-
-.author-avatar {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background-color: var(--color-blue);
-  color: #FFFFFF;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.65rem;
-  font-weight: bold;
-  flex-shrink: 0;
+  display: none;
 }
 
 /* Section Header Structure */
@@ -418,18 +363,19 @@
   font-size: var(--text-h2);
   color: var(--text-main);
   margin-bottom: 0;
+  letter-spacing: -0.02em;
 }
 
 .section-numeral {
-  font-size: var(--text-tiny);
+  font-size: 0.72rem;
   font-weight: var(--weight-bold);
-  color: var(--color-blue);
+  color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   margin-bottom: 4px;
 }
 
-/* Navigation Dropdown Menu (Oberlo Style) */
+/* Navigation Dropdown Menu */
 .nav-dropdown {
   position: relative;
 }
@@ -437,10 +383,10 @@
 .nav-dropdown-summary {
   list-style: none;
   cursor: pointer;
-  padding: 10px 14px;
+  padding: 8px 12px;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   font-weight: var(--weight-medium);
   font-size: var(--text-small);
   color: var(--text-main);
@@ -452,7 +398,7 @@
 }
 
 .nav-dropdown-summary:hover {
-  color: var(--color-blue);
+  color: var(--color-accent);
 }
 
 .nav-dropdown-menu {
@@ -461,17 +407,17 @@
   left: 0;
   min-width: 220px;
   background-color: #FFFFFF;
-  border-top: 3px solid var(--color-blue);
+  border: 1px solid var(--border-hairline);
   box-shadow: var(--shadow-lg);
-  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
-  padding: var(--space-sm) 0;
+  border-radius: var(--radius-sm);
+  padding: var(--space-xs) 0;
   z-index: 50;
   display: flex;
   flex-direction: column;
 }
 
 .nav-dropdown-item {
-  padding: 10px 20px;
+  padding: 8px 16px;
   font-size: var(--text-small);
   color: var(--text-main);
   transition: background-color var(--transition-base), color var(--transition-base);
@@ -481,7 +427,7 @@
 
 .nav-dropdown-item:hover {
   background-color: var(--bg-muted);
-  color: var(--color-blue);
+  color: var(--color-accent);
 }
 
 /* Status Tags */
@@ -490,8 +436,8 @@
   font-weight: var(--weight-bold);
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  padding: 4px 10px;
-  border-radius: var(--radius-sm);
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
   display: inline-flex;
   align-items: center;
   white-space: nowrap;
@@ -512,7 +458,7 @@
   color: var(--text-muted);
 }
 
-/* Form Controls - Clean Light */
+/* Form Controls */
 .form-group {
   display: flex;
   flex-direction: column;
@@ -528,8 +474,8 @@
 
 .form-input, .form-textarea, .form-select {
   font-family: var(--font-sans);
-  font-size: 1rem;
-  padding: 12px 16px;
+  font-size: 0.95rem;
+  padding: 10px 14px;
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-sm);
   background-color: #FFFFFF;
@@ -541,7 +487,7 @@
 .form-input:focus, .form-textarea:focus, .form-select:focus {
   border-color: var(--color-blue);
   outline: none;
-  box-shadow: 0 0 0 3px rgba(45, 0, 251, 0.12);
+  box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.08);
 }
 
 .form-hint {
@@ -553,9 +499,9 @@
 /* Notification & Alert Banner */
 .alert-banner {
   border: 1px solid var(--border-hairline);
-  background-color: var(--bg-sky);
+  background-color: var(--bg-muted);
   border-radius: var(--radius-sm);
-  padding: var(--space-md) var(--space-lg);
+  padding: var(--space-sm) var(--space-md);
   margin-bottom: var(--space-lg);
   display: flex;
   align-items: center;
@@ -564,8 +510,8 @@
 
 .alert-banner-text {
   font-size: var(--text-small);
-  font-weight: var(--weight-bold);
-  color: var(--color-blue);
+  font-weight: var(--weight-medium);
+  color: var(--text-main);
 }
 
 .alert-dismiss {
@@ -575,51 +521,6 @@
   color: var(--text-muted);
   cursor: pointer;
   padding: 0 4px;
-}
-
-/* Service card deliverables list */
-.card-service-deliverables {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.card-service-deliverables li {
-  font-size: var(--text-small);
-  color: var(--text-body);
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  line-height: 1.5;
-}
-
-.card-service-deliverables li::before {
-  content: "•";
-  color: var(--color-blue);
-  font-weight: bold;
-  flex-shrink: 0;
-}
-
-/* Service card numeral */
-.card-service-numeral {
-  font-family: var(--font-mono);
-  font-weight: var(--weight-bold);
-  font-size: 1.1rem;
-  color: var(--color-blue);
-}
-
-/* Service action link */
-.card-service-action {
-  font-weight: var(--weight-bold);
-  color: var(--color-blue);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  transition: color var(--transition-base);
-}
-
-.card-service-action:hover {
-  text-decoration: underline;
-  color: var(--color-blue-hover);
 }
 
 /* Process steps */
@@ -636,12 +537,10 @@
   justify-content: center;
   font-family: var(--font-sans);
   font-size: var(--text-tiny);
-  font-weight: var(--weight-bold);
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
+  font-weight: var(--weight-medium);
   padding: 8px 16px;
   border-radius: var(--radius-sm);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   background-color: transparent;
   color: #FFFFFF;
   cursor: pointer;
@@ -651,28 +550,8 @@
 
 .btn-outline-white:hover {
   background-color: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.5);
+  border-color: rgba(255, 255, 255, 0.4);
   color: #FFFFFF;
-}
-
-/* Card article thumbnail for work list */
-.card-article-thumb {
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  overflow: hidden;
-  background-color: var(--bg-muted);
-}
-
-.card-article-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform var(--transition-slow);
-}
-
-.card-article:hover .card-article-img {
-  transform: scale(1.05);
 }
 
 /* Results Metrics Grid */
@@ -702,44 +581,20 @@
 /* ============================================================ */
 /* Component Responsive Overrides                                */
 /* ============================================================ */
-
 @media (max-width: 768px) {
-  .btn {
-    white-space: normal;
-    max-width: 100%;
-    text-align: center;
-  }
-
   .btn-lg {
-    padding: 14px 20px;
-    font-size: 0.95rem;
+    padding: 12px 20px;
+    font-size: 0.9rem;
     width: 100%;
-    max-width: 100%;
-  }
-
-  .btn-proposal-cta {
-    width: 100%;
-    max-width: 100%;
   }
 
   .card, .card-hairline, .card-light, .card-service, .card-founder {
-    padding: var(--space-lg);
-    min-height: auto;
-    min-width: 0;
-    max-width: 100%;
-  }
-
-  .card-service {
-    min-height: auto;
+    padding: var(--space-md);
   }
 
   .card-dark, .section-dark {
     padding: var(--space-lg);
     border-radius: var(--radius-sm);
-  }
-
-  .card-sky {
-    padding: var(--space-lg);
   }
 
   .founder-header {
@@ -748,84 +603,26 @@
   }
 
   .section-header {
-    margin-bottom: var(--space-xl);
+    margin-bottom: var(--space-lg);
   }
 
   .card-body {
     padding: var(--space-md);
   }
 
-  /* Form controls on mobile */
-  .form-input, .form-textarea, .form-select {
-    padding: 10px 14px;
-    font-size: 0.95rem;
-    max-width: 100%;
-  }
-
-  /* Results metrics grid collapses */
   .results-metrics-grid {
     grid-template-columns: 1fr;
-  }
-
-  .results-metrics-grid--compact > div {
-    border-right: none;
-    border-bottom: 1px solid var(--border-hairline);
-  }
-
-  .results-metrics-grid--compact > div:last-child {
-    border-bottom: none;
-  }
-
-  .card-action-row > .btn,
-  .card-action-row > a.btn {
-    flex: 1 1 auto;
-    justify-content: center;
-    text-align: center;
   }
 }
 
 @media (max-width: 480px) {
-  .card, .card-hairline, .card-light, .card-service, .card-founder {
-    padding: var(--space-md);
-  }
-
-  .card-dark, .section-dark {
-    padding: var(--space-md);
-  }
-
-  .card-sky {
-    padding: var(--space-md);
-  }
-
-  .founder-skill-pill {
-    font-size: 0.65rem;
-    padding: 3px 8px;
-  }
-
-  .numeral-badge, .category-badge {
-    font-size: 0.65rem;
-    padding: 3px 8px;
-  }
-
   .btn {
-    padding: 10px 16px;
+    padding: 8px 14px;
     font-size: 0.85rem;
   }
 
   .btn-sm {
-    padding: 7px 12px;
-    font-size: 0.72rem;
-  }
-
-  .card-action-row {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .card-action-row > .btn,
-  .card-action-row > a.btn {
-    width: 100%;
-    justify-content: center;
+    padding: 6px 12px;
+    font-size: 0.75rem;
   }
 }
-

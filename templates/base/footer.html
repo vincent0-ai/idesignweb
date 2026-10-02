@@ -5,19 +5,16 @@
       <div class="footer-col">
         <a href="{% url 'public:home' %}" class="brand-mark"
           style="color: #FFFFFF; margin-bottom: var(--space-md); display: inline-flex;">
-          <span class="brand-dot" style="background-color: var(--color-green);"></span>
           <span style="letter-spacing: -0.02em;">IDESIGNWEB</span>
         </a>
-        <p
-          style="font-size: var(--text-small); max-width: 340px; line-height: 1.6; margin-bottom: var(--space-lg); color: var(--text-on-dark-muted);">
-          High-performance web applications, secure e-commerce systems, and distinctive brand identities designed to
-          grow your business.
+        <p style="font-size: var(--text-small); max-width: 340px; line-height: 1.6; margin-bottom: var(--space-lg); color: var(--text-on-dark-muted);">
+          High-performance web applications, secure e-commerce systems, and distinctive brand identities designed to grow your business.
         </p>
       </div>
 
       <!-- Col 2: Capabilities -->
       <div class="footer-col">
-        <div class="footer-col-title">CAPABILITIES</div>
+        <div class="footer-col-title">Capabilities</div>
         <div class="footer-links">
           {% for s in service_links %}
           <a href="{% url 'public:service_detail' s.slug %}" class="footer-link">
@@ -29,7 +26,7 @@
 
       <!-- Col 3: Navigation -->
       <div class="footer-col">
-        <div class="footer-col-title">NAVIGATION</div>
+        <div class="footer-col-title">Navigation</div>
         <div class="footer-links">
           <a href="{% url 'public:work_list' %}" class="footer-link">Case Studies</a>
           <a href="{% url 'public:about' %}" class="footer-link">Founders & Story</a>
@@ -38,20 +35,19 @@
         </div>
       </div>
 
-      <!-- Col 4: Direct Founder Access -->
+      <!-- Col 4: Direct Access -->
       <div class="footer-col">
-        <div class="footer-col-title">CONTACT US</div>
+        <div class="footer-col-title">Contact</div>
         <p style="font-size: var(--text-small); color: var(--text-on-dark-muted); margin-bottom: var(--space-md);">
           Reach out to us directly.
         </p>
-        <div
-          style="display: flex; flex-direction: column; gap: 8px; font-size: var(--text-small); margin-bottom: var(--space-lg);">
+        <div style="display: flex; flex-direction: column; gap: 8px; font-size: var(--text-small); margin-bottom: var(--space-lg);">
           <div>
-            <span style="color: var(--text-dim);">Timothy (Founder):</span>
+            <span style="color: var(--text-dim);">Timothy:</span>
             <a href="tel:+254115709680" style="color: #FFFFFF; text-decoration: underline;">+254115709680</a>
           </div>
           <div>
-            <span style="color: var(--text-dim);">Vincent (Co-Founder):</span>
+            <span style="color: var(--text-dim);">Vincent:</span>
             <a href="tel:+254768072566" style="color: #FFFFFF; text-decoration: underline;">+254768072566</a>
           </div>
         </div>
@@ -59,12 +55,12 @@
           {% if user.is_authenticated %}
           <a href="{% url 'portal:dashboard' %}" class="btn btn-outline btn-sm"
             style="color: #FFFFFF; border-color: rgba(255, 255, 255, 0.2);">
-            Open Client Workspace
+            Client Workspace
           </a>
           {% else %}
           <a href="{% url 'portal:login' %}" class="btn btn-outline btn-sm"
             style="color: #FFFFFF; border-color: rgba(255, 255, 255, 0.2);">
-            Client Portal Login
+            Client Login
           </a>
           {% endif %}
         </div>
@@ -78,8 +74,7 @@
       </div>
       <div style="display: flex; align-items: center; gap: 8px 16px; flex-wrap: wrap;">
         <span>Nairobi, Kenya &middot; Remote Globally</span>
-        <a href="{% url 'public:contact' %}" style="color: var(--color-green); font-weight: bold;">Work With Us
-          &rarr;</a>
+        <a href="{% url 'public:contact' %}" style="color: #FFFFFF; font-weight: 500;">Work With Us</a>
       </div>
     </div>
   </div>

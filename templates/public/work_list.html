@@ -4,20 +4,14 @@
 {% block title %}Selected Work & Case Studies : {{ site_title }}{% endblock %}
 
 {% block content %}
-<section class="section"
-  style="background: var(--bg-muted); border-bottom: 1px solid var(--border-hairline); padding: var(--space-2xl) 0;">
+<section class="section" style="background: var(--bg-muted); border-bottom: 1px solid var(--border-hairline); padding: var(--space-2xl) 0;">
   <div class="container">
-    <div style="margin-bottom: var(--space-sm);">
-      <span class="story-tag">CASE ARCHIVE</span>
-    </div>
-
-    <h1 style="font-size: var(--text-display); margin-bottom: var(--space-md); text-transform: uppercase;">
-      Our Featured Work
+    <h1 style="font-size: var(--text-display); margin-bottom: var(--space-md);">
+      Featured Work & Case Studies
     </h1>
 
-    <p style="font-size: 1.25rem; color: var(--text-body); max-width: 760px; margin-bottom: 0; line-height: 1.65;">
-      Measured outcomes delivered across custom web engineering, vulnerability defense, visual brand identity, and
-      commercial video production.
+    <p style="font-size: 1.15rem; color: var(--text-body); max-width: 760px; margin-bottom: 0; line-height: 1.6;">
+      Measured outcomes delivered across custom web engineering, vulnerability defense, visual brand identity, and commercial video production.
     </p>
   </div>
 </section>
@@ -27,12 +21,12 @@
     <!-- Category Filter Controls -->
     <div class="filter-scroll-row">
       <a href="{% url 'public:work_list' %}"
-        class="btn btn-sm {% if selected_category == 'all' %}btn-green{% else %}btn-outline{% endif %}">
+        class="btn btn-sm {% if selected_category == 'all' %}btn-primary{% else %}btn-outline{% endif %}">
         All Practices
       </a>
       {% for cat in categories %}
       <a href="{% url 'public:work_list' %}?category={{ cat|urlencode }}"
-        class="btn btn-sm {% if selected_category == cat %}btn-green{% else %}btn-outline{% endif %}">
+        class="btn btn-sm {% if selected_category == cat %}btn-primary{% else %}btn-outline{% endif %}">
         {{ cat }}
       </a>
       {% endfor %}
@@ -49,18 +43,15 @@
         {% endif %}
 
         <div class="card-body">
-          <div
-            style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-sm); flex-wrap: wrap; gap: 4px;">
-            <span class="story-tag" style="margin-bottom: 0;">{{ case.category }}</span>
-            <span style="font-size: var(--text-tiny); font-family: var(--font-mono); color: var(--text-dim);">{{
-              case.year }}</span>
+          <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs); margin-bottom: var(--space-sm); flex-wrap: wrap; gap: 4px;">
+            <span class="category-label" style="margin-bottom: 0;">{{ case.category }}</span>
+            <span style="font-size: var(--text-tiny); font-family: var(--font-mono); color: var(--text-dim);">{{ case.year }}</span>
           </div>
 
-          <h2 style="font-size: var(--text-h3); margin-bottom: var(--space-xs); text-transform: uppercase;">
-            <a href="{% url 'public:work_detail' case.slug %}">{{ case.title }}</a>
+          <h2 style="font-size: var(--text-h3); margin-bottom: var(--space-xs); line-height: 1.3;">
+            <a href="{% url 'public:work_detail' case.slug %}" style="color: inherit; text-decoration: none;">{{ case.title }}</a>
           </h2>
-          <p
-            style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-lg); line-height: 1.6;">
+          <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-lg); line-height: 1.6;">
             {{ case.summary }}
           </p>
 
@@ -68,9 +59,9 @@
           <div class="results-metrics-grid results-metrics-grid--compact">
             {% for res in case.results %}
             <div style="padding: var(--space-sm) var(--space-md); text-align: center;">
-              <div
-                style="font-size: 1.2rem; font-weight: var(--weight-bold); color: var(--color-blue); font-family: var(--font-mono);">
-                {{ res.metric }}</div>
+              <div style="font-size: 1.15rem; font-weight: var(--weight-bold); color: var(--text-main); font-family: var(--font-mono);">
+                {{ res.metric }}
+              </div>
               <div style="font-size: var(--text-tiny); color: var(--text-muted); margin-top: 2px;">{{ res.label }}</div>
             </div>
             {% endfor %}
@@ -79,7 +70,7 @@
           <div class="card-action-row">
             <span style="font-size: var(--text-tiny); color: var(--text-dim);">Client: {{ case.client }}</span>
             <a href="{% url 'public:work_detail' case.slug %}" class="btn btn-outline btn-sm">
-              Explore Case Study &rarr;
+              Explore Case Study
             </a>
           </div>
         </div>
@@ -87,8 +78,7 @@
       {% empty %}
       <div class="card" style="grid-column: 1 / -1; text-align: center; padding: var(--space-2xl);">
         <p style="color: var(--text-muted);">No case studies found for this category.</p>
-        <a href="{% url 'public:work_list' %}" class="btn btn-outline btn-sm" style="margin-top: var(--space-md);">All
-          Projects</a>
+        <a href="{% url 'public:work_list' %}" class="btn btn-outline btn-sm" style="margin-top: var(--space-md);">All Projects</a>
       </div>
       {% endfor %}
     </div>

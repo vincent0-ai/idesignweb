@@ -1,45 +1,46 @@
 /*
  * Idesignweb Design Tokens
- * Cloned from Oberlo (https://www.oberlo.com/)
- * Clean editorial light aesthetic, electric cobalt blue (#2D00FB), high-conversion green (#00D084),
- * pastel sky-blue accent containers (#EBF6FC), midnight-navy contrast sections (#03002F), and bold uppercase display typography with italic serif accents.
+ * Refined Minimalist Editorial Design System
+ * Clean, distraction-free typography, cohesive obsidian palette, hairline borders, and flat modern cards.
  */
 
 :root {
-  /* Color Palette - Oberlo Design System */
+  /* Color Palette - Clean Minimalist Neutral */
   --bg-primary: #FFFFFF;
   --bg-surface: #FFFFFF;
-  --bg-muted: #F4F4F6;        /* Oberlo bg-gray-10 */
-  --bg-muted-hover: #ECECF0;
-  --bg-sky: #EBF6FC;          /* Oberlo bg-sky-30 */
-  --bg-sky-hover: #DDF0FB;
-  --bg-dark: #03002F;         /* Oberlo signature deep midnight navy */
-  --bg-dark-surface: #0A0738;
-  --bg-dark-card: #0F0C42;
+  --bg-muted: #F8FAFC;
+  --bg-muted-hover: #F1F5F9;
+  --bg-sky: #F8FAFC;          /* Clean light neutral card fill */
+  --bg-sky-hover: #F1F5F9;
+  --bg-dark: #0F172A;         /* Deep slate obsidian */
+  --bg-dark-surface: #1E293B;
+  --bg-dark-card: #1E293B;
 
-  /* Brand Accents */
-  --color-blue: #2D00FB;       /* Oberlo electric cobalt blue */
-  --color-blue-hover: #1F00B8;
-  --color-blue-subtle: rgba(45, 0, 251, 0.08);
-  --color-green: #00D084;      /* Oberlo high-conversion CTA green */
-  --color-green-hover: #00B36E;
-  --color-green-focus: rgba(0, 208, 132, 0.25);
+  /* Brand Accents - Clean Obsidian Slate & Refined Blue */
+  --color-blue: #0F172A;       /* Dominant text/button slate */
+  --color-blue-hover: #1E293B;
+  --color-blue-subtle: rgba(15, 23, 42, 0.04);
+  --color-accent: #2563EB;     /* Subtle modern blue accent link */
+  --color-accent-hover: #1D4ED8;
+  --color-green: #0F172A;      /* Primary button matches clean obsidian */
+  --color-green-hover: #1E293B;
+  --color-green-focus: rgba(15, 23, 42, 0.15);
   
   /* Text System */
-  --text-main: #111827;        /* Deep charcoal/black */
-  --text-body: #374151;        /* Highly readable slate body */
-  --text-muted: #6B7280;       /* Neutral gray */
-  --text-dim: #9CA3AF;         /* Muted caption gray */
-  --text-blue: #2D00FB;        /* Oberlo blue headline text */
+  --text-main: #0F172A;        /* Deep slate black */
+  --text-body: #334155;        /* Highly readable slate body */
+  --text-muted: #64748B;       /* Neutral gray */
+  --text-dim: #94A3B8;         /* Muted caption gray */
+  --text-blue: #0F172A;
   --text-on-dark: #FFFFFF;
-  --text-on-dark-muted: #D1D5DB;
-  --text-on-dark-sky: #EBF6FC;
+  --text-on-dark-muted: #94A3B8;
+  --text-on-dark-sky: #E2E8F0;
 
   /* Borders & Dividers */
-  --border-hairline: #E5E7EB;
-  --border-subtle: #E2E8F0;
-  --border-strong: #D1D5DB;
-  --border-dark: rgba(255, 255, 255, 0.12);
+  --border-hairline: #E2E8F0;
+  --border-subtle: #F1F5F9;
+  --border-strong: #CBD5E1;
+  --border-dark: rgba(255, 255, 255, 0.1);
 
   /* Typography */
   --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -48,48 +49,47 @@
   /* Font Weights */
   --weight-regular: 400;
   --weight-medium: 500;
-  --weight-bold: 700;
-  --weight-black: 800;
+  --weight-bold: 600;
+  --weight-black: 700;
 
   /* Type Scale */
-  --text-display: clamp(2rem, 5.2vw, 3.75rem);
-  --text-h1: clamp(1.65rem, 3.5vw, 2.75rem);
-  --text-h2: clamp(1.3rem, 2.4vw, 2rem);
-  --text-h3: 1.25rem;
-  --text-h4: 1.1rem;
-  --text-body: 1rem;
-  --text-small: 0.875rem;
+  --text-display: clamp(2rem, 4.5vw, 3.25rem);
+  --text-h1: clamp(1.6rem, 3vw, 2.4rem);
+  --text-h2: clamp(1.25rem, 2.2vw, 1.85rem);
+  --text-h3: 1.15rem;
+  --text-h4: 1rem;
+  --text-body: 0.95rem;
+  --text-small: 0.85rem;
   --text-tiny: 0.75rem;
 
-  /* Radii — softer, modern rounded corners */
-  --radius-xs: 6px;
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 18px;
+  /* Radii — clean, sleek, consistent */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
   --radius-full: 9999px;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.1);
-  --shadow-green: 0 4px 14px rgba(0, 208, 132, 0.35);
+  /* Shadows — soft, modern, minimal */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 24px rgba(0, 0, 0, 0.07);
+  --shadow-green: 0 4px 12px rgba(15, 23, 42, 0.15);
 
   /* Transitions */
-  --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-smooth: cubic-bezier(0.2, 0, 0.2, 1);
   --transition-base: 0.2s var(--ease-smooth);
-  --transition-slow: 0.35s var(--ease-smooth);
+  --transition-slow: 0.3s var(--ease-smooth);
 
   /* Layout Spacing */
-  --container-max: 1240px;
+  --container-max: 1200px;
   --header-height: 64px;
   --space-unit: 8px;
   --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 16px;
   --space-lg: 24px;
-  --space-xl: 36px;
-  --space-2xl: 64px;
-  --space-3xl: 96px;
-  --space-4xl: 128px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
 }
-

@@ -1,22 +1,22 @@
 {% extends 'base/base.html' %}
 
-{% block title %}{{ post.title }} : Studio Article : {{ site_title }}{% endblock %}
+{% block title %}{{ post.title }} : {{ site_title }}{% endblock %}
 
 {% block content %}
 <section class="section" style="background: var(--bg-muted); border-bottom: 1px solid var(--border-hairline); padding: var(--space-2xl) 0;">
   <div class="container" style="max-width: 860px;">
     <div style="margin-bottom: var(--space-md);">
       <a href="{% url 'public:insights_list' %}" class="btn btn-outline btn-sm">
-        <span>&larr; Back to Articles</span>
+        Back to Articles
       </a>
     </div>
 
-    <div style="display: flex; gap: 12px; align-items: center; margin-bottom: var(--space-sm);">
-      <span class="story-tag" style="margin-bottom: 0;">{{ post.category }}</span>
-      <span style="font-size: var(--text-small); color: var(--text-muted); font-family: var(--font-mono);">{{ post.reading_time }} &bull; By {{ post.author }}</span>
+    <div style="display: flex; gap: 12px; align-items: center; margin-bottom: var(--space-sm); flex-wrap: wrap;">
+      <span style="font-size: var(--text-tiny); font-family: var(--font-mono); color: var(--text-main); font-weight: var(--weight-medium);">{{ post.category }}</span>
+      <span style="font-size: var(--text-small); color: var(--text-dim); font-family: var(--font-mono);">&bull; {{ post.reading_time }} &bull; By {{ post.author }}</span>
     </div>
 
-    <h1 style="font-size: var(--text-display); margin-bottom: 0; line-height: 1.15; text-transform: uppercase;">
+    <h1 style="font-size: var(--text-display); margin-bottom: 0; line-height: 1.2;">
       {{ post.title }}
     </h1>
   </div>
@@ -24,7 +24,7 @@
 
 <article class="section">
   <div class="container" style="max-width: 860px;">
-    <div class="card-sky" style="padding: var(--space-xl); margin-bottom: var(--space-2xl); font-size: 1.2rem; font-weight: var(--weight-medium); color: var(--color-blue); line-height: 1.6;">
+    <div class="card" style="padding: var(--space-xl); margin-bottom: var(--space-2xl); font-size: 1.15rem; font-weight: var(--weight-medium); color: var(--text-main); line-height: 1.6;">
       {{ post.excerpt }}
     </div>
 
@@ -34,10 +34,10 @@
 
     <div style="border-top: 1px solid var(--border-hairline); padding-top: var(--space-2xl); margin-top: var(--space-3xl); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-md);">
       <a href="{% url 'public:insights_list' %}" class="btn btn-outline">
-        <span>Back to Archive</span>
+        Back to Archive
       </a>
-      <a href="{% url 'public:contact' %}" class="btn btn-green">
-        <span>Start a Project &rarr;</span>
+      <a href="{% url 'public:contact' %}" class="btn btn-primary">
+        Start a Project
       </a>
     </div>
 
