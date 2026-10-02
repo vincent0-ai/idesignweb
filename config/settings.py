@@ -33,7 +33,15 @@ else:
             ALLOWED_HOSTS.append(h_clean)
 
 # Automatically ensure domain fallbacks and local loopbacks are allowed
-for default_h in ['idesignweb.echowithin.xyz', '.echowithin.xyz', 'localhost', '127.0.0.1', 'testserver']:
+for default_h in [
+    'idesignweb.co.ke',
+    '.idesignweb.co.ke',
+    'idesignweb.echowithin.xyz',
+    '.echowithin.xyz',
+    'localhost',
+    '127.0.0.1',
+    'testserver',
+]:
     if default_h not in ALLOWED_HOSTS and '*' not in ALLOWED_HOSTS:
         ALLOWED_HOSTS.append(default_h)
 
@@ -46,6 +54,10 @@ else:
     CSRF_TRUSTED_ORIGINS = []
 
 for default_csrf in [
+    'https://idesignweb.co.ke',
+    'https://*.idesignweb.co.ke',
+    'http://idesignweb.co.ke',
+    'http://*.idesignweb.co.ke',
     'https://idesignweb.echowithin.xyz',
     'https://*.echowithin.xyz',
     'http://idesignweb.echowithin.xyz',
