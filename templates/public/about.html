@@ -108,27 +108,6 @@
       </div>
     </div>
 
-    <!-- Operating Standards Grid -->
-    <div style="margin-bottom: var(--space-3xl);">
-      <div class="section-header">
-        <div class="section-title-wrap">
-          <h2 class="section-title">How We Build & Operate</h2>
-        </div>
-      </div>
-
-      <div class="grid-3">
-        {% for std in standards %}
-        <div class="card" style="padding: var(--space-lg);">
-          <div
-            style="font-family: var(--font-mono); font-size: var(--text-tiny); color: var(--text-dim); font-weight: var(--weight-medium); margin-bottom: var(--space-sm); border-bottom: 1px solid var(--border-hairline); padding-bottom: var(--space-xs);">
-            {{ std.numeral }}
-          </div>
-          <h3 style="font-size: var(--text-h3); margin-bottom: var(--space-xs);">{{ std.title }}</h3>
-          <p style="font-size: var(--text-small); color: var(--text-muted); line-height: 1.6; margin-bottom: 0;">{{ std.desc }}</p>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
 
     <!-- Direct Studio Contact Info -->
     <div class="card" style="padding: var(--space-xl); margin-bottom: var(--space-xl);">
@@ -150,11 +129,16 @@
 
         <div
           style="border: 1px solid var(--border-hairline); background: var(--bg-surface-alt); border-radius: var(--radius-sm); padding: var(--space-lg);">
-          <div style="display: flex; flex-direction: column; gap: var(--space-md); font-size: var(--text-small); overflow-wrap: anywhere; word-break: break-word;">
-            <div><span style="color: var(--text-dim);">Location:</span> <strong style="color: var(--text-main);">{{ company_location }}</strong></div>
-            <div><span style="color: var(--text-dim);">Direct Phone:</span> <strong style="color: var(--text-main);">{{ company_phone }}</strong></div>
-            <div><span style="color: var(--text-dim);">Email:</span> <strong style="color: var(--text-main);">{{ company_email }}</strong></div>
-            <div><span style="color: var(--text-dim);">Turnaround:</span> <strong style="color: var(--text-main);">Proposals delivered within 24 hours</strong></div>
+          <div
+            style="display: flex; flex-direction: column; gap: var(--space-md); font-size: var(--text-small); overflow-wrap: anywhere; word-break: break-word;">
+            <div><span style="color: var(--text-dim);">Location:</span> <strong style="color: var(--text-main);">{{
+                company_location }}</strong></div>
+            <div><span style="color: var(--text-dim);">Direct Phone:</span> <strong style="color: var(--text-main);">{{
+                company_phone }}</strong></div>
+            <div><span style="color: var(--text-dim);">Email:</span> <strong style="color: var(--text-main);">{{
+                company_email }}</strong></div>
+            <div><span style="color: var(--text-dim);">Turnaround:</span> <strong
+                style="color: var(--text-main);">Proposals delivered within 24 hours</strong></div>
           </div>
         </div>
       </div>
