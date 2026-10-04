@@ -156,6 +156,19 @@ def robots_txt_view(request):
         sitemap_url = 'https://idesignweb.co.ke/sitemap.xml'
 
     lines = [
+        "User-agent: Googlebot",
+        "Allow: /",
+        "Disallow: /admin/",
+        "Disallow: /portal/",
+        "Disallow: /login/",
+        "",
+        "User-agent: GoogleOther",
+        "Allow: /",
+        "Allow: /sitemap.xml",
+        "Disallow: /admin/",
+        "Disallow: /portal/",
+        "Disallow: /login/",
+        "",
         "User-agent: *",
         "Allow: /",
         "Disallow: /admin/",
