@@ -1,6 +1,52 @@
 {% extends 'base/base.html' %}
 
-{% block title %}Studio Capabilities : {{ site_title }}{% endblock %}
+{% block title %}Studio Capabilities : Web Development, Cybersecurity & Design : {{ site_title }}{% endblock %}
+{% block meta_description %}Explore Idesignweb studio capabilities: custom full-stack web applications, e-commerce stores, proactive cybersecurity audits, brand identity design, and commercial video editing.{% endblock %}
+{% block meta_keywords %}web development services, cybersecurity audits Kenya, brand identity design, commercial video editing, full stack web apps Nairobi{% endblock %}
+{% block og_title %}Studio Capabilities : Web Development, Cybersecurity & Design : {{ site_title }}{% endblock %}
+{% block og_description %}Custom web applications, cybersecurity audits, brand identity systems, and commercial video editing built for conversion and long-term security.{% endblock %}
+
+{% block structured_data %}
+{{ block.super }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "{{ site_base_url }}/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Capabilities",
+          "item": "{{ canonical_url }}"
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Idesignweb Studio Capabilities",
+      "itemListElement": [
+        {% for service in services %}
+        {
+          "@type": "ListItem",
+          "position": {{ forloop.counter }},
+          "name": "{{ service.title }}",
+          "url": "{{ site_base_url }}/services/{{ service.slug }}/"
+        }{% if not forloop.last %},{% endif %}
+        {% endfor %}
+      ]
+    }
+  ]
+}
+</script>
+{% endblock %}
 
 {% block content %}
 <section class="section" style="padding-top: 32px; padding-bottom: 48px;">

@@ -1,7 +1,62 @@
 {% extends 'base/base.html' %}
 {% load static %}
 
-{% block title %}Founders & Philosophy : {{ site_title }}{% endblock %}
+{% block title %}Founders & Philosophy : Timothy Owino & Vincent Odhiambo : {{ site_title }}{% endblock %}
+{% block meta_description %}Meet the founders of Idesignweb: Timothy Owino (Creative Director & Full-Stack Developer) and Vincent Odhiambo (Lead Software Engineer & Cybersecurity Analyst). Built in Nairobi, serving globally.{% endblock %}
+{% block meta_keywords %}Timothy Owino, Vincent Odhiambo, founders Idesignweb, cybersecurity engineers Kenya, creative director Nairobi, web developers Kenya{% endblock %}
+{% block og_title %}Founders & Philosophy : Timothy Owino & Vincent Odhiambo : {{ site_title }}{% endblock %}
+{% block og_description %}Meet the founders of Idesignweb: Timothy Owino and Vincent Odhiambo. High-performance web engineering and proactive cybersecurity defense.{% endblock %}
+
+{% block structured_data %}
+{{ block.super }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "{{ site_base_url }}/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Founders & Philosophy",
+          "item": "{{ canonical_url }}"
+        }
+      ]
+    },
+    {
+      "@type": "AboutPage",
+      "name": "About Idesignweb Founders & Philosophy",
+      "description": "Meet the founders of Idesignweb: Timothy Owino and Vincent Odhiambo.",
+      "url": "{{ canonical_url }}",
+      "mainEntity": {
+        "@type": "Organization",
+        "name": "{{ site_title }}",
+        "founders": [
+          {% for founder in founders %}
+          {
+            "@type": "Person",
+            "name": "{{ founder.name }}",
+            "jobTitle": "{{ founder.role }}",
+            "description": "{{ founder.bio|escapejs }}",
+            "email": "{{ founder.email }}",
+            "telephone": "{{ founder.phone }}",
+            "knowsAbout": [{% for s in founder.skills %}"{{ s|escapejs }}"{% if not forloop.last %},{% endif %}{% endfor %}]
+          }{% if not forloop.last %},{% endif %}
+          {% endfor %}
+        ]
+      }
+    }
+  ]
+}
+</script>
+{% endblock %}
 
 {% block content %}
 <section class="section" style="padding-top: 32px; padding-bottom: 48px;">

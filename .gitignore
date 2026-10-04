@@ -39,5 +39,4 @@ staticfiles/
 .idea/
 .vscode/
 *.swp
-dokploy_ctl.py
 AGENTS.md

@@ -17,4 +17,6 @@ urlpatterns = [
     path('insights/', views.insights_list_view, name='insights_list'),
     path('insights/<slug:slug>/', views.insight_detail_view, name='insight_detail'),
     path('contact/', views.contact_view, name='contact'),
+    path('robots.txt', views.robots_txt_view, name='robots_txt'),
+    path('sitemap.xml', views.sitemap_xml_view, name='sitemap_xml'),
 ]

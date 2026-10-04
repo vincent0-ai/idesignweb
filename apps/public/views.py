@@ -5,7 +5,7 @@ All content is retrieved from MongoDB collections.
 """
 
 from django.shortcuts import render, redirect
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.contrib import messages
 from apps.core.db import get_db
 from apps.core.content import (
@@ -143,3 +143,103 @@ def contact_view(request):
             return redirect('public:contact')
             
     return render(request, 'public/contact.html')
+
+
+def robots_txt_view(request):
+    """
+    Dynamically serves robots.txt referencing the production sitemap.
+    Explicitly permits public marketing routes while blocking portal, admin, and login routes.
+    """
+    try:
+        sitemap_url = request.build_absolute_uri('/sitemap.xml')
+    except Exception:
+        sitemap_url = 'https://idesignweb.co.ke/sitemap.xml'
+
+    lines = [
+        "User-agent: *",
+        "Allow: /",
+        "Disallow: /admin/",
+        "Disallow: /portal/",
+        "Disallow: /login/",
+        "",
+        f"Sitemap: {sitemap_url}",
+    ]
+    response = HttpResponse("\n".join(lines), content_type="text/plain; charset=utf-8")
+    response['Cache-Control'] = 'public, max-age=86400'
+    return response
+
+
+def sitemap_xml_view(request):
+    """
+    Dynamically generates standard sitemap.xml covering all public marketing pages,
+    services, case studies, and editorial insights with lastmod, changefreq, and priority tags.
+    """
+    try:
+        base_url = request.build_absolute_uri('/')[:-1]
+    except Exception:
+        base_url = 'https://idesignweb.co.ke'
+
+    today_str = datetime.date.today().isoformat()
+    entries = []
+
+    # High-priority core landing pages
+    core_pages = [
+        {'url': '/', 'priority': '1.0', 'changefreq': 'weekly'},
+        {'url': '/services/', 'priority': '0.9', 'changefreq': 'weekly'},
+        {'url': '/work/', 'priority': '0.9', 'changefreq': 'weekly'},
+        {'url': '/about/', 'priority': '0.8', 'changefreq': 'monthly'},
+        {'url': '/insights/', 'priority': '0.8', 'changefreq': 'weekly'},
+        {'url': '/contact/', 'priority': '0.8', 'changefreq': 'monthly'},
+    ]
+
+    for page in core_pages:
+        entries.append({
+            'loc': f"{base_url}{page['url']}",
+            'lastmod': today_str,
+            'changefreq': page['changefreq'],
+            'priority': page['priority']
+        })
+
+    # Studio Capabilities
+    for service in get_all_services():
+        entries.append({
+            'loc': f"{base_url}/services/{service['slug']}/",
+            'lastmod': today_str,
+            'changefreq': 'monthly',
+            'priority': '0.8'
+        })
+
+    # Portfolio Case Studies
+    for work in get_all_works():
+        entries.append({
+            'loc': f"{base_url}/work/{work['slug']}/",
+            'lastmod': today_str,
+            'changefreq': 'monthly',
+            'priority': '0.8'
+        })
+
+    # Editorial Insights & Retrospectives
+    for article in get_all_articles():
+        art_lastmod = today_str
+        pub_date = article.get('published_at') if isinstance(article, dict) else getattr(article, 'published_at', None)
+        if pub_date:
+            if hasattr(pub_date, 'strftime'):
+                art_lastmod = pub_date.strftime('%Y-%m-%d')
+            elif isinstance(pub_date, str) and len(pub_date) >= 10:
+                art_lastmod = pub_date[:10]
+
+        entries.append({
+            'loc': f"{base_url}/insights/{article['slug']}/",
+            'lastmod': art_lastmod,
+            'changefreq': 'monthly',
+            'priority': '0.7'
+        })
+
+    response = render(
+        request,
+        'public/sitemap.xml',
+        {'entries': entries},
+        content_type='application/xml; charset=utf-8'
+    )
+    response['Cache-Control'] = 'public, max-age=43200'
+    return response

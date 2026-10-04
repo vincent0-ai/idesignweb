@@ -10,8 +10,9 @@ class PortalSecurityMiddleware:
     def __call__(self, request):
         response = self.get_response(request)
         
-        # Enforce noindex on all portal routes
-        if request.path.startswith('/portal/'):
+        # Enforce noindex and non-cacheable directives on private/administrative routes
+        private_prefixes = ('/portal/', '/login/', '/admin/')
+        if any(request.path.startswith(prefix) for prefix in private_prefixes):
             response['X-Robots-Tag'] = 'noindex, nofollow, noarchive'
             response['Cache-Control'] = 'private, no-cache, no-store, must-revalidate'
             response['Pragma'] = 'no-cache'

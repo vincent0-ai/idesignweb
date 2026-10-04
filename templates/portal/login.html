@@ -4,7 +4,10 @@
 
 {% block robots %}
 <meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="googlebot" content="noindex, nofollow, noarchive">
 {% endblock %}
+
+{% block structured_data %}{% endblock %}
 
 {% block content %}
 <section class="section" style="min-height: calc(80vh - var(--header-height)); display: flex; align-items: center;">

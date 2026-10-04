@@ -1,6 +1,44 @@
 {% extends 'base/base.html' %}
 
-{% block title %}Articles & Technical Insights : {{ site_title }}{% endblock %}
+{% block title %}Articles & Technical Insights : Engineering & Architecture : {{ site_title }}{% endblock %}
+{% block meta_description %}Technical case reflections, architecture breakdowns, security engineering practices, and digital studio notes from Idesignweb.{% endblock %}
+{% block meta_keywords %}software engineering blog, cybersecurity insights Kenya, full stack development articles, web architecture Nairobi{% endblock %}
+{% block og_title %}Articles & Technical Insights : {{ site_title }}{% endblock %}
+{% block og_description %}Technical case reflections, architecture breakdowns, security engineering practices, and digital studio notes.{% endblock %}
+
+{% block structured_data %}
+{{ block.super }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "{{ site_base_url }}/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Articles & Insights",
+          "item": "{{ canonical_url }}"
+        }
+      ]
+    },
+    {
+      "@type": "Blog",
+      "name": "Idesignweb Articles & Technical Insights",
+      "description": "Technical case reflections, architecture breakdowns, security engineering practices, and studio notes.",
+      "url": "{{ canonical_url }}"
+    }
+  ]
+}
+</script>
+{% endblock %}
 
 {% block content %}
 <section class="section" style="padding-top: 32px; padding-bottom: 48px;">

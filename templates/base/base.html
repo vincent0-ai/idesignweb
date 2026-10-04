@@ -4,13 +4,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#FFFFFF">
-  <title>{% block title %}{{ site_title }} : Web Development, Cybersecurity & Design Studio{% endblock %}</title>
-  <meta name="description" content="{% block meta_description %}Idesignweb builds high-performing web applications, e-commerce stores, bulletproof cybersecurity defense, and distinctive brand systems. Founded by Timothy Owino with co-founder Vincent Odhiambo.{% endblock %}">
+  <meta name="theme-color" content="#0F172A">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- Document Title & Search Engine Metadata -->
+  <title>{% block title %}{{ default_meta_title }}{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}{{ default_meta_description }}{% endblock %}">
+  <meta name="keywords" content="{% block meta_keywords %}{{ default_meta_keywords }}{% endblock %}">
+  <meta name="author" content="Timothy Owino &amp; Vincent Odhiambo">
+
+  <!-- Canonical URL Link -->
+  <link rel="canonical" href="{% block canonical_url %}{{ canonical_url }}{% endblock %}">
+
+  <!-- Search Crawler Directives -->
   {% block robots %}
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   {% endblock %}
-  
+
+  <!-- Geo & Regional Local SEO Tags -->
+  <meta name="geo.region" content="{{ geo_region|default:'KE' }}">
+  <meta name="geo.placename" content="{{ geo_placename|default:'Nairobi' }}">
+  <meta name="geo.position" content="-1.286389;36.817223">
+  <meta name="ICBM" content="-1.286389, 36.817223">
+
+  <!-- Open Graph Protocol (Facebook, LinkedIn, Messaging) -->
+  <meta property="og:site_name" content="{{ site_title }}">
+  <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+  <meta property="og:title" content="{% block og_title %}{{ default_meta_title }}{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}{{ default_meta_description }}{% endblock %}">
+  <meta property="og:url" content="{% block og_url %}{{ canonical_url }}{% endblock %}">
+  <meta property="og:image" content="{% block og_image %}{{ default_og_image }}{% endblock %}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{% block og_image_alt %}{{ site_title }} : Web Engineering &amp; Cybersecurity Studio{% endblock %}">
+  <meta property="og:locale" content="en_US">
+  {% block og_extra %}{% endblock %}
+
+  <!-- Twitter / X Card Metadata -->
+  <meta name="twitter:card" content="{% block twitter_card %}summary_large_image{% endblock %}">
+  <meta name="twitter:title" content="{% block twitter_title %}{{ default_meta_title }}{% endblock %}">
+  <meta name="twitter:description" content="{% block twitter_description %}{{ default_meta_description }}{% endblock %}">
+  <meta name="twitter:image" content="{% block twitter_image %}{{ default_og_image }}{% endblock %}">
+  <meta name="twitter:image:alt" content="{% block twitter_image_alt %}{{ site_title }} Studio{% endblock %}">
+
+  <!-- Favicon & Web App Manifest (derived directly from official logo) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="512x512" href="{% static 'img/favicon.png' %}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/apple-touch-icon.png' %}">
+  <link rel="manifest" href="{% static 'site.webmanifest' %}">
+
   <!-- Inter Typography (vinkj.com standard) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,6 +65,53 @@
   <link rel="stylesheet" href="{% static 'css/components.css' %}">
   <link rel="stylesheet" href="{% static 'css/layout.css' %}">
   {% block extra_css %}{% endblock %}
+
+  <!-- Structured Data / JSON-LD -->
+  {% block structured_data %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "{{ site_base_url }}/#organization",
+        "name": "{{ site_title }}",
+        "url": "{{ site_base_url }}/",
+        "logo": "{{ site_logo_url }}",
+        "description": "{{ default_meta_description }}",
+        "email": "{{ company_email }}",
+        "telephone": "{{ company_phone }}",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "{{ geo_placename|default:'Nairobi' }}",
+          "addressCountry": "{{ geo_region|default:'KE' }}"
+        },
+        "founders": [
+          {% for founder in founders %}
+          {
+            "@type": "Person",
+            "name": "{{ founder.name }}",
+            "jobTitle": "{{ founder.role }}",
+            "email": "{{ founder.email }}",
+            "telephone": "{{ founder.phone }}"
+          }{% if not forloop.last %},{% endif %}
+          {% endfor %}
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "{{ site_base_url }}/#website",
+        "url": "{{ site_base_url }}/",
+        "name": "{{ site_title }}",
+        "description": "{{ default_meta_description }}",
+        "publisher": {
+          "@id": "{{ site_base_url }}/#organization"
+        }
+      }
+    ]
+  }
+  </script>
+  {% endblock %}
 </head>
 <body>
 

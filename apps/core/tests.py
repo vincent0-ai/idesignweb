@@ -299,3 +299,127 @@ class OberloDesignAndFoundersTests(TestCase):
         resp_detail = client.get('/insights/building-echowithin-encrypted-platform/')
         self.assertEqual(resp_detail.status_code, 200)
         self.assertIn('zero-knowledge', resp_detail.content.decode('utf-8'))
+
+
+class SEOMetaAndSitemapTests(TestCase):
+    def setUp(self):
+        self.client = Client()
+
+    def test_robots_txt_endpoint(self):
+        resp = self.client.get('/robots.txt')
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue(resp.headers.get('Content-Type', '').startswith('text/plain'))
+        content = resp.content.decode('utf-8')
+        self.assertIn('User-agent: *', content)
+        self.assertIn('Allow: /', content)
+        self.assertIn('Disallow: /admin/', content)
+        self.assertIn('Disallow: /portal/', content)
+        self.assertIn('Disallow: /login/', content)
+        self.assertIn('Sitemap:', content)
+        self.assertIn('/sitemap.xml', content)
+
+    def test_sitemap_xml_endpoint(self):
+        import xml.etree.ElementTree as ET
+        resp = self.client.get('/sitemap.xml')
+        self.assertEqual(resp.status_code, 200)
+        self.assertTrue('xml' in resp.headers.get('Content-Type', ''))
+        root = ET.fromstring(resp.content)
+        ns = {'sm': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
+        locs = [elem.text for elem in root.findall('sm:url/sm:loc', ns)]
+
+        # Verify core pages
+        self.assertTrue(any(l.endswith('/') for l in locs))
+        self.assertTrue(any('/services/' in l for l in locs))
+        self.assertTrue(any('/work/' in l for l in locs))
+        self.assertTrue(any('/about/' in l for l in locs))
+        self.assertTrue(any('/insights/' in l for l in locs))
+        self.assertTrue(any('/contact/' in l for l in locs))
+
+        # Verify dynamic service and work URLs
+        self.assertTrue(any('web-development' in l for l in locs))
+        self.assertTrue(any('echowithin-encrypted-platform' in l for l in locs))
+        self.assertTrue(any('building-echowithin-encrypted-platform' in l for l in locs))
+
+    def test_homepage_seo_meta_tags_and_schema(self):
+        resp = self.client.get('/')
+        self.assertEqual(resp.status_code, 200)
+        content = resp.content.decode('utf-8')
+
+        # Title and description
+        self.assertIn('<title>', content)
+        self.assertIn('Idesignweb', content)
+        self.assertIn('<meta name="description"', content)
+        self.assertIn('<link rel="canonical"', content)
+
+        # Open Graph
+        self.assertIn('<meta property="og:site_name" content="Idesignweb">', content)
+        self.assertIn('<meta property="og:title"', content)
+        self.assertIn('<meta property="og:description"', content)
+        self.assertIn('<meta property="og:url"', content)
+        self.assertIn('<meta property="og:image"', content)
+        self.assertIn('og-image.jpg', content)
+
+        # Twitter Card
+        self.assertIn('<meta name="twitter:card" content="summary_large_image">', content)
+
+        # Favicon and Manifest
+        self.assertIn('favicon-32x32.png', content)
+        self.assertIn('site.webmanifest', content)
+
+        # Structured Data JSON-LD
+        self.assertIn('application/ld+json', content)
+        self.assertIn('"@type": "Organization"', content)
+        self.assertIn('"@type": "WebSite"', content)
+        self.assertIn('Vincent Odhiambo', content)
+        self.assertIn('Timothy Owino', content)
+
+    def test_detail_pages_structured_data(self):
+        # Service detail
+        resp_service = self.client.get('/services/web-development/')
+        self.assertEqual(resp_service.status_code, 200)
+        content_service = resp_service.content.decode('utf-8')
+        self.assertIn('"@type": "Service"', content_service)
+        self.assertIn('"@type": "BreadcrumbList"', content_service)
+        self.assertIn('Web Development', content_service)
+
+        # Work detail
+        resp_work = self.client.get('/work/echowithin-encrypted-platform/')
+        self.assertEqual(resp_work.status_code, 200)
+        content_work = resp_work.content.decode('utf-8')
+        self.assertIn('"@type": "CreativeWork"', content_work)
+        self.assertIn('"@type": "BreadcrumbList"', content_work)
+        self.assertIn('EchoWithin', content_work)
+
+        # Insight detail
+        resp_insight = self.client.get('/insights/building-echowithin-encrypted-platform/')
+        self.assertEqual(resp_insight.status_code, 200)
+        content_insight = resp_insight.content.decode('utf-8')
+        self.assertIn('"@type": "TechArticle"', content_insight)
+        self.assertIn('content="article"', content_insight)
+
+    def test_auth_and_portal_noindex_enforcement(self):
+        # Login page has noindex in meta and in response header
+        resp_login = self.client.get('/login/')
+        self.assertEqual(resp_login.status_code, 200)
+        content_login = resp_login.content.decode('utf-8')
+        self.assertIn('content="noindex, nofollow, noarchive"', content_login)
+        self.assertEqual(resp_login.headers.get('X-Robots-Tag'), 'noindex, nofollow, noarchive')
+
+        # Portal route redirect has X-Robots-Tag header
+        resp_portal = self.client.get('/portal/')
+        self.assertEqual(resp_portal.status_code, 302)
+        self.assertEqual(resp_portal.headers.get('X-Robots-Tag'), 'noindex, nofollow, noarchive')
+
+    def test_derived_official_assets_exist(self):
+        import json
+        img_dir = pathlib.Path('static/img')
+        self.assertTrue((img_dir / 'logo.jpg').exists())
+        self.assertTrue((img_dir / 'favicon-32x32.png').exists())
+        self.assertTrue((img_dir / 'apple-touch-icon.png').exists())
+        self.assertTrue((img_dir / 'favicon.png').exists())
+        self.assertTrue((img_dir / 'og-image.jpg').exists())
+
+        manifest_file = pathlib.Path('static/site.webmanifest')
+        self.assertTrue(manifest_file.exists())
+        manifest_data = json.loads(manifest_file.read_text(encoding='utf-8'))
+        self.assertEqual(manifest_data['name'], 'Idesignweb')

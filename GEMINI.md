@@ -1,6 +1,13 @@
-# Idesignweb Design System & Frontend Invariants
+# Idesignweb Design System, Security & Frontend Invariants
 
-This project follows strict minimalist, modern digital studio and engineering agency standards. Adhere strictly to these principles whenever creating, updating, or reviewing templates, stylesheets, and components.
+This project follows strict security rules and minimalist, modern digital studio and engineering agency standards. Adhere strictly to these principles whenever creating, updating, or reviewing code, templates, stylesheets, and components.
+
+---
+
+## 0. Security & Deployment Mandates (Zero Tolerance)
+- **NEVER Hardcode Any Keys or Credentials**: No agent or model may EVER hardcode any API key, database URI, password, secret key, token, or server IP in any Python file, script, fallback (`os.getenv('KEY', '...')`), test, or documentation file.
+- **NEVER Read `.env` to Copy Keys**: Never extract or copy values from `.env` into source code, scripts, or markdown files.
+- **Manual Deployment Only (No AI Deployment API Usage)**: The user ALWAYS handles deployments and deployment API calls manually themselves. AI agents must NEVER reference, configure, write scripts for, or invoke Dokploy or any deployment API.
 
 ---
 

@@ -1,7 +1,45 @@
 {% extends 'base/base.html' %}
 {% load static %}
 
-{% block title %}Work : {{ site_title }}{% endblock %}
+{% block title %}Client Work & Case Studies : {{ site_title }}{% endblock %}
+{% block meta_description %}Explore published case studies and live platforms engineered by Idesignweb, including the EchoWithin encrypted platform and VIN-KJ Auto Services.{% endblock %}
+{% block meta_keywords %}Idesignweb portfolio, web development case studies, EchoWithin, VIN-KJ, full stack web apps Kenya, digital studio Nairobi{% endblock %}
+{% block og_title %}Client Work & Case Studies : {{ site_title }}{% endblock %}
+{% block og_description %}Explore published case studies and live platforms engineered by Idesignweb.{% endblock %}
+
+{% block structured_data %}
+{{ block.super }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "{{ site_base_url }}/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Work",
+          "item": "{{ canonical_url }}"
+        }
+      ]
+    },
+    {
+      "@type": "CollectionPage",
+      "name": "Idesignweb Client Work & Portfolio",
+      "description": "Live web platforms and client projects engineered for speed, reliability, and security.",
+      "url": "{{ canonical_url }}"
+    }
+  ]
+}
+</script>
+{% endblock %}
 
 {% block content %}
 <section class="section" style="padding-top: 32px; padding-bottom: 48px;">

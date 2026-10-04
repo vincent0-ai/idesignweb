@@ -43,7 +43,7 @@ for default_h in [
     if default_h not in ALLOWED_HOSTS and '*' not in ALLOWED_HOSTS:
         ALLOWED_HOSTS.append(default_h)
 
-# Traefik Reverse Proxy & HTTPS Configuration for Dokploy
+# Reverse Proxy & HTTPS Configuration
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 csrf_origins_env = os.getenv('CSRF_TRUSTED_ORIGINS', '').strip()
 if csrf_origins_env:

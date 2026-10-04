@@ -6,9 +6,30 @@ Provides company information, contact details, navigation, and service links.
 import datetime
 
 def global_context(request):
+    try:
+        base_url = request.build_absolute_uri('/')[:-1]
+        canonical_url = request.build_absolute_uri(request.path)
+        default_og_image = request.build_absolute_uri('/static/img/og-image.jpg')
+        site_logo_url = request.build_absolute_uri('/static/img/logo.jpg')
+    except Exception:
+        base_url = 'https://idesignweb.co.ke'
+        canonical_url = 'https://idesignweb.co.ke/'
+        default_og_image = 'https://idesignweb.co.ke/static/img/og-image.jpg'
+        site_logo_url = 'https://idesignweb.co.ke/static/img/logo.jpg'
+
     return {
         'site_title': 'Idesignweb',
         'site_tagline': 'High-Performance Web Engineering & Cybersecurity',
+        'site_domain': 'idesignweb.co.ke',
+        'site_base_url': base_url,
+        'site_logo_url': site_logo_url,
+        'canonical_url': canonical_url,
+        'default_meta_title': 'Idesignweb : Web Development, Cybersecurity & Design Studio',
+        'default_meta_description': 'Idesignweb builds high-performing web applications, e-commerce stores, bulletproof cybersecurity defense, and distinctive brand systems. Founded by Timothy Owino with co-founder Vincent Odhiambo. Nairobi, Kenya & Global.',
+        'default_meta_keywords': 'web development Nairobi, web design Kenya, cybersecurity audits, e-commerce development, full stack engineering, Timothy Owino, Vincent Odhiambo, brand identity design',
+        'default_og_image': default_og_image,
+        'geo_region': 'KE',
+        'geo_placename': 'Nairobi',
         'founder_name': 'Timothy Owino & Vincent Odhiambo',
         'founder_title': 'Leadership',
         'founders': [

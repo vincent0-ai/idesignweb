@@ -1,6 +1,61 @@
 {% extends 'base/base.html' %}
 
-{% block title %}Start a Project : {{ site_title }}{% endblock %}
+{% block title %}Start a Project : Contact Idesignweb : {{ site_title }}{% endblock %}
+{% block meta_description %}Reach out directly to Timothy Owino and Vincent Odhiambo. Inquire about custom web development, cybersecurity audits, or brand identity design. Response within 24 hours.{% endblock %}
+{% block meta_keywords %}contact Idesignweb, hire web developers Nairobi, cybersecurity consultation Kenya, web design agency quote, start digital project{% endblock %}
+{% block og_title %}Start a Project : Contact Idesignweb : {{ site_title }}{% endblock %}
+{% block og_description %}Reach out directly to Timothy Owino and Vincent Odhiambo. Inquire about custom web development, cybersecurity audits, or brand identity design.{% endblock %}
+
+{% block structured_data %}
+{{ block.super }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "{{ site_base_url }}/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Contact",
+          "item": "{{ canonical_url }}"
+        }
+      ]
+    },
+    {
+      "@type": "ContactPage",
+      "name": "Contact Idesignweb",
+      "description": "Reach out directly to founders Timothy Owino and Vincent Odhiambo.",
+      "url": "{{ canonical_url }}",
+      "mainEntity": {
+        "@type": "Organization",
+        "name": "{{ site_title }}",
+        "email": "{{ company_email }}",
+        "telephone": "{{ company_phone }}",
+        "contactPoint": [
+          {% for founder in founders %}
+          {
+            "@type": "ContactPoint",
+            "contactType": "{{ founder.short_role|escapejs }}",
+            "telephone": "{{ founder.phone }}",
+            "email": "{{ founder.email }}",
+            "name": "{{ founder.name }}"
+          }{% if not forloop.last %},{% endif %}
+          {% endfor %}
+        ]
+      }
+    }
+  ]
+}
+</script>
+{% endblock %}
 
 {% block content %}
 <section class="section" style="padding-top: 32px; padding-bottom: 48px;">

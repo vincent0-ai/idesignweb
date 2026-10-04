@@ -1,6 +1,79 @@
 {% extends 'base/base.html' %}
 
-{% block title %}{{ service.title }} : {{ site_title }}{% endblock %}
+{% block title %}{{ service.title }} Services : {{ site_title }}{% endblock %}
+{% block meta_description %}{{ service.overview|truncatechars:160 }}{% endblock %}
+{% block meta_keywords %}{{ service.title|lower }}, {{ service.title|lower }} Nairobi Kenya, {{ service.tagline|lower }}, Idesignweb{% endblock %}
+{% block og_title %}{{ service.title }} Services : {{ site_title }}{% endblock %}
+{% block og_description %}{{ service.overview|truncatechars:160 }}{% endblock %}
+
+{% block structured_data %}
+{{ block.super }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "{{ site_base_url }}/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Capabilities",
+          "item": "{{ site_base_url }}/services/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "{{ service.title|escapejs }}",
+          "item": "{{ canonical_url }}"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "name": "{{ service.title|escapejs }}",
+      "description": "{{ service.overview|escapejs }}",
+      "provider": {
+        "@id": "{{ site_base_url }}/#organization"
+      },
+      "serviceType": "{{ service.tagline|escapejs }}",
+      "url": "{{ canonical_url }}",
+      "areaServed": [
+        {
+          "@type": "Country",
+          "name": "Kenya"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Worldwide"
+        }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "{{ service.title|escapejs }} Deliverables",
+        "itemListElement": [
+          {% for d in service.deliverables %}
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "{{ d|escapejs }}"
+            }
+          }{% if not forloop.last %},{% endif %}
+          {% endfor %}
+        ]
+      }
+    }
+  ]
+}
+</script>
+{% endblock %}
 
 {% block content %}
 <section class="section" style="padding-top: 32px; padding-bottom: 48px;">
