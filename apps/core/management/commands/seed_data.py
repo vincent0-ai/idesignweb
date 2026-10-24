@@ -9,6 +9,7 @@ from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 from apps.core.db import get_db, init_indexes
 from apps.core.models import Work, Article
+from apps.core.content import DEFAULT_WORKS
 import datetime
 import os
 
@@ -54,6 +55,27 @@ class Command(BaseCommand):
                 self.stdout.write(self.style.SUCCESS(f'Updated administrator credentials from env: {admin_username}'))
         else:
             self.stdout.write('No DJANGO_SUPERUSER_PASSWORD / USERNAME set in environment. Skipping administrator creation.')
+
+        self.stdout.write('Ensuring default Work records in SQLite...')
+        for work in DEFAULT_WORKS:
+            Work.objects.get_or_create(
+                slug=work['slug'],
+                defaults={
+                    'title': work['title'],
+                    'full_title': work.get('full_title', ''),
+                    'client': work['client'],
+                    'category': work['category'],
+                    'year': work['year'],
+                    'image_url': work['image_url'],
+                    'live_url': work.get('live_url'),
+                    'summary': work['summary'],
+                    'challenge': work.get('challenge', ''),
+                    'solution': work.get('solution', ''),
+                    'deliverables_summary': work.get('deliverables_summary', ''),
+                    'is_featured': work.get('is_featured', True),
+                    'is_published': work.get('is_published', True),
+                },
+            )
 
         self.stdout.write('Initializing indexes...')
         init_indexes()
@@ -210,11 +232,26 @@ class Command(BaseCommand):
                 'deliverables_summary': 'Custom inventory and services catalog, real-time live search engine, appointment booking engine, local SEO optimization, responsive mobile UI.',
                 'published_at': now,
                 'is_published': True
+            },
+            {
+                'slug': 'idesignweb-hotel-booking-platform',
+                'title': 'Idesignweb Hotel - Hotel Booking Platform',
+                'client': 'Idesignweb Hotel',
+                'category': 'Web Development',
+                'year': '2026',
+                'image_url': 'https://hotel.idesignweb.co.ke/images/hero.jpg',
+                'live_url': 'https://hotel.idesignweb.co.ke',
+                'summary': 'A calm, responsive hotel booking platform that helps guests explore rooms, check availability, create an account, and request a stay from one clear customer experience.',
+                'challenge': 'The hotel needed more than a static brochure website. Guests needed to understand the rooms quickly, search availability by dates and guest count, and submit booking requests without unnecessary friction. The system also required a secure staff administration area for managing rooms, hotel settings, bookings, and gallery content.',
+                'solution': 'We built a responsive hotel experience with a lightweight customer-facing frontend and a Django booking API. Guests can browse rooms and gallery content, search available rooms, create an account, and submit booking requests. The backend validates dates and capacity, protects against overlapping reservations, and provides staff administration for managing hotel operations.',
+                'deliverables_summary': 'Responsive hotel website, room catalogue, gallery experience, availability search, customer registration and login, booking request workflow, Django API backend, staff administration, room and gallery management, booking validation, and deployment-ready Docker configuration.',
+                'published_at': now,
+                'is_published': True
             }
         ]
         for cs in case_studies_data:
             db.case_studies.update_one({'slug': cs['slug']}, {'$set': cs}, upsert=True)
-            Work.objects.update_or_create(
+            Work.objects.get_or_create(
                 slug=cs['slug'],
                 defaults={
                     'title': cs['title'].split(' - ')[0],

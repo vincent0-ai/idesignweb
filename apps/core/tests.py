@@ -62,10 +62,11 @@ class PublicZoneTests(TestCase):
 
     def test_work_model_in_sqlite(self):
         from apps.core.content import get_all_works
-        # Verify default fallback returns 2 real works
+        # Verify default fallback returns the defined real works
         works = get_all_works()
-        self.assertEqual(len(works), 2)
+        self.assertEqual(len(works), 3)
         self.assertIn('echowithin.xyz', works[0]['live_url'])
+        self.assertTrue(any(w['slug'] == 'idesignweb-hotel-booking-platform' for w in works))
         
         # Verify admin can insert new Work in SQLite
         Work.objects.create(

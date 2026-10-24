@@ -37,6 +37,22 @@ DEFAULT_WORKS = [
         'deliverables_summary': 'Custom inventory and services catalog, real-time live search engine, appointment booking engine, local SEO optimization, responsive mobile UI.',
         'is_featured': True,
         'is_published': True
+    },
+    {
+        'slug': 'idesignweb-hotel-booking-platform',
+        'title': 'Idesignweb Hotel',
+        'full_title': 'Idesignweb Hotel - Hotel Booking Platform',
+        'client': 'Idesignweb Hotel',
+        'category': 'Web Development',
+        'year': '2026',
+        'image_url': 'https://hotel.idesignweb.co.ke/images/hero.jpg',
+        'live_url': 'https://hotel.idesignweb.co.ke',
+        'summary': 'A calm, responsive hotel booking platform that helps guests explore rooms, check availability, create an account, and request a stay from one clear customer experience.',
+        'challenge': 'The hotel needed more than a static brochure website. Guests needed to understand the rooms quickly, search availability by dates and guest count, and submit booking requests without unnecessary friction. The system also required a secure staff administration area for managing rooms, hotel settings, bookings, and gallery content.',
+        'solution': 'We built a responsive hotel experience with a lightweight customer-facing frontend and a Django booking API. Guests can browse rooms and gallery content, search available rooms, create an account, and submit booking requests. The backend validates dates and capacity, protects against overlapping reservations, and provides staff administration for managing hotel operations.',
+        'deliverables_summary': 'Responsive hotel website, room catalogue, gallery experience, availability search, customer registration and login, booking request workflow, Django API backend, staff administration, room and gallery management, booking validation, and deployment-ready Docker configuration.',
+        'is_featured': True,
+        'is_published': True
     }
 ]
 
