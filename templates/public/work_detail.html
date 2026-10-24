@@ -117,21 +117,6 @@
     </div>
     {% endif %}
 
-    <!-- Bottom CTA -->
-    <div class="card-action-row" style="padding-top: var(--space-xl); margin-top: var(--space-3xl); border-top: 1px solid var(--border-hairline);">
-      <a href="{% url 'public:work_list' %}" class="btn btn-outline">
-        View More Work
-      </a>
-      {% if case_study.live_url %}
-      <a href="{{ case_study.live_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
-        Visit Website
-      </a>
-      {% endif %}
-      <a href="{% url 'public:contact' %}" class="btn btn-primary">
-        Start a Similar Project
-      </a>
-    </div>
-
   </div>
 </section>
 {% endblock %}
