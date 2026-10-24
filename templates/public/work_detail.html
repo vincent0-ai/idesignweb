@@ -92,7 +92,7 @@
     {% if case_study.image_url %}
       <!-- Featured Work Visual Showcase -->
       <div style="border: 1px solid var(--border-hairline); border-radius: var(--radius-sm); margin-bottom: 36px; overflow: hidden; background: #F8FAFC; padding: 14px; box-shadow: var(--shadow-sm);">
-        <img src="{% static case_study.image_url %}" alt="{{ case_study.title }}" style="width: 100%; height: auto; aspect-ratio: 1356 / 674; object-fit: contain; display: block; border-radius: var(--radius-xs); border: 1px solid var(--border-hairline);" loading="eager">
+        <img src="{% if case_study.image_url|slice:":1" == "/" or 'http' in case_study.image_url %}{{ case_study.image_url }}{% else %}{% static case_study.image_url %}{% endif %}" alt="{{ case_study.title }}" style="width: 100%; height: auto; aspect-ratio: 1356 / 674; object-fit: contain; display: block; border-radius: var(--radius-xs); border: 1px solid var(--border-hairline);" loading="eager">
       </div>
     {% endif %}
 

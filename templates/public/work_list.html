@@ -73,7 +73,7 @@
       <article class="card-article">
         <div class="card-image-wrap">
           {% if case.image_url %}
-          <img src="{% static case.image_url %}" alt="{{ case.title }}" class="card-image" loading="lazy" width="678" height="337">
+          <img src="{% if case.image_url|slice:":1" == "/" or 'http' in case.image_url %}{{ case.image_url }}{% else %}{% static case.image_url %}{% endif %}" alt="{{ case.title }}" class="card-image" loading="lazy" width="678" height="337">
           {% else %}
           <div style="width: 100%; height: 100%; background: var(--bg-muted);"></div>
           {% endif %}

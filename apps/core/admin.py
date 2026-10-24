@@ -10,7 +10,7 @@ class WorkAdmin(admin.ModelAdmin):
     list_editable = ('is_featured', 'is_published', 'sort_order')
     fieldsets = (
         ('Overview', {
-            'fields': ('title', 'full_title', 'slug', 'client', 'category', 'year', 'live_url', 'image_url', 'sort_order')
+            'fields': ('title', 'full_title', 'slug', 'client', 'category', 'year', 'live_url', 'image_upload', 'image_url', 'sort_order')
         }),
         ('Narrative & Teaser', {
             'fields': ('summary', 'challenge', 'solution', 'deliverables_summary')

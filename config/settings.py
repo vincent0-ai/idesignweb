@@ -157,6 +157,9 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_ROOT.mkdir(parents=True, exist_ok=True)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'data' / 'media'
+MEDIA_ROOT.mkdir(parents=True, exist_ok=True)
 
 STORAGES = {
     "default": {

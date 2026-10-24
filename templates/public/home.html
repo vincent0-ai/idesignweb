@@ -2,8 +2,8 @@
 {% load static %}
 
 {% block title %}Idesignweb : Web Development, Cybersecurity & Design Studio{% endblock %}
-{% block meta_description %}Idesignweb engineers high-performing web applications, e-commerce stores, bulletproof cybersecurity defense, and distinctive brand systems built for conversion. Nairobi, Kenya & Global.{% endblock %}
-{% block meta_keywords %}web development Nairobi Kenya, custom web applications, cybersecurity audits, e-commerce stores, full stack engineering, Timothy Owino, Vincent Odhiambo, brand identity design{% endblock %}
+{% block meta_description %}Idesignweb builds and manages high-performing websites, web applications, e-commerce stores, hosting infrastructure, server operations, cybersecurity, and distinctive brand systems. Nairobi, Kenya & Global.{% endblock %}
+{% block meta_keywords %}web development Nairobi Kenya, website hosting, website maintenance, server management, custom web applications, cybersecurity audits, e-commerce stores, full stack engineering, brand identity design{% endblock %}
 {% block og_title %}Idesignweb : Web Development, Cybersecurity & Design Studio{% endblock %}
 {% block og_description %}Idesignweb engineers high-performing web applications, e-commerce stores, bulletproof cybersecurity defense, and distinctive brand systems.{% endblock %}
 
@@ -17,8 +17,8 @@
     </h1>
 
     <p class="hero-description">
-      Idesignweb engineers custom web applications, e-commerce platforms, cybersecurity defense, and distinctive brand
-      identities built for speed, conversion, and long-term security.
+      Idesignweb builds and runs custom websites, web applications, e-commerce platforms, and the hosting infrastructure
+      behind them, with cybersecurity and ongoing maintenance built in.
     </p>
 
     <div class="hero-actions">
@@ -47,7 +47,7 @@
       <article class="card-article">
         <div class="card-image-wrap">
           {% if case.image_url %}
-          <img src="{% static case.image_url %}" alt="{{ case.title }}" class="card-image" loading="lazy" width="678"
+          <img src="{% if case.image_url|slice:":1" == "/" or 'http' in case.image_url %}{{ case.image_url }}{% else %}{% static case.image_url %}{% endif %}" alt="{{ case.title }}" class="card-image" loading="lazy" width="678"
             height="337">
           {% else %}
           <div style="width: 100%; height: 100%; background: var(--bg-muted);"></div>

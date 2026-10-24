@@ -1,4 +1,9 @@
+from django.core.exceptions import ValidationError
+from django.core.validators import FileExtensionValidator
 from django.db import models
+
+
+MAX_WORK_IMAGE_BYTES = 8 * 1024 * 1024
 
 class Work(models.Model):
     """
@@ -35,6 +40,12 @@ class Work(models.Model):
         default='img/echowithin-platform.webp',
         help_text="Static image path (e.g. img/echowithin-platform.webp) or full external URL"
     )
+    image_upload = models.ImageField(
+        upload_to='work/',
+        blank=True,
+        help_text="Optional uploaded image. When provided, it takes priority over Image URL.",
+        validators=[FileExtensionValidator(['jpg', 'jpeg', 'png', 'webp'])],
+    )
     summary = models.TextField(help_text="Short teaser description shown on cards")
     challenge = models.TextField(blank=True, help_text="The client challenge")
     solution = models.TextField(blank=True, help_text="The technical solution delivered")
@@ -53,6 +64,10 @@ class Work(models.Model):
 
     def __str__(self):
         return f"{self.title} ({self.client})"
+
+    def clean(self):
+        if self.image_upload and self.image_upload.size > MAX_WORK_IMAGE_BYTES:
+            raise ValidationError({'image_upload': 'Work images must be 8 MB or smaller.'})
 
     @property
     def display_title(self):

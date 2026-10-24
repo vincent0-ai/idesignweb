@@ -146,6 +146,23 @@ class Command(BaseCommand):
                 'featured': True,
                 'sort_order': 4,
                 'updated_at': now
+            },
+            {
+                'slug': 'hosting-maintenance-server-management',
+                'service_number': '05',
+                'title': 'Hosting & Maintenance',
+                'tagline': 'Reliable hosting, website maintenance, and managed server operations.',
+                'overview': 'Keep your website available, secure, and up to date without managing the infrastructure alone. We handle hosting setup, domains, deployments, updates, backups, monitoring, and day-to-day server administration.',
+                'deliverables': [
+                    'Managed website hosting and deployment setup',
+                    'Routine website updates, maintenance, and content support',
+                    'Server configuration, monitoring, and performance tuning',
+                    'SSL, domain, backup, and recovery management',
+                    'Ongoing technical support and incident response'
+                ],
+                'featured': True,
+                'sort_order': 5,
+                'updated_at': now
             }
         ]
         for s in services_data:
@@ -286,4 +303,3 @@ class Command(BaseCommand):
             )
 
         self.stdout.write(self.style.SUCCESS('Platform initialization completed.'))
-
