@@ -80,7 +80,7 @@
 
         <div style="margin-bottom: var(--space-lg); flex-grow: 1;">
           <div style="font-size: var(--text-tiny); font-weight: var(--weight-bold); text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px; letter-spacing: 0.04em;">
-            Deliverable Scope:
+            What you get:
           </div>
           <ul class="card-service-deliverables" style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 0;">
             {% for d in service.deliverables %}
@@ -91,10 +91,10 @@
 
         <div class="card-action-row">
           <a href="{% url 'public:service_detail' service.slug %}" class="btn btn-outline btn-sm">
-            <span>View Practice Details</span>
+            <span>View service details</span>
           </a>
           <a href="{% url 'public:contact' %}?service={{ service.slug }}" class="btn btn-primary btn-sm">
-            <span>Book Practice</span>
+            <span>Start a project</span>
           </a>
         </div>
       </article>

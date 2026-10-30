@@ -12,6 +12,7 @@ DEFAULT_WORKS = [
         'full_title': 'EchoWithin - Private Encrypted Notes & Social Bonds Platform',
         'client': 'EchoWithin',
         'category': 'Web Development',
+        'work_type': 'client',
         'year': '2026',
         'image_url': 'img/echowithin-platform.webp',
         'live_url': 'https://echowithin.xyz',
@@ -28,6 +29,7 @@ DEFAULT_WORKS = [
         'full_title': 'VIN-KJ Auto Services - E-Commerce & Service Booking Platform',
         'client': 'VIN-KJ Auto Services',
         'category': 'E-Commerce',
+        'work_type': 'client',
         'year': '2026',
         'image_url': 'img/vinkj-ecommerce.webp',
         'live_url': 'https://vinkj.com',
@@ -44,6 +46,7 @@ DEFAULT_WORKS = [
         'full_title': 'Idesignweb Hotel - Hotel Booking Platform',
         'client': 'Idesignweb Hotel',
         'category': 'Web Development',
+        'work_type': 'showcase',
         'year': '2026',
         'image_url': 'https://hotel.idesignweb.co.ke/images/hero.jpg',
         'live_url': 'https://hotel.idesignweb.co.ke',
@@ -146,6 +149,7 @@ def _work_to_dict(w):
             'full_title': getattr(w, 'full_title', '') or w.title,
             'client': w.client,
             'category': w.category,
+            'work_type': getattr(w, 'work_type', 'client'),
             'year': w.year,
             'image_url': w.image_upload.url if w.image_upload else w.image_url,
             'live_url': w.live_url,
@@ -158,22 +162,25 @@ def _work_to_dict(w):
         }
     return w
 
-def get_all_works(category=None, featured_only=False):
+def get_all_works(category=None, featured_only=False, work_type=None):
     """
     Retrieve all published works.
     Queries Django ORM (SQLite) first if records exist; falls back to DEFAULT_WORKS.
+
+    work_type: 'client' for paid client projects, 'showcase' for ready-made builds
+    customers can buy and customise, None for both.
     """
     try:
         from apps.core.models import Work
-        qs = Work.objects.filter(is_published=True)
-        if featured_only:
-            qs = qs.filter(is_featured=True)
-        if category and category != 'all':
-            qs = qs.filter(category__iexact=category)
-        
-        orm_works = list(qs)
-        if orm_works:
-            return [_work_to_dict(w) for w in orm_works]
+        if Work.objects.filter(is_published=True).exists():
+            qs = Work.objects.filter(is_published=True)
+            if featured_only:
+                qs = qs.filter(is_featured=True)
+            if work_type:
+                qs = qs.filter(work_type=work_type)
+            if category and category != 'all':
+                qs = qs.filter(category__iexact=category)
+            return [_work_to_dict(w) for w in qs]
     except Exception:
         pass
 
@@ -181,6 +188,8 @@ def get_all_works(category=None, featured_only=False):
     items = list(DEFAULT_WORKS)
     if featured_only:
         items = [w for w in items if w.get('is_featured', True)]
+    if work_type:
+        items = [w for w in items if w.get('work_type', 'client') == work_type]
     if category and category != 'all':
         items = [w for w in items if w.get('category', '').lower() == category.lower()]
     return items

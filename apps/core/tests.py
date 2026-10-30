@@ -39,9 +39,31 @@ class PublicZoneTests(TestCase):
                 f"Expected 200 for {url}, got {response.status_code}"
             )
 
+    def test_work_page_separates_client_and_showcase(self):
+        response = self.client.get('/work/')
+        self.assertEqual(response.status_code, 200)
+        content = response.content.decode('utf-8')
+
+        self.assertIn('Client work', content)
+        self.assertIn('Showcase projects', content)
+        self.assertLess(
+            content.index('Client work'),
+            content.index('Showcase projects'),
+            'Client work must lead the page, showcase projects follow'
+        )
+
+        # The hotel project is showcase, so it must not appear under client work
+        client_section = content[content.index('Client work'):content.index('Showcase projects')]
+        self.assertNotIn('Idesignweb Hotel', client_section)
+        self.assertIn('Idesignweb Hotel', content)
+
+        # Homepage featured work stays client only
+        home = self.client.get('/').content.decode('utf-8')
+        self.assertNotIn('Idesignweb Hotel', home)
+
     def test_contact_form_submission_stores_in_sqlite(self):
         initial_count = Inquiry.objects.count()
-        
+
         post_data = {
             'full_name': 'Test Client',
             'email': 'test@client.com',
@@ -67,6 +89,14 @@ class PublicZoneTests(TestCase):
         self.assertEqual(len(works), 3)
         self.assertIn('echowithin.xyz', works[0]['live_url'])
         self.assertTrue(any(w['slug'] == 'idesignweb-hotel-booking-platform' for w in works))
+        self.assertEqual(works[0]['work_type'], 'client')
+
+        # Showcase projects are separable from client work
+        showcase = get_all_works(work_type='showcase')
+        self.assertEqual([w['slug'] for w in showcase], ['idesignweb-hotel-booking-platform'])
+        client_only = get_all_works(work_type='client')
+        self.assertEqual(len(client_only), 2)
+        self.assertNotIn('idesignweb-hotel-booking-platform', [w['slug'] for w in client_only])
         
         # Verify admin can insert new Work in SQLite
         Work.objects.create(

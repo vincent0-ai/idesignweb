@@ -44,44 +44,7 @@
     {% if case_studies %}
     <div class="grid-2">
       {% for case in case_studies %}
-      <article class="card-article">
-        <div class="card-image-wrap">
-          {% if case.image_url %}
-          <img src="{% if case.image_url|slice:":1" == "/" or 'http' in case.image_url %}{{ case.image_url }}{% else %}{% static case.image_url %}{% endif %}" alt="{{ case.title }}" class="card-image" loading="lazy" width="678"
-            height="337">
-          {% else %}
-          <div style="width: 100%; height: 100%; background: var(--bg-muted);"></div>
-          {% endif %}
-        </div>
-        <div class="card-body">
-          <div style="margin-bottom: var(--space-xs);">
-            <span class="category-label">{{ case.category }}</span>
-          </div>
-
-          <h3
-            style="font-size: 1.25rem; margin-bottom: var(--space-xs); font-weight: var(--weight-bold); line-height: 1.3;">
-            <a href="{% url 'public:work_detail' case.slug %}" style="color: var(--text-main); text-decoration: none;">
-              {{ case.title }}
-            </a>
-          </h3>
-
-          <p
-            style="font-size: var(--text-small); color: var(--text-muted); line-height: 1.6; margin-bottom: var(--space-md); flex-grow: 1;">
-            {{ case.summary }}
-          </p>
-
-          <div class="card-action-row">
-            <a href="{% url 'public:work_detail' case.slug %}" class="btn btn-outline btn-sm">
-              View Work
-            </a>
-            {% if case.live_url %}
-            <a href="{{ case.live_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
-              Visit Website
-            </a>
-            {% endif %}
-          </div>
-        </div>
-      </article>
+      {% include 'components/work_card.html' with case=case %}
       {% endfor %}
     </div>
 

@@ -3,20 +3,21 @@ from apps.core.models import Work, Inquiry, Article
 
 @admin.register(Work)
 class WorkAdmin(admin.ModelAdmin):
-    list_display = ('title', 'client', 'category', 'live_url', 'is_featured', 'is_published', 'sort_order', 'created_at')
-    list_filter = ('category', 'is_featured', 'is_published')
+    list_display = ('title', 'client', 'work_type', 'category', 'live_url', 'is_featured', 'is_published', 'sort_order', 'created_at')
+    list_filter = ('work_type', 'category', 'is_featured', 'is_published')
     search_fields = ('title', 'client', 'summary', 'challenge', 'solution')
     prepopulated_fields = {'slug': ('title',)}
     list_editable = ('is_featured', 'is_published', 'sort_order')
     fieldsets = (
         ('Overview', {
-            'fields': ('title', 'full_title', 'slug', 'client', 'category', 'year', 'live_url', 'image_upload', 'image_url', 'sort_order')
+            'fields': ('title', 'full_title', 'slug', 'client', 'work_type', 'category', 'year', 'live_url', 'image_upload', 'image_url', 'sort_order')
         }),
         ('Narrative & Teaser', {
             'fields': ('summary', 'challenge', 'solution', 'deliverables_summary')
         }),
         ('Visibility', {
-            'fields': ('is_featured', 'is_published')
+            'fields': ('is_featured', 'is_published'),
+            'description': 'Only client work appears under Featured Work on the homepage. Showcase projects stay on the Work page, where customers can ask to buy and customise them.'
         }),
     )
 

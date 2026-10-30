@@ -49,11 +49,11 @@
       },
       "provider": {
         "@id": "{{ site_base_url }}/#organization"
-      },
+      }{% if case_study.work_type != 'showcase' %},
       "customer": {
         "@type": "Organization",
         "name": "{{ case_study.client|escapejs }}"
-      }
+      }{% endif %}
     }
   ]
 }
@@ -70,7 +70,7 @@
     </div>
 
     <div style="margin-bottom: 10px;">
-      <span class="category-label" style="margin-bottom: 0;">{{ case_study.category }}</span>
+      <span class="category-label" style="margin-bottom: 0;">{{ case_study.category }}{% if case_study.work_type == 'showcase' %} &middot; Showcase project{% endif %}</span>
     </div>
 
     <h1 style="font-size: clamp(1.85rem, 3.5vw, 2.5rem); font-weight: 700; max-width: 960px; margin-bottom: 12px; line-height: 1.15; letter-spacing: -0.02em;">
@@ -81,13 +81,18 @@
       {{ case_study.summary }}
     </p>
 
-    {% if case_study.live_url %}
-    <div style="margin-bottom: 32px;">
-      <a href="{{ case_study.live_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-        Visit Live Website
+    <div style="display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-bottom: 32px;">
+      {% if case_study.work_type == 'showcase' %}
+      <a href="{% url 'public:contact' %}" class="btn btn-primary">
+        Buy and customise
       </a>
+      {% endif %}
+      {% if case_study.live_url %}
+      <a href="{{ case_study.live_url }}" target="_blank" rel="noopener noreferrer" class="btn {% if case_study.work_type == 'showcase' %}btn-outline{% else %}btn-primary{% endif %}">
+        {% if case_study.work_type == 'showcase' %}See it live{% else %}Visit Live Website{% endif %}
+      </a>
+      {% endif %}
     </div>
-    {% endif %}
 
     {% if case_study.image_url %}
       <!-- Featured Work Visual Showcase -->
@@ -99,12 +104,12 @@
     <!-- Work Deep Dive Breakdown -->
     <div class="grid-2" style="margin-bottom: var(--space-3xl); gap: var(--space-xl);">
       <div class="card" style="padding: var(--space-xl);">
-        <h2 style="font-size: var(--text-h3); margin-bottom: var(--space-sm);">The Challenge</h2>
+        <h2 style="font-size: var(--text-h3); margin-bottom: var(--space-sm);">{% if case_study.work_type == 'showcase' %}What you can use it for{% else %}The Challenge{% endif %}</h2>
         <p style="line-height: 1.7; font-size: var(--text-body); color: var(--text-body); margin-bottom: 0;">{{ case_study.challenge }}</p>
       </div>
 
       <div class="card" style="padding: var(--space-xl);">
-        <h2 style="font-size: var(--text-h3); margin-bottom: var(--space-sm);">The Solution</h2>
+        <h2 style="font-size: var(--text-h3); margin-bottom: var(--space-sm);">{% if case_study.work_type == 'showcase' %}How we customise it{% else %}The Solution{% endif %}</h2>
         <p style="line-height: 1.7; font-size: var(--text-body); color: var(--text-body); margin-bottom: 0;">{{ case_study.solution }}</p>
       </div>
     </div>
@@ -112,8 +117,21 @@
     <!-- Deliverables Manifest -->
     {% if case_study.deliverables_summary %}
     <div class="card" style="padding: var(--space-xl); margin-bottom: var(--space-3xl);">
-      <h2 style="font-size: var(--text-h3); margin-bottom: var(--space-sm);">Completed Deliverables</h2>
+      <h2 style="font-size: var(--text-h3); margin-bottom: var(--space-sm);">{% if case_study.work_type == 'showcase' %}What you get{% else %}Completed Deliverables{% endif %}</h2>
       <p style="color: var(--text-body); font-size: var(--text-body); margin-bottom: 0; line-height: 1.6;">{{ case_study.deliverables_summary }}</p>
+    </div>
+    {% endif %}
+
+    {% if case_study.work_type == 'showcase' %}
+    <!-- Showcase Buy CTA -->
+    <div class="card" style="padding: var(--space-xl); text-align: center;">
+      <h2 style="font-size: var(--text-h3); margin-bottom: var(--space-sm);">Want this for your business?</h2>
+      <p style="color: var(--text-muted); margin-bottom: var(--space-md);">
+        Buy this project as it is, or tell us what to change and we will build it around your brand.
+      </p>
+      <a href="{% url 'public:contact' %}" class="btn btn-primary">
+        Buy and customise
+      </a>
     </div>
     {% endif %}
 

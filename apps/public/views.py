@@ -21,7 +21,7 @@ import datetime
 
 def home_view(request):
     services = get_all_services(featured_only=True)
-    case_studies = get_all_works()
+    case_studies = get_all_works(featured_only=True, work_type='client')
     
     # Try fetching insights if db available, fallback to empty
     try:
@@ -55,9 +55,9 @@ def service_detail_view(request, slug):
     if not service:
         raise Http404('Service not found')
         
-    related_cases = [w for w in get_all_works() if w.get('category') == service['title']]
+    related_cases = [w for w in get_all_works(work_type='client') if w.get('category') == service['title']]
     if not related_cases:
-        related_cases = get_all_works()[:2]
+        related_cases = get_all_works(work_type='client')[:2]
         
     context = {
         'service': service,
@@ -67,11 +67,13 @@ def service_detail_view(request, slug):
 
 def work_list_view(request):
     selected_category = request.GET.get('category', 'all')
-    case_studies = get_all_works(category=selected_category)
+    client_work = get_all_works(category=selected_category, work_type='client')
+    showcase_work = get_all_works(category=selected_category, work_type='showcase')
     categories = get_work_categories()
-    
+
     context = {
-        'case_studies': case_studies,
+        'client_work': client_work,
+        'showcase_work': showcase_work,
         'categories': categories,
         'selected_category': selected_category
     }

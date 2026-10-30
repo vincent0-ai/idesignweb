@@ -29,6 +29,15 @@ class Work(models.Model):
             ('Video Editing', 'Video Editing'),
         ]
     )
+    work_type = models.CharField(
+        max_length=20,
+        default='client',
+        choices=[
+            ('client', 'Client Work'),
+            ('showcase', 'Showcase Project'),
+        ],
+        help_text="Client work was paid for by a client. Showcase projects are ready-made builds customers can buy and have customised.",
+    )
     year = models.CharField(max_length=10, default='2026')
     live_url = models.URLField(
         blank=True, 

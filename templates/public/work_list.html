@@ -1,11 +1,11 @@
 {% extends 'base/base.html' %}
 {% load static %}
 
-{% block title %}Client Work & Case Studies : {{ site_title }}{% endblock %}
-{% block meta_description %}Explore published case studies and live platforms engineered by Idesignweb, including the EchoWithin encrypted platform and VIN-KJ Auto Services.{% endblock %}
-{% block meta_keywords %}Idesignweb portfolio, web development case studies, EchoWithin, VIN-KJ, full stack web apps Kenya, digital studio Nairobi{% endblock %}
-{% block og_title %}Client Work & Case Studies : {{ site_title }}{% endblock %}
-{% block og_description %}Explore published case studies and live platforms engineered by Idesignweb.{% endblock %}
+{% block title %}Client Work & Showcase Projects : {{ site_title }}{% endblock %}
+{% block meta_description %}Platforms Idesignweb built for clients, plus showcase projects you can buy and have customised to fit your business.{% endblock %}
+{% block meta_keywords %}Idesignweb portfolio, client work, showcase projects, buy a website and customise it, web development Kenya, digital studio Nairobi{% endblock %}
+{% block og_title %}Client Work & Showcase Projects : {{ site_title }}{% endblock %}
+{% block og_description %}Client platforms and showcase projects you can buy and customise.{% endblock %}
 
 {% block structured_data %}
 {{ block.super }}
@@ -32,8 +32,8 @@
     },
     {
       "@type": "CollectionPage",
-      "name": "Idesignweb Client Work & Portfolio",
-      "description": "Live web platforms and client projects engineered for speed, reliability, and security.",
+      "name": "Idesignweb Client Work & Showcase Projects",
+      "description": "Client platforms and showcase projects you can buy and have customised.",
       "url": "{{ canonical_url }}"
     }
   ]
@@ -42,19 +42,19 @@
 {% endblock %}
 
 {% block content %}
-<section class="section" style="padding-top: 32px; padding-bottom: 48px;">
+<section class="section" style="padding-top: 32px; padding-bottom: 40px;">
   <div class="container">
     <div class="page-header">
       <h1 class="page-title">
         Work
       </h1>
       <p class="page-subtitle">
-        Live web platforms and client projects engineered for speed, reliability, and security.
+        Platforms we built for clients, and ready-made projects you can buy and make your own.
       </p>
     </div>
 
     <!-- Category Filter Controls -->
-    <div class="filter-scroll-row" style="margin-bottom: 24px;">
+    <div class="filter-scroll-row" style="margin-bottom: 0;">
       <a href="{% url 'public:work_list' %}"
         class="btn btn-sm {% if selected_category == 'all' %}btn-primary{% else %}btn-outline{% endif %}">
         All Work
@@ -66,52 +66,73 @@
       </a>
       {% endfor %}
     </div>
-
-    <!-- Work Projects Grid -->
-    <div class="grid-2">
-      {% for case in case_studies %}
-      <article class="card-article">
-        <div class="card-image-wrap">
-          {% if case.image_url %}
-          <img src="{% if case.image_url|slice:":1" == "/" or 'http' in case.image_url %}{{ case.image_url }}{% else %}{% static case.image_url %}{% endif %}" alt="{{ case.title }}" class="card-image" loading="lazy" width="678" height="337">
-          {% else %}
-          <div style="width: 100%; height: 100%; background: var(--bg-muted);"></div>
-          {% endif %}
-        </div>
-
-        <div class="card-body">
-          <div style="margin-bottom: var(--space-xs);">
-            <span class="category-label">{{ case.category }}</span>
-          </div>
-
-          <h2 style="font-size: 1.25rem; margin-bottom: var(--space-xs); line-height: 1.3; font-weight: var(--weight-bold);">
-            <a href="{% url 'public:work_detail' case.slug %}" style="color: var(--text-main); text-decoration: none;">{{ case.title }}</a>
-          </h2>
-          
-          <p style="font-size: var(--text-small); color: var(--text-muted); margin-bottom: var(--space-md); line-height: 1.6; flex-grow: 1;">
-            {{ case.summary }}
-          </p>
-
-          <div class="card-action-row">
-            <a href="{% url 'public:work_detail' case.slug %}" class="btn btn-outline btn-sm">
-              View Details
-            </a>
-            {% if case.live_url %}
-            <a href="{{ case.live_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
-              Visit Website
-            </a>
-            {% endif %}
-          </div>
-        </div>
-      </article>
-      {% empty %}
-      <div class="card" style="grid-column: 1 / -1; text-align: center; padding: var(--space-2xl);">
-        <p style="color: var(--text-muted);">No projects found for this category.</p>
-        <a href="{% url 'public:work_list' %}" class="btn btn-outline btn-sm" style="margin-top: var(--space-md);">All Work</a>
-      </div>
-      {% endfor %}
-    </div>
-
   </div>
 </section>
+
+{% if client_work %}
+<section class="section" style="padding-top: 40px;">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Client work</h2>
+        <p style="font-size: var(--text-small); color: var(--text-muted); margin: var(--space-xs) 0 0 0;">
+          Built for our clients and live today.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      {% for case in client_work %}
+      {% include 'components/work_card.html' with case=case %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if showcase_work %}
+<section class="section section-muted" style="padding-top: 40px;">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title">Showcase projects</h2>
+        <p style="font-size: var(--text-small); color: var(--text-muted); margin: var(--space-xs) 0 0 0;">
+          Ready-made projects you can buy as they are, or have us customise to fit your business.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      {% for case in showcase_work %}
+      {% include 'components/work_card.html' with case=case %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if not client_work and not showcase_work %}
+<section class="section">
+  <div class="container">
+    <div class="card" style="text-align: center; padding: var(--space-2xl);">
+      <h2 class="section-title" style="margin-bottom: var(--space-sm);">
+        {% if selected_category == 'all' %}No work here yet{% else %}No {{ selected_category }} work yet{% endif %}
+      </h2>
+      <p style="color: var(--text-muted); margin-bottom: var(--space-md);">
+        {% if selected_category == 'all' %}
+        New projects appear here as they ship. Tell us what you need in the meantime.
+        {% else %}
+        Nothing in {{ selected_category }} yet. Other categories are already listed.
+        {% endif %}
+      </p>
+      <div style="display: flex; gap: var(--space-sm); justify-content: center; flex-wrap: wrap;">
+        {% if selected_category != 'all' %}
+        <a href="{% url 'public:work_list' %}" class="btn btn-outline btn-sm">Show all work</a>
+        {% endif %}
+        <a href="{% url 'public:contact' %}" class="btn btn-primary btn-sm">Start a project</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
 {% endblock %}
