@@ -17,15 +17,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy entrypoint separately first so script changes don't invalidate pip cache
-COPY entrypoint.sh /app/
-RUN chmod +x /app/entrypoint.sh
-
-# Copy application code last
+# Copy application source code
 COPY . /app/
 
-# Ensure directory for persistent SQLite data
-RUN mkdir -p /app/data /app/staticfiles
+# Ensure directory for persistent SQLite data & set executable permissions AFTER COPY
+RUN mkdir -p /app/data /app/staticfiles && \
+    chmod +x /app/entrypoint.sh
 
 EXPOSE 8000
 
